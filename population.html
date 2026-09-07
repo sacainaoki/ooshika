@@ -27,6 +27,15 @@
   @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
   @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
 
+  .nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+       margin:14px 0 0;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.nav span{flex:0 0 auto;padding:7px 15px 7px 0;font-size:15px;
+       text-decoration:none;white-space:nowrap;color:var(--muted)}
+  .nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+  .nav span{color:var(--ink);font-weight:700}
+  @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
+
   :root{
     --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
     --rule:#D8DAD0; --moegi:#7A9A3C;
