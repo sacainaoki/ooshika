@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>村の道と橋 ｜ 大鹿村データ室</title>
+<meta name="description" content="大鹿村の林道・村道・橋りょうについて、固定資産台帳と広報おおしかから数字を並べたものです。大鹿村の公式サイトではありません。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .chartbox{position:relative;touch-action:pan-y}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .cguide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+  .cdot{opacity:0;pointer-events:none}
+  .ctip{
+    position:absolute;z-index:3;pointer-events:none;opacity:0;
+    background:var(--paper);border:1px solid var(--ink);
+    padding:8px 12px;font-size:13px;line-height:1.75;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    box-shadow:0 2px 10px rgba(35,36,31,.10);transition:opacity .1s
+  }
+  .ctip b{display:block;font-weight:600;margin-bottom:2px;font-size:12px;color:var(--muted)}
+  .ctip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .chartbox.on .cguide,.chartbox.on .cdot,.chartbox.on .ctip{opacity:1}
+  .chint{color:var(--muted);font-size:12px;margin-top:6px}
+  @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
+  @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
+
+  :root{
+    --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
+    --rule:#D8DAD0; --moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+       font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+     letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+     margin:64px 0 6px;padding-top:18px;border-top:2px solid var(--moegi)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+  p{margin:0 0 18px;max-width:38em}
+  figure{margin:0 0 10px}
+  svg{width:100%;height:auto;display:block}
+  .ax{font-family:var(--gothic);font-size:12px;fill:var(--muted)}
+  .pt{font-family:var(--gothic);font-size:14px;font-weight:700}
+  figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+  .facts{margin:34px 0 0;padding:0;list-style:none}
+  .fact{border-top:1px solid var(--rule);padding:20px 0}
+  .fact:last-child{border-bottom:1px solid var(--rule)}
+  .fact b{display:block;font-family:var(--mincho);font-size:27px;font-weight:600;
+          letter-spacing:.02em;line-height:1.35;margin-bottom:4px}
+  .fact span{color:var(--muted);font-size:15px}
+  details{margin:26px 0 0}
+  summary{cursor:pointer;font-size:15px;color:var(--muted);padding:8px 0}
+  summary:hover{color:var(--ink)}
+  .scroll{overflow:auto;max-height:470px;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:7px 13px;text-align:right;white-space:nowrap;
+        font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+  th{position:sticky;top:0;background:var(--panel);font-weight:600;
+     border-bottom:1px solid var(--ink);font-size:13px}
+  td:first-child,th:first-child{text-align:left}
+  .pj{text-align:left;white-space:normal;min-width:16em}
+  .nt{text-align:left;white-space:normal;color:var(--muted);font-size:12.5px;min-width:12em}
+  .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
+  .note p{margin:0 0 12px} .note p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+         font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){
+    body{font-size:16px} h1{font-size:27px}
+    h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
+    .pt{font-size:16px} .ax{font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="site"><a href="./">大鹿村データ室</a></div>
+    <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+  </div>
+
+  <h1>村の道と橋</h1>
+  <p class="lede">大鹿村の固定資産台帳（令和2年度末）と、広報おおしかに掲載された主要事業の決算額・当初予算額から、林道・村道・橋りょうに関する数字を並べたものです。村の面積は248平方キロメートル、村道の延長は約125キロメートル、林道は約87キロメートルあります。</p>
+
+  <h2>資産としての規模</h2>
+  <p class="sub">固定資産台帳（令和2年度末）</p>
+  <figure>
+    <svg viewBox="0 0 900 308" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="146" y="27" text-anchor="end" class="ax">林道</text>
+<rect x="156.0" y="12" width="117.2" height="21" fill="#8C4A34"/>
+<rect x="273.2" y="12" width="105.3" height="21" fill="#B08A3E"/>
+<rect x="378.6" y="12" width="81.1" height="21" fill="#7A9A3C"/>
+<rect x="459.6" y="12" width="91.6" height="21" fill="#4A8090"/>
+<rect x="551.2" y="12" width="247.3" height="21" fill="#B7BBB0"/>
+<text x="806.5" y="28.0" class="pt" fill="#23241F">140.4</text>
+<text x="146" y="61" text-anchor="end" class="ax">村道・農道</text>
+<rect x="156.0" y="46" width="5.0" height="21" fill="#8C4A34"/>
+<rect x="161.0" y="46" width="20.6" height="21" fill="#B08A3E"/>
+<rect x="181.6" y="46" width="27.5" height="21" fill="#7A9A3C"/>
+<rect x="209.1" y="46" width="66.4" height="21" fill="#4A8090"/>
+<rect x="275.5" y="46" width="178.6" height="21" fill="#B7BBB0"/>
+<text x="462.1" y="62.0" class="pt" fill="#23241F">65.1</text>
+<text x="146" y="95" text-anchor="end" class="ax">建物</text>
+<rect x="156.0" y="80" width="46.3" height="21" fill="#8C4A34"/>
+<rect x="202.3" y="80" width="8.7" height="21" fill="#B08A3E"/>
+<rect x="211.0" y="80" width="38.0" height="21" fill="#7A9A3C"/>
+<rect x="249.0" y="80" width="44.4" height="21" fill="#4A8090"/>
+<rect x="293.4" y="80" width="132.3" height="21" fill="#B7BBB0"/>
+<text x="433.7" y="96.0" class="pt" fill="#23241F">58.9</text>
+<text x="146" y="129" text-anchor="end" class="ax">橋りょう・トンネル</text>
+<rect x="156.0" y="114" width="54.5" height="21" fill="#8C4A34"/>
+<rect x="210.5" y="114" width="27.9" height="21" fill="#B08A3E"/>
+<rect x="238.4" y="114" width="13.3" height="21" fill="#7A9A3C"/>
+<rect x="251.7" y="114" width="37.6" height="21" fill="#4A8090"/>
+<rect x="289.3" y="114" width="69.1" height="21" fill="#B7BBB0"/>
+<text x="366.4" y="130.0" class="pt" fill="#23241F">44.2</text>
+<text x="146" y="163" text-anchor="end" class="ax">上水道</text>
+<rect x="156.0" y="148" width="15.6" height="21" fill="#8C4A34"/>
+<rect x="171.6" y="148" width="14.2" height="21" fill="#B08A3E"/>
+<rect x="185.8" y="148" width="4.6" height="21" fill="#7A9A3C"/>
+<rect x="190.3" y="148" width="33.9" height="21" fill="#4A8090"/>
+<rect x="224.2" y="148" width="20.1" height="21" fill="#B7BBB0"/>
+<text x="252.4" y="164.0" class="pt" fill="#23241F">19.4</text>
+<text x="146" y="197" text-anchor="end" class="ax">工作物・公園</text>
+<rect x="156.0" y="182" width="15.1" height="21" fill="#8C4A34"/>
+<rect x="171.1" y="182" width="11.9" height="21" fill="#B08A3E"/>
+<rect x="183.0" y="182" width="9.2" height="21" fill="#7A9A3C"/>
+<rect x="192.2" y="182" width="13.7" height="21" fill="#4A8090"/>
+<rect x="205.9" y="182" width="11.4" height="21" fill="#B7BBB0"/>
+<text x="225.4" y="198.0" class="pt" fill="#23241F">13.4</text>
+<text x="146" y="231" text-anchor="end" class="ax">物品・ソフトウェア</text>
+<rect x="156.0" y="216" width="15.1" height="21" fill="#8C4A34"/>
+<rect x="171.1" y="216" width="15.1" height="21" fill="#B08A3E"/>
+<rect x="186.2" y="216" width="4.6" height="21" fill="#7A9A3C"/>
+<text x="198.8" y="232.0" class="pt" fill="#23241F">7.6</text>
+<rect x="156" y="288" width="11" height="11" fill="#8C4A34"/><text x="172" y="298" class="ax">耐用超過</text>
+<rect x="284" y="288" width="11" height="11" fill="#B08A3E"/><text x="300" y="298" class="ax">R3〜R8</text>
+<rect x="412" y="288" width="11" height="11" fill="#7A9A3C"/><text x="428" y="298" class="ax">R9〜R13</text>
+<rect x="540" y="288" width="11" height="11" fill="#4A8090"/><text x="556" y="298" class="ax">R14〜R23</text>
+<rect x="668" y="288" width="11" height="11" fill="#B7BBB0"/><text x="684" y="298" class="ax">R24以降</text>
+</svg>
+    <figcaption>区分ごとの取得価額（億円）と、更新到来年度別の内訳。右端の数字は取得価額の合計。</figcaption>
+  </figure>
+
+  <ul class="facts">
+    <li class="fact"><b>林道が140.4億円で最も大きい</b><span>減価償却の対象となる資産349.0億円のうち40.2％。村道・農道65.1億円の2倍以上、建物58.9億円の2.4倍にあたります。</span></li>
+    <li class="fact"><b>2路線で林道の6割を占める</b><span>中峰黒川線41.95億円と鳥倉線41.68億円で83.6億円。いずれも期末簿価の残存率は25％前後です。</span></li>
+    <li class="fact"><b>耐用年数を過ぎた資産が58.7億円</b><span>うち林道が25.6億円。令和3年度から令和13年度までに更新到来年度が来る資産は、全区分で83.5億円あります。</span></li>
+  </ul>
+
+  <p style="margin-top:30px">「更新到来年度」は、台帳の供用開始日に耐用年数を加えて計算したものです。台帳にこの項目はありません。また取得価額は更新に必要な費用ではなく、会計上の耐用年数の到達は物理的に更新が必要な時期とも異なります。</p>
+
+  <h2>林道の路線別</h2>
+  <p class="sub">12路線・652件</p>
+  <div class="scroll" style="max-height:none;margin-top:22px">
+    <table>
+      <thead><tr><th>路線</th><th>資産件数</th><th>取得価額<br>（億円）</th><th>期末簿価<br>（億円）</th><th>残存率<br>（％）</th></tr></thead>
+      <tbody>
+<tr><td>中峰黒川線</td><td>249</td><td>41.95</td><td>9.97</td><td>23.8</td></tr>
+<tr><td>鳥倉線</td><td>214</td><td>41.68</td><td>10.56</td><td>25.3</td></tr>
+<tr><td>高森山線</td><td>64</td><td>31.65</td><td>18.27</td><td>57.7</td></tr>
+<tr><td>釜沢線</td><td>55</td><td>8.14</td><td>2.08</td><td>25.6</td></tr>
+<tr><td>大萱（北川）線</td><td>14</td><td>6.22</td><td>3.65</td><td>58.7</td></tr>
+<tr><td>上蔵東山線</td><td>21</td><td>2.57</td><td>0.97</td><td>37.7</td></tr>
+<tr><td>鳥ヶ池線</td><td>14</td><td>2.48</td><td>0.84</td><td>33.9</td></tr>
+<tr><td>藤塚線</td><td>8</td><td>2.09</td><td>0.52</td><td>24.9</td></tr>
+<tr><td>大萱（大栗）線</td><td>6</td><td>1.64</td><td>0.14</td><td>8.5</td></tr>
+<tr><td>牧休線</td><td>4</td><td>1.27</td><td>0.09</td><td>7.1</td></tr>
+<tr><td>青木線</td><td>2</td><td>0.58</td><td>0.02</td><td>3.4</td></tr>
+<tr><td>小野久保線</td><td>1</td><td>0.13</td><td>0.04</td><td>30.8</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:18px">上位3路線のうち、中峰黒川線と鳥倉線の残存率が25％前後であるのに対し、高森山線は57.7％です。残存率は取得価額に対する期末簿価の割合で、会計上の値です。</p>
+
+  <h2>毎年かかっている費用</h2>
+  <p class="sub">決算額</p>
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2010, &quot;xmax&quot;: 2024, &quot;ymin&quot;: 0, &quot;ymax&quot;: 2.2, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;林道整備事業&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2010, 1.1682], [2011, 1.2363], [2012, 1.5003], [2013, 1.3713], [2014, 0.8289], [2015, 0.7402], [2016, 1.25], [2017, 0.7419], [2018, 0.808], [2019, 0.6897], [2021, 0.6652], [2022, 0.9421]]}, {&quot;n&quot;: &quot;村道改良事業&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2010, 1.0258], [2011, 0.7508], [2012, 1.3826], [2013, 1.7098], [2014, 1.0438], [2016, 0.6043], [2017, 0.7866], [2018, 0.7583], [2019, 1.2565], [2021, 2.0394], [2022, 1.1597]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="290.0" x2="882" y2="290.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="294.0" text-anchor="end" class="ax">0.0億</text>
+<line x1="62" y1="230.0" x2="882" y2="230.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="234.0" text-anchor="end" class="ax">0.5億</text>
+<line x1="62" y1="170.0" x2="882" y2="170.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="174.0" text-anchor="end" class="ax">1.0億</text>
+<line x1="62" y1="110.0" x2="882" y2="110.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="114.0" text-anchor="end" class="ax">1.5億</text>
+<line x1="62" y1="50.0" x2="882" y2="50.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="54.0" text-anchor="end" class="ax">2.0億</text>
+<line x1="62.0" y1="26" x2="62.0" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="62.0" y="312" text-anchor="middle" class="ax">2010</text>
+<line x1="354.9" y1="26" x2="354.9" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="354.9" y="312" text-anchor="middle" class="ax">2015</text>
+<line x1="647.7" y1="26" x2="647.7" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="647.7" y="312" text-anchor="middle" class="ax">2020</text>
+<line x1="940.6" y1="26" x2="940.6" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="940.6" y="312" text-anchor="middle" class="ax">2025</text>
+<polyline points="62.0,149.8 120.6,141.6 179.1,110.0 237.7,125.4 296.3,190.5 354.9,201.2 413.4,140.0 472.0,201.0 530.6,193.0 589.1,207.2" fill="none" stroke="#7A9A3C" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="706.3,210.2 764.9,176.9" fill="none" stroke="#7A9A3C" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="149.8" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="136.8" text-anchor="start" class="pt" fill="#7A9A3C">林道 1.17億</text>
+<circle cx="764.9" cy="176.9" r="3.5" fill="#7A9A3C"/>
+<text x="756.9" y="202.9" text-anchor="end" class="pt" fill="#7A9A3C">林道 0.94億</text>
+<polyline points="62.0,166.9 120.6,199.9 179.1,124.1 237.7,84.8 296.3,164.7" fill="none" stroke="#2E6B8A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="413.4,217.5 472.0,195.6 530.6,199.0 589.1,139.2" fill="none" stroke="#2E6B8A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="706.3,45.3 764.9,150.8" fill="none" stroke="#2E6B8A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="166.9" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="190.9" text-anchor="start" class="pt" fill="#2E6B8A">村道 1.03億</text>
+<circle cx="764.9" cy="150.8" r="3.5" fill="#2E6B8A"/>
+<text x="756.9" y="135.8" text-anchor="end" class="pt" fill="#2E6B8A">村道 1.61億</text>
+</svg></div>
+    <figcaption>広報おおしかの主要事業一覧に掲載された決算額。線が切れている年は掲載がありません。<span class="chint"></span></figcaption>
+  </figure>
+  <p>林道整備事業は、農林水産業費に占める割合で見ると23％から52％の間で推移しています。村道改良事業は土木費に計上されます。</p>
+  <p>令和2年度は「道路改良整備事業（鳥倉線、中峰線、小渋橋、他）」として林道と村道が合算で掲載されており、林道分を分けることができません。</p>
+
+  <h2>当初予算での計上額</h2>
+  <p class="sub">令和元年度以降</p>
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 310, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2019, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 0, &quot;ymax&quot;: 4.5, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;林道&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2020, 0.8306], [2021, 0.686], [2022, 0.6444], [2023, 0.5211], [2024, 0.4536], [2025, 0.2656], [2026, 0.1415]]}, {&quot;n&quot;: &quot;村道&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2019, 1.096], [2020, 0.9234], [2021, 0.9695], [2022, 0.5758], [2023, 1.7341], [2024, 1.545], [2025, 0.5266], [2026, 0.5]]}, {&quot;n&quot;: &quot;橋梁&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2019, 0.1169], [2020, 1.3801], [2021, 0.8519], [2022, 0.5167], [2025, 4.163], [2026, 0.238]]}]}"><svg viewBox="0 0 900 310" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="270.0" x2="882" y2="270.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="274.0" text-anchor="end" class="ax">0億</text>
+<line x1="62" y1="215.8" x2="882" y2="215.8" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="219.8" text-anchor="end" class="ax">1億</text>
+<line x1="62" y1="161.6" x2="882" y2="161.6" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="165.6" text-anchor="end" class="ax">2億</text>
+<line x1="62" y1="107.3" x2="882" y2="107.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="111.3" text-anchor="end" class="ax">3億</text>
+<line x1="62" y1="53.1" x2="882" y2="53.1" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="57.1" text-anchor="end" class="ax">4億</text>
+<line x1="179.1" y1="26" x2="179.1" y2="270" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="179.1" y="292" text-anchor="middle" class="ax">2020</text>
+<line x1="413.4" y1="26" x2="413.4" y2="270" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="413.4" y="292" text-anchor="middle" class="ax">2022</text>
+<line x1="647.7" y1="26" x2="647.7" y2="270" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="647.7" y="292" text-anchor="middle" class="ax">2024</text>
+<line x1="882.0" y1="26" x2="882.0" y2="270" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="882.0" y="292" text-anchor="middle" class="ax">2026</text>
+<polyline points="179.1,225.0 296.3,232.8 413.4,235.1 530.6,241.7 647.7,245.4 764.9,255.6 882.0,262.3" fill="none" stroke="#7A9A3C" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="179.1" cy="225.0" r="3.5" fill="#7A9A3C"/>
+<text x="188.1" y="212.0" text-anchor="start" class="pt" fill="#7A9A3C">林道 0.83億</text>
+<circle cx="882.0" cy="262.3" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="302.3" text-anchor="end" class="pt" fill="#7A9A3C">林道 0.14億</text>
+<polyline points="62.0,210.6 179.1,219.9 296.3,217.4 413.4,238.8 530.6,176.0 647.7,186.2 764.9,241.4 882.0,242.9" fill="none" stroke="#2E6B8A" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="210.6" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="234.6" text-anchor="start" class="pt" fill="#2E6B8A">村道 1.10億</text>
+<circle cx="882.0" cy="242.9" r="3.5" fill="#2E6B8A"/>
+<text x="874.0" y="226.9" text-anchor="end" class="pt" fill="#2E6B8A">村道 0.50億</text>
+<polyline points="62.0,263.7 179.1,195.2 296.3,223.8 413.4,242.0" fill="none" stroke="#A8482F" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="764.9,44.3 882.0,257.1" fill="none" stroke="#A8482F" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="263.7" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="303.7" text-anchor="start" class="pt" fill="#A8482F">橋梁 0.12億</text>
+<circle cx="882.0" cy="257.1" r="3.5" fill="#A8482F"/>
+<text x="874.0" y="269.1" text-anchor="end" class="pt" fill="#A8482F">橋梁 0.24億</text>
+</svg></div>
+    <figcaption>広報おおしかの予算特集号に掲載された当初予算額。<span class="chint"></span></figcaption>
+  </figure>
+  <p>林道の当初予算額は令和2年度の8,306万円から令和8年度の1,415万円へ推移しています。この間、事業名は「林道維持・改良事業」「林道改良事業」「林道維持事業」と変わっています。名称の変更が事業の統合や分割を伴うものかどうかは、広報の記載からは分かりません。</p>
+  <p>橋りょうは令和7年度に4億1,630万円が計上されています。前年度は5,266万円、翌年度は2,380万円です。</p>
+
+  <h2>もとの数字</h2>
+  <details>
+    <summary>林道関係の事業費を開く</summary>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>年度</th><th>区分</th><th>事業名</th><th>金額<br>（万円）</th><th>注</th></tr></thead>
+        <tbody>
+<tr><td>2010年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川・鳥倉・高森山線他)</td><td>11,682</td><td class='nt'></td></tr>
+<tr><td>2011年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線・鳥倉線・釜沢線他)</td><td>12,363</td><td class='nt'></td></tr>
+<tr><td>2012年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線・鳥倉線・釜沢線他)</td><td>15,003</td><td class='nt'></td></tr>
+<tr><td>2013年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線・鳥倉線・釜沢線他)</td><td>13,713</td><td class='nt'></td></tr>
+<tr><td>2014年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線・鳥倉線他)</td><td>8,289</td><td class='nt'></td></tr>
+<tr><td>2015年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線・鳥倉線他)</td><td>7,402</td><td class='nt'>ATMフォント破損のため画像から採録</td></tr>
+<tr><td>2016年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線・鳥倉線他)</td><td>12,500</td><td class='nt'>ATMフォント破損のため画像から採録</td></tr>
+<tr><td>2017年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線、鳥倉線他)</td><td>7,419</td><td class='nt'>ATMフォント破損のため画像から採録</td></tr>
+<tr><td>2018年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線、鳥倉線他)</td><td>8,080</td><td class='nt'></td></tr>
+<tr><td>2019年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線、鳥倉線 他)</td><td>6,897</td><td class='nt'></td></tr>
+<tr><td>2020年度</td><td>決算</td><td class='pj'>道路改良整備事業(鳥倉線、中峰線、小渋橋、他)</td><td>18,668</td><td class='nt'>林道と村道の合算。林道分は分離できない</td></tr>
+<tr><td>2021年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線、鳥倉線 他)</td><td>6,652</td><td class='nt'></td></tr>
+<tr><td>2022年度</td><td>決算</td><td class='pj'>林道整備事業(中峰黒川線、鳥倉線他)</td><td>9,421</td><td class='nt'></td></tr>
+<tr><td>2023年度</td><td>決算</td><td class='pj'>—</td><td>—</td><td class='nt'>主要事業一覧に林道整備事業の掲載なし</td></tr>
+<tr><td>2024年度</td><td>決算</td><td class='pj'>—</td><td>—</td><td class='nt'>主要事業一覧に林道整備事業の掲載なし</td></tr>
+<tr><td>2010年度</td><td>決算</td><td class='pj'>林道施設災害復旧事業</td><td>81</td><td class='nt'>災害復旧費 / 災害復旧費の内訳事業として掲載</td></tr>
+<tr><td>2011年度</td><td>決算</td><td class='pj'>林道災害復旧事業(中峰黒川線)</td><td>452</td><td class='nt'>災害復旧費 / 災害復旧費の内訳事業として掲載</td></tr>
+<tr><td>2012年度</td><td>決算</td><td class='pj'>林道災害復旧事業(中峰黒川線)</td><td>5,771</td><td class='nt'>災害復旧費。H23発生分を繰越して実施 / 災害復旧費の内訳事業として掲載</td></tr>
+<tr><td>2023年度</td><td>決算</td><td class='pj'>林道災害復旧事業</td><td>33,264</td><td class='nt'>費目「災害復旧費」の総額。林道分の額ではない</td></tr>
+<tr><td>2024年度</td><td>決算</td><td class='pj'>林道災害復旧事業</td><td>3,024</td><td class='nt'>費目「災害復旧費」の総額。林道分の額ではない</td></tr>
+<tr><td>2019年度</td><td>当初予算</td><td class='pj'>—</td><td>—</td><td class='nt'>主要事業一覧に林道事業の掲載なし</td></tr>
+<tr><td>2020年度</td><td>当初予算</td><td class='pj'>林道維持・改良事業</td><td>8,306</td><td class='nt'></td></tr>
+<tr><td>2021年度</td><td>当初予算</td><td class='pj'>林道維持・改良事業</td><td>6,860</td><td class='nt'></td></tr>
+<tr><td>2022年度</td><td>当初予算</td><td class='pj'>林道維持・改良事業</td><td>6,444</td><td class='nt'></td></tr>
+<tr><td>2023年度</td><td>当初予算</td><td class='pj'>林道維持・改良事業</td><td>5,211</td><td class='nt'></td></tr>
+<tr><td>2024年度</td><td>当初予算</td><td class='pj'>林道改良事業</td><td>4,536</td><td class='nt'></td></tr>
+<tr><td>2025年度</td><td>当初予算</td><td class='pj'>林道改良事業</td><td>2,656</td><td class='nt'></td></tr>
+<tr><td>2026年度</td><td>当初予算</td><td class='pj'>林道維持事業</td><td>1,415</td><td class='nt'></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+  <details>
+    <summary>更新到来時期の内訳を開く</summary>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>区分</th><th>耐用超過</th><th>R3〜R8</th><th>R9〜R13</th><th>R14〜R23</th><th>R24以降</th><th>合計</th></tr></thead>
+        <tbody>
+<tr><td>林道</td><td>25.6</td><td>23.0</td><td>17.7</td><td>20.0</td><td>54.0</td><td>140.4</td></tr>
+<tr><td>村道・農道</td><td>1.1</td><td>4.5</td><td>6.0</td><td>14.5</td><td>39.0</td><td>65.1</td></tr>
+<tr><td>建物</td><td>10.1</td><td>1.9</td><td>8.3</td><td>9.7</td><td>28.9</td><td>58.9</td></tr>
+<tr><td>橋りょう・トンネル</td><td>11.9</td><td>6.1</td><td>2.9</td><td>8.2</td><td>15.1</td><td>44.2</td></tr>
+<tr><td>上水道</td><td>3.4</td><td>3.1</td><td>1.0</td><td>7.4</td><td>4.4</td><td>19.4</td></tr>
+<tr><td>工作物・公園</td><td>3.3</td><td>2.6</td><td>2.0</td><td>3.0</td><td>2.5</td><td>13.4</td></tr>
+<tr><td>物品・ソフトウェア</td><td>3.3</td><td>3.3</td><td>1.0</td><td>0.0</td><td>0.0</td><td>7.6</td></tr>
+<tr><td>合計</td><td>58.7</td><td>44.5</td><td>39.0</td><td>62.8</td><td>144.0</td><td>349.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <div class="note">
+    <p><b>主要事業一覧は抜粋です。</b>広報に掲載されている主要事業の一覧は、その年度に実施したすべての事業を網羅したものではありません。掲載がないことは、事業が実施されなかったことを意味しません。令和5年度・令和6年度の決算には林道整備事業の掲載がありませんが、同じ年度の当初予算には林道の事業費が計上されています。</p>
+    <p><b>災害復旧費について。</b>令和5年度・令和6年度の広報では、施策別の一覧とは別に「災害復旧費」という費目の枠が設けられ、代表的な事業名として「林道災害復旧事業」が記載されています。この金額は費目としての災害復旧費の総額であり、林道分の額ではありません。令和5年度の災害復旧費3億3,264万円のうち、農林水産業施設災害復旧費が2億4,946万円であることが広報の本文に記載されています。</p>
+    <p><b>広報の掲載額に桁の誤りと考えられるものがあります。</b>平成29年度・平成30年度の主要事業一覧に掲載された「有害鳥獣対策関係経費」と「森林造成事業」の決算額は、同じ紙面に掲載されている農林水産業費の総額を上回っています。平成29年度は農林水産業費2億1,113万円に対して両事業の計が4億7,362万円、平成30年度は1億9,425万円に対して3億5,943万円です。桁が1つ多い可能性がありますが、正しい額は確認していません。本サイトの表には掲載された数値をそのまま載せています。</p>
+    <p><b>資産の区分について。</b>更新到来時期の表の区分は、村が公表している区分ではありません。村の集計では林道が「道路」に含まれるため、台帳の補助科目名称をもとにこちらで7区分に組み直しました。林道は補助科目「林道（公共工作物）」に該当する652件です。</p>
+  </div>
+
+  <footer>
+    <p>出典：大鹿村固定資産一覧表（令和2年度末、情報公開請求により取得）／広報おおしか No.203〜No.353（大鹿村役場発行）に掲載の主要事業一覧。金額は掲載のまま転記しています。<br>
+    データ：<a href="ooshika_rindo_series.csv" download>林道の事業費</a> ／ <a href="ooshika_road_projects.csv" download>村道・橋梁ほか</a> ／ <a href="ooshika_rindo_lines.csv" download>林道の路線別</a> ／ <a href="ooshika_assets_renewal.csv" download>更新到来時期</a><br>
+    <a href="./">目次へ</a> ／ ooshika.org ／ 最終更新 2026年9月7日<br>
+    ご指摘は data@ooshika.org までお願いします。</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var boxes = document.querySelectorAll('.chartbox');
+  if(!boxes.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  boxes.forEach(function(box){
+    var cfg, svg = box.querySelector('svg');
+    try { cfg = JSON.parse(box.getAttribute('data-chart')); } catch(e){ return; }
+    if(!svg || !cfg) return;
+
+    var pw = cfg.W - cfg.L - cfg.R, ph = cfg.H - cfg.T - cfg.B;
+    function px(x){ return cfg.L + (x - cfg.xmin) / (cfg.xmax - cfg.xmin) * pw; }
+    function py(v){ return cfg.T + (cfg.ymax - v) / (cfg.ymax - cfg.ymin) * ph; }
+
+    // x座標の集合（系列をまたいで統合）
+    var xs = [], seen = {};
+    cfg.series.forEach(function(s){
+      s.p.forEach(function(pt){ if(!seen[pt[0]]){ seen[pt[0]] = 1; xs.push(pt[0]); } });
+    });
+    xs.sort(function(a,b){ return a-b; });
+
+    var guide = document.createElementNS(NS,'line');
+    guide.setAttribute('class','cguide');
+    guide.setAttribute('y1', cfg.T); guide.setAttribute('y2', cfg.T + ph);
+    svg.appendChild(guide);
+
+    var dots = cfg.series.map(function(s){
+      var c = document.createElementNS(NS,'circle');
+      c.setAttribute('class','cdot'); c.setAttribute('r','4.5');
+      c.setAttribute('fill', s.c); c.setAttribute('stroke','var(--paper)');
+      c.setAttribute('stroke-width','1.5');
+      svg.appendChild(c); return c;
+    });
+
+    var tip = document.createElement('div');
+    tip.className = 'ctip';
+    box.appendChild(tip);
+
+    function label(x){
+      if(cfg.xfmt === 'ym'){
+        var y = Math.floor(x + 1e-6), m = Math.round((x - y) * 12) + 1;
+        if(m > 12){ y += 1; m -= 12; }
+        return y + '年' + m + '月';
+      }
+      return x + '年度';
+    }
+    function fmt(v, d){
+      return v.toLocaleString('ja-JP', {minimumFractionDigits:d, maximumFractionDigits:d});
+    }
+
+    function show(clientX){
+      var r = svg.getBoundingClientRect();
+      var vx = (clientX - r.left) / r.width * cfg.W;
+      var dx = cfg.xmin + (vx - cfg.L) / pw * (cfg.xmax - cfg.xmin);
+      var best = xs[0];
+      for(var i=1;i<xs.length;i++){ if(Math.abs(xs[i]-dx) < Math.abs(best-dx)) best = xs[i]; }
+
+      var gx = px(best);
+      guide.setAttribute('x1', gx); guide.setAttribute('x2', gx);
+
+      var html = '<b>' + label(best) + '</b>', any = false;
+      cfg.series.forEach(function(s, i){
+        var hit = null;
+        for(var j=0;j<s.p.length;j++){ if(Math.abs(s.p[j][0]-best) < 1e-6){ hit = s.p[j][1]; break; } }
+        if(hit === null){ dots[i].setAttribute('opacity','0'); return; }
+        dots[i].removeAttribute('opacity');
+        dots[i].setAttribute('cx', gx); dots[i].setAttribute('cy', py(hit));
+        html += '<div><i style="background:' + s.c + '"></i>'
+             + (s.n ? s.n + ' ' : '') + fmt(hit, s.d) + s.u + '</div>';
+        any = true;
+      });
+      if(!any) return;
+      tip.innerHTML = html;
+      box.classList.add('on');
+
+      var bw = box.clientWidth, tw = tip.offsetWidth;
+      var left = gx / cfg.W * bw + 14;
+      if(left + tw > bw - 4) left = gx / cfg.W * bw - tw - 14;
+      if(left < 4) left = 4;
+      tip.style.left = left + 'px';
+      tip.style.top = (r.height * 0.10) + 'px';
+    }
+
+    function hide(){ box.classList.remove('on'); }
+
+    box.addEventListener('pointermove', function(e){ show(e.clientX); });
+    box.addEventListener('pointerdown', function(e){ show(e.clientX); });
+    box.addEventListener('pointerleave', hide);
+    box.addEventListener('pointercancel', hide);
+  });
+})();
+</script>
+</body>
+</html>
