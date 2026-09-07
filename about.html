@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>このサイトについて ｜ 大鹿村データ室</title>
+<meta name="description" content="大鹿村データ室の運営方針。何を載せ、何を書かないか。掲載データの利用について。">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#7A9A3C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+       margin:14px 0 0;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.nav span{flex:0 0 auto;padding:7px 15px 7px 0;font-size:15px;
+       text-decoration:none;white-space:nowrap;color:var(--muted)}
+  .nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+  .nav span{color:var(--ink);font-weight:700}
+  @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
+
+  :root{
+    --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
+    --rule:#D8DAD0; --moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+       font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+     letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+     margin:60px 0 14px;padding-top:18px;border-top:2px solid var(--moegi)}
+  h3{font-family:var(--mincho);font-weight:600;font-size:18px;margin:32px 0 8px}
+  p{margin:0 0 18px;max-width:38em}
+  ul{margin:0 0 18px;padding-left:1.3em;max-width:38em}
+  li{margin-bottom:7px}
+  blockquote{margin:18px 0;padding:2px 0 2px 20px;border-left:3px solid var(--rule);
+             color:var(--muted);font-size:16px;max-width:36em}
+  .box{background:var(--panel);padding:20px 24px;margin:26px 0;font-size:15.5px;line-height:1.85}
+  .box p{margin:0 0 12px} .box p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+         font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){
+    body{font-size:16px} h1{font-size:27px} h2{font-size:20px;margin-top:50px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="site"><a href="./">大鹿村データ室</a></div>
+    <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+    <nav class="nav">
+    <a href="index.html">目次</a>
+    <a href="population.html">人口</a>
+    <a href="finance.html">予算と決算</a>
+    <a href="agriculture.html">農業</a>
+    <a href="roads.html">村の道と橋</a>
+    <span aria-current="page">このサイトについて</span>
+    </nav>
+  </div>
+
+  <h1>このサイトについて</h1>
+  <p class="lede">長野県下伊那郡大鹿村について、公表された資料から数字を拾い、経年で並べています。運営の方針をここに書いておきます。</p>
+
+  <h2>誰が運営しているか</h2>
+  <p>大鹿村に住む一住民が、個人で運営しています。村の公式サイトではなく、村やその他の団体の見解を示すものでもありません。</p>
+  <p>費用は運営者が負担しています。広告は掲載していません。</p>
+
+  <h2>何を載せているか</h2>
+  <p>出どころは次の3つです。</p>
+  <ul>
+    <li>村が公表した資料（広報おおしか、村のウェブサイト、住民懇談会の配布資料など）</li>
+    <li>国や県が公表した統計（農林業センサス、作物統計など）</li>
+    <li>大鹿村公文書公開条例に基づく請求で得た公文書</li>
+  </ul>
+  <p>どのページにも出典を書いています。数値がどの資料の何ページから来たものかを、読んだ人が自分で確かめられる状態にすることを基本にしています。</p>
+
+  <h2>数値の扱い</h2>
+
+  <h3>出典のまま載せます</h3>
+  <p>数値は、出典に記載されたとおりに転記します。読みやすさのために丸めたり、単位を揃えるために計算し直したりはしません。</p>
+
+  <h3>誤っていると思われる数値も直しません</h3>
+  <p>資料の数値が明らかに他と整合しない場合でも、値は直さず、そのまま載せます。そのうえで、どこがどう整合しないかを注記に書きます。</p>
+  <p>実際に、広報おおしかに掲載された決算額のうち、同じ紙面の費目総額を上回っているものが見つかっています。桁が1つ多い可能性がありますが、正しい額は確認できていないため、掲載値をそのまま載せて注記しています。</p>
+
+  <h3>判断が入った箇所は書き出します</h3>
+  <p>資料に載っていない数字を計算で出した場合、区分を組み直した場合、複数の資料をつなげた場合には、その旨を注記に書きます。</p>
+  <p>たとえば固定資産台帳の「更新到来年度」は、台帳の供用開始日に耐用年数を加えて計算したものです。台帳にその項目はありません。こうした箇所をすべて書き出すようにしています。</p>
+
+  <h3>検算を通します</h3>
+  <p>内訳の合計が総額と一致するか、男女の人数の合計が総人口と一致するかを確認しています。合わなかったものは、いったん値を捨てて、紙面を目で見て採録し直しています。</p>
+
+  <h2>何を書かないか</h2>
+  <p>このサイトは、数字を並べて「こう見える」と置くところまでを役目にしています。次のことは書きません。</p>
+  <ul>
+    <li><b>評価をしません。</b>「不適切」「未達」「問題がある」といった言葉は使いません</li>
+    <li><b>理由を推測しません。</b>ある資料が公表されていない場合、なぜ公表されていないのかには触れません。結果として公表されていない、という事実だけを書きます</li>
+    <li><b>賛成も反対もしません。</b>特定の政策や事業について、進めるべきか止めるべきかの立場は取りません</li>
+    <li><b>データから読み取れる以上のことを書きません。</b>因果関係が確かめられていないものは、並べるだけにします</li>
+  </ul>
+  <p>数字を見てどう考えるかは、読んだ人が決めることだと思っています。</p>
+
+  <h2>このサイトの目的</h2>
+  <p>村が公表することになっている情報のうち、実際には公表されていないものがあります。それを代わりに整理して出しています。</p>
+  <p>大鹿村公文書公開条例は、その目的をこう定めています。</p>
+  <blockquote>村民の村政に対する理解と信頼を深め、村民の村政への参加を増進し、いっそう公正で開かれた村政の推進に寄与すること（第1条）</blockquote>
+  <p>同じ条例の第3条第2項には、村の責務としてこう書かれています。</p>
+  <blockquote>実施機関は、公文書の公開にあわせ、村政に関する正確で分かりやすい情報を積極的に提供するよう努めなければならない</blockquote>
+  <p><b>村が自分で公表するようになれば、このサイトの当該ページは役目を終えます。</b>代わりに出し続けることが目的ではありません。</p>
+
+  <h2>個人に関する情報</h2>
+  <p>個人が特定される情報は掲載しません。公文書公開条例第6条第2号が不開示情報として定めているものにあたります。</p>
+  <p>公務員や議員の職務上の行動については、同号ただし書エにより公開の対象とされているため、必要な範囲で扱うことがあります。ただし個人を非難する目的では扱いません。</p>
+
+  <h2>掲載データの利用について</h2>
+  <div class="box">
+    <p><b>出典を明記していただければ、自由にお使いください。</b>引用、転載、加工、再配布のいずれも構いません。事前の連絡も不要です。営利・非営利を問いません。</p>
+    <p>出典の書き方に決まりはありませんが、「大鹿村データ室（ooshika.org）」のように、たどれる形にしていただけると助かります。</p>
+    <p>数値に誤りが見つかったときに、使っている方に伝わるようにしたいというのが理由です。</p>
+  </div>
+  <p>掲載している数値そのものは、村や国が公表した公的な情報です。それらを整理して表やグラフにしたものが本サイトの内容にあたります。</p>
+
+  <h2>誤りのご指摘</h2>
+  <p>数値の誤り、出典の記載漏れ、事実と異なる記述などがありましたら、お知らせください。確認のうえ訂正し、訂正した旨をページに残します。</p>
+  <p>掲載してほしい資料、扱ってほしいテーマについてのご意見も歓迎します。</p>
+  <p><b>data@ooshika.org</b></p>
+
+  <h2>更新について</h2>
+  <p>広報おおしかが発行されたときに人口の数値を追加しています。そのほかのページは、資料が手に入りしだい不定期に更新します。</p>
+  <p>ページの元になっているデータは、各ページの下部からCSV形式でダウンロードできます。</p>
+
+  <footer>
+    <p>大鹿村データ室 ／ ooshika.org<br>
+    data@ooshika.org<br>
+    最終更新 2026年9月8日</p>
+  </footer>
+
+</div>
+</body>
+</html>
