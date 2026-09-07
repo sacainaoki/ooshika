@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大鹿村の予算と決算 ｜ 大鹿村データ室</title>
+<meta name="description" content="広報おおしかに掲載された一般会計の当初予算額・決算額を2003年度から並べたものです。大鹿村の公式サイトではありません。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .chartbox{position:relative;touch-action:pan-y}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .cguide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+  .cdot{opacity:0;pointer-events:none}
+  .ctip{
+    position:absolute;z-index:3;pointer-events:none;opacity:0;
+    background:var(--paper);border:1px solid var(--ink);
+    padding:8px 12px;font-size:13px;line-height:1.75;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    box-shadow:0 2px 10px rgba(35,36,31,.10);transition:opacity .1s
+  }
+  .ctip b{display:block;font-weight:600;margin-bottom:2px;font-size:12px;color:var(--muted)}
+  .ctip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .chartbox.on .cguide,.chartbox.on .cdot,.chartbox.on .ctip{opacity:1}
+  .chint{color:var(--muted);font-size:12px;margin-top:6px}
+  @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
+  @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
+
+  :root{
+    --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
+    --rule:#D8DAD0; --moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+       font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+     letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+     margin:64px 0 6px;padding-top:18px;border-top:2px solid var(--moegi)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+  p{margin:0 0 18px;max-width:38em}
+  figure{margin:0 0 10px}
+  svg{width:100%;height:auto;display:block}
+  .ax{font-family:var(--gothic);font-size:12px;fill:var(--muted)}
+  .pt{font-family:var(--gothic);font-size:14px;font-weight:700}
+  figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+  .facts{margin:34px 0 0;padding:0;list-style:none}
+  .fact{border-top:1px solid var(--rule);padding:20px 0}
+  .fact:last-child{border-bottom:1px solid var(--rule)}
+  .fact b{display:block;font-family:var(--mincho);font-size:27px;font-weight:600;
+          letter-spacing:.02em;line-height:1.35;margin-bottom:4px}
+  .fact span{color:var(--muted);font-size:15px}
+  details{margin:26px 0 0}
+  summary{cursor:pointer;font-size:15px;color:var(--muted);padding:8px 0}
+  summary:hover{color:var(--ink)}
+  .scroll{overflow:auto;max-height:460px;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:7px 12px;text-align:right;white-space:nowrap;
+        font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+  th{position:sticky;top:0;background:var(--panel);font-weight:600;
+     border-bottom:1px solid var(--ink);font-size:13px}
+  td:first-child,th:first-child{text-align:left}
+  .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
+  .note p{margin:0 0 12px} .note p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+         font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){
+    body{font-size:16px} h1{font-size:27px}
+    h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
+    .pt{font-size:17px} .ax{font-size:15px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="site"><a href="./">大鹿村データ室</a></div>
+    <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+  </div>
+
+  <h1>大鹿村の予算と決算</h1>
+  <p class="lede">広報おおしかは毎年、当初予算の内容と、議会で認定された決算の額を載せています。2003年度から2026年度までの一般会計について、当初予算23年度分と決算22年度分を拾い、並べたものです。</p>
+
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 340, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 15, &quot;ymax&quot;: 30, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2003, 21.5976], [2004, 18.9087], [2005, 18.5145], [2006, 18.0726], [2007, 20.4028], [2008, 20.3848], [2009, 24.899], [2010, 21.9969], [2011, 18.9883], [2012, 22.5185], [2013, 20.6433], [2014, 19.5849], [2015, 23.2978], [2016, 24.1171], [2017, 20.1372], [2018, 21.9842], [2019, 21.8971], [2020, 27.9083], [2021, 25.5446], [2022, 23.0735], [2023, 25.7941], [2024, 23.6187]]}, {&quot;n&quot;: &quot;当初予算&quot;, &quot;c&quot;: &quot;#6B6E64&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2004, 19.3], [2005, 19.7], [2006, 16.82], [2007, 17.65], [2008, 18.9], [2009, 19.7], [2010, 18.8], [2011, 18.0], [2012, 16.3], [2013, 18.0], [2014, 18.8], [2015, 23.8], [2016, 19.1], [2017, 18.1], [2018, 18.4], [2019, 20.9], [2020, 20.08], [2021, 23.98], [2022, 19.8], [2023, 21.51], [2024, 22.58], [2025, 26.5], [2026, 22.6]]}]}"><svg viewBox="0 0 900 340" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="300.0" x2="882" y2="300.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="304.0" text-anchor="end" class="ax">15億</text>
+<line x1="62" y1="208.7" x2="882" y2="208.7" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="212.7" text-anchor="end" class="ax">20億</text>
+<line x1="62" y1="117.3" x2="882" y2="117.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="121.3" text-anchor="end" class="ax">25億</text>
+<line x1="62" y1="26.0" x2="882" y2="26.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="30.0" text-anchor="end" class="ax">30億</text>
+<line x1="133.3" y1="26" x2="133.3" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="133.3" y="322" text-anchor="middle" class="ax">2005</text>
+<line x1="311.6" y1="26" x2="311.6" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="311.6" y="322" text-anchor="middle" class="ax">2010</text>
+<line x1="489.8" y1="26" x2="489.8" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="489.8" y="322" text-anchor="middle" class="ax">2015</text>
+<line x1="668.1" y1="26" x2="668.1" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="668.1" y="322" text-anchor="middle" class="ax">2020</text>
+<line x1="846.3" y1="26" x2="846.3" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="846.3" y="322" text-anchor="middle" class="ax">2025</text>
+<polyline points="62.0,179.5 97.7,228.6 133.3,235.8 169.0,243.9 204.6,201.3 240.3,201.6 275.9,119.2 311.6,172.2 347.2,227.1 382.9,162.7 418.5,196.9 454.2,216.2 489.8,148.4 525.5,133.5 561.1,206.2 596.8,172.4 632.4,174.0 668.1,64.2 703.7,107.4 739.4,152.5 775.0,102.8 810.7,142.6" fill="none" stroke="#23241F" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="179.5" r="3.5" fill="#23241F"/>
+<text x="71.0" y="166.5" text-anchor="start" class="pt" fill="#23241F">決算 21.6億</text>
+<circle cx="810.7" cy="142.6" r="3.5" fill="#23241F"/>
+<text x="802.7" y="120.6" text-anchor="end" class="pt" fill="#23241F">23.6億</text>
+<polyline points="97.7,221.5 133.3,214.1 169.0,266.8 204.6,251.6 240.3,228.8 275.9,214.1 311.6,230.6 347.2,245.2 382.9,276.3 418.5,245.2 454.2,230.6 489.8,139.3 525.5,225.1 561.1,243.4 596.8,237.9 632.4,192.2 668.1,207.2 703.7,136.0 739.4,212.3 775.0,181.1 810.7,161.5 846.3,89.9 882.0,161.2" fill="none" stroke="#6B6E64" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="97.7" cy="221.5" r="3.5" fill="#6B6E64"/>
+<text x="106.7" y="247.5" text-anchor="start" class="pt" fill="#6B6E64">当初 19.3億</text>
+<circle cx="882.0" cy="161.2" r="3.5" fill="#6B6E64"/>
+<text x="874.0" y="187.2" text-anchor="end" class="pt" fill="#6B6E64">26.5億</text>
+</svg></div>
+    <figcaption>一般会計の歳出。太い線が決算、細い線が当初予算。<span class="chint"></span></figcaption>
+  </figure>
+
+  <ul class="facts">
+    <li class="fact"><b>22年間、規模はほとんど変わっていない</b><span>決算の歳出は2003年度が21.6億円、2024年度が23.6億円。人口が4割減る間に、村が使う額は減っていません。</span></li>
+    <li class="fact"><b>1人当たりは156万円から277万円へ</b><span>総額が変わらず人口だけが減ったので、住民1人あたりの額は1.8倍になりました。何もしなくても上がり続ける構造です。</span></li>
+    <li class="fact"><b>決算はいつも当初予算より大きい</b><span>22年度のうち19年度で決算が当初予算を上回り、平均で1.13倍。年度の途中に補正予算で積み増されています。</span></li>
+  </ul>
+
+  <h2>1人当たりで見ると</h2>
+  <p class="sub">村に住むためにかかっている額</p>
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 340, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 120, &quot;ymax&quot;: 340, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 156.164859], [2004, 138.932403], [2005, 140.155185], [2006, 139.234206], [2007, 162.0556], [2008, 165.595451], [2009, 205.947064], [2010, 186.098985], [2011, 165.259356], [2012, 197.357581], [2013, 186.311372], [2014, 181.846797], [2015, 221.041746], [2016, 229.032289], [2017, 194.0], [2018, 220.282565], [2019, 220.736895], [2020, 289.805815], [2021, 272.621131], [2022, 254.393605], [2023, 293.114773], [2024, 276.889801]]}, {&quot;n&quot;: &quot;当初予算&quot;, &quot;c&quot;: &quot;#6B6E64&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2004, 141.807494], [2005, 149.129447], [2006, 129.583975], [2007, 140.190627], [2008, 153.533712], [2009, 162.944582], [2010, 159.052453], [2011, 156.657963], [2012, 142.857143], [2013, 162.454874], [2014, 174.55896], [2015, 225.806452], [2016, 181.386515], [2017, 174.373796], [2018, 184.368737], [2019, 210.685484], [2020, 208.515057], [2021, 255.923159], [2022, 218.302095], [2023, 244.431818], [2024, 264.712778], [2025, 314.353499]]}]}"><svg viewBox="0 0 900 340" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="262.6" x2="882" y2="262.6" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="266.6" text-anchor="end" class="ax">150万</text>
+<line x1="62" y1="200.4" x2="882" y2="200.4" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="204.4" text-anchor="end" class="ax">200万</text>
+<line x1="62" y1="138.1" x2="882" y2="138.1" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="142.1" text-anchor="end" class="ax">250万</text>
+<line x1="62" y1="75.8" x2="882" y2="75.8" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="79.8" text-anchor="end" class="ax">300万</text>
+<line x1="133.3" y1="26" x2="133.3" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="133.3" y="322" text-anchor="middle" class="ax">2005</text>
+<line x1="311.6" y1="26" x2="311.6" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="311.6" y="322" text-anchor="middle" class="ax">2010</text>
+<line x1="489.8" y1="26" x2="489.8" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="489.8" y="322" text-anchor="middle" class="ax">2015</text>
+<line x1="668.1" y1="26" x2="668.1" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="668.1" y="322" text-anchor="middle" class="ax">2020</text>
+<line x1="846.3" y1="26" x2="846.3" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="846.3" y="322" text-anchor="middle" class="ax">2025</text>
+<polyline points="62.0,255.0 97.7,276.4 133.3,274.9 169.0,276.0 204.6,247.6 240.3,243.2 275.9,193.0 311.6,217.7 347.2,243.6 382.9,203.7 418.5,217.4 454.2,223.0 489.8,174.2 525.5,164.2 561.1,207.8 596.8,175.1 632.4,174.5 668.1,88.5 703.7,109.9 739.4,132.6 775.0,84.4 810.7,104.6" fill="none" stroke="#A8482F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="255.0" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="242.0" text-anchor="start" class="pt" fill="#A8482F">決算 156万円</text>
+<circle cx="810.7" cy="104.6" r="3.5" fill="#A8482F"/>
+<text x="802.7" y="130.6" text-anchor="end" class="pt" fill="#A8482F">277万円</text>
+<polyline points="97.7,272.8 133.3,263.7 169.0,288.1 204.6,274.9 240.3,258.2 275.9,246.5 311.6,251.4 347.2,254.3 382.9,271.5 418.5,247.1 454.2,232.0 489.8,168.2 525.5,223.5 561.1,232.3 596.8,219.8 632.4,187.1 668.1,189.8 703.7,130.7 739.4,177.6 775.0,145.0 810.7,119.8 846.3,57.9" fill="none" stroke="#6B6E64" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="97.7" cy="272.8" r="3.5" fill="#6B6E64"/>
+<text x="106.7" y="298.8" text-anchor="start" class="pt" fill="#6B6E64">当初 142万円</text>
+<circle cx="846.3" cy="57.9" r="3.5" fill="#6B6E64"/>
+<text x="838.3" y="42.9" text-anchor="end" class="pt" fill="#6B6E64">314万円</text>
+</svg></div>
+    <figcaption>一般会計の歳出を、その年度末の人口で割ったもの。<span class="chint"></span></figcaption>
+  </figure>
+  <p>2003年度の156万円が、2024年度に277万円。2025年度の当初予算では314万円になっています。</p>
+  <p>これは村が使いすぎているという話とは別です。面積248平方キロメートルの道路も、水道も、消防も、人口が減っても同じだけ維持する必要があります。人数で割れば1人当たりが上がるのは避けられません。ただ、いま年25人ずつ人口が減っているので、総額が今のままなら1人当たりは今後も上がり続けます。</p>
+
+  <h2>何に使われているか</h2>
+  <p class="sub">決算の歳出に占める割合</p>
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 0, &quot;ymax&quot;: 30, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;公債費&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 18.974793], [2004, 22.898454], [2005, 24.091388], [2006, 25.898321], [2007, 21.649095], [2008, 22.188101], [2009, 22.392064], [2010, 18.561706], [2011, 16.306357], [2012, 12.227778], [2013, 12.667548], [2014, 12.865013], [2015, 8.333834], [2016, 7.129381], [2017, 8.918817], [2018, 7.839721], [2019, 7.023761], [2020, 7.969672], [2021, 7.620006], [2022, 8.513663], [2023, 8.622936], [2024, 9.969643]]}, {&quot;n&quot;: &quot;農林水産業費&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 18.805793], [2004, 12.966518], [2005, 9.695644], [2006, 12.076292], [2007, 9.775177], [2008, 10.227719], [2009, 17.832443], [2010, 18.270756], [2011, 16.804032], [2012, 13.720779], [2013, 12.906851], [2014, 11.731998], [2015, 10.300543], [2016, 10.849149], [2017, 10.484576], [2018, 8.835891], [2019, 13.572574], [2020, 6.261578], [2021, 7.524878], [2022, 9.025505], [2023, 7.204001], [2024, 8.058445]]}, {&quot;n&quot;: &quot;総務費&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 11.690651], [2004, 11.693559], [2005, 20.148532], [2006, 10.164559], [2007, 11.128429], [2008, 12.92826], [2009, 13.242701], [2010, 14.750715], [2011, 13.812716], [2012, 13.230514], [2013, 17.414851], [2014, 18.531624], [2015, 15.290714], [2016, 14.472304], [2017, 15.827424], [2018, 20.039392], [2019, 17.984117], [2020, 20.49247], [2021, 18.439122], [2022, 18.624396], [2023, 14.249438], [2024, 20.551512]]}, {&quot;n&quot;: &quot;災害復旧費&quot;, &quot;c&quot;: &quot;#9A8C5C&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 4.172686], [2004, 1.641572], [2005, 0.404008], [2006, 3.048261], [2007, 9.584026], [2008, 1.405459], [2009, 0.0], [2010, 0.510981], [2011, 0.238041], [2012, 2.562793], [2013, 0.0], [2014, 0.0], [2015, 0.0], [2016, 0.038147], [2017, 0.0], [2018, 4.448195], [2019, 11.156729], [2020, 4.080507], [2021, 7.110309], [2022, 4.342644], [2023, 12.896022], [2024, 3.093312]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="290.0" x2="882" y2="290.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="294.0" text-anchor="end" class="ax">0%</text>
+<line x1="62" y1="202.0" x2="882" y2="202.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="206.0" text-anchor="end" class="ax">10%</text>
+<line x1="62" y1="114.0" x2="882" y2="114.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="118.0" text-anchor="end" class="ax">20%</text>
+<line x1="62" y1="26.0" x2="882" y2="26.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="30.0" text-anchor="end" class="ax">30%</text>
+<line x1="133.3" y1="26" x2="133.3" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="133.3" y="312" text-anchor="middle" class="ax">2005</text>
+<line x1="311.6" y1="26" x2="311.6" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="311.6" y="312" text-anchor="middle" class="ax">2010</text>
+<line x1="489.8" y1="26" x2="489.8" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="489.8" y="312" text-anchor="middle" class="ax">2015</text>
+<line x1="668.1" y1="26" x2="668.1" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="668.1" y="312" text-anchor="middle" class="ax">2020</text>
+<line x1="846.3" y1="26" x2="846.3" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="846.3" y="312" text-anchor="middle" class="ax">2025</text>
+<polyline points="62.0,123.0 97.7,88.5 133.3,78.0 169.0,62.1 204.6,99.5 240.3,94.7 275.9,92.9 311.6,126.7 347.2,146.5 382.9,182.4 418.5,178.5 454.2,176.8 489.8,216.7 525.5,227.3 561.1,211.5 596.8,221.0 632.4,228.2 668.1,219.9 703.7,222.9 739.4,215.1 775.0,214.1 810.7,202.3" fill="none" stroke="#A8482F" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="123.0" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="110.0" text-anchor="start" class="pt" fill="#A8482F">公債費 19%</text>
+<circle cx="810.7" cy="202.3" r="3.5" fill="#A8482F"/>
+<text x="802.7" y="188.3" text-anchor="end" class="pt" fill="#A8482F">10%</text>
+<polyline points="62.0,124.5 97.7,175.9 133.3,204.7 169.0,183.7 204.6,204.0 240.3,200.0 275.9,133.1 311.6,129.2 347.2,142.1 382.9,169.3 418.5,176.4 454.2,186.8 489.8,199.4 525.5,194.5 561.1,197.7 596.8,212.2 632.4,170.6 668.1,234.9 703.7,223.8 739.4,210.6 775.0,226.6 810.7,219.1" fill="none" stroke="#7A9A3C" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="124.5" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="150.5" text-anchor="start" class="pt" fill="#7A9A3C">農林水産 19%</text>
+<circle cx="810.7" cy="219.1" r="3.5" fill="#7A9A3C"/>
+<text x="802.7" y="243.1" text-anchor="end" class="pt" fill="#7A9A3C">8%</text>
+<polyline points="62.0,187.1 97.7,187.1 133.3,112.7 169.0,200.6 204.6,192.1 240.3,176.2 275.9,173.5 311.6,160.2 347.2,168.4 382.9,173.6 418.5,136.7 454.2,126.9 489.8,155.4 525.5,162.6 561.1,150.7 596.8,113.7 632.4,131.7 668.1,109.7 703.7,127.7 739.4,126.1 775.0,164.6 810.7,109.1" fill="none" stroke="#2E6B8A" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="187.1" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="219.1" text-anchor="start" class="pt" fill="#2E6B8A">総務費 12%</text>
+<circle cx="810.7" cy="109.1" r="3.5" fill="#2E6B8A"/>
+<text x="802.7" y="95.1" text-anchor="end" class="pt" fill="#2E6B8A">21%</text>
+<polyline points="62.0,253.3 97.7,275.6 133.3,286.4 169.0,263.2 204.6,205.7 240.3,277.6 275.9,290.0 311.6,285.5 347.2,287.9 382.9,267.4 418.5,290.0 454.2,290.0 489.8,290.0 525.5,289.7 561.1,290.0 596.8,250.9 632.4,191.8 668.1,254.1 703.7,227.4 739.4,251.8 775.0,176.5 810.7,262.8" fill="none" stroke="#9A8C5C" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="253.3" r="3.5" fill="#9A8C5C"/>
+<text x="71.0" y="277.3" text-anchor="start" class="pt" fill="#9A8C5C">災害復旧 4%</text>
+<circle cx="810.7" cy="262.8" r="3.5" fill="#9A8C5C"/>
+<text x="802.7" y="288.8" text-anchor="end" class="pt" fill="#9A8C5C">3%</text>
+</svg></div>
+    <figcaption>主な費目の構成比。全12費目は下の表にあります。<span class="chint"></span></figcaption>
+  </figure>
+  <p>2000年代前半は、歳出の4分の1が公債費、つまり借金の返済でした。それが2010年代に大きく下がり、近年また上がりはじめています。農林水産業費は割合として大きく下がりました。災害復旧費は、計上のない年が続いた時期と、毎年計上される時期があります。</p>
+
+  <h2>もとの数字</h2>
+  <p class="sub">当初予算23年度分・決算22年度分</p>
+  <details>
+    <summary>総額の表を開く</summary>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>年度</th><th>年度末人口</th><th>当初予算</th><th>1人当たり<br>（万円）</th><th>決算</th><th>1人当たり<br>（万円）</th><th>決算/当初</th></tr></thead>
+        <tbody>
+<tr><td>2003年度</td><td>1383</td><td>—</td><td>—</td><td>21.60億</td><td>156</td><td>—</td></tr>
+<tr><td>2004年度</td><td>1361</td><td>19.30億</td><td>142</td><td>18.91億</td><td>139</td><td>0.98</td></tr>
+<tr><td>2005年度</td><td>1321</td><td>19.70億</td><td>149</td><td>18.51億</td><td>140</td><td>0.94</td></tr>
+<tr><td>2006年度</td><td>1298</td><td>16.82億</td><td>130</td><td>18.07億</td><td>139</td><td>1.07</td></tr>
+<tr><td>2007年度</td><td>1259</td><td>17.65億</td><td>140</td><td>20.40億</td><td>162</td><td>1.16</td></tr>
+<tr><td>2008年度</td><td>1231</td><td>18.90億</td><td>154</td><td>20.38億</td><td>166</td><td>1.08</td></tr>
+<tr><td>2009年度</td><td>1209</td><td>19.70億</td><td>163</td><td>24.90億</td><td>206</td><td>1.26</td></tr>
+<tr><td>2010年度</td><td>1182</td><td>18.80億</td><td>159</td><td>22.00億</td><td>186</td><td>1.17</td></tr>
+<tr><td>2011年度</td><td>1149</td><td>18.00億</td><td>157</td><td>18.99億</td><td>165</td><td>1.05</td></tr>
+<tr><td>2012年度</td><td>1141</td><td>16.30億</td><td>143</td><td>22.52億</td><td>197</td><td>1.38</td></tr>
+<tr><td>2013年度</td><td>1108</td><td>18.00億</td><td>162</td><td>20.64億</td><td>186</td><td>1.15</td></tr>
+<tr><td>2014年度</td><td>1077</td><td>18.80億</td><td>175</td><td>19.58億</td><td>182</td><td>1.04</td></tr>
+<tr><td>2015年度</td><td>1054</td><td>23.80億</td><td>226</td><td>23.30億</td><td>221</td><td>0.98</td></tr>
+<tr><td>2016年度</td><td>1053</td><td>19.10億</td><td>181</td><td>24.12億</td><td>229</td><td>1.26</td></tr>
+<tr><td>2017年度</td><td>1038</td><td>18.10億</td><td>174</td><td>20.14億</td><td>194</td><td>1.11</td></tr>
+<tr><td>2018年度</td><td>998</td><td>18.40億</td><td>184</td><td>21.98億</td><td>220</td><td>1.19</td></tr>
+<tr><td>2019年度</td><td>992</td><td>20.90億</td><td>211</td><td>21.90億</td><td>221</td><td>1.05</td></tr>
+<tr><td>2020年度</td><td>963</td><td>20.08億</td><td>209</td><td>27.91億</td><td>290</td><td>1.39</td></tr>
+<tr><td>2021年度</td><td>937</td><td>23.98億</td><td>256</td><td>25.54億</td><td>273</td><td>1.07</td></tr>
+<tr><td>2022年度</td><td>907</td><td>19.80億</td><td>218</td><td>23.07億</td><td>254</td><td>1.17</td></tr>
+<tr><td>2023年度</td><td>880</td><td>21.51億</td><td>244</td><td>25.79億</td><td>293</td><td>1.20</td></tr>
+<tr><td>2024年度</td><td>853</td><td>22.58億</td><td>265</td><td>23.62億</td><td>277</td><td>1.05</td></tr>
+<tr><td>2025年度</td><td>843</td><td>26.50億</td><td>314</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>2026年度</td><td>—</td><td>22.60億</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+  <details>
+    <summary>費目別の構成比（決算・％）を開く</summary>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>年度</th><th>議会</th><th>総務</th><th>民生</th><th>衛生</th><th>農林業</th><th>商工</th><th>土木</th><th>消防</th><th>教育</th><th>災害復旧</th><th>公債</th><th>諸支出金</th></tr></thead>
+        <tbody>
+<tr><td>2003年度</td><td>1.2</td><td>11.7</td><td>10.1</td><td>10.4</td><td>18.8</td><td>2.0</td><td>8.1</td><td>3.1</td><td>6.4</td><td>4.2</td><td>19.0</td><td>5.0</td></tr>
+<tr><td>2004年度</td><td>1.4</td><td>11.7</td><td>12.8</td><td>13.2</td><td>13.0</td><td>2.1</td><td>10.2</td><td>3.8</td><td>6.6</td><td>1.6</td><td>22.9</td><td>0.6</td></tr>
+<tr><td>2005年度</td><td>1.4</td><td>20.1</td><td>13.1</td><td>8.7</td><td>9.7</td><td>2.4</td><td>7.1</td><td>3.3</td><td>5.5</td><td>0.4</td><td>24.1</td><td>4.0</td></tr>
+<tr><td>2006年度</td><td>1.7</td><td>10.2</td><td>13.4</td><td>8.6</td><td>12.1</td><td>2.4</td><td>7.0</td><td>4.1</td><td>5.6</td><td>3.0</td><td>25.9</td><td>6.0</td></tr>
+<tr><td>2007年度</td><td>1.1</td><td>11.1</td><td>11.5</td><td>10.0</td><td>9.8</td><td>1.9</td><td>7.3</td><td>2.9</td><td>5.8</td><td>9.6</td><td>21.6</td><td>7.4</td></tr>
+<tr><td>2008年度</td><td>1.1</td><td>12.9</td><td>17.5</td><td>7.3</td><td>10.2</td><td>2.0</td><td>9.3</td><td>3.0</td><td>4.4</td><td>1.4</td><td>22.2</td><td>8.6</td></tr>
+<tr><td>2009年度</td><td>0.9</td><td>13.2</td><td>11.6</td><td>7.3</td><td>17.8</td><td>2.8</td><td>8.9</td><td>3.8</td><td>5.8</td><td>0.0</td><td>22.4</td><td>5.5</td></tr>
+<tr><td>2010年度</td><td>0.9</td><td>14.8</td><td>11.4</td><td>5.7</td><td>18.3</td><td>3.6</td><td>7.2</td><td>3.2</td><td>5.5</td><td>0.5</td><td>18.6</td><td>10.3</td></tr>
+<tr><td>2011年度</td><td>1.5</td><td>13.8</td><td>14.4</td><td>9.0</td><td>16.8</td><td>4.1</td><td>8.6</td><td>3.0</td><td>6.4</td><td>0.2</td><td>16.3</td><td>5.7</td></tr>
+<tr><td>2012年度</td><td>1.1</td><td>13.2</td><td>12.5</td><td>7.5</td><td>13.7</td><td>1.8</td><td>9.6</td><td>2.6</td><td>4.4</td><td>2.6</td><td>12.2</td><td>18.7</td></tr>
+<tr><td>2013年度</td><td>1.2</td><td>17.4</td><td>13.4</td><td>11.4</td><td>12.9</td><td>2.8</td><td>12.8</td><td>2.9</td><td>5.4</td><td>0.0</td><td>12.7</td><td>7.2</td></tr>
+<tr><td>2014年度</td><td>1.3</td><td>18.5</td><td>15.0</td><td>7.9</td><td>11.7</td><td>3.7</td><td>10.7</td><td>3.2</td><td>7.7</td><td>0.0</td><td>12.9</td><td>7.4</td></tr>
+<tr><td>2015年度</td><td>1.3</td><td>15.3</td><td>21.3</td><td>7.9</td><td>10.3</td><td>2.5</td><td>14.1</td><td>3.8</td><td>10.6</td><td>0.0</td><td>8.3</td><td>4.6</td></tr>
+<tr><td>2016年度</td><td>1.1</td><td>14.5</td><td>28.0</td><td>8.0</td><td>10.8</td><td>3.3</td><td>12.1</td><td>2.4</td><td>5.8</td><td>0.0</td><td>7.1</td><td>6.7</td></tr>
+<tr><td>2017年度</td><td>1.3</td><td>15.8</td><td>15.0</td><td>7.4</td><td>10.5</td><td>13.3</td><td>8.6</td><td>2.8</td><td>8.2</td><td>0.0</td><td>8.9</td><td>8.2</td></tr>
+<tr><td>2018年度</td><td>1.2</td><td>20.0</td><td>13.7</td><td>6.3</td><td>8.8</td><td>21.3</td><td>6.6</td><td>2.7</td><td>6.5</td><td>4.4</td><td>7.8</td><td>0.5</td></tr>
+<tr><td>2019年度</td><td>1.2</td><td>18.0</td><td>17.3</td><td>6.6</td><td>13.6</td><td>2.6</td><td>9.2</td><td>2.5</td><td>8.6</td><td>11.2</td><td>7.0</td><td>2.3</td></tr>
+<tr><td>2020年度</td><td>0.9</td><td>20.5</td><td>20.3</td><td>6.3</td><td>6.3</td><td>3.9</td><td>6.4</td><td>2.3</td><td>14.4</td><td>4.1</td><td>8.0</td><td>6.6</td></tr>
+<tr><td>2021年度</td><td>1.0</td><td>18.4</td><td>14.6</td><td>6.4</td><td>7.5</td><td>3.3</td><td>10.0</td><td>2.4</td><td>13.7</td><td>7.1</td><td>7.6</td><td>8.0</td></tr>
+<tr><td>2022年度</td><td>1.1</td><td>18.6</td><td>13.7</td><td>8.4</td><td>9.0</td><td>5.1</td><td>10.4</td><td>3.2</td><td>9.2</td><td>4.3</td><td>8.5</td><td>8.4</td></tr>
+<tr><td>2023年度</td><td>1.0</td><td>14.2</td><td>13.0</td><td>8.8</td><td>7.2</td><td>3.9</td><td>11.7</td><td>2.3</td><td>10.5</td><td>12.9</td><td>8.6</td><td>5.9</td></tr>
+<tr><td>2024年度</td><td>1.2</td><td>20.6</td><td>14.5</td><td>8.7</td><td>8.1</td><td>4.9</td><td>11.3</td><td>2.3</td><td>13.2</td><td>3.1</td><td>10.0</td><td>2.2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <div class="note">
+    <p><b>数字の出どころについて。</b>広報おおしかの予算特集号と決算公表号から、記載された金額をそのまま転記しています。費目別の内訳は、合計が歳出総額と一致することを確認したものだけを採用しました。一致しなかった号は紙面を目視して採録しています。</p>
+    <p><b>当初予算と決算の違いについて。</b>当初予算は年度のはじめに議会で議決された額、決算は年度が終わって実際に使われた額です。年度の途中に補正予算が組まれるため、両者は一致しません。</p>
+    <p><b>1人当たりの計算について。</b>その年度末（翌年3月末）の人口で割っています。人口は広報おおしかの人口動態欄によります。</p>
+    <p><b>2026年度について。</b>当初予算のみで、決算はまだ出ていません。2025年度の決算は2026年9月の定例会で認定される予定です。</p>
+  </div>
+
+  <footer>
+    <p>出典：広報おおしか No.164〜No.357（大鹿村役場発行）に掲載の予算・決算記事。数値は掲載のまま転記しています。<br>
+    データ：<a href="ooshika_budget.csv" download>総額のCSV</a> ／ <a href="ooshika_expenditure_by_category.csv" download>費目別のCSV</a><br>
+    <a href="./">目次へ</a> ／ ooshika.org ／ 最終更新 2026年9月7日<br>
+    ご指摘は data@ooshika.org までお願いします。</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var boxes = document.querySelectorAll('.chartbox');
+  if(!boxes.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  boxes.forEach(function(box){
+    var cfg, svg = box.querySelector('svg');
+    try { cfg = JSON.parse(box.getAttribute('data-chart')); } catch(e){ return; }
+    if(!svg || !cfg) return;
+
+    var pw = cfg.W - cfg.L - cfg.R, ph = cfg.H - cfg.T - cfg.B;
+    function px(x){ return cfg.L + (x - cfg.xmin) / (cfg.xmax - cfg.xmin) * pw; }
+    function py(v){ return cfg.T + (cfg.ymax - v) / (cfg.ymax - cfg.ymin) * ph; }
+
+    // x座標の集合（系列をまたいで統合）
+    var xs = [], seen = {};
+    cfg.series.forEach(function(s){
+      s.p.forEach(function(pt){ if(!seen[pt[0]]){ seen[pt[0]] = 1; xs.push(pt[0]); } });
+    });
+    xs.sort(function(a,b){ return a-b; });
+
+    var guide = document.createElementNS(NS,'line');
+    guide.setAttribute('class','cguide');
+    guide.setAttribute('y1', cfg.T); guide.setAttribute('y2', cfg.T + ph);
+    svg.appendChild(guide);
+
+    var dots = cfg.series.map(function(s){
+      var c = document.createElementNS(NS,'circle');
+      c.setAttribute('class','cdot'); c.setAttribute('r','4.5');
+      c.setAttribute('fill', s.c); c.setAttribute('stroke','var(--paper)');
+      c.setAttribute('stroke-width','1.5');
+      svg.appendChild(c); return c;
+    });
+
+    var tip = document.createElement('div');
+    tip.className = 'ctip';
+    box.appendChild(tip);
+
+    function label(x){
+      if(cfg.xfmt === 'ym'){
+        var y = Math.floor(x + 1e-6), m = Math.round((x - y) * 12) + 1;
+        if(m > 12){ y += 1; m -= 12; }
+        return y + '年' + m + '月';
+      }
+      return x + '年度';
+    }
+    function fmt(v, d){
+      return v.toLocaleString('ja-JP', {minimumFractionDigits:d, maximumFractionDigits:d});
+    }
+
+    function show(clientX){
+      var r = svg.getBoundingClientRect();
+      var vx = (clientX - r.left) / r.width * cfg.W;
+      var dx = cfg.xmin + (vx - cfg.L) / pw * (cfg.xmax - cfg.xmin);
+      var best = xs[0];
+      for(var i=1;i<xs.length;i++){ if(Math.abs(xs[i]-dx) < Math.abs(best-dx)) best = xs[i]; }
+
+      var gx = px(best);
+      guide.setAttribute('x1', gx); guide.setAttribute('x2', gx);
+
+      var html = '<b>' + label(best) + '</b>', any = false;
+      cfg.series.forEach(function(s, i){
+        var hit = null;
+        for(var j=0;j<s.p.length;j++){ if(Math.abs(s.p[j][0]-best) < 1e-6){ hit = s.p[j][1]; break; } }
+        if(hit === null){ dots[i].setAttribute('opacity','0'); return; }
+        dots[i].removeAttribute('opacity');
+        dots[i].setAttribute('cx', gx); dots[i].setAttribute('cy', py(hit));
+        html += '<div><i style="background:' + s.c + '"></i>'
+             + (s.n ? s.n + ' ' : '') + fmt(hit, s.d) + s.u + '</div>';
+        any = true;
+      });
+      if(!any) return;
+      tip.innerHTML = html;
+      box.classList.add('on');
+
+      var bw = box.clientWidth, tw = tip.offsetWidth;
+      var left = gx / cfg.W * bw + 14;
+      if(left + tw > bw - 4) left = gx / cfg.W * bw - tw - 14;
+      if(left < 4) left = 4;
+      tip.style.left = left + 'px';
+      tip.style.top = (r.height * 0.10) + 'px';
+    }
+
+    function hide(){ box.classList.remove('on'); }
+
+    box.addEventListener('pointermove', function(e){ show(e.clientX); });
+    box.addEventListener('pointerdown', function(e){ show(e.clientX); });
+    box.addEventListener('pointerleave', hide);
+    box.addEventListener('pointercancel', hide);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大鹿村の農業 ｜ 大鹿村データ室</title>
+<meta name="description" content="農林業センサスと作物統計から、大鹿村の農業経営体数・耕地面積・農業産出額を並べたものです。大鹿村の公式サイトではありません。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .chartbox{position:relative;touch-action:pan-y}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .cguide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+  .cdot{opacity:0;pointer-events:none}
+  .ctip{
+    position:absolute;z-index:3;pointer-events:none;opacity:0;
+    background:var(--paper);border:1px solid var(--ink);
+    padding:8px 12px;font-size:13px;line-height:1.75;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    box-shadow:0 2px 10px rgba(35,36,31,.10);transition:opacity .1s
+  }
+  .ctip b{display:block;font-weight:600;margin-bottom:2px;font-size:12px;color:var(--muted)}
+  .ctip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .chartbox.on .cguide,.chartbox.on .cdot,.chartbox.on .ctip{opacity:1}
+  .chint{color:var(--muted);font-size:12px;margin-top:6px}
+  @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
+  @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
+
+  :root{
+    --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
+    --rule:#D8DAD0; --moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+       font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+     letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+     margin:64px 0 6px;padding-top:18px;border-top:2px solid var(--moegi)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+  p{margin:0 0 18px;max-width:38em}
+  figure{margin:0 0 10px}
+  svg{width:100%;height:auto;display:block}
+  .ax{font-family:var(--gothic);font-size:12px;fill:var(--muted)}
+  .pt{font-family:var(--gothic);font-size:14px;font-weight:700}
+  figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+  .facts{margin:34px 0 0;padding:0;list-style:none}
+  .fact{border-top:1px solid var(--rule);padding:20px 0}
+  .fact:last-child{border-bottom:1px solid var(--rule)}
+  .fact b{display:block;font-family:var(--mincho);font-size:27px;font-weight:600;
+          letter-spacing:.02em;line-height:1.35;margin-bottom:4px}
+  .fact span{color:var(--muted);font-size:15px}
+  details{margin:26px 0 0}
+  summary{cursor:pointer;font-size:15px;color:var(--muted);padding:8px 0}
+  summary:hover{color:var(--ink)}
+  .scroll{overflow:auto;max-height:460px;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:7px 13px;text-align:right;white-space:nowrap;
+        font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+  th{position:sticky;top:0;background:var(--panel);font-weight:600;
+     border-bottom:1px solid var(--ink);font-size:13px}
+  td:first-child,th:first-child{text-align:left}
+  .hi{color:var(--muted);font-size:12.5px}
+  .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
+  .note p{margin:0 0 12px} .note p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+         font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){
+    body{font-size:16px} h1{font-size:27px}
+    h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
+    .pt{font-size:16px} .ax{font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="site"><a href="./">大鹿村データ室</a></div>
+    <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+  </div>
+
+  <h1>大鹿村の農業</h1>
+  <p class="lede">農林水産省の農林業センサス（5年ごと）と作物統計（毎年）から、大鹿村の数字を拾って並べたものです。あわせて、村の決算から農林水産業費の推移を載せています。</p>
+
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 340, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2005, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 50, &quot;ymax&quot;: 110, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;耕地面積&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2005, 100.0], [2006, 99.547511], [2007, 96.832579], [2008, 95.927602], [2009, 95.475113], [2010, 94.570136], [2011, 94.117647], [2012, 93.665158], [2013, 92.760181], [2014, 93.21267], [2015, 93.21267], [2016, 91.855204], [2017, 90.950226], [2018, 89.140271], [2019, 87.330317], [2020, 85.520362], [2021, 85.067873], [2022, 85.067873], [2023, 85.067873], [2024, 85.067873], [2025, 85.067873]]}, {&quot;n&quot;: &quot;人口&quot;, &quot;c&quot;: &quot;#6B6E64&quot;, &quot;u&quot;: &quot;&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2005, 100.0], [2010, 89.477668], [2015, 79.788039], [2020, 72.899319], [2025, 63.815291]]}, {&quot;n&quot;: &quot;農業経営体&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2005, 100.0], [2010, 89.090909], [2015, 86.363636], [2020, 60.909091]]}, {&quot;n&quot;: &quot;基幹的農業従事者&quot;, &quot;c&quot;: &quot;#B08A3E&quot;, &quot;u&quot;: &quot;&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2005, 100.0], [2010, 89.705882], [2015, 91.911765], [2020, 63.235294]]}]}"><svg viewBox="0 0 900 340" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="300.0" x2="882" y2="300.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="304.0" text-anchor="end" class="ax">50</text>
+<line x1="62" y1="254.3" x2="882" y2="254.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="258.3" text-anchor="end" class="ax">60</text>
+<line x1="62" y1="208.7" x2="882" y2="208.7" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="212.7" text-anchor="end" class="ax">70</text>
+<line x1="62" y1="163.0" x2="882" y2="163.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="167.0" text-anchor="end" class="ax">80</text>
+<line x1="62" y1="117.3" x2="882" y2="117.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="121.3" text-anchor="end" class="ax">90</text>
+<line x1="62" y1="71.7" x2="882" y2="71.7" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="75.7" text-anchor="end" class="ax">100</text>
+<line x1="62.0" y1="26" x2="62.0" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="62.0" y="322" text-anchor="middle" class="ax">2005</text>
+<line x1="267.0" y1="26" x2="267.0" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="267.0" y="322" text-anchor="middle" class="ax">2010</text>
+<line x1="472.0" y1="26" x2="472.0" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="472.0" y="322" text-anchor="middle" class="ax">2015</text>
+<line x1="677.0" y1="26" x2="677.0" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="677.0" y="322" text-anchor="middle" class="ax">2020</text>
+<line x1="882.0" y1="26" x2="882.0" y2="300" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="882.0" y="322" text-anchor="middle" class="ax">2025</text>
+<polyline points="62.0,71.7 103.0,73.7 144.0,86.1 185.0,90.3 226.0,92.3 267.0,96.5 308.0,98.5 349.0,100.6 390.0,104.7 431.0,102.7 472.0,102.7 513.0,108.9 554.0,113.0 595.0,121.3 636.0,129.5 677.0,137.8 718.0,139.9 759.0,139.9 800.0,139.9 841.0,139.9 882.0,139.9" fill="none" stroke="#7A9A3C" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="71.7" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="57.7" text-anchor="start" class="pt" fill="#7A9A3C">耕地面積</text>
+<circle cx="882.0" cy="139.9" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="124.9" text-anchor="end" class="pt" fill="#7A9A3C">85</text>
+<polyline points="62.0,71.7 267.0,119.7 472.0,164.0 677.0,195.4 882.0,236.9" fill="none" stroke="#6B6E64" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="71.7" r="3.5" fill="#6B6E64"/>
+<text x="71.0" y="95.7" text-anchor="start" class="pt" fill="#6B6E64">人口</text>
+<circle cx="882.0" cy="236.9" r="3.5" fill="#6B6E64"/>
+<text x="874.0" y="260.9" text-anchor="end" class="pt" fill="#6B6E64">64</text>
+<polyline points="62.0,71.7 267.0,121.5 472.0,133.9 677.0,250.2" fill="none" stroke="#A8482F" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="71.7" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="117.7" text-anchor="start" class="pt" fill="#A8482F">経営体</text>
+<circle cx="677.0" cy="250.2" r="3.5" fill="#A8482F"/>
+<text x="669.0" y="276.2" text-anchor="end" class="pt" fill="#A8482F">61</text>
+<polyline points="62.0,71.7 267.0,118.7 472.0,108.6 677.0,239.6" fill="none" stroke="#B08A3E" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="71.7" r="3.5" fill="#B08A3E"/>
+<text x="71.0" y="139.7" text-anchor="start" class="pt" fill="#B08A3E">従事者</text>
+<circle cx="677.0" cy="239.6" r="3.5" fill="#B08A3E"/>
+<text x="669.0" y="223.6" text-anchor="end" class="pt" fill="#B08A3E">63</text>
+</svg></div>
+    <figcaption>2005年を100としたときの推移。人口は各年3月末。<span class="chint"></span></figcaption>
+  </figure>
+
+  <ul class="facts">
+    <li class="fact"><b>担い手は15年で4割減った</b><span>農業経営体は110から67へ、基幹的農業従事者は136人から86人へ。同じ期間の人口の減少（27.1％）より速いペースです。</span></li>
+    <li class="fact"><b>耕地はそれほど減っていない</b><span>221haから189haへ、14.5％の減少。担い手の減り方の半分以下です。1経営体あたりの面積は2.01haから2.82haになりました。</span></li>
+    <li class="fact"><b>2020年時点で60歳未満は10人</b><span>基幹的農業従事者86人のうち、70歳以上が65人。20代と45〜49歳はいません。</span></li>
+  </ul>
+
+  <h2>担い手の年齢</h2>
+  <p class="sub">2020年農林業センサス</p>
+  <figure>
+    <svg viewBox="0 0 900 370" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="86" y="29" text-anchor="end" class="ax">85歳以上</text>
+<rect x="100.0" y="16" width="322.7" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="422.7" y="16" width="96.8" height="19" fill="#A8482F" rx="1"/>
+<text x="527.5" y="30" class="pt" fill="#23241F">13</text>
+<text x="86" y="59" text-anchor="end" class="ax">80〜84</text>
+<rect x="100.0" y="46" width="322.7" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="422.7" y="46" width="225.9" height="19" fill="#A8482F" rx="1"/>
+<text x="656.6" y="60" class="pt" fill="#23241F">17</text>
+<text x="86" y="89" text-anchor="end" class="ax">75〜79</text>
+<rect x="100.0" y="76" width="290.5" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="390.5" y="76" width="387.3" height="19" fill="#A8482F" rx="1"/>
+<text x="785.7" y="90" class="pt" fill="#23241F">21</text>
+<text x="86" y="119" text-anchor="end" class="ax">70〜74</text>
+<rect x="100.0" y="106" width="258.2" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="358.2" y="106" width="193.6" height="19" fill="#A8482F" rx="1"/>
+<text x="559.8" y="120" class="pt" fill="#23241F">14</text>
+<text x="86" y="149" text-anchor="end" class="ax">65〜69</text>
+<rect x="100.0" y="136" width="161.4" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="261.4" y="136" width="96.8" height="19" fill="#A8482F" rx="1"/>
+<text x="366.2" y="150" class="pt" fill="#23241F">8</text>
+<text x="86" y="179" text-anchor="end" class="ax">60〜64</text>
+<rect x="100.0" y="166" width="64.5" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="164.5" y="166" width="32.3" height="19" fill="#A8482F" rx="1"/>
+<text x="204.8" y="180" class="pt" fill="#23241F">3</text>
+<text x="86" y="209" text-anchor="end" class="ax">55〜59</text>
+<rect x="100.0" y="196" width="32.3" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="132.3" y="196" width="32.3" height="19" fill="#A8482F" rx="1"/>
+<text x="172.5" y="210" class="pt" fill="#23241F">2</text>
+<text x="86" y="239" text-anchor="end" class="ax">50〜54</text>
+<rect x="100.0" y="226" width="64.5" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="164.5" y="226" width="32.3" height="19" fill="#A8482F" rx="1"/>
+<text x="204.8" y="240" class="pt" fill="#23241F">3</text>
+<text x="86" y="269" text-anchor="end" class="ax">40〜44</text>
+<rect x="100.0" y="256" width="32.3" height="19" fill="#2E6B8A" rx="1"/>
+<rect x="132.3" y="256" width="32.3" height="19" fill="#A8482F" rx="1"/>
+<text x="172.5" y="270" class="pt" fill="#23241F">2</text>
+<text x="86" y="299" text-anchor="end" class="ax">35〜39</text>
+<rect x="100.0" y="286" width="32.3" height="19" fill="#A8482F" rx="1"/>
+<text x="140.3" y="300" class="pt" fill="#23241F">1</text>
+<text x="86" y="329" text-anchor="end" class="ax">30〜34</text>
+<rect x="100.0" y="316" width="64.5" height="19" fill="#2E6B8A" rx="1"/>
+<text x="172.5" y="330" class="pt" fill="#23241F">2</text>
+<rect x="100" y="354" width="12" height="12" fill="#2E6B8A" rx="1"/><text x="118" y="364" class="ax">男</text><rect x="150" y="354" width="12" height="12" fill="#A8482F" rx="1"/><text x="168" y="364" class="ax">女</text>
+</svg>
+    <figcaption>基幹的農業従事者（ふだん仕事として自営農業に従事している人）の年齢階層別人数。合計86人。</figcaption>
+  </figure>
+  <p>70歳以上が65人で全体の76％、80歳以上が30人で35％。60歳未満は10人です。20〜29歳と45〜49歳は0人でした。</p>
+  <p>基幹的農業従事者の総数は2005年136人、2010年122人、2015年125人、2020年86人と推移しています。2015年までは横ばいでしたが、直近の5年で39人減りました。</p>
+
+  <h2>耕地面積</h2>
+  <p class="sub">田は4割減り、畑は横ばい</p>
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2004, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 20, &quot;ymax&quot;: 240, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;耕地計&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 222.0], [2005, 221.0], [2006, 220.0], [2007, 214.0], [2008, 212.0], [2009, 211.0], [2010, 209.0], [2011, 208.0], [2012, 207.0], [2013, 205.0], [2014, 206.0], [2015, 206.0], [2016, 203.0], [2017, 201.0], [2018, 197.0], [2019, 193.0], [2020, 189.0], [2021, 188.0], [2022, 188.0], [2023, 188.0], [2024, 188.0], [2025, 188.0]]}, {&quot;n&quot;: &quot;畑&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 142.0], [2005, 141.0], [2006, 140.0], [2007, 138.0], [2008, 139.0], [2009, 141.0], [2010, 148.0], [2011, 147.0], [2012, 146.0], [2013, 145.0], [2014, 146.0], [2015, 146.0], [2016, 144.0], [2017, 143.0], [2018, 140.0], [2019, 137.0], [2020, 132.0], [2021, 132.0], [2022, 135.0], [2023, 136.0], [2024, 139.0], [2025, 141.0]]}, {&quot;n&quot;: &quot;田&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 80.0], [2005, 80.0], [2006, 80.0], [2007, 76.0], [2008, 73.0], [2009, 70.0], [2010, 61.0], [2011, 61.0], [2012, 61.0], [2013, 60.0], [2014, 60.0], [2015, 60.0], [2016, 59.0], [2017, 58.0], [2018, 57.0], [2019, 56.0], [2020, 57.0], [2021, 56.0], [2022, 53.0], [2023, 52.0], [2024, 49.0], [2025, 47.0]]}, {&quot;n&quot;: &quot;水稲作付&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 43.0], [2005, 42.0], [2006, 40.0], [2007, 40.0], [2008, 38.0], [2009, 39.0], [2010, 39.0], [2011, 39.0], [2012, 39.0], [2013, 38.0], [2014, 37.0], [2015, 33.0], [2016, 32.0], [2017, 32.0], [2018, 31.0], [2019, 30.0], [2020, 30.0], [2021, 30.0], [2022, 29.0], [2023, 29.0], [2024, 29.0], [2025, 28.0]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="254.0" x2="882" y2="254.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="258.0" text-anchor="end" class="ax">50ha</text>
+<line x1="62" y1="194.0" x2="882" y2="194.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="198.0" text-anchor="end" class="ax">100ha</text>
+<line x1="62" y1="134.0" x2="882" y2="134.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="138.0" text-anchor="end" class="ax">150ha</text>
+<line x1="62" y1="74.0" x2="882" y2="74.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="78.0" text-anchor="end" class="ax">200ha</text>
+<line x1="101.0" y1="26" x2="101.0" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="101.0" y="312" text-anchor="middle" class="ax">2005</text>
+<line x1="296.3" y1="26" x2="296.3" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="296.3" y="312" text-anchor="middle" class="ax">2010</text>
+<line x1="491.5" y1="26" x2="491.5" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="491.5" y="312" text-anchor="middle" class="ax">2015</text>
+<line x1="686.8" y1="26" x2="686.8" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="686.8" y="312" text-anchor="middle" class="ax">2020</text>
+<line x1="882.0" y1="26" x2="882.0" y2="290" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="882.0" y="312" text-anchor="middle" class="ax">2025</text>
+<polyline points="62.0,47.6 101.0,48.8 140.1,50.0 179.1,57.2 218.2,59.6 257.2,60.8 296.3,63.2 335.3,64.4 374.4,65.6 413.4,68.0 452.5,66.8 491.5,66.8 530.6,70.4 569.6,72.8 608.7,77.6 647.7,82.4 686.8,87.2 725.8,88.4 764.9,88.4 803.9,88.4 843.0,88.4 882.0,88.4" fill="none" stroke="#23241F" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="47.6" r="3.5" fill="#23241F"/>
+<text x="71.0" y="34.6" text-anchor="start" class="pt" fill="#23241F">耕地計 222</text>
+<circle cx="882.0" cy="88.4" r="3.5" fill="#23241F"/>
+<text x="874.0" y="73.4" text-anchor="end" class="pt" fill="#23241F">188</text>
+<polyline points="62.0,143.6 101.0,144.8 140.1,146.0 179.1,148.4 218.2,147.2 257.2,144.8 296.3,136.4 335.3,137.6 374.4,138.8 413.4,140.0 452.5,138.8 491.5,138.8 530.6,141.2 569.6,142.4 608.7,146.0 647.7,149.6 686.8,155.6 725.8,155.6 764.9,152.0 803.9,150.8 843.0,147.2 882.0,144.8" fill="none" stroke="#7A9A3C" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="143.6" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="167.6" text-anchor="start" class="pt" fill="#7A9A3C">畑 142</text>
+<circle cx="882.0" cy="144.8" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="168.8" text-anchor="end" class="pt" fill="#7A9A3C">141</text>
+<polyline points="62.0,218.0 101.0,218.0 140.1,218.0 179.1,222.8 218.2,226.4 257.2,230.0 296.3,240.8 335.3,240.8 374.4,240.8 413.4,242.0 452.5,242.0 491.5,242.0 530.6,243.2 569.6,244.4 608.7,245.6 647.7,246.8 686.8,245.6 725.8,246.8 764.9,250.4 803.9,251.6 843.0,255.2 882.0,257.6" fill="none" stroke="#2E6B8A" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="218.0" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="205.0" text-anchor="start" class="pt" fill="#2E6B8A">田 80</text>
+<circle cx="882.0" cy="257.6" r="3.5" fill="#2E6B8A"/>
+<text x="874.0" y="242.6" text-anchor="end" class="pt" fill="#2E6B8A">47</text>
+<polyline points="62.0,262.4 101.0,263.6 140.1,266.0 179.1,266.0 218.2,268.4 257.2,267.2 296.3,267.2 335.3,267.2 374.4,267.2 413.4,268.4 452.5,269.6 491.5,274.4 530.6,275.6 569.6,275.6 608.7,276.8 647.7,278.0 686.8,278.0 725.8,278.0 764.9,279.2 803.9,279.2 843.0,279.2 882.0,280.4" fill="none" stroke="#A8482F" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="262.4" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="286.4" text-anchor="start" class="pt" fill="#A8482F">水稲 43</text>
+<circle cx="882.0" cy="280.4" r="3.5" fill="#A8482F"/>
+<text x="874.0" y="304.4" text-anchor="end" class="pt" fill="#A8482F">28</text>
+</svg></div>
+    <figcaption>作物統計による耕地面積と水稲作付面積。<span class="chint"></span></figcaption>
+  </figure>
+  <p>2004年から2025年にかけて、田は80haから47haへ41.2％減った一方、畑は142haから141haとほとんど変わっていません。水稲の作付面積は43haから28haへ34.9％減っています。</p>
+  <p>2009年から2010年にかけて田が9ha減り、同時に畑が7ha増えています。この統計だけでは、実際の転換によるものか、区分の取り方の変更によるものかは分かりません。</p>
+
+  <h2>農業産出額</h2>
+  <p class="sub">推計値</p>
+  <div class="scroll" style="max-height:none;margin-top:22px">
+    <table>
+      <thead><tr><th>品目</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th></tr></thead>
+      <tbody>
+<tr><td>農業産出額</td><td>29</td><td>30</td><td>25</td><td>24</td><td>26</td><td>27</td><td>27</td></tr>
+<tr><td>耕種計</td><td>22</td><td>22</td><td>22</td><td>21</td><td>23</td><td>24</td><td>24</td></tr>
+<tr><td>米</td><td>4</td><td>4</td><td>4</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>野菜計</td><td>7</td><td>8</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td></tr>
+<tr><td>いちご</td><td>4</td><td>5</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>果実計</td><td>2</td><td>3</td><td>2</td><td>3</td><td>3</td><td>2</td><td>3</td></tr>
+<tr><td>花き</td><td>7</td><td>7</td><td>11</td><td>10</td><td>12</td><td>13</td><td>12</td></tr>
+<tr><td>畜産計</td><td>8</td><td>8</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+<tr><td>肉用牛</td><td>3</td><td>3</td><td>3</td><td>2</td><td>3</td><td>3</td><td>3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:18px">農林水産省が農林業センサスなどをもとに推計した市町村別の産出額です。単位は千万円。実際の販売額を集計したものではありません。</p>
+  <p>2017年から2023年にかけて、花きが7から12へ、畜産計が8から3へ動いています。この推移について、この統計だけでは背景は分かりません。産出額の推計方法は農林水産省が公表しています。</p>
+
+  <h2>農業集落別の経営体数</h2>
+  <p class="sub">24集落</p>
+  <details open>
+    <summary>表を開く</summary>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>農業集落</th><th>2005</th><th>2010</th><th>2015</th><th>2020</th></tr></thead>
+        <tbody>
+<tr><td>落合</td><td>1</td><td>1</td><td>2</td><td>0</td></tr>
+<tr><td>下青木</td><td>8</td><td>7</td><td>9</td><td>5</td></tr>
+<tr><td>上青木</td><td>8</td><td>7</td><td>5</td><td>3</td></tr>
+<tr><td>深ケ沢桃の平</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>北の原</td><td>4</td><td>4</td><td>3</td><td>3</td></tr>
+<tr><td>釜沢</td><td>2</td><td>2</td><td>0</td><td>0</td></tr>
+<tr><td>上蔵</td><td>12</td><td>9</td><td>6</td><td>4</td></tr>
+<tr><td>沢戸</td><td>7</td><td>7</td><td>7</td><td>5</td></tr>
+<tr><td>上市場</td><td>8</td><td>3</td><td>2</td><td class="hi">秘匿</td></tr>
+<tr><td>下市場</td><td>4</td><td>5</td><td>6</td><td>6</td></tr>
+<tr><td>清水</td><td>1</td><td>1</td><td>1</td><td class="hi">秘匿</td></tr>
+<tr><td>文満</td><td>4</td><td>3</td><td>3</td><td class="hi">秘匿</td></tr>
+<tr><td>中尾</td><td>3</td><td>2</td><td>3</td><td class="hi">秘匿</td></tr>
+<tr><td>南山</td><td>1</td><td>2</td><td>0</td><td>0</td></tr>
+<tr><td>河合</td><td>2</td><td>3</td><td>2</td><td class="hi">秘匿</td></tr>
+<tr><td>塩河</td><td>3</td><td>2</td><td>3</td><td>5</td></tr>
+<tr><td>西</td><td>8</td><td>8</td><td>11</td><td>7</td></tr>
+<tr><td>塩原</td><td>2</td><td>2</td><td>3</td><td class="hi">秘匿</td></tr>
+<tr><td>大栗</td><td>3</td><td>3</td><td>3</td><td class="hi">秘匿</td></tr>
+<tr><td>中峰</td><td>6</td><td>7</td><td>6</td><td>6</td></tr>
+<tr><td>梨原</td><td>6</td><td>5</td><td>7</td><td>6</td></tr>
+<tr><td>沢井</td><td>1</td><td>2</td><td>5</td><td>0</td></tr>
+<tr><td>入沢井</td><td>5</td><td>4</td><td>3</td><td class="hi">秘匿</td></tr>
+<tr><td>北入</td><td>11</td><td>9</td><td>5</td><td>5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+  <p style="margin-top:18px">経営体数が1〜2の集落は、統計の秘密保護のため数値が公表されていません。表では「秘匿」と表示しています。0との区別が必要です。2020年は9集落が秘匿となっており、表示されている数字の合計は村全体の67に届きません。</p>
+
+  <h2>村の農林水産業費</h2>
+  <p class="sub">一般会計の決算</p>
+  <figure>
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 280, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2024, &quot;ymin&quot;: 1.5, &quot;ymax&quot;: 4.5, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;農林水産業費&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2003, 4.0616], [2004, 2.4518], [2005, 1.7951], [2006, 2.1825], [2007, 1.9944], [2008, 2.0849], [2009, 4.4401], [2010, 4.019], [2011, 3.1908], [2012, 3.0897], [2013, 2.6644], [2014, 2.2977], [2015, 2.3998], [2016, 2.6165], [2017, 2.1113], [2018, 1.9425], [2019, 2.972], [2020, 1.7475], [2021, 1.9222], [2022, 2.0825], [2023, 1.8582], [2024, 1.9033]]}]}"><svg viewBox="0 0 900 280" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="204.3" x2="882" y2="204.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="208.3" text-anchor="end" class="ax">2億</text>
+<line x1="62" y1="133.0" x2="882" y2="133.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="137.0" text-anchor="end" class="ax">3億</text>
+<line x1="62" y1="61.7" x2="882" y2="61.7" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="65.7" text-anchor="end" class="ax">4億</text>
+<line x1="140.1" y1="26" x2="140.1" y2="240" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="140.1" y="262" text-anchor="middle" class="ax">2005</text>
+<line x1="335.3" y1="26" x2="335.3" y2="240" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="335.3" y="262" text-anchor="middle" class="ax">2010</text>
+<line x1="530.6" y1="26" x2="530.6" y2="240" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="530.6" y="262" text-anchor="middle" class="ax">2015</text>
+<line x1="725.8" y1="26" x2="725.8" y2="240" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="725.8" y="262" text-anchor="middle" class="ax">2020</text>
+<polyline points="62.0,57.3 101.0,172.1 140.1,218.9 179.1,191.3 218.2,204.7 257.2,198.3 296.3,30.3 335.3,60.3 374.4,119.4 413.4,126.6 452.5,156.9 491.5,183.1 530.6,175.8 569.6,160.4 608.7,196.4 647.7,208.4 686.8,135.0 725.8,222.3 764.9,209.9 803.9,198.4 843.0,214.4 882.0,211.2" fill="none" stroke="#7A9A3C" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="57.3" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="44.3" text-anchor="start" class="pt" fill="#7A9A3C">4.06億</text>
+<circle cx="882.0" cy="211.2" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="196.2" text-anchor="end" class="pt" fill="#7A9A3C">1.90億</text>
+</svg></div>
+    <figcaption>農林水産業費の決算額。<span class="chint"></span></figcaption>
+  </figure>
+  <figure style="margin-top:26px">
+    <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 250, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2024, &quot;ymin&quot;: 0, &quot;ymax&quot;: 20, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;歳出に占める割合&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 18.805793], [2004, 12.966518], [2005, 9.695644], [2006, 12.076292], [2007, 9.775177], [2008, 10.227719], [2009, 17.832443], [2010, 18.270756], [2011, 16.804032], [2012, 13.720779], [2013, 12.906851], [2014, 11.731998], [2015, 10.300543], [2016, 10.849149], [2017, 10.484576], [2018, 8.835891], [2019, 13.572574], [2020, 6.261578], [2021, 7.524878], [2022, 9.025505], [2023, 7.204001], [2024, 8.058445]]}]}"><svg viewBox="0 0 900 250" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="210.0" x2="882" y2="210.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="214.0" text-anchor="end" class="ax">0%</text>
+<line x1="62" y1="164.0" x2="882" y2="164.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="168.0" text-anchor="end" class="ax">5%</text>
+<line x1="62" y1="118.0" x2="882" y2="118.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="122.0" text-anchor="end" class="ax">10%</text>
+<line x1="62" y1="72.0" x2="882" y2="72.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="76.0" text-anchor="end" class="ax">15%</text>
+<line x1="62" y1="26.0" x2="882" y2="26.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="30.0" text-anchor="end" class="ax">20%</text>
+<line x1="140.1" y1="26" x2="140.1" y2="210" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="140.1" y="232" text-anchor="middle" class="ax">2005</text>
+<line x1="335.3" y1="26" x2="335.3" y2="210" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="335.3" y="232" text-anchor="middle" class="ax">2010</text>
+<line x1="530.6" y1="26" x2="530.6" y2="210" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="530.6" y="232" text-anchor="middle" class="ax">2015</text>
+<line x1="725.8" y1="26" x2="725.8" y2="210" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="725.8" y="232" text-anchor="middle" class="ax">2020</text>
+<polyline points="62.0,37.0 101.0,90.7 140.1,120.8 179.1,98.9 218.2,120.1 257.2,115.9 296.3,45.9 335.3,41.9 374.4,55.4 413.4,83.8 452.5,91.3 491.5,102.1 530.6,115.2 569.6,110.2 608.7,113.5 647.7,128.7 686.8,85.1 725.8,152.4 764.9,140.8 803.9,127.0 843.0,143.7 882.0,135.9" fill="none" stroke="#7A9A3C" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="37.0" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="24.0" text-anchor="start" class="pt" fill="#7A9A3C">18.8%</text>
+<circle cx="882.0" cy="135.9" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="120.9" text-anchor="end" class="pt" fill="#7A9A3C">8.1%</text>
+</svg></div>
+    <figcaption>歳出全体に占める割合。<span class="chint"></span></figcaption>
+  </figure>
+  <p>2003年度の4.06億円が2024年度に1.90億円へ。歳出全体に占める割合は18.8％から8.1％になりました。この間、村の歳出総額は21.6億円から23.6億円とほぼ横ばいです。</p>
+  <p>農林水産業費には林道の整備・維持も含まれます。村の固定資産台帳（令和2年度末）では、林道の取得価額は140.4億円で、償却対象資産349.0億円の40.2％を占めています。</p>
+
+  <h2>もとの数字</h2>
+  <details>
+    <summary>耕地面積の表を開く（2004〜2025年）</summary>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>年</th><th>耕地計（ha）</th><th>田（ha）</th><th>畑（ha）</th><th>水稲作付（ha）</th></tr></thead>
+        <tbody>
+<tr><td>2004年</td><td>222</td><td>80</td><td>142</td><td>43</td></tr>
+<tr><td>2005年</td><td>221</td><td>80</td><td>141</td><td>42</td></tr>
+<tr><td>2006年</td><td>220</td><td>80</td><td>140</td><td>40</td></tr>
+<tr><td>2007年</td><td>214</td><td>76</td><td>138</td><td>40</td></tr>
+<tr><td>2008年</td><td>212</td><td>73</td><td>139</td><td>38</td></tr>
+<tr><td>2009年</td><td>211</td><td>70</td><td>141</td><td>39</td></tr>
+<tr><td>2010年</td><td>209</td><td>61</td><td>148</td><td>39</td></tr>
+<tr><td>2011年</td><td>208</td><td>61</td><td>147</td><td>39</td></tr>
+<tr><td>2012年</td><td>207</td><td>61</td><td>146</td><td>39</td></tr>
+<tr><td>2013年</td><td>205</td><td>60</td><td>145</td><td>38</td></tr>
+<tr><td>2014年</td><td>206</td><td>60</td><td>146</td><td>37</td></tr>
+<tr><td>2015年</td><td>206</td><td>60</td><td>146</td><td>33</td></tr>
+<tr><td>2016年</td><td>203</td><td>59</td><td>144</td><td>32</td></tr>
+<tr><td>2017年</td><td>201</td><td>58</td><td>143</td><td>32</td></tr>
+<tr><td>2018年</td><td>197</td><td>57</td><td>140</td><td>31</td></tr>
+<tr><td>2019年</td><td>193</td><td>56</td><td>137</td><td>30</td></tr>
+<tr><td>2020年</td><td>189</td><td>57</td><td>132</td><td>30</td></tr>
+<tr><td>2021年</td><td>188</td><td>56</td><td>132</td><td>30</td></tr>
+<tr><td>2022年</td><td>188</td><td>53</td><td>135</td><td>29</td></tr>
+<tr><td>2023年</td><td>188</td><td>52</td><td>136</td><td>29</td></tr>
+<tr><td>2024年</td><td>188</td><td>49</td><td>139</td><td>29</td></tr>
+<tr><td>2025年</td><td>188</td><td>47</td><td>141</td><td>28</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <div class="note">
+    <p><b>耕地面積が同じ値で続いていることについて。</b>2021年から2025年まで、耕地面積の合計は5年連続で188haと同じ値になっています。作物統計では、規模の小さい市町村について毎年の実測を行わず前年の値を用いる場合があります。この5年間の値がそれに当たるかどうかは確認していません。</p>
+    <p><b>農業産出額について。</b>農林水産省が推計した値であり、実際の販売額の集計ではありません。品目によっては実態と離れる場合があります。</p>
+    <p><b>秘匿について。</b>農林業センサスでは、調査対象数が2以下の場合に数値が公表されません。集落別の表では「秘匿」と表示しています。0ではありません。</p>
+    <p><b>2025年農林業センサスについて。</b>市町村別のデータは2026年10月に公表される予定です。公表され次第、追加します。</p>
+    <p><b>指数のグラフについて。</b>2005年の値を100として計算しています。経営体数と従事者数は5年ごと、耕地面積と人口は毎年の値です。人口は各年3月末の広報おおしか掲載値によります。</p>
+  </div>
+
+  <footer>
+    <p>出典：農林水産省 農林業センサス（2005・2010・2015・2020年）、作物統計、市町村別農業産出額（推計）。関東農政局「地域のデータ」に掲載のエクセルから大鹿村の値を抽出しました。農林水産業費は広報おおしか掲載の決算額によります。<br>
+    データ：<a href="ooshika_agri_census.csv" download>経営体・従事者</a> ／ <a href="ooshika_agri_age2020.csv" download>年齢構成</a> ／ <a href="ooshika_agri_land.csv" download>耕地面積</a> ／ <a href="ooshika_agri_output.csv" download>産出額</a> ／ <a href="ooshika_agri_settlement.csv" download>集落別</a><br>
+    <a href="./">目次へ</a> ／ ooshika.org ／ 最終更新 2026年9月7日<br>
+    ご指摘は data@ooshika.org までお願いします。</p>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var boxes = document.querySelectorAll('.chartbox');
+  if(!boxes.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  boxes.forEach(function(box){
+    var cfg, svg = box.querySelector('svg');
+    try { cfg = JSON.parse(box.getAttribute('data-chart')); } catch(e){ return; }
+    if(!svg || !cfg) return;
+
+    var pw = cfg.W - cfg.L - cfg.R, ph = cfg.H - cfg.T - cfg.B;
+    function px(x){ return cfg.L + (x - cfg.xmin) / (cfg.xmax - cfg.xmin) * pw; }
+    function py(v){ return cfg.T + (cfg.ymax - v) / (cfg.ymax - cfg.ymin) * ph; }
+
+    // x座標の集合（系列をまたいで統合）
+    var xs = [], seen = {};
+    cfg.series.forEach(function(s){
+      s.p.forEach(function(pt){ if(!seen[pt[0]]){ seen[pt[0]] = 1; xs.push(pt[0]); } });
+    });
+    xs.sort(function(a,b){ return a-b; });
+
+    var guide = document.createElementNS(NS,'line');
+    guide.setAttribute('class','cguide');
+    guide.setAttribute('y1', cfg.T); guide.setAttribute('y2', cfg.T + ph);
+    svg.appendChild(guide);
+
+    var dots = cfg.series.map(function(s){
+      var c = document.createElementNS(NS,'circle');
+      c.setAttribute('class','cdot'); c.setAttribute('r','4.5');
+      c.setAttribute('fill', s.c); c.setAttribute('stroke','var(--paper)');
+      c.setAttribute('stroke-width','1.5');
+      svg.appendChild(c); return c;
+    });
+
+    var tip = document.createElement('div');
+    tip.className = 'ctip';
+    box.appendChild(tip);
+
+    function label(x){
+      if(cfg.xfmt === 'ym'){
+        var y = Math.floor(x + 1e-6), m = Math.round((x - y) * 12) + 1;
+        if(m > 12){ y += 1; m -= 12; }
+        return y + '年' + m + '月';
+      }
+      return x + '年度';
+    }
+    function fmt(v, d){
+      return v.toLocaleString('ja-JP', {minimumFractionDigits:d, maximumFractionDigits:d});
+    }
+
+    function show(clientX){
+      var r = svg.getBoundingClientRect();
+      var vx = (clientX - r.left) / r.width * cfg.W;
+      var dx = cfg.xmin + (vx - cfg.L) / pw * (cfg.xmax - cfg.xmin);
+      var best = xs[0];
+      for(var i=1;i<xs.length;i++){ if(Math.abs(xs[i]-dx) < Math.abs(best-dx)) best = xs[i]; }
+
+      var gx = px(best);
+      guide.setAttribute('x1', gx); guide.setAttribute('x2', gx);
+
+      var html = '<b>' + label(best) + '</b>', any = false;
+      cfg.series.forEach(function(s, i){
+        var hit = null;
+        for(var j=0;j<s.p.length;j++){ if(Math.abs(s.p[j][0]-best) < 1e-6){ hit = s.p[j][1]; break; } }
+        if(hit === null){ dots[i].setAttribute('opacity','0'); return; }
+        dots[i].removeAttribute('opacity');
+        dots[i].setAttribute('cx', gx); dots[i].setAttribute('cy', py(hit));
+        html += '<div><i style="background:' + s.c + '"></i>'
+             + (s.n ? s.n + ' ' : '') + fmt(hit, s.d) + s.u + '</div>';
+        any = true;
+      });
+      if(!any) return;
+      tip.innerHTML = html;
+      box.classList.add('on');
+
+      var bw = box.clientWidth, tw = tip.offsetWidth;
+      var left = gx / cfg.W * bw + 14;
+      if(left + tw > bw - 4) left = gx / cfg.W * bw - tw - 14;
+      if(left < 4) left = 4;
+      tip.style.left = left + 'px';
+      tip.style.top = (r.height * 0.10) + 'px';
+    }
+
+    function hide(){ box.classList.remove('on'); }
+
+    box.addEventListener('pointermove', function(e){ show(e.clientX); });
+    box.addEventListener('pointerdown', function(e){ show(e.clientX); });
+    box.addEventListener('pointerleave', hide);
+    box.addEventListener('pointercancel', hide);
+  });
+})();
+</script>
+</body>
+</html>

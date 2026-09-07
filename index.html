@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大鹿村データ室</title>
+<meta name="description" content="長野県大鹿村について、村が公表した資料をもとに数字を整理して掲載しています。大鹿村の公式サイトではありません。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .chartbox{position:relative;touch-action:pan-y}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .cguide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+  .cdot{opacity:0;pointer-events:none}
+  .ctip{
+    position:absolute;z-index:3;pointer-events:none;opacity:0;
+    background:var(--paper);border:1px solid var(--ink);
+    padding:8px 12px;font-size:13px;line-height:1.75;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    box-shadow:0 2px 10px rgba(35,36,31,.10);transition:opacity .1s
+  }
+  .ctip b{display:block;font-weight:600;margin-bottom:2px;font-size:12px;color:var(--muted)}
+  .ctip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .chartbox.on .cguide,.chartbox.on .cdot,.chartbox.on .ctip{opacity:1}
+  .chint{color:var(--muted);font-size:12px;margin-top:6px}
+  @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
+  @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
+
+  :root{
+    --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
+    --rule:#D8DAD0; --moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+       font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+     letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+     margin:64px 0 6px;padding-top:18px;border-top:2px solid var(--moegi)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+  p{margin:0 0 18px;max-width:38em}
+  figure{margin:0 0 10px}
+  svg{width:100%;height:auto;display:block}
+  .ax{font-family:var(--gothic);font-size:12px;fill:var(--muted)}
+  .pt{font-family:var(--gothic);font-size:14px;font-weight:700}
+  figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+  .facts{margin:34px 0 0;padding:0;list-style:none}
+  .fact{border-top:1px solid var(--rule);padding:20px 0}
+  .fact:last-child{border-bottom:1px solid var(--rule)}
+  .fact b{display:block;font-family:var(--mincho);font-size:27px;font-weight:600;
+          letter-spacing:.02em;line-height:1.35;margin-bottom:4px}
+  .fact span{color:var(--muted);font-size:15px}
+  details{margin:26px 0 0}
+  summary{cursor:pointer;font-size:15px;color:var(--muted);padding:8px 0}
+  summary:hover{color:var(--ink)}
+  .scroll{overflow:auto;max-height:460px;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:7px 12px;text-align:right;white-space:nowrap;
+        font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+  th{position:sticky;top:0;background:var(--panel);font-weight:600;
+     border-bottom:1px solid var(--ink);font-size:13px}
+  td:first-child,th:first-child{text-align:left}
+  .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
+  .note p{margin:0 0 12px} .note p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+         font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){
+    body{font-size:16px} h1{font-size:27px}
+    h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
+    .pt{font-size:17px} .ax{font-size:15px}
+  }
+
+  .idx{list-style:none;margin:40px 0 0;padding:0}
+  .idx li{border-top:1px solid var(--rule);padding:0}
+  .idx li:last-child{border-bottom:1px solid var(--rule)}
+  .idx a{display:block;padding:24px 2px;text-decoration:none;color:inherit}
+  .idx a:hover b{text-decoration:underline;text-underline-offset:4px}
+  .idx b{display:block;font-family:var(--mincho);font-size:25px;font-weight:600;
+         letter-spacing:.02em;line-height:1.4;margin-bottom:5px}
+  .idx span{color:var(--muted);font-size:15px;display:block;max-width:36em}
+  .soon{padding:24px 2px;color:#A8ADA0}
+  .soon b{display:block;font-family:var(--mincho);font-size:25px;font-weight:600;
+          letter-spacing:.02em;line-height:1.4;margin-bottom:5px}
+  .soon span{font-size:15px;display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="site"><a href="./">大鹿村データ室</a></div>
+    <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+  </div>
+
+  <h1>大鹿村データ室</h1>
+  <p class="lede">長野県下伊那郡大鹿村について、村が公表した資料から数字を拾い、経年で並べています。広報おおしか、村の公表資料、情報公開請求で得た文書が出どころです。数値は出典の記載のまま転記し、判断が入った箇所は各ページに注記しています。</p>
+
+  <ul class="idx">
+    <li><a href="population.html"><b>人口</b><span>2003年11月から2026年7月までの194か月分。人口・男女別・世帯数。23年で571人減り、減り方はこの間ほとんど変わっていません。</span></a></li>
+    <li><a href="finance.html"><b>予算と決算</b><span>2003年度から2026年度までの一般会計。総額、1人当たりの額、費目別の構成比。人口が4割減る間、村が使う額は減っていません。</span></a></li>
+    <li><a href="agriculture.html"><b>農業</b><span>農林業センサスと作物統計から。経営体数、担い手の年齢、耕地面積、産出額、農業集落別の経営体数。担い手は15年で4割減りました。</span></a></li>
+  </ul>
+
+  <ul class="idx">
+    <li class="soon"><b>学校</b><span>準備中。児童生徒数と、複式学級の基準に照らした見通し。</span></li>
+    <li class="soon"><b>林業・鳥獣害</b><span>準備中。</span></li>
+    <li class="soon"><b>公共施設とインフラ</b><span>準備中。資産の老朽化と更新の時期。</span></li>
+    <li class="soon"><b>村が公表しているもの／していないもの</b><span>準備中。法令や条例で公表が定められている情報の一覧と、その状況。</span></li>
+  </ul>
+
+  <footer>
+    <p>数値の誤りや、掲載してほしい資料についてのご指摘は歓迎します。<br>
+    data@ooshika.org<br>    ooshika.org ／ 最終更新 2026年9月7日</p>
+  </footer>
+
+</div>
+</body>
+</html>
