@@ -6,5 +6,9 @@
     "directory": "./",
     "not_found_handling": "404-page",
     "binding": "ASSETS"
+  },
+  "vars": {
+    "GAS_URL": "https://script.google.com/macros/s/AKfycbyphOWEwp9Y5z8ZnqCKJ1i-oWUHlOTEj3f-U9TVTWNCU7xiXgWCS2e2nx38FUnQK-Je/exec",
+    "GAS_TOKEN": "ooshikaAgricultureCommittee"
   }
 }
