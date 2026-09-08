@@ -9,6 +9,8 @@
   },
   "vars": {
     "GAS_URL": "https://script.google.com/macros/s/AKfycbyphOWEwp9Y5z8ZnqCKJ1i-oWUHlOTEj3f-U9TVTWNCU7xiXgWCS2e2nx38FUnQK-Je/exec",
-    "GAS_TOKEN": "ooshikaAgricultureCommittee"
+    "GAS_TOKEN": "ooshikaAgricultureCommittee",
+    "HUNT_GAS_URL": "https://script.google.com/macros/s/AKfycbxwdPYjzWEOlmHEtoOPV0Lyoe7mPGzmkrjxQD9gAT-Rxgf_uc3Iqq7XBpMJ5NhDohbw/exec",
+    "HUNT_TOKEN": "browningB25fabarmSDASSComposite"
   }
 }
