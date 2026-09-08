@@ -1,2 +1,4 @@
+_worker.js
 src
 wrangler.jsonc
+.assetsignore
