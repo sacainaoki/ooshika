@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>捕獲地点の記録</title>
+<style>
+  body{font-family:system-ui,-apple-system,"Hiragino Sans",sans-serif;background:#E3E3DE;color:#1B1E1C;margin:0;padding:24px;max-width:560px;margin:0 auto}
+  h1{font-size:18px;letter-spacing:.06em}
+  label{display:block;font-size:12px;color:#5E635D;margin:12px 0 4px}
+  input,select,textarea{width:100%;padding:10px;font-size:16px;border:1px solid #C5C7C0;background:#fff;border-radius:0;box-sizing:border-box}
+  button{width:100%;margin-top:16px;padding:14px;border:0;background:#B4470B;color:#fff;font-size:16px;font-weight:700}
+  button.sub{background:transparent;color:#1B1E1C;border:1px solid #1B1E1C;margin-top:8px}
+  #out{margin-top:14px;font-size:13px;white-space:pre-wrap;min-height:1.4em}
+  .row{display:flex;gap:8px}.row>*{flex:1}
+</style>
+</head>
+<body>
+  <h1>捕獲地点の記録</h1>
+
+  <label>区分</label>
+  <select id="kubun"><option>狩猟</option><option>有害鳥獣捕獲</option><option>指定管理鳥獣捕獲等事業</option></select>
+
+  <label>場所</label><input id="place" placeholder="鹿塩">
+
+  <div class="row">
+    <div><label>捕獲</label><input id="game" placeholder="ニホンジカ"></div>
+    <div><label>性別</label>
+      <select id="sex"><option value=""></option><option>オス</option><option>メス</option></select></div>
+  </div>
+  <div class="row">
+    <div><label>頭数</label><input id="head" type="number" inputmode="numeric" placeholder="1"></div>
+    <div><label>体重kg</label><input id="weight" type="number" inputmode="decimal"></div>
+  </div>
+
+  <label>使用銃</label><input id="gun" placeholder="ベレッタ / gun_id など">
+  <div class="row">
+    <div><label>発砲数</label><input id="shots" type="number" inputmode="numeric"></div>
+    <div><label>弾</label><select id="stype"><option>散弾</option><option>単弾</option></select></div>
+  </div>
+
+  <label>同行者</label><input id="party">
+  <div class="row">
+    <div><label>天候</label><input id="weather" placeholder="晴"></div>
+    <div><label>気温℃</label><input id="temp" type="number" inputmode="numeric"></div>
+  </div>
+
+  <div class="row">
+    <div><label>緯度</label><input id="lat" readonly></div>
+    <div><label>経度</label><input id="lng" readonly></div>
+  </div>
+
+  <label>備考</label><textarea id="notes"></textarea>
+
+  <div id="out"></div>
+  <button id="get">現在地を取得</button>
+  <button id="send" class="sub">この地点で登録</button>
+
+<script>
+const $ = id => document.getElementById(id);
+$("get").onclick = () => {
+  $("out").textContent = "取得中…";
+  navigator.geolocation.getCurrentPosition(p => {
+    $("lat").value = p.coords.latitude.toFixed(6);
+    $("lng").value = p.coords.longitude.toFixed(6);
+    $("out").textContent = "取得しました（±" + Math.round(p.coords.accuracy) + "m）";
+  }, e => { $("out").textContent = "取得できません: " + e.message; },
+  { enableHighAccuracy:true, timeout:12000, maximumAge:0 });
+};
+$("send").onclick = async () => {
+  if (!$("lat").value) { $("out").textContent = "先に現在地を取得してください"; return; }
+  if (!$("place").value.trim()) { $("out").textContent = "場所を入れてください"; return; }
+  $("out").textContent = "送信中…";
+  const t = new Date();
+  const d = t.getFullYear() + "-" + String(t.getMonth()+1).padStart(2,"0") + "-" + String(t.getDate()).padStart(2,"0");
+  const record = {
+    date: d, kubun: $("kubun").value, place: $("place").value,
+    game: $("game").value, sex: $("sex").value,
+    head: $("head").value || "", weight: $("weight").value || "",
+    gun_id: $("gun").value, party: $("party").value,
+    weather: $("weather").value, temp: $("temp").value || "",
+    notes: $("notes").value,
+    lat: Number($("lat").value), lng: Number($("lng").value)
+  };
+  if ($("shots").value) { record.shot_count = Number($("shots").value); record.shot_type = $("stype").value; }
+  try {
+    const r = await fetch("/api/hunt", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ record })
+    });
+    const j = await r.json();
+    $("out").textContent = j.ok ? "登録しました ✓（ID: " + (j.id||"") + "）" : ("エラー: " + (j.error||JSON.stringify(j)));
+  } catch(e){ $("out").textContent = "通信エラー: " + e; }
+};
+</script>
+</body>
+</html>
