@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>現地GPS登録</title>
+<style>
+  body{font-family:system-ui,-apple-system,"Hiragino Sans",sans-serif;background:#E3E3DE;color:#1B1E1C;margin:0;padding:24px;max-width:560px;margin:0 auto}
+  h1{font-size:18px;letter-spacing:.08em}
+  label{display:block;font-size:12px;color:#5E635D;margin:12px 0 4px}
+  input,select,textarea{width:100%;padding:10px;font-size:16px;border:1px solid #C5C7C0;background:#fff;border-radius:0;box-sizing:border-box}
+  button{width:100%;margin-top:16px;padding:14px;border:0;background:#2F6B4F;color:#fff;font-size:16px;font-weight:700}
+  button.sub{background:transparent;color:#1B1E1C;border:1px solid #1B1E1C;margin-top:8px}
+  #out{margin-top:14px;font-size:13px;white-space:pre-wrap;min-height:1.4em}
+  .row{display:flex;gap:8px}.row>*{flex:1}
+</style>
+</head>
+<body>
+  <h1>現地GPS登録</h1>
+  <label>所在・地番</label><input id="chiban" placeholder="大河原2662-1">
+  <label>区分</label>
+  <select id="kubun"><option>その他</option><option>最適化活動</option><option>許認可</option></select>
+  <label>細目</label><input id="sub" value="現地調査">
+  <label>内容</label><input id="detail" value="農地確認">
+  <div class="row">
+    <div><label>緯度</label><input id="lat" readonly></div>
+    <div><label>経度</label><input id="lng" readonly></div>
+  </div>
+  <div id="out"></div>
+  <button id="get">現在地を取得</button>
+  <button id="send" class="sub">この内容で登録</button>
+
+<script>
+const $ = id => document.getElementById(id);
+$("get").onclick = () => {
+  $("out").textContent = "取得中…";
+  navigator.geolocation.getCurrentPosition(p => {
+    $("lat").value = p.coords.latitude.toFixed(6);
+    $("lng").value = p.coords.longitude.toFixed(6);
+    $("out").textContent = "取得しました（±" + Math.round(p.coords.accuracy) + "m）";
+  }, e => { $("out").textContent = "取得できません: " + e.message; },
+  { enableHighAccuracy:true, timeout:12000, maximumAge:0 });
+};
+$("send").onclick = async () => {
+  if (!$("lat").value) { $("out").textContent = "先に現在地を取得してください"; return; }
+  $("out").textContent = "送信中…";
+  const today = new Date();
+  const d = today.getFullYear() + "-" +
+    String(today.getMonth()+1).padStart(2,"0") + "-" +
+    String(today.getDate()).padStart(2,"0");
+  const record = {
+    date: d, kubun: $("kubun").value, sub: $("sub").value,
+    place: "圃場", detail: $("detail").value, chiban: $("chiban").value,
+    lat: Number($("lat").value), lng: Number($("lng").value)
+  };
+  try {
+    const r = await fetch("/api/spot", {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({ record })
+    });
+    const t = await r.json();
+    $("out").textContent = t.ok ? "登録しました ✓" : ("エラー: " + (t.error||JSON.stringify(t)));
+  } catch(e){ $("out").textContent = "通信エラー: " + e; }
+};
+</script>
+</body>
+</html>
