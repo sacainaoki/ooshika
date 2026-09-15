@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>決算を読む ｜ 大鹿村データ室</title>
+<meta name="description" content="大鹿村の一般会計決算書から、平成30年度から令和7年度までの8年分を並べたものです。大鹿村の公式サイトではありません。">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#7A9A3C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .chartbox{position:relative;touch-action:pan-y}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .cguide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+  .cdot{opacity:0;pointer-events:none}
+  .ctip{
+    position:absolute;z-index:3;pointer-events:none;opacity:0;
+    background:var(--paper);border:1px solid var(--ink);
+    padding:8px 12px;font-size:13px;line-height:1.75;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    box-shadow:0 2px 10px rgba(35,36,31,.10);transition:opacity .1s
+  }
+  .ctip b{display:block;font-weight:600;margin-bottom:2px;font-size:12px;color:var(--muted)}
+  .ctip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .chartbox.on .cguide,.chartbox.on .cdot,.chartbox.on .ctip{opacity:1}
+  .chint{color:var(--muted);font-size:12px;margin-top:6px}
+  @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
+  @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
+
+  .nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+       margin:14px 0 0;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.nav span{flex:0 0 auto;padding:7px 15px 7px 0;font-size:15px;
+       text-decoration:none;white-space:nowrap;color:var(--muted)}
+  .nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+  .nav span{color:var(--ink);font-weight:700}
+  @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
+
+  :root{--paper:#FBFBF8;--panel:#F2F3EE;--ink:#23241F;--muted:#6B6E64;--rule:#D8DAD0;--moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;}
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+    font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+    letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+    margin:64px 0 6px;padding-top:18px;border-top:2px solid var(--moegi)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+  p{margin:0 0 18px;max-width:38em}
+  figure{margin:0 0 10px} svg{width:100%;height:auto;display:block}
+  .ax{font-family:var(--gothic);font-size:12px;fill:var(--muted)}
+  .pt{font-family:var(--gothic);font-size:14px;font-weight:700}
+  figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+  .facts{margin:34px 0 0;padding:0;list-style:none}
+  .fact{border-top:1px solid var(--rule);padding:20px 0}
+  .fact:last-child{border-bottom:1px solid var(--rule)}
+  .fact b{display:block;font-family:var(--mincho);font-size:27px;font-weight:600;
+    letter-spacing:.02em;line-height:1.35;margin-bottom:4px}
+  .fact span{color:var(--muted);font-size:15px}
+  details{margin:26px 0 0}
+  summary{cursor:pointer;font-size:15px;color:var(--muted);padding:8px 0}
+  summary:hover{color:var(--ink)}
+  .scroll{overflow:auto;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:7px 12px;text-align:right;white-space:nowrap;
+    font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+  th{position:sticky;top:0;background:var(--panel);font-weight:600;
+    border-bottom:1px solid var(--ink);font-size:13px}
+  td:first-child,th:first-child{text-align:left}
+  td.kn{color:var(--muted)}
+  tfoot .tot td{border-top:1px solid var(--ink);border-bottom:none;font-weight:700;background:var(--panel)}
+  .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
+  .eq{background:var(--panel);padding:14px 20px;font-size:15px;line-height:1.7;
+    font-variant-numeric:tabular-nums;max-width:none}
+  .note p{margin:0 0 12px} .note p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+    font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){body{font-size:16px} h1{font-size:27px}
+    h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
+    .pt{font-size:17px} .ax{font-size:15px}}
+</style></head><body><div class="wrap">
+
+<div class="top">
+  <div class="site"><a href="./">大鹿村データ室</a></div>
+  <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+  <nav class="nav">
+    <a href="index.html">目次</a>
+    <a href="population.html">人口</a>
+    <a href="finance.html">予算と決算</a>
+    <a href="agriculture.html">農業</a>
+    <a href="roads.html">村の道と橋</a>
+    <span aria-current="page">決算を読む</span>
+    <a href="about.html">このサイトについて</a>
+    </nav>
+</div>
+
+<h1>決算を読む</h1>
+<p class="lede">村の予算は、年度のはじめに議会で決まったあと、補正で増減し、前の年度から繰り越された分が加わって、
+最終的な予算現額になります。そこから実際に支出された額が決算です。
+広報おおしかに載るのは当初予算額と決算額だけなので、その間の動きは決算書を見ないと分かりません。
+平成30年度から令和7年度までの8年分を並べています。</p>
+
+<h2>予算はどう変わって決算になるか</h2>
+<p class="sub">3つの額の8年間</p>
+<figure>
+  <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 360, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 16, &quot;ymax&quot;: 33, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 18.4], [2019, 20.9], [2020, 20.08], [2021, 23.98], [2022, 19.8], [2023, 21.51], [2024, 22.58], [2025, 26.5]]}, {&quot;n&quot;: &quot;予算現額&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 27.70808], [2019, 28.93223], [2020, 31.60349], [2021, 30.64043], [2022, 28.37786], [2023, 29.455445], [2024, 27.617099], [2025, 27.04603]]}, {&quot;n&quot;: &quot;支出済額&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 21.984245], [2019, 21.897054], [2020, 27.908303], [2021, 25.544557], [2022, 23.073392], [2023, 25.794137], [2024, 23.61869], [2025, 25.265666]]}]}"><svg viewBox="0 0 900 360" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="320.0" x2="882" y2="320.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="324.0" text-anchor="end" class="ax">16億</text>
+<line x1="62" y1="250.8" x2="882" y2="250.8" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="254.8" text-anchor="end" class="ax">20億</text>
+<line x1="62" y1="181.6" x2="882" y2="181.6" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="185.6" text-anchor="end" class="ax">24億</text>
+<line x1="62" y1="112.5" x2="882" y2="112.5" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="116.5" text-anchor="end" class="ax">28億</text>
+<line x1="62" y1="43.3" x2="882" y2="43.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="47.3" text-anchor="end" class="ax">32億</text>
+<line x1="62.0" y1="26" x2="62.0" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="62.0" y="342" text-anchor="middle" class="ax">2018</text>
+<line x1="296.3" y1="26" x2="296.3" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="296.3" y="342" text-anchor="middle" class="ax">2020</text>
+<line x1="530.6" y1="26" x2="530.6" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="530.6" y="342" text-anchor="middle" class="ax">2022</text>
+<line x1="764.9" y1="26" x2="764.9" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="764.9" y="342" text-anchor="middle" class="ax">2024</text>
+<polyline points="62.0,278.5 179.1,235.3 296.3,249.4 413.4,182.0 530.6,254.3 647.7,224.7 764.9,206.2 882.0,138.4" fill="none" stroke="#2E6B8A" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="278.5" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="264.5" text-anchor="start" class="pt" fill="#2E6B8A">18.4</text>
+<circle cx="882.0" cy="138.4" r="3.5" fill="#2E6B8A"/>
+<text x="874.0" y="124.4" text-anchor="end" class="pt" fill="#2E6B8A">26.5</text>
+<polyline points="62.0,117.5 179.1,96.3 296.3,50.2 413.4,66.8 530.6,105.9 647.7,87.3 764.9,119.1 882.0,129.0" fill="none" stroke="#23241F" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="117.5" r="3.5" fill="#23241F"/>
+<text x="71.0" y="103.5" text-anchor="start" class="pt" fill="#23241F">27.7</text>
+<circle cx="882.0" cy="129.0" r="3.5" fill="#23241F"/>
+<text x="874.0" y="115.0" text-anchor="end" class="pt" fill="#23241F">27.1</text>
+<polyline points="62.0,216.5 179.1,218.0 296.3,114.1 413.4,154.9 530.6,197.7 647.7,150.6 764.9,188.2 882.0,159.8" fill="none" stroke="#7A9A3C" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="216.5" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="238.5" text-anchor="start" class="pt" fill="#7A9A3C">22.0</text>
+<circle cx="882.0" cy="159.8" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="181.8" text-anchor="end" class="pt" fill="#7A9A3C">25.3</text>
+</svg></div>
+  <figcaption>一般会計の歳出。当初予算額は決算書の款別の当初予算額を合計したものです。<span class="chint"></span></figcaption>
+</figure>
+
+<ul class="facts">
+  <li class="fact"><b>当初予算額は8.1億円ふえた</b><span>平成30年度の18.4億円が、令和7年度に26.5億円。予算現額は27.7億円から27.1億円で、ほぼ変わっていません。</span></li>
+  <li class="fact"><b>当初予算額と予算現額の差は9.3億円から0.6億円へ</b><span>平成30年度は、年度のはじめに決まった額が、最終的な予算現額の66％でした。令和7年度は98％です。</span></li>
+  <li class="fact"><b>令和7年度は補正が減額</b><span>補正予算額の合計が8年間で唯一のマイナス（-1.7億円）になっています。</span></li>
+</ul>
+
+<h2>予算現額はどう使われたか</h2>
+<p class="sub">支出済額・翌年度繰越額・不用額の別</p>
+<figure>
+  <svg viewBox="0 0 900 368" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="86" y="26" text-anchor="end" class="ax">2018年度</text>
+<rect x="96.0" y="10" width="493.9" height="22" fill="#7A9A3C"/>
+<text x="342.9" y="26.0" text-anchor="middle" class="ax" fill="#FBFBF8">21.98</text>
+<rect x="589.9" y="10" width="112.6" height="22" fill="#B08A3E"/>
+<text x="646.2" y="26.0" text-anchor="middle" class="ax" fill="#FBFBF8">5.01</text>
+<rect x="702.5" y="10" width="16.0" height="22" fill="#A8482F"/>
+<text x="727.5" y="26.0" class="pt" fill="#23241F">27.71</text>
+<text x="86" y="64" text-anchor="end" class="ax">2019年度</text>
+<rect x="96.0" y="48" width="491.9" height="22" fill="#7A9A3C"/>
+<text x="342.0" y="64.0" text-anchor="middle" class="ax" fill="#FBFBF8">21.90</text>
+<rect x="587.9" y="48" width="141.9" height="22" fill="#B08A3E"/>
+<text x="658.9" y="64.0" text-anchor="middle" class="ax" fill="#FBFBF8">6.32</text>
+<rect x="729.8" y="48" width="16.2" height="22" fill="#A8482F"/>
+<text x="755.0" y="64.0" class="pt" fill="#23241F">28.93</text>
+<text x="86" y="102" text-anchor="end" class="ax">2020年度</text>
+<rect x="96.0" y="86" width="627.0" height="22" fill="#7A9A3C"/>
+<text x="409.5" y="102.0" text-anchor="middle" class="ax" fill="#FBFBF8">27.91</text>
+<rect x="723.0" y="86" width="53.9" height="22" fill="#B08A3E"/>
+<text x="749.9" y="102.0" text-anchor="middle" class="ax" fill="#FBFBF8">2.40</text>
+<rect x="776.8" y="86" width="29.2" height="22" fill="#A8482F"/>
+<text x="815.0" y="102.0" class="pt" fill="#23241F">31.60</text>
+<text x="86" y="140" text-anchor="end" class="ax">2021年度</text>
+<rect x="96.0" y="124" width="573.9" height="22" fill="#7A9A3C"/>
+<text x="382.9" y="140.0" text-anchor="middle" class="ax" fill="#FBFBF8">25.54</text>
+<rect x="669.9" y="124" width="87.3" height="22" fill="#B08A3E"/>
+<text x="713.5" y="140.0" text-anchor="middle" class="ax" fill="#FBFBF8">3.89</text>
+<rect x="757.2" y="124" width="27.2" height="22" fill="#A8482F"/>
+<text x="793.4" y="140.0" class="pt" fill="#23241F">30.64</text>
+<text x="86" y="178" text-anchor="end" class="ax">2022年度</text>
+<rect x="96.0" y="162" width="518.4" height="22" fill="#7A9A3C"/>
+<text x="355.2" y="178.0" text-anchor="middle" class="ax" fill="#FBFBF8">23.07</text>
+<rect x="614.4" y="162" width="93.2" height="22" fill="#B08A3E"/>
+<text x="661.0" y="178.0" text-anchor="middle" class="ax" fill="#FBFBF8">4.15</text>
+<rect x="707.6" y="162" width="26.0" height="22" fill="#A8482F"/>
+<text x="742.5" y="178.0" class="pt" fill="#23241F">28.38</text>
+<text x="86" y="216" text-anchor="end" class="ax">2023年度</text>
+<rect x="96.0" y="200" width="579.5" height="22" fill="#7A9A3C"/>
+<text x="385.7" y="216.0" text-anchor="middle" class="ax" fill="#FBFBF8">25.79</text>
+<rect x="675.5" y="200" width="70.8" height="22" fill="#B08A3E"/>
+<text x="710.9" y="216.0" text-anchor="middle" class="ax" fill="#FBFBF8">3.15</text>
+<rect x="746.2" y="200" width="11.5" height="22" fill="#A8482F"/>
+<text x="766.7" y="216.0" class="pt" fill="#23241F">29.46</text>
+<text x="86" y="254" text-anchor="end" class="ax">2024年度</text>
+<rect x="96.0" y="238" width="530.6" height="22" fill="#7A9A3C"/>
+<text x="361.3" y="254.0" text-anchor="middle" class="ax" fill="#FBFBF8">23.62</text>
+<rect x="626.6" y="238" width="51.3" height="22" fill="#B08A3E"/>
+<text x="652.3" y="254.0" text-anchor="middle" class="ax" fill="#FBFBF8">2.28</text>
+<rect x="677.9" y="238" width="38.5" height="22" fill="#A8482F"/>
+<text x="725.4" y="254.0" class="pt" fill="#23241F">27.62</text>
+<text x="86" y="292" text-anchor="end" class="ax">2025年度</text>
+<rect x="96.0" y="276" width="567.6" height="22" fill="#7A9A3C"/>
+<text x="379.8" y="292.0" text-anchor="middle" class="ax" fill="#FBFBF8">25.27</text>
+<rect x="663.6" y="276" width="21.3" height="22" fill="#B08A3E"/>
+<rect x="684.9" y="276" width="18.7" height="22" fill="#A8482F"/>
+<text x="712.6" y="292.0" class="pt" fill="#23241F">27.05</text>
+<rect x="96" y="346" width="11" height="11" fill="#7A9A3C"/><text x="112" y="356" class="ax">支出済額</text>
+<rect x="246" y="346" width="11" height="11" fill="#B08A3E"/><text x="262" y="356" class="ax">翌年度繰越額</text>
+<rect x="396" y="346" width="11" height="11" fill="#A8482F"/><text x="412" y="356" class="ax">不用額</text>
+</svg>
+  <figcaption>各年度の予算現額（右端の数字）が、支出済額・翌年度繰越額・不用額に分かれた内訳。単位は億円。</figcaption>
+</figure>
+<p>翌年度繰越額は、その年度に使われずに次の年度へ送られた分です。不用額は、予算に計上されたまま使われなかった分になります。
+支出済額が予算現額に占める割合は、平成30年度の79.3％から令和7年度の93.4％まで動いています。</p>
+
+
+<h2>地方交付税</h2>
+<p class="sub">当初予算額と収入済額</p>
+<figure>
+  <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 360, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 15, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算（収入済額）&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 11.37536], [2019, 11.15968], [2020, 13.01671], [2021, 13.70096], [2022, 13.46473], [2023, 13.53823], [2024, 13.33856], [2025, 13.90351]]}, {&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 9.5], [2019, 9.2], [2020, 9.5], [2021, 10.0], [2022, 10.2], [2023, 10.2], [2024, 10.4], [2025, 10.5]]}, {&quot;n&quot;: &quot;村税（収入済額）&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 1.926803], [2019, 1.919964], [2020, 1.883161], [2021, 1.815636], [2022, 1.848335], [2023, 1.837787], [2024, 1.903559], [2025, 1.90591]]}]}"><svg viewBox="0 0 900 360" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="320.0" x2="882" y2="320.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="324.0" text-anchor="end" class="ax">0億</text>
+<line x1="62" y1="261.2" x2="882" y2="261.2" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="265.2" text-anchor="end" class="ax">3億</text>
+<line x1="62" y1="202.4" x2="882" y2="202.4" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="206.4" text-anchor="end" class="ax">6億</text>
+<line x1="62" y1="143.6" x2="882" y2="143.6" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="147.6" text-anchor="end" class="ax">9億</text>
+<line x1="62" y1="84.8" x2="882" y2="84.8" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="88.8" text-anchor="end" class="ax">12億</text>
+<line x1="62" y1="26.0" x2="882" y2="26.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="30.0" text-anchor="end" class="ax">15億</text>
+<line x1="62.0" y1="26" x2="62.0" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="62.0" y="342" text-anchor="middle" class="ax">2018</text>
+<line x1="296.3" y1="26" x2="296.3" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="296.3" y="342" text-anchor="middle" class="ax">2020</text>
+<line x1="530.6" y1="26" x2="530.6" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="530.6" y="342" text-anchor="middle" class="ax">2022</text>
+<line x1="764.9" y1="26" x2="764.9" y2="320" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="764.9" y="342" text-anchor="middle" class="ax">2024</text>
+<polyline points="62.0,97.0 179.1,101.3 296.3,64.9 413.4,51.5 530.6,56.1 647.7,54.7 764.9,58.6 882.0,47.5" fill="none" stroke="#23241F" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="97.0" r="3.5" fill="#23241F"/>
+<text x="71.0" y="83.0" text-anchor="start" class="pt" fill="#23241F">11.38</text>
+<circle cx="882.0" cy="47.5" r="3.5" fill="#23241F"/>
+<text x="874.0" y="33.5" text-anchor="end" class="pt" fill="#23241F">13.90</text>
+<polyline points="62.0,133.8 179.1,139.7 296.3,133.8 413.4,124.0 530.6,120.1 647.7,120.1 764.9,116.2 882.0,114.2" fill="none" stroke="#2E6B8A" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="133.8" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="155.8" text-anchor="start" class="pt" fill="#2E6B8A">9.50</text>
+<circle cx="882.0" cy="114.2" r="3.5" fill="#2E6B8A"/>
+<text x="874.0" y="136.2" text-anchor="end" class="pt" fill="#2E6B8A">10.50</text>
+<polyline points="62.0,282.2 179.1,282.4 296.3,283.1 413.4,284.4 530.6,283.8 647.7,284.0 764.9,282.7 882.0,282.6" fill="none" stroke="#A8482F" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="282.2" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="302.2" text-anchor="start" class="pt" fill="#A8482F">1.93</text>
+<circle cx="882.0" cy="282.6" r="3.5" fill="#A8482F"/>
+<text x="874.0" y="302.6" text-anchor="end" class="pt" fill="#A8482F">1.91</text>
+</svg></div>
+  <figcaption>一般会計の歳入のうち、款10 地方交付税。比べるために款1 村税も置いています。<span class="chint"></span></figcaption>
+</figure>
+
+<ul class="facts">
+  <li class="fact"><b>当初予算額は9.2億円から10.5億円</b><span>8年間、この範囲におさまっています。いちばん低い年と高い年の差は1.3億円です。</span></li>
+  <li class="fact"><b>収入済額は11.2億円から13.9億円</b><span>当初予算額との差は、平成30年度の1.88億円から令和3年度の3.70億円まで。8年の平均は3.00億円です。</span></li>
+</ul>
+
+<p>地方交付税は、この8年のあいだ、歳入の43.8％から55.2％を占めています。村税（1.8〜1.9億円）のおよそ7倍です。</p>
+
+<h2>もとの数字（地方交付税）</h2>
+<p class="sub">単位は円</p>
+<details><summary>表を開く</summary>
+<div class="scroll"><table>
+<thead><tr><th>年度</th><th>当初予算額</th><th>予算現額</th><th>収入済額</th>
+<th>収入済−当初</th><th>収入済/当初</th><th>歳入に占める割合</th></tr></thead>
+<tbody>
+<tr><td>2018年度</td><td>950,000,000</td><td>1,137,536,000</td><td>1,137,536,000</td><td>187,536,000</td><td>120%</td><td>47.3%</td></tr>
+<tr><td>2019年度</td><td>920,000,000</td><td>1,115,968,000</td><td>1,115,968,000</td><td>195,968,000</td><td>121%</td><td>43.8%</td></tr>
+<tr><td>2020年度</td><td>950,000,000</td><td>1,301,671,000</td><td>1,301,671,000</td><td>351,671,000</td><td>137%</td><td>44.3%</td></tr>
+<tr><td>2021年度</td><td>1,000,000,000</td><td>1,370,096,000</td><td>1,370,096,000</td><td>370,096,000</td><td>137%</td><td>50.6%</td></tr>
+<tr><td>2022年度</td><td>1,020,000,000</td><td>1,346,473,000</td><td>1,346,473,000</td><td>326,473,000</td><td>132%</td><td>55.2%</td></tr>
+<tr><td>2023年度</td><td>1,020,000,000</td><td>1,353,823,000</td><td>1,353,823,000</td><td>333,823,000</td><td>133%</td><td>50.4%</td></tr>
+<tr><td>2024年度</td><td>1,040,000,000</td><td>1,333,856,000</td><td>1,333,856,000</td><td>293,856,000</td><td>128%</td><td>54.0%</td></tr>
+<tr><td>2025年度</td><td>1,050,000,000</td><td>1,390,351,000</td><td>1,390,351,000</td><td>340,351,000</td><td>132%</td><td>53.7%</td></tr>
+</tbody></table></div></details>
+
+
+<h2>款別の執行状況</h2>
+<p class="sub">令和7年度</p>
+<figure>
+  <svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="30.5" height="21" fill="#7A9A3C"/>
+<rect x="158.5" y="8" width="0.1" height="21" fill="#A8482F"/>
+<text x="167.6" y="23.0" class="pt" fill="#23241F">0.27</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="636.6" height="21" fill="#7A9A3C"/>
+<rect x="764.6" y="42" width="13.5" height="21" fill="#B08A3E"/>
+<rect x="778.1" y="42" width="13.9" height="21" fill="#A8482F"/>
+<text x="801.0" y="57.0" class="pt" fill="#23241F">5.92</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="432.8" height="21" fill="#7A9A3C"/>
+<rect x="560.8" y="76" width="2.7" height="21" fill="#B08A3E"/>
+<rect x="563.5" y="76" width="5.2" height="21" fill="#A8482F"/>
+<text x="577.6" y="91.0" class="pt" fill="#23241F">3.93</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="218.4" height="21" fill="#7A9A3C"/>
+<rect x="346.4" y="110" width="4.0" height="21" fill="#A8482F"/>
+<text x="359.4" y="125.0" class="pt" fill="#23241F">1.98</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="275.7" height="21" fill="#7A9A3C"/>
+<rect x="403.7" y="144" width="41.7" height="21" fill="#B08A3E"/>
+<rect x="445.4" y="144" width="8.1" height="21" fill="#A8482F"/>
+<text x="462.5" y="159.0" class="pt" fill="#23241F">2.90</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="144.9" height="21" fill="#7A9A3C"/>
+<rect x="272.9" y="178" width="13.8" height="21" fill="#B08A3E"/>
+<rect x="286.6" y="178" width="3.6" height="21" fill="#A8482F"/>
+<text x="299.2" y="193.0" class="pt" fill="#23241F">1.45</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="390.0" height="21" fill="#7A9A3C"/>
+<rect x="518.0" y="212" width="28.7" height="21" fill="#B08A3E"/>
+<rect x="546.8" y="212" width="15.0" height="21" fill="#A8482F"/>
+<text x="570.8" y="227.0" class="pt" fill="#23241F">3.86</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="98.6" height="21" fill="#7A9A3C"/>
+<rect x="226.6" y="246" width="0.4" height="21" fill="#A8482F"/>
+<text x="236.0" y="261.0" class="pt" fill="#23241F">0.88</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="227.2" height="21" fill="#7A9A3C"/>
+<rect x="355.2" y="280" width="6.1" height="21" fill="#B08A3E"/>
+<rect x="361.3" y="280" width="10.8" height="21" fill="#A8482F"/>
+<text x="381.1" y="295.0" class="pt" fill="#23241F">2.17</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="56.2" height="21" fill="#7A9A3C"/>
+<rect x="184.2" y="314" width="0.1" height="21" fill="#A8482F"/>
+<text x="193.3" y="329.0" class="pt" fill="#23241F">0.50</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="274.3" height="21" fill="#7A9A3C"/>
+<rect x="402.3" y="348" width="20.3" height="21" fill="#A8482F"/>
+<text x="431.5" y="363.0" class="pt" fill="#23241F">2.62</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<rect x="128.0" y="382" width="51.0" height="21" fill="#7A9A3C"/>
+<rect x="179.0" y="382" width="0.6" height="21" fill="#A8482F"/>
+<text x="188.6" y="397.0" class="pt" fill="#23241F">0.46</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="11.2" height="21" fill="#A8482F"/>
+<text x="148.2" y="431.0" class="pt" fill="#23241F">0.10</text>
+<rect x="128" y="478" width="11" height="11" fill="#7A9A3C"/><text x="144" y="488" class="ax">支出済額</text>
+<rect x="278" y="478" width="11" height="11" fill="#B08A3E"/><text x="294" y="488" class="ax">翌年度繰越額</text>
+<rect x="428" y="478" width="11" height="11" fill="#A8482F"/><text x="444" y="488" class="ax">不用額</text>
+</svg>
+  <figcaption>令和7年度の一般会計歳出。款ごとの予算現額（右端の数字）が、支出済額・翌年度繰越額・不用額に分かれた内訳。単位は億円。</figcaption>
+</figure>
+<p>予備費は、支出済額が0です。予備費から他の款へまわした分は、決算書ではその款の予算現額がふえ、予備費の予算現額がへる形で処理されます。令和7年度は、そのやりとりが決算書に印字されていません。</p>
+
+<h2>不用額の8年</h2>
+<p class="sub">款別・単位は円</p>
+<div class="scroll"><table>
+<thead><tr><th>款</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead>
+<tbody>
+<tr><td>議会費</td><td>65,323</td><td>742,745</td><td>4,587</td><td>244,495</td><td>527,844</td><td>307,175</td><td>542,117</td><td>133,560</td></tr>
+<tr><td>総務費</td><td>25,304,816</td><td>20,527,444</td><td>33,387,343</td><td>31,682,195</td><td>20,058,415</td><td>3,823,116</td><td>19,679,638</td><td>12,378,947</td></tr>
+<tr><td>民生費</td><td>4,738,583</td><td>9,278,761</td><td>19,495,201</td><td>20,451,660</td><td>12,233,942</td><td>21,625,858</td><td>16,166,390</td><td>4,596,629</td></tr>
+<tr><td>衛生費</td><td>4,458,949</td><td>4,048,678</td><td>9,691,652</td><td>7,551,665</td><td>3,067,608</td><td>2,127,484</td><td>3,127,736</td><td>3,528,425</td></tr>
+<tr><td>農林水産業費</td><td>4,053,400</td><td>4,518,350</td><td>8,308,942</td><td>6,153,219</td><td>7,051,937</td><td>2,081,882</td><td>46,785,418</td><td>7,188,804</td></tr>
+<tr><td>商工費</td><td>9,030,604</td><td>1,225,225</td><td>3,898,219</td><td>13,375,995</td><td>6,876,690</td><td>1,809,965</td><td>679,598</td><td>3,199,251</td></tr>
+<tr><td>土木費</td><td>3,715,487</td><td>2,317,179</td><td>7,936,350</td><td>17,951,782</td><td>28,675,431</td><td>2,179,488</td><td>6,993,706</td><td>13,342,246</td></tr>
+<tr><td>消防費</td><td>352,632</td><td>891,368</td><td>343,769</td><td>1,570,629</td><td>813,722</td><td>1,726,035</td><td>1,142,794</td><td>356,667</td></tr>
+<tr><td>教育費</td><td>3,799,402</td><td>15,063,081</td><td>7,735,700</td><td>7,055,570</td><td>11,678,293</td><td>11,242,970</td><td>22,237,728</td><td>9,638,684</td></tr>
+<tr><td>災害復旧費</td><td>2,278,723</td><td>962,537</td><td>20,768,340</td><td>2,247,160</td><td>7,321,400</td><td>904,165</td><td>14,293,000</td><td>124,000</td></tr>
+<tr><td>公債費</td><td>2,336,715</td><td>2,065,575</td><td>7,352,149</td><td>2,678,574</td><td>6,434,447</td><td>105,978</td><td>30,040,398</td><td>18,069,782</td></tr>
+<tr><td>諸支出金</td><td>974,836</td><td>366,666</td><td>853,482</td><td>2,306</td><td>1,199,578</td><td>2,781</td><td>7,790</td><td>575,389</td></tr>
+<tr><td>予備費</td><td>10,000,000</td><td>10,000,000</td><td>10,000,000</td><td>10,000,000</td><td>9,675,000</td><td>3,239,000</td><td>9,687,600</td><td>10,000,000</td></tr>
+</tbody><tfoot><tr class="tot"><td>合計</td><td>71,109,470</td><td>72,007,609</td><td>129,775,734</td><td>120,965,250</td><td>115,614,307</td><td>51,175,897</td><td>171,383,913</td><td>83,132,384</td></tr></tfoot></table></div>
+
+<ul class="facts">
+  <li class="fact"><b>令和6年度の農林水産業費の不用額は4,679万円</b><span>予算現額の17％にあたります。同じ款の他の7年度は208万円から831万円で、1％から4％でした。</span></li>
+  <li class="fact"><b>予備費は8年とも支出済額が0</b><span>予算現額は当初1,000万円で、令和4年度・令和5年度・令和6年度は他の款へまわした分だけ減っています。令和5年度は324万円まで減りました。</span></li>
+  <li class="fact"><b>10％を超えた不用額は、8年で5回</b><span>令和2年度の災害復旧費、令和3年度の商工費、令和6年度の農林水産業費・災害復旧費・公債費です。うち3回が令和6年度に集まっています。</span></li>
+</ul>
+
+<p>不用額は、予算現額から支出済額と翌年度繰越額を引いた残りです。使わずに終わった予算の枠を示す数字で、それ自体がお金の動きを表すものではありません。</p>
+<p>お金の側では、その年度に入った額と出た額の差が、歳入歳出差引残額になります。8年度すべてで、次の関係が1円の違いなく成り立っています。</p>
+<p class="eq">歳入の収入済額 − 歳出の予算現額 ＋ 翌年度繰越額 ＋ 不用額 ＝ 歳入歳出差引残額</p>
+<p>差引残額は、翌年度の歳入に繰越金として入ります。差引残額から、繰越した事業にあてる財源を差し引いたものが実質収支額です。令和7年度でいえば、差引残額61,214,991円、繰越すべき財源25,803,000円、実質収支額35,411,991円でした。</p>
+<p>実質収支額の一部または全部は、基金に積み立てることができます（地方自治法第233条の2）。次の節で扱います。</p>
+
+
+<h2>基金への積立と取り崩し</h2>
+<p class="sub">諸支出金と繰入金</p>
+<p>村が基金に積み立てた額は、歳出の款13 諸支出金に計上されます。基金から取り崩した額は、歳入の款17 繰入金に入ります。
+どちらも8年分が決算書から取れます。</p>
+
+<h2>積み立て</h2>
+<p class="sub">当初予算額と支出済額</p>
+<figure>
+  <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 320, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 2.2, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算（支出済額）&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.106892], [2019, 0.511553], [2020, 1.851385], [2021, 2.048047], [2022, 1.930754], [2023, 1.513432], [2024, 0.513702], [2025, 0.454196]]}, {&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.09178], [2019, 0.09643], [2020, 0.1945], [2021, 0.15698], [2022, 0.16977], [2023, 0.02586], [2024, 0.03122], [2025, 0.03016]]}]}"><svg viewBox="0 0 900 320" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="280.0" x2="882" y2="280.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="284.0" text-anchor="end" class="ax">0億</text>
+<line x1="62" y1="222.3" x2="882" y2="222.3" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="226.3" text-anchor="end" class="ax">0.5億</text>
+<line x1="62" y1="164.5" x2="882" y2="164.5" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="168.5" text-anchor="end" class="ax">1.0億</text>
+<line x1="62" y1="106.8" x2="882" y2="106.8" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="110.8" text-anchor="end" class="ax">1.5億</text>
+<line x1="62" y1="49.1" x2="882" y2="49.1" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="53.1" text-anchor="end" class="ax">2.0億</text>
+<line x1="62.0" y1="26" x2="62.0" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="62.0" y="302" text-anchor="middle" class="ax">2018</text>
+<line x1="296.3" y1="26" x2="296.3" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="296.3" y="302" text-anchor="middle" class="ax">2020</text>
+<line x1="530.6" y1="26" x2="530.6" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="530.6" y="302" text-anchor="middle" class="ax">2022</text>
+<line x1="764.9" y1="26" x2="764.9" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="764.9" y="302" text-anchor="middle" class="ax">2024</text>
+<polyline points="62.0,267.7 179.1,220.9 296.3,66.2 413.4,43.5 530.6,57.1 647.7,105.3 764.9,220.7 882.0,227.6" fill="none" stroke="#7A9A3C" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="267.7" r="3.5" fill="#7A9A3C"/>
+<text x="71.0" y="253.7" text-anchor="start" class="pt" fill="#7A9A3C">0.11</text>
+<circle cx="882.0" cy="227.6" r="3.5" fill="#7A9A3C"/>
+<text x="874.0" y="213.6" text-anchor="end" class="pt" fill="#7A9A3C">0.45</text>
+<polyline points="62.0,269.4 179.1,268.9 296.3,257.5 413.4,261.9 530.6,260.4 647.7,277.0 764.9,276.4 882.0,276.5" fill="none" stroke="#2E6B8A" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="269.4" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="289.4" text-anchor="start" class="pt" fill="#2E6B8A">0.09</text>
+<circle cx="882.0" cy="276.5" r="3.5" fill="#2E6B8A"/>
+<text x="874.0" y="296.5" text-anchor="end" class="pt" fill="#2E6B8A">0.03</text>
+</svg></div>
+  <figcaption>歳出の款13 諸支出金。全額が基金への積立です。<span class="chint"></span></figcaption>
+</figure>
+
+<h2>取り崩し</h2>
+<p class="sub">当初予算額と収入済額</p>
+<figure>
+  <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 320, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 4.2, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算（収入済額）&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.97851], [2019, 1.47011], [2020, 0.04], [2021, 0.1249], [2022, 0.0277], [2023, 0.0159], [2024, 0.0256], [2025, 0.214473]]}, {&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.84], [2019, 2.57], [2020, 1.535], [2021, 1.3445], [2022, 1.3827], [2023, 1.3396], [2024, 2.32191], [2025, 3.81593]]}]}"><svg viewBox="0 0 900 320" role="img" xmlns="http://www.w3.org/2000/svg">
+<line x1="62" y1="280.0" x2="882" y2="280.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="284.0" text-anchor="end" class="ax">0億</text>
+<line x1="62" y1="219.5" x2="882" y2="219.5" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="223.5" text-anchor="end" class="ax">1億</text>
+<line x1="62" y1="159.0" x2="882" y2="159.0" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="163.0" text-anchor="end" class="ax">2億</text>
+<line x1="62" y1="98.6" x2="882" y2="98.6" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="102.6" text-anchor="end" class="ax">3億</text>
+<line x1="62" y1="38.1" x2="882" y2="38.1" stroke="#D8DAD0" stroke-width="1"/>
+<text x="53" y="42.1" text-anchor="end" class="ax">4億</text>
+<line x1="62.0" y1="26" x2="62.0" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="62.0" y="302" text-anchor="middle" class="ax">2018</text>
+<line x1="296.3" y1="26" x2="296.3" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="296.3" y="302" text-anchor="middle" class="ax">2020</text>
+<line x1="530.6" y1="26" x2="530.6" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="530.6" y="302" text-anchor="middle" class="ax">2022</text>
+<line x1="764.9" y1="26" x2="764.9" y2="280" stroke="#D8DAD0" stroke-width="1" stroke-dasharray="2 4"/>
+<text x="764.9" y="302" text-anchor="middle" class="ax">2024</text>
+<polyline points="62.0,220.8 179.1,191.1 296.3,277.6 413.4,272.4 530.6,278.3 647.7,279.0 764.9,278.5 882.0,267.0" fill="none" stroke="#A8482F" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="220.8" r="3.5" fill="#A8482F"/>
+<text x="71.0" y="206.8" text-anchor="start" class="pt" fill="#A8482F">0.98</text>
+<circle cx="882.0" cy="267.0" r="3.5" fill="#A8482F"/>
+<text x="874.0" y="287.0" text-anchor="end" class="pt" fill="#A8482F">0.21</text>
+<polyline points="62.0,229.2 179.1,124.6 296.3,187.2 413.4,198.7 530.6,196.4 647.7,199.0 764.9,139.6 882.0,49.2" fill="none" stroke="#2E6B8A" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="62.0" cy="229.2" r="3.5" fill="#2E6B8A"/>
+<text x="71.0" y="249.2" text-anchor="start" class="pt" fill="#2E6B8A">0.84</text>
+<circle cx="882.0" cy="49.2" r="3.5" fill="#2E6B8A"/>
+<text x="874.0" y="35.2" text-anchor="end" class="pt" fill="#2E6B8A">3.82</text>
+</svg></div>
+  <figcaption>歳入の款17 繰入金。基金からの繰入です。<span class="chint"></span></figcaption>
+</figure>
+
+<ul class="facts">
+  <li class="fact"><b>積立は当初予算に259万円から1,945万円、決算では1,069万円から2億480万円</b><span>決算額が当初予算額の10倍を超えた年度が5回あります。令和5年度は58.5倍でした。差は補正によるものです。</span></li>
+  <li class="fact"><b>取り崩しは逆の向き</b><span>当初予算には8,400万円から3億8,159万円が計上され、決算は159万円から1億4,701万円でした。令和7年度は当初3億8,159万円に対し、決算は2,145万円です。</span></li>
+  <li class="fact"><b>令和2年度から令和5年度は、積立が2億円前後で取り崩しがほぼ止まった</b><span>この4年度の積立から取り崩しを引いた差は、1億4,975万円から1億9,231万円です。平成30年度と令和元年度は、逆に取り崩しのほうが多くなっていました。</span></li>
+</ul>
+
+<h2>もとの数字（基金）</h2>
+<p class="sub">単位は円</p>
+<details><summary>表を開く</summary>
+<div class="scroll"><table>
+<thead><tr><th>年度</th><th>積立 当初予算額</th><th>積立 補正予算額</th><th>積立 支出済額</th>
+<th>取崩 当初予算額</th><th>取崩 収入済額</th><th>積立−取崩</th></tr></thead>
+<tbody>
+<tr><td>2018年度</td><td>9,178,000</td><td>2,486,000</td><td>10,689,164</td><td>84,000,000</td><td>97,851,000</td><td>-87,161,836</td></tr>
+<tr><td>2019年度</td><td>9,643,000</td><td>41,879,000</td><td>51,155,334</td><td>257,000,000</td><td>147,011,000</td><td>-95,855,666</td></tr>
+<tr><td>2020年度</td><td>19,450,000</td><td>166,542,000</td><td>185,138,518</td><td>153,500,000</td><td>4,000,000</td><td>181,138,518</td></tr>
+<tr><td>2021年度</td><td>15,698,000</td><td>189,109,000</td><td>204,804,694</td><td>134,450,000</td><td>12,490,000</td><td>192,314,694</td></tr>
+<tr><td>2022年度</td><td>16,977,000</td><td>177,298,000</td><td>193,075,422</td><td>138,270,000</td><td>2,770,000</td><td>190,305,422</td></tr>
+<tr><td>2023年度</td><td>2,586,000</td><td>148,760,000</td><td>151,343,219</td><td>133,960,000</td><td>1,590,000</td><td>149,753,219</td></tr>
+<tr><td>2024年度</td><td>3,122,000</td><td>48,256,000</td><td>51,370,210</td><td>232,191,000</td><td>2,560,000</td><td>48,810,210</td></tr>
+<tr><td>2025年度</td><td>3,016,000</td><td>42,979,000</td><td>45,419,611</td><td>381,593,000</td><td>21,447,300</td><td>23,972,311</td></tr>
+</tbody></table></div></details>
+
+
+<h2>項ごとの8年</h2>
+<p class="sub">歳出の支出済額・単位は円</p>
+<details><summary>表を開く（30項）</summary>
+<div class="scroll"><table>
+<thead><tr><th>款</th><th>項</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead>
+<tbody>
+<tr><td class="kn">議会費</td><td>議会費</td><td>26,725,677</td><td>25,935,255</td><td>25,775,413</td><td>25,689,505</td><td>26,130,156</td><td>26,660,825</td><td>27,692,883</td><td>27,163,440</td></tr>
+<tr><td class="kn">総務費</td><td>総務管理費</td><td>374,487,155</td><td>321,858,006</td><td>492,944,518</td><td>398,175,139</td><td>348,533,175</td><td>290,913,165</td><td>379,327,905</td><td>471,662,824</td></tr>
+<tr><td class="kn"></td><td>徴税費</td><td>21,604,878</td><td>25,186,613</td><td>21,319,735</td><td>19,527,462</td><td>26,071,898</td><td>37,008,658</td><td>32,290,450</td><td>32,237,582</td></tr>
+<tr><td class="kn"></td><td>戸籍住民基本台帳費</td><td>22,185,264</td><td>15,297,145</td><td>24,719,119</td><td>19,634,996</td><td>24,281,292</td><td>16,215,272</td><td>47,871,591</td><td>28,279,854</td></tr>
+<tr><td class="kn"></td><td>選挙費</td><td>3,959,180</td><td>8,245,451</td><td>2,416,708</td><td>7,052,641</td><td>9,253,444</td><td>4,258,539</td><td>4,272,968</td><td>8,008,684</td></tr>
+<tr><td class="kn"></td><td>統計調査費</td><td>218,302</td><td>685,208</td><td>1,582,315</td><td>189,785</td><td>19,206</td><td>103,189</td><td>518,291</td><td>1,746,205</td></tr>
+<tr><td class="kn"></td><td>監査委員費</td><td>610,624</td><td>575,840</td><td>491,485</td><td>537,700</td><td>632,900</td><td>634,470</td><td>599,940</td><td>565,520</td></tr>
+<tr><td class="kn"></td><td>国土調査費</td><td>17,505,781</td><td>21,949,293</td><td>28,440,777</td><td>25,899,082</td><td>20,942,670</td><td>18,421,691</td><td>20,517,117</td><td>24,615,384</td></tr>
+<tr><td class="kn">民生費</td><td>社会福祉費</td><td>251,997,355</td><td>250,940,081</td><td>243,888,081</td><td>300,802,263</td><td>256,387,112</td><td>281,044,172</td><td>286,535,208</td><td>320,526,110</td></tr>
+<tr><td class="kn"></td><td>児童福祉費</td><td>49,154,062</td><td>127,684,158</td><td>322,105,718</td><td>72,223,077</td><td>60,690,946</td><td>54,193,970</td><td>55,825,402</td><td>65,001,261</td></tr>
+<tr><td class="kn">衛生費</td><td>保健衛生費</td><td>97,877,856</td><td>101,910,226</td><td>132,733,763</td><td>121,481,491</td><td>147,925,878</td><td>180,543,494</td><td>157,861,253</td><td>147,661,469</td></tr>
+<tr><td class="kn"></td><td>清掃費</td><td>40,135,195</td><td>42,689,096</td><td>43,861,585</td><td>41,044,844</td><td>46,535,514</td><td>46,740,022</td><td>47,828,011</td><td>46,928,106</td></tr>
+<tr><td class="kn">農林水産業費</td><td>農業費</td><td>70,467,112</td><td>189,192,311</td><td>70,036,938</td><td>88,473,363</td><td>71,495,097</td><td>74,314,226</td><td>71,297,561</td><td>107,060,859</td></tr>
+<tr><td class="kn"></td><td>林業費</td><td>123,785,488</td><td>108,011,339</td><td>104,712,120</td><td>103,744,418</td><td>136,749,966</td><td>111,503,892</td><td>119,035,021</td><td>138,543,337</td></tr>
+<tr><td class="kn">商工費</td><td>商工費</td><td>467,365,396</td><td>56,518,775</td><td>109,144,781</td><td>83,932,005</td><td>116,815,310</td><td>99,414,035</td><td>116,706,802</td><td>129,062,749</td></tr>
+<tr><td class="kn">土木費</td><td>土木管理費</td><td>1,936,392</td><td>598,400</td><td>657,300</td><td>803,092</td><td>3,455,800</td><td>1,002,100</td><td>855,100</td><td>2,142,246</td></tr>
+<tr><td class="kn"></td><td>道路橋梁費</td><td>115,396,473</td><td>164,492,034</td><td>143,902,719</td><td>227,932,058</td><td>208,715,023</td><td>274,554,135</td><td>231,465,606</td><td>318,625,172</td></tr>
+<tr><td class="kn"></td><td>河川費</td><td>7,203,276</td><td>14,747,596</td><td>10,020,807</td><td>14,608,000</td><td>10,961,500</td><td>18,266,600</td><td>20,559,220</td><td>13,608,100</td></tr>
+<tr><td class="kn"></td><td>住宅費</td><td>21,539,372</td><td>22,531,791</td><td>23,928,824</td><td>11,210,068</td><td>17,499,386</td><td>8,804,537</td><td>13,399,368</td><td>13,084,236</td></tr>
+<tr><td class="kn">消防費</td><td>消防費</td><td>59,785,368</td><td>53,809,632</td><td>65,237,231</td><td>61,041,371</td><td>72,895,278</td><td>58,763,965</td><td>55,151,206</td><td>87,871,333</td></tr>
+<tr><td class="kn">教育費</td><td>教育総務費</td><td>51,217,482</td><td>47,580,630</td><td>39,562,662</td><td>240,725,647</td><td>69,313,716</td><td>52,135,623</td><td>195,417,920</td><td>58,946,873</td></tr>
+<tr><td class="kn"></td><td>小学校費</td><td>32,321,033</td><td>57,466,377</td><td>34,876,376</td><td>35,702,014</td><td>35,958,660</td><td>36,189,845</td><td>46,087,029</td><td>51,195,684</td></tr>
+<tr><td class="kn"></td><td>中学校費</td><td>16,708,101</td><td>46,623,446</td><td>19,114,104</td><td>35,547,438</td><td>46,841,414</td><td>39,358,984</td><td>32,005,066</td><td>36,571,616</td></tr>
+<tr><td class="kn"></td><td>社会教育費</td><td>31,405,452</td><td>16,816,093</td><td>17,159,589</td><td>20,333,049</td><td>42,290,985</td><td>127,946,087</td><td>23,063,494</td><td>39,285,825</td></tr>
+<tr><td class="kn"></td><td>保健体育費</td><td>12,008,530</td><td>19,101,373</td><td>290,757,569</td><td>17,057,282</td><td>17,227,932</td><td>14,019,491</td><td>15,789,763</td><td>16,410,318</td></tr>
+<tr><td class="kn">災害復旧費</td><td>農林水産業施設災害復旧費</td><td>23,219,036</td><td>33,639,360</td><td>55,826,280</td><td>169,265,900</td><td>83,187,000</td><td>332,643,435</td><td>73,057,000</td><td>50,025,000</td></tr>
+<tr><td class="kn"></td><td>公共土木施設災害復旧費</td><td>74,568,241</td><td>210,662,103</td><td>58,054,380</td><td>12,365,940</td><td>17,008,000</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td class="kn">公債費</td><td>公債費</td><td>172,347,285</td><td>153,802,425</td><td>222,420,851</td><td>194,651,426</td><td>196,444,553</td><td>222,416,022</td><td>235,467,602</td><td>244,317,218</td></tr>
+<tr><td class="kn">諸支出金</td><td>基金費</td><td>10,689,164</td><td>51,155,334</td><td>185,138,518</td><td>204,804,694</td><td>193,075,422</td><td>151,343,219</td><td>50,523,210</td><td>45,419,611</td></tr>
+<tr><td class="kn">予備費</td><td>予備費</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td class="kn">諸支出金</td><td>普通財産取得費</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>847,000</td><td>—</td></tr>
+</tbody><tfoot><tr class="tot"><td></td><td>合計</td><td>2,198,424,530</td><td>2,189,705,391</td><td>2,790,830,266</td><td>2,554,455,750</td><td>2,307,339,233</td><td>2,579,413,663</td><td>2,361,868,987</td><td>2,526,566,616</td></tr></tfoot></table></div></details>
+
+<p class="sub" style="margin-top:34px">歳入の収入済額・単位は円</p>
+<details><summary>表を開く（37項）</summary>
+<div class="scroll"><table>
+<thead><tr><th>款</th><th>項</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead>
+<tbody>
+<tr><td class="kn">村税</td><td>村民税</td><td>47,331,114</td><td>43,990,673</td><td>42,419,678</td><td>41,574,376</td><td>40,193,588</td><td>42,102,625</td><td>49,278,145</td><td>51,991,039</td></tr>
+<tr><td class="kn"></td><td>固定資産税</td><td>138,386,500</td><td>140,464,300</td><td>137,872,092</td><td>132,274,838</td><td>136,836,300</td><td>133,627,300</td><td>132,975,000</td><td>130,567,000</td></tr>
+<tr><td class="kn"></td><td>軽自動車税</td><td>4,831,100</td><td>4,870,800</td><td>5,218,000</td><td>5,320,100</td><td>5,498,000</td><td>5,429,300</td><td>5,471,900</td><td>5,301,800</td></tr>
+<tr><td class="kn"></td><td>村たばこ税</td><td>2,035,626</td><td>2,472,583</td><td>2,624,120</td><td>2,298,258</td><td>2,209,577</td><td>2,523,496</td><td>2,534,810</td><td>2,416,346</td></tr>
+<tr><td class="kn"></td><td>入湯税</td><td>96,000</td><td>198,000</td><td>182,250</td><td>96,000</td><td>96,000</td><td>96,000</td><td>96,000</td><td>314,850</td></tr>
+<tr><td class="kn">地方譲与税</td><td>地方揮発油譲与税</td><td>7,186,000</td><td>6,350,002</td><td>6,217,000</td><td>6,440,000</td><td>6,142,000</td><td>6,183,000</td><td>6,084,000</td><td>5,770,000</td></tr>
+<tr><td class="kn"></td><td>自動車重量譲与税</td><td>17,704,000</td><td>18,292,000</td><td>18,090,000</td><td>18,417,000</td><td>18,388,000</td><td>18,644,000</td><td>18,622,000</td><td>19,178,000</td></tr>
+<tr><td class="kn">利子割交付金</td><td>利子割交付金</td><td>122,000</td><td>58,000</td><td>57,000</td><td>45,000</td><td>25,000</td><td>19,000</td><td>27,000</td><td>130,000</td></tr>
+<tr><td class="kn">配当割交付金</td><td>配当割交付金</td><td>209,000</td><td>261,000</td><td>253,000</td><td>363,000</td><td>313,000</td><td>378,000</td><td>508,000</td><td>540,000</td></tr>
+<tr><td class="kn">株式等譲渡所得割交付金</td><td>株式等譲渡所得割交付金</td><td>178,000</td><td>153,000</td><td>293,000</td><td>392,000</td><td>225,000</td><td>376,000</td><td>678,000</td><td>843,000</td></tr>
+<tr><td class="kn">地方消費税交付金</td><td>地方消費税交付金</td><td>20,083,000</td><td>19,025,000</td><td>23,251,000</td><td>25,412,000</td><td>26,734,000</td><td>26,494,000</td><td>26,741,000</td><td>28,879,000</td></tr>
+<tr><td class="kn">自動車取得税交付金</td><td>自動車取得税交付金</td><td>5,885,000</td><td>3,470,000</td><td>—</td><td>—</td><td>—</td><td>—</td><td>131,000</td><td>—</td></tr>
+<tr><td class="kn">地方特例交付金</td><td>地方特例交付金</td><td>93,000</td><td>1,799,000</td><td>1,168,000</td><td>4,738,000</td><td>103,000</td><td>111,000</td><td>2,680,000</td><td>28,000</td></tr>
+<tr><td class="kn">地方交付税</td><td>地方交付税</td><td>1,137,536,000</td><td>1,115,968,000</td><td>1,301,671,000</td><td>1,370,096,000</td><td>1,346,473,000</td><td>1,353,823,000</td><td>1,333,856,000</td><td>1,390,351,000</td></tr>
+<tr><td class="kn">分担金及び負担金</td><td>負担金</td><td>723,389</td><td>584,640</td><td>688,424</td><td>693,300</td><td>922,674</td><td>819,825</td><td>776,200</td><td>725,400</td></tr>
+<tr><td class="kn">使用料及び手数料</td><td>使用料</td><td>32,013,906</td><td>27,125,363</td><td>19,564,183</td><td>22,261,347</td><td>21,024,136</td><td>20,795,445</td><td>21,166,524</td><td>18,908,720</td></tr>
+<tr><td class="kn"></td><td>手数料</td><td>1,929,700</td><td>2,028,800</td><td>2,003,150</td><td>2,115,700</td><td>2,162,100</td><td>1,899,100</td><td>1,947,800</td><td>1,630,550</td></tr>
+<tr><td class="kn">国庫支出金</td><td>国庫負担金</td><td>74,344,699</td><td>237,353,442</td><td>87,798,434</td><td>175,233,924</td><td>129,282,802</td><td>330,273,076</td><td>93,210,271</td><td>43,206,449</td></tr>
+<tr><td class="kn"></td><td>国庫補助金</td><td>64,477,000</td><td>96,816,000</td><td>351,512,870</td><td>333,248,787</td><td>215,124,398</td><td>154,670,944</td><td>137,411,993</td><td>255,268,368</td></tr>
+<tr><td class="kn"></td><td>国庫委託金</td><td>1,772,878</td><td>5,135,361</td><td>1,547,295</td><td>8,413,729</td><td>5,555,968</td><td>885,582</td><td>3,581,615</td><td>7,995,902</td></tr>
+<tr><td class="kn">県支出金</td><td>県負担金</td><td>37,908,498</td><td>36,901,071</td><td>33,351,302</td><td>32,441,164</td><td>31,139,517</td><td>30,684,151</td><td>29,590,548</td><td>32,624,819</td></tr>
+<tr><td class="kn"></td><td>県補助金</td><td>53,748,114</td><td>62,368,174</td><td>36,075,709</td><td>32,530,489</td><td>32,736,925</td><td>26,592,474</td><td>45,116,161</td><td>72,952,437</td></tr>
+<tr><td class="kn"></td><td>県委託金</td><td>6,572,545</td><td>4,938,328</td><td>4,089,561</td><td>3,149,111</td><td>6,859,003</td><td>4,479,036</td><td>2,733,420</td><td>4,074,224</td></tr>
+<tr><td class="kn">財産収入</td><td>財産運用収入</td><td>12,303,244</td><td>9,981,444</td><td>10,236,424</td><td>8,510,772</td><td>7,713,260</td><td>6,978,413</td><td>6,542,846</td><td>9,407,198</td></tr>
+<tr><td class="kn"></td><td>財産売払収入</td><td>18,417,905</td><td>739,465</td><td>3,481,892</td><td>978,155</td><td>1,926,299</td><td>354,970</td><td>1,157,011</td><td>1,287,016</td></tr>
+<tr><td class="kn">寄付金</td><td>寄付金</td><td>12,390,000</td><td>8,900,000</td><td>17,630,072</td><td>5,998,900</td><td>3,739,000</td><td>9,620,000</td><td>16,240,101</td><td>6,998,283</td></tr>
+<tr><td class="kn">繰入金</td><td>基金繰入金</td><td>97,851,000</td><td>147,011,000</td><td>4,000,000</td><td>12,490,000</td><td>2,770,000</td><td>1,590,000</td><td>2,560,000</td><td>21,447,300</td></tr>
+<tr><td class="kn">繰越金</td><td>繰越金</td><td>445,634,098</td><td>204,040,218</td><td>355,953,587</td><td>148,351,017</td><td>153,654,408</td><td>131,500,456</td><td>105,247,026</td><td>109,781,603</td></tr>
+<tr><td class="kn">諸収入</td><td>延滞金加算金及び過料</td><td>2,100</td><td>4,600</td><td>8,000</td><td>7,700</td><td>22,400</td><td>2,300</td><td>23,700</td><td>26,700</td></tr>
+<tr><td class="kn"></td><td>預金利子</td><td>14,467</td><td>33,288</td><td>10,182</td><td>26,237</td><td>5,394</td><td>4,730</td><td>261,844</td><td>799,705</td></tr>
+<tr><td class="kn"></td><td>貸付金元利収入</td><td>190,000</td><td>50,000</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td class="kn"></td><td>受託事業収入</td><td>7,032,520</td><td>7,019,376</td><td>10,162,419</td><td>5,163,048</td><td>5,019,945</td><td>7,172,725</td><td>7,487,898</td><td>12,013,063</td></tr>
+<tr><td class="kn"></td><td>雑入</td><td>61,062,345</td><td>214,005,050</td><td>48,715,639</td><td>31,838,206</td><td>28,164,995</td><td>71,540,741</td><td>83,218,777</td><td>48,909,835</td></tr>
+<tr><td class="kn">村債</td><td>村債</td><td>92,400,000</td><td>116,900,000</td><td>398,000,000</td><td>260,426,000</td><td>188,300,000</td><td>275,900,000</td><td>308,200,000</td><td>276,600,000</td></tr>
+<tr><td class="kn">地方譲与税</td><td>森林環境譲与税</td><td>—</td><td>5,510,000</td><td>11,712,000</td><td>11,754,000</td><td>14,624,000</td><td>14,624,000</td><td>20,377,000</td><td>21,472,000</td></tr>
+<tr><td class="kn">環境性能割交付金</td><td>環境性能割交付金</td><td>—</td><td>841,000</td><td>1,680,000</td><td>1,828,000</td><td>1,757,000</td><td>2,216,000</td><td>2,682,000</td><td>2,767,000</td></tr>
+<tr><td class="kn">法人事業税交付金</td><td>法人事業税交付金</td><td>—</td><td>—</td><td>1,644,000</td><td>3,184,000</td><td>3,099,000</td><td>2,250,000</td><td>2,435,000</td><td>2,575,000</td></tr>
+</tbody><tfoot><tr class="tot"><td></td><td>合計</td><td>2,402,464,748</td><td>2,545,658,978</td><td>2,939,181,283</td><td>2,708,110,158</td><td>2,438,839,689</td><td>2,684,660,689</td><td>2,471,650,590</td><td>2,587,781,607</td></tr></tfoot></table></div></details>
+
+<p>款や項は、年度によって増えたり無くなったりします。「—」は、その年度の決算書にその項の行が無かったことを示します。
+款の番号も年度で変わることがあるため、この表は款と項の名称で並べています。</p>
+
+
+<h2>もとの数字（歳出の全体）</h2>
+<p class="sub">単位は円</p>
+<details><summary>表を開く</summary>
+<div class="scroll"><table>
+<thead><tr><th>年度</th><th>当初予算額</th><th>補正予算額</th><th>繰越額</th><th>予算現額</th>
+<th>支出済額</th><th>翌年度繰越額</th><th>不用額</th><th>支出済/予算現額</th></tr></thead>
+<tbody>
+<tr><td>2018年度</td><td>1,840,000,000</td><td>460,683,000</td><td>470,125,000</td><td>2,770,808,000</td><td>2,198,424,530</td><td>501,274,000</td><td>71,109,470</td><td>79.3%</td></tr>
+<tr><td>2019年度</td><td>2,090,000,000</td><td>301,949,000</td><td>501,274,000</td><td>2,893,223,000</td><td>2,189,705,391</td><td>631,510,000</td><td>72,007,609</td><td>75.7%</td></tr>
+<tr><td>2020年度</td><td>2,008,000,000</td><td>514,539,000</td><td>637,810,000</td><td>3,160,349,000</td><td>2,790,830,266</td><td>239,743,000</td><td>129,775,734</td><td>88.3%</td></tr>
+<tr><td>2021年度</td><td>2,398,000,000</td><td>426,300,000</td><td>239,743,000</td><td>3,064,043,000</td><td>2,554,455,750</td><td>388,622,000</td><td>120,965,250</td><td>83.4%</td></tr>
+<tr><td>2022年度</td><td>1,980,000,000</td><td>469,164,000</td><td>388,622,000</td><td>2,837,786,000</td><td>2,307,339,233</td><td>414,832,460</td><td>115,614,307</td><td>81.3%</td></tr>
+<tr><td>2023年度</td><td>2,151,000,000</td><td>379,712,000</td><td>414,832,460</td><td>2,945,544,460</td><td>2,579,413,663</td><td>314,954,900</td><td>51,175,897</td><td>87.6%</td></tr>
+<tr><td>2024年度</td><td>2,258,000,000</td><td>188,755,000</td><td>314,954,900</td><td>2,761,709,900</td><td>2,361,868,987</td><td>228,457,000</td><td>171,383,913</td><td>85.5%</td></tr>
+<tr><td>2025年度</td><td>2,650,000,000</td><td>-173,854,000</td><td>228,457,000</td><td>2,704,603,000</td><td>2,526,566,616</td><td>94,904,000</td><td>83,132,384</td><td>93.4%</td></tr>
+</tbody></table></div></details>
+
+<div class="note">
+  <p><b>出典について。</b>大鹿村の一般会計決算書（平成30年度〜令和7年度）です。大鹿村公文書公開条例に基づき、村役場で写しの交付を受けました。数値は決算書の印字のまま転記しています。</p>
+  <p><b>地方交付税の額が決まる時期について。</b>地方交付税の額は国が算定し、村に交付されます。額が確定するのは当初予算を議決したあとで、当初予算には、その時点での見積りが計上されます。</p>
+  <p><b>地方交付税の予算現額について。</b>上のグラフには当初予算額と収入済額を載せていますが、補正後の予算現額は、8年度すべてで収入済額と円単位で一致しています。同じ値のため線が重なり、グラフには描いていません。表でご確認いただけます。</p>
+  <p><b>当初予算額・補正予算額・繰越額について。</b>決算書にはこの3つの合計額の行がないため、款ごとの額を合計しています。合計が予算現額と一致することは、8年度すべてで確認しています。</p>
+  <p><b>広報おおしかの数字との突き合わせ。</b>広報にも決算額が載っており、重なる8年分を照合しました。歳入・歳出の総額は一致し、費目別では84件のうち81件が一致、3件（いずれも平成30年度）で1万円から2万円の差がありました。原因は確認できていません。それぞれの資料の数値をそのまま掲載しています。</p>
+  <p><b>実質収支額からの基金繰入について。</b>実質収支に関する調書には「実質収支額のうち地方自治法第233条の2の規定による基金繰入額」という欄があります。印字のある5年度（平成30年度、令和元年度、令和5年度、令和6年度、令和7年度）は、いずれも0円でした。令和2年度から令和4年度の調書は、まだ手元にありません。</p>
+  <p><b>基金の残高について。</b>各基金の年度末現在高は、決算書の末尾にある財産に関する調書に載っています。現在は平成30年度と令和元年度の2年分を読み取った段階です。8年分がそろいしだい、このページに加えます。</p>
+  <p><b>紙面の数値が整合しない箇所。</b>平成30年度の林業費と道路橋梁費で、項の行の当初予算額・補正予算額と、その下の目を合計した額が一致しません（いずれも1,523,000円）。目の行に欠落がないことは現物で確認しています。予算現額・支出済額・翌年度繰越額・不用額は一致しています。値は決算書のまま載せています。</p>
+</div>
+
+<footer><p>出典：大鹿村 一般会計決算書（平成30年度〜令和7年度）。大鹿村公文書公開条例に基づき写しの交付を受けたものです。<br>
+データ：<a href="ooshika_settlement_summary.csv" download>年度サマリ</a>／<a href="ooshika_settlement_revenue_kan.csv" download>歳入・款</a>／<a href="ooshika_settlement_expenditure_kan.csv" download>歳出・款</a>／<a href="ooshika_settlement_revenue_ko.csv" download>歳入・項</a>／<a href="ooshika_settlement_expenditure_ko.csv" download>歳出・項</a><br>
+<a href="./">目次へ</a> ／ <a href="finance.html">予算と決算</a> ／ ooshika.org ／ 最終更新 2026年9月15日<br>
+ご指摘は data@ooshika.org までお願いします。</p></footer>
+</div><script>
+(function(){
+  var boxes = document.querySelectorAll('.chartbox');
+  if(!boxes.length) return;
+  var NS = 'http://www.w3.org/2000/svg';
+
+  boxes.forEach(function(box){
+    var cfg, svg = box.querySelector('svg');
+    try { cfg = JSON.parse(box.getAttribute('data-chart')); } catch(e){ return; }
+    if(!svg || !cfg) return;
+
+    var pw = cfg.W - cfg.L - cfg.R, ph = cfg.H - cfg.T - cfg.B;
+    function px(x){ return cfg.L + (x - cfg.xmin) / (cfg.xmax - cfg.xmin) * pw; }
+    function py(v){ return cfg.T + (cfg.ymax - v) / (cfg.ymax - cfg.ymin) * ph; }
+
+    // x座標の集合（系列をまたいで統合）
+    var xs = [], seen = {};
+    cfg.series.forEach(function(s){
+      s.p.forEach(function(pt){ if(!seen[pt[0]]){ seen[pt[0]] = 1; xs.push(pt[0]); } });
+    });
+    xs.sort(function(a,b){ return a-b; });
+
+    var guide = document.createElementNS(NS,'line');
+    guide.setAttribute('class','cguide');
+    guide.setAttribute('y1', cfg.T); guide.setAttribute('y2', cfg.T + ph);
+    svg.appendChild(guide);
+
+    var dots = cfg.series.map(function(s){
+      var c = document.createElementNS(NS,'circle');
+      c.setAttribute('class','cdot'); c.setAttribute('r','4.5');
+      c.setAttribute('fill', s.c); c.setAttribute('stroke','var(--paper)');
+      c.setAttribute('stroke-width','1.5');
+      svg.appendChild(c); return c;
+    });
+
+    var tip = document.createElement('div');
+    tip.className = 'ctip';
+    box.appendChild(tip);
+
+    function label(x){
+      if(cfg.xfmt === 'ym'){
+        var y = Math.floor(x + 1e-6), m = Math.round((x - y) * 12) + 1;
+        if(m > 12){ y += 1; m -= 12; }
+        return y + '年' + m + '月';
+      }
+      return x + '年度';
+    }
+    function fmt(v, d){
+      return v.toLocaleString('ja-JP', {minimumFractionDigits:d, maximumFractionDigits:d});
+    }
+
+    function show(clientX){
+      var r = svg.getBoundingClientRect();
+      var vx = (clientX - r.left) / r.width * cfg.W;
+      var dx = cfg.xmin + (vx - cfg.L) / pw * (cfg.xmax - cfg.xmin);
+      var best = xs[0];
+      for(var i=1;i<xs.length;i++){ if(Math.abs(xs[i]-dx) < Math.abs(best-dx)) best = xs[i]; }
+
+      var gx = px(best);
+      guide.setAttribute('x1', gx); guide.setAttribute('x2', gx);
+
+      var html = '<b>' + label(best) + '</b>', any = false;
+      cfg.series.forEach(function(s, i){
+        var hit = null;
+        for(var j=0;j<s.p.length;j++){ if(Math.abs(s.p[j][0]-best) < 1e-6){ hit = s.p[j][1]; break; } }
+        if(hit === null){ dots[i].setAttribute('opacity','0'); return; }
+        dots[i].removeAttribute('opacity');
+        dots[i].setAttribute('cx', gx); dots[i].setAttribute('cy', py(hit));
+        html += '<div><i style="background:' + s.c + '"></i>'
+             + (s.n ? s.n + ' ' : '') + fmt(hit, s.d) + s.u + '</div>';
+        any = true;
+      });
+      if(!any) return;
+      tip.innerHTML = html;
+      box.classList.add('on');
+
+      var bw = box.clientWidth, tw = tip.offsetWidth;
+      var left = gx / cfg.W * bw + 14;
+      if(left + tw > bw - 4) left = gx / cfg.W * bw - tw - 14;
+      if(left < 4) left = 4;
+      tip.style.left = left + 'px';
+      tip.style.top = (r.height * 0.10) + 'px';
+    }
+
+    function hide(){ box.classList.remove('on'); }
+
+    box.addEventListener('pointermove', function(e){ show(e.clientX); });
+    box.addEventListener('pointerdown', function(e){ show(e.clientX); });
+    box.addEventListener('pointerleave', hide);
+    box.addEventListener('pointercancel', hide);
+  });
+})();
+</script></body></html>
