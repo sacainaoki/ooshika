@@ -189,7 +189,7 @@
   </div>
 
   <h1>大鹿村の農業</h1>
-<p class="stamp"><b>データの時点</b>　農林業センサス（担い手の年齢は2025年、経営体数は2020年まで）、作物統計、生産農業所得統計<br><b>このページの更新</b>　2026年9月18日</p>
+<p class="stamp"><b>データの時点</b>　農林業センサス（担い手の年齢は2025年、経営体数は2020年まで）、作物統計、生産農業所得統計<br><b>このページの更新</b>　2026年9月19日</p>
   <p class="lede">農林水産省の農林業センサス（5年ごと）と作物統計（毎年）から、大鹿村の数字を拾って並べたものです。あわせて、村の決算から農林水産業費の推移を載せています。</p>
 
   <figure>
@@ -248,10 +248,10 @@
 
   <h2 id="nenrei"><a class="alink" href="#nenrei" aria-label="この見出しへのリンク">#</a>担い手の年齢</h2>
   <p class="sub">‹ › で調査年を切りかえられます</p>
-  <div class="ysw-unit" id="nenrei-sw" tabindex="0">
+  <div class="ysw-unit" id="nenrei-sw" tabindex="0" data-labels='{"2005": "2005年農林業センサス", "2010": "2010年農林業センサス", "2015": "2015年農林業センサス", "2020": "2020年農林業センサス", "2025": "2025年農林業センサス"}'>
   <div class="ysw">
     <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
-    <span class="yl">令和7年度</span>
+    <span class="yl">2025年農林業センサス</span>
     <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
   </div>
   <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
@@ -591,10 +591,10 @@
 
   <h2 id="sanshutsu"><a class="alink" href="#sanshutsu" aria-label="この見出しへのリンク">#</a>農業産出額</h2>
   <p class="sub">‹ › で年を切りかえられます</p>
-  <div class="ysw-unit" id="sanshutsu-sw" tabindex="0">
+  <div class="ysw-unit" id="sanshutsu-sw" tabindex="0" data-labels='{"2017": "2017年", "2018": "2018年", "2019": "2019年", "2020": "2020年", "2021": "2021年", "2022": "2022年", "2023": "2023年"}'>
   <div class="ysw">
     <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
-    <span class="yl">令和5年度</span>
+    <span class="yl">2023年</span>
     <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
   </div>
   <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
@@ -795,10 +795,10 @@
 
   <h2 id="shuraku"><a class="alink" href="#shuraku" aria-label="この見出しへのリンク">#</a>農業集落別の経営体数</h2>
   <p class="sub">‹ › で調査年を切りかえられます・24集落</p>
-  <div class="ysw-unit" id="shuraku-sw" tabindex="0">
+  <div class="ysw-unit" id="shuraku-sw" tabindex="0" data-labels='{"2005": "2005年農林業センサス", "2010": "2010年農林業センサス", "2015": "2015年農林業センサス", "2020": "2020年農林業センサス"}'>
   <div class="ysw">
     <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
-    <span class="yl">令和2年度</span>
+    <span class="yl">2020年農林業センサス</span>
     <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
   </div>
   <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
@@ -1065,7 +1065,7 @@
   <p>地図の数字が、その集落の経営体数です。集落名はカーソルを乗せると出ます。</p>
   <p><b>経営体数が1〜2の集落は、統計の秘密保護のため数値が公表されていません。</b>地図では灰色にしてあります。秘匿の集落は2005年に5つ、2020年に9つあり、年によって数が違います。<b>このため、年を切りかえて比べるときは、0の集落と秘匿の集落を分けて見る必要があります。</b></p>
 
-  <h3 id="h9422"><a class="alink" href="#h9422" aria-label="この見出しへのリンク">#</a>数値の表</h3>
+  <h3 id="h1090"><a class="alink" href="#h1090" aria-label="この見出しへのリンク">#</a>数値の表</h3>
   <details open>
     <summary>表を開く</summary>
     <div class="scroll">
@@ -1363,14 +1363,17 @@
 </script>
 <script>
 (function(){
-  var names = {"2018": "平成30年度", "2019": "令和元年度", "2020": "令和2年度", "2021": "令和3年度", "2022": "令和4年度", "2023": "令和5年度", "2024": "令和6年度", "2025": "令和7年度"};
+  var base = {"2003": "平成15年度（2003年度）", "2004": "平成16年度（2004年度）", "2005": "平成17年度（2005年度）", "2006": "平成18年度（2006年度）", "2007": "平成19年度（2007年度）", "2008": "平成20年度（2008年度）", "2009": "平成21年度（2009年度）", "2010": "平成22年度（2010年度）", "2011": "平成23年度（2011年度）", "2012": "平成24年度（2012年度）", "2013": "平成25年度（2013年度）", "2014": "平成26年度（2014年度）", "2015": "平成27年度（2015年度）", "2016": "平成28年度（2016年度）", "2017": "平成29年度（2017年度）", "2018": "平成30年度（2018年度）", "2019": "令和元年度（2019年度）", "2020": "令和2年度（2020年度）", "2021": "令和3年度（2021年度）", "2022": "令和4年度（2022年度）", "2023": "令和5年度（2023年度）", "2024": "令和6年度（2024年度）", "2025": "令和7年度（2025年度）", "2026": "令和8年度（2026年度）", "2027": "令和9年度（2027年度）", "2028": "令和10年度（2028年度）", "2029": "令和11年度（2029年度）", "2030": "令和12年度（2030年度）", "2031": "令和13年度（2031年度）", "2032": "令和14年度（2032年度）", "2033": "令和15年度（2033年度）", "2034": "令和16年度（2034年度）", "2035": "令和17年度（2035年度）", "2036": "令和18年度（2036年度）", "2037": "令和19年度（2037年度）", "2038": "令和20年度（2038年度）", "2039": "令和21年度（2039年度）", "2040": "令和22年度（2040年度）"};
   [].slice.call(document.querySelectorAll('.ysw-unit')).forEach(function(u){
+    var names = base;
     var ps = [].slice.call(u.querySelectorAll('.yp')),
         lab = u.querySelector('.yl'),
         bs  = [].slice.call(u.querySelectorAll('.yb')),
         ds  = [].slice.call(u.querySelectorAll('.ydot')),
-        i   = ps.length - 1;
+        i   = ps.length - 1,
+        own = u.getAttribute('data-labels');
     if (!ps.length) return;
+    if (own) { try { names = JSON.parse(own); } catch(e) {} }
     function show(k){
       i = Math.max(0, Math.min(ps.length - 1, k));
       ps.forEach(function(p, j){

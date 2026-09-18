@@ -39,6 +39,22 @@
   .nav span{color:var(--ink);font-weight:700}
   @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
 
+  .ysw{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 0 12px}
+  .yb{appearance:none;background:none;border:1px solid var(--rule);border-radius:50%;
+    width:40px;height:40px;font-size:22px;line-height:1;color:var(--ink);cursor:pointer;
+    font-family:var(--gothic);padding:0;flex:0 0 auto}
+  .yb:hover:not(:disabled){border-color:var(--moegi);color:var(--moegi)}
+  .yb:focus-visible{outline:2px solid var(--moegi);outline-offset:2px}
+  .yb:disabled{opacity:.26;cursor:default}
+  .yl{font-family:var(--mincho);font-size:19px;letter-spacing:.04em;
+    min-width:7.5em;text-align:center}
+  .ydots{display:flex;gap:5px;justify-content:center;margin:2px 0 14px}
+  .ydot{width:6px;height:6px;border-radius:50%;background:var(--rule)}
+  .ydot.on{background:var(--moegi)}
+  .yp[hidden]{display:none}
+  @media(max-width:560px){.yl{font-size:17px;min-width:6.5em}
+    .yb{width:36px;height:36px;font-size:20px}}
+
   :root{
     --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
     --rule:#D8DAD0; --moegi:#7A9A3C;
@@ -149,7 +165,7 @@
   </div>
 
   <h1>村の道と橋</h1>
-<p class="stamp"><b>データの時点</b>　固定資産台帳（令和6年度末）、広報おおしか掲載の予算・決算記事<br><b>このページの更新</b>　2026年9月18日</p>
+<p class="stamp"><b>データの時点</b>　固定資産台帳（令和6年度末）、広報おおしか掲載の予算・決算記事<br><b>このページの更新</b>　2026年9月19日</p>
   <p class="lede">大鹿村の固定資産台帳（令和2年度末）と、広報おおしかに掲載された主要事業の決算額・当初予算額から、林道・村道・橋りょうに関する数字を並べたものです。村の面積は248平方キロメートル、村道の延長は約125キロメートル、林道は約87キロメートルあります。</p>
 
   <h2 id="shisan"><a class="alink" href="#shisan" aria-label="この見出しへのリンク">#</a>資産としての規模</h2>
@@ -220,6 +236,66 @@
 
   <p style="margin-top:30px">「更新到来年度」は、台帳の供用開始日に耐用年数を加えて計算したものです。台帳にこの項目はありません。また取得価額は更新に必要な費用ではなく、会計上の耐用年数の到達は物理的に更新が必要な時期とも異なります。</p>
 
+  <h2 id="koshin"><a class="alink" href="#koshin" aria-label="この見出しへのリンク">#</a>更新の時期</h2>
+  <p class="sub">固定資産台帳から計算したもの</p>
+  <figure>
+    <svg viewBox="0 0 900 252" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="100" y="23" text-anchor="end" class="ax">耐用超過</text>
+<rect x="110.0" y="8" width="121.3" height="21" fill="#4A6B1E"/>
+<rect x="231.3" y="8" width="5.2" height="21" fill="#2E6B8A"/>
+<rect x="236.5" y="8" width="47.9" height="21" fill="#A8482F"/>
+<rect x="284.4" y="8" width="56.4" height="21" fill="#B08A3E"/>
+<rect x="340.8" y="8" width="16.1" height="21" fill="#6B8C33"/>
+<rect x="356.9" y="8" width="15.6" height="21" fill="#8C4A34"/>
+<rect x="372.6" y="8" width="15.6" height="21" fill="#B7BBB0"/>
+<text x="397.2" y="23.0" class="pt" fill="#23241F">58.7</text>
+<text x="100" y="57" text-anchor="end" class="ax">R3〜R8</text>
+<rect x="110.0" y="42" width="109.0" height="21" fill="#4A6B1E"/>
+<rect x="219.0" y="42" width="21.3" height="21" fill="#2E6B8A"/>
+<rect x="240.3" y="42" width="9.0" height="21" fill="#A8482F"/>
+<rect x="249.3" y="42" width="28.9" height="21" fill="#B08A3E"/>
+<rect x="278.2" y="42" width="14.7" height="21" fill="#6B8C33"/>
+<rect x="292.9" y="42" width="12.3" height="21" fill="#8C4A34"/>
+<rect x="305.3" y="42" width="15.6" height="21" fill="#B7BBB0"/>
+<text x="329.9" y="57.0" class="pt" fill="#23241F">44.5</text>
+<text x="100" y="91" text-anchor="end" class="ax">R9〜R13</text>
+<rect x="110.0" y="76" width="83.9" height="21" fill="#4A6B1E"/>
+<rect x="193.9" y="76" width="28.4" height="21" fill="#2E6B8A"/>
+<rect x="222.3" y="76" width="39.3" height="21" fill="#A8482F"/>
+<rect x="261.7" y="76" width="13.7" height="21" fill="#B08A3E"/>
+<rect x="275.4" y="76" width="4.7" height="21" fill="#6B8C33"/>
+<rect x="280.1" y="76" width="9.5" height="21" fill="#8C4A34"/>
+<rect x="289.6" y="76" width="4.7" height="21" fill="#B7BBB0"/>
+<text x="303.4" y="91.0" class="pt" fill="#23241F">38.9</text>
+<text x="100" y="125" text-anchor="end" class="ax">R14〜R23</text>
+<rect x="110.0" y="110" width="94.8" height="21" fill="#4A6B1E"/>
+<rect x="204.8" y="110" width="68.7" height="21" fill="#2E6B8A"/>
+<rect x="273.5" y="110" width="46.0" height="21" fill="#A8482F"/>
+<rect x="319.5" y="110" width="38.9" height="21" fill="#B08A3E"/>
+<rect x="358.3" y="110" width="35.1" height="21" fill="#6B8C33"/>
+<rect x="393.4" y="110" width="14.2" height="21" fill="#8C4A34"/>
+<text x="416.6" y="125.0" class="pt" fill="#23241F">62.8</text>
+<text x="100" y="159" text-anchor="end" class="ax">R24以降</text>
+<rect x="110.0" y="144" width="255.9" height="21" fill="#4A6B1E"/>
+<rect x="365.9" y="144" width="184.8" height="21" fill="#2E6B8A"/>
+<rect x="550.8" y="144" width="137.0" height="21" fill="#A8482F"/>
+<rect x="687.7" y="144" width="71.6" height="21" fill="#B08A3E"/>
+<rect x="759.3" y="144" width="20.9" height="21" fill="#6B8C33"/>
+<rect x="780.2" y="144" width="11.8" height="21" fill="#8C4A34"/>
+<text x="801.0" y="159.0" class="pt" fill="#23241F">143.9</text>
+<rect x="110" y="206" width="11" height="11" fill="#4A6B1E"/><text x="126" y="216" class="ax">林道</text>
+<rect x="260" y="206" width="11" height="11" fill="#2E6B8A"/><text x="276" y="216" class="ax">村道・農道</text>
+<rect x="410" y="206" width="11" height="11" fill="#A8482F"/><text x="426" y="216" class="ax">建物</text>
+<rect x="560" y="206" width="11" height="11" fill="#B08A3E"/><text x="576" y="216" class="ax">橋りょう・トンネル</text>
+<rect x="710" y="206" width="11" height="11" fill="#6B8C33"/><text x="726" y="216" class="ax">上水道</text>
+<rect x="110" y="230" width="11" height="11" fill="#8C4A34"/><text x="126" y="240" class="ax">工作物・公園</text>
+<rect x="260" y="230" width="11" height="11" fill="#B7BBB0"/><text x="276" y="240" class="ax">物品・ソフトウェア</text>
+</svg>
+    <figcaption>区分ごとに、更新到来年度がいつ来るかを分けたもの。単位は億円。</figcaption>
+  </figure>
+  <p><b>「更新到来年度」は、台帳の供用開始日に耐用年数を加えて計算したものです。台帳にこの項目はありません。</b>
+  また取得価額は更新に必要な費用ではなく、会計上の耐用年数の到達は、物理的に更新が必要な時期とも異なります。</p>
+
   <h2 id="rosen"><a class="alink" href="#rosen" aria-label="この見出しへのリンク">#</a>林道の路線別</h2>
   <p class="sub">12路線・652件</p>
   <div class="scroll" style="max-height:none;margin-top:22px">
@@ -283,6 +359,227 @@
   </figure>
   <p>林道整備事業は、農林水産業費に占める割合で見ると23％から52％の間で推移しています。村道改良事業は土木費に計上されます。</p>
   <p>令和2年度は「道路改良整備事業（鳥倉線、中峰線、小渋橋、他）」として林道と村道が合算で掲載されており、林道分を分けることができません。</p>
+
+  <h2 id="kessan"><a class="alink" href="#kessan" aria-label="この見出しへのリンク">#</a>決算書で細かく見る</h2>
+  <p class="sub">平成30年度〜令和7年度の8年・‹ › で年度を切りかえられます</p>
+  <div class="ysw-unit" id="kessan-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度（2025年度）</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="123.6" height="21" fill="#7A9A3C"/>
+<rect x="303.6" y="8" width="17.6" height="21" fill="#A8482F"/>
+<text x="330.2" y="23.0" class="pt" fill="#23241F">0.92</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="168.5" height="21" fill="#7A9A3C"/>
+<rect x="348.5" y="42" width="97.2" height="21" fill="#A8482F"/>
+<text x="454.7" y="57.0" class="pt" fill="#23241F">1.74</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="7.8" height="21" fill="#7A9A3C"/>
+<text x="196.8" y="91.0" class="pt" fill="#23241F">0.05</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="11.0" height="21" fill="#7A9A3C"/>
+<rect x="191.0" y="110" width="16.8" height="21" fill="#A8482F"/>
+<text x="216.8" y="125.0" class="pt" fill="#23241F">0.18</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="11.2" height="21" fill="#7A9A3C"/>
+<text x="200.2" y="159.0" class="pt" fill="#23241F">0.07</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="3.0" height="21" fill="#7A9A3C"/>
+<text x="192.0" y="193.0" class="pt" fill="#23241F">0.02</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="105.6" height="21" fill="#7A9A3C"/>
+<rect x="285.6" y="8" width="43.0" height="21" fill="#A8482F"/>
+<text x="337.6" y="23.0" class="pt" fill="#23241F">0.97</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="227.1" height="21" fill="#7A9A3C"/>
+<rect x="407.1" y="42" width="269.0" height="21" fill="#A8482F"/>
+<text x="685.1" y="57.0" class="pt" fill="#23241F">3.25</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="24.3" height="21" fill="#7A9A3C"/>
+<text x="213.3" y="91.0" class="pt" fill="#23241F">0.16</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="22.5" height="21" fill="#7A9A3C"/>
+<rect x="202.5" y="110" width="52.9" height="21" fill="#A8482F"/>
+<text x="264.4" y="125.0" class="pt" fill="#23241F">0.49</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="14.7" height="21" fill="#7A9A3C"/>
+<text x="203.7" y="159.0" class="pt" fill="#23241F">0.10</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="0.9" height="21" fill="#7A9A3C"/>
+<text x="189.9" y="193.0" class="pt" fill="#23241F">0.01</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="113.2" height="21" fill="#7A9A3C"/>
+<rect x="293.2" y="8" width="66.8" height="21" fill="#A8482F"/>
+<text x="369.1" y="23.0" class="pt" fill="#23241F">1.18</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="113.6" height="21" fill="#7A9A3C"/>
+<rect x="293.6" y="42" width="66.2" height="21" fill="#A8482F"/>
+<text x="368.8" y="57.0" class="pt" fill="#23241F">1.18</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="106.3" height="21" fill="#7A9A3C"/>
+<text x="295.3" y="91.0" class="pt" fill="#23241F">0.70</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="15.3" height="21" fill="#7A9A3C"/>
+<rect x="195.3" y="110" width="22.5" height="21" fill="#A8482F"/>
+<text x="226.8" y="125.0" class="pt" fill="#23241F">0.25</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="15.4" height="21" fill="#7A9A3C"/>
+<text x="204.4" y="159.0" class="pt" fill="#23241F">0.10</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="1.0" height="21" fill="#7A9A3C"/>
+<text x="190.0" y="193.0" class="pt" fill="#23241F">0.01</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="100.1" height="21" fill="#7A9A3C"/>
+<rect x="280.1" y="8" width="242.3" height="21" fill="#A8482F"/>
+<text x="531.4" y="23.0" class="pt" fill="#23241F">2.24</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="179.5" height="21" fill="#7A9A3C"/>
+<rect x="359.5" y="42" width="2.2" height="21" fill="#A8482F"/>
+<text x="370.7" y="57.0" class="pt" fill="#23241F">1.19</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="168.8" height="21" fill="#7A9A3C"/>
+<text x="357.8" y="91.0" class="pt" fill="#23241F">1.10</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="22.3" height="21" fill="#7A9A3C"/>
+<rect x="202.3" y="110" width="16.7" height="21" fill="#A8482F"/>
+<text x="228.0" y="125.0" class="pt" fill="#23241F">0.26</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="41.2" height="21" fill="#7A9A3C"/>
+<text x="230.2" y="159.0" class="pt" fill="#23241F">0.27</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="1.2" height="21" fill="#7A9A3C"/>
+<text x="190.2" y="193.0" class="pt" fill="#23241F">0.01</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="144.0" height="21" fill="#7A9A3C"/>
+<rect x="324.0" y="8" width="92.8" height="21" fill="#A8482F"/>
+<text x="425.7" y="23.0" class="pt" fill="#23241F">1.55</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="228.4" height="21" fill="#7A9A3C"/>
+<rect x="408.4" y="42" width="19.5" height="21" fill="#A8482F"/>
+<text x="436.9" y="57.0" class="pt" fill="#23241F">1.62</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="90.5" height="21" fill="#7A9A3C"/>
+<text x="279.5" y="91.0" class="pt" fill="#23241F">0.59</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="16.8" height="21" fill="#7A9A3C"/>
+<rect x="196.8" y="110" width="6.5" height="21" fill="#A8482F"/>
+<text x="212.2" y="125.0" class="pt" fill="#23241F">0.15</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="31.7" height="21" fill="#7A9A3C"/>
+<text x="220.7" y="159.0" class="pt" fill="#23241F">0.21</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="5.3" height="21" fill="#7A9A3C"/>
+<text x="194.3" y="193.0" class="pt" fill="#23241F">0.03</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="112.1" height="21" fill="#7A9A3C"/>
+<rect x="292.1" y="8" width="499.9" height="21" fill="#A8482F"/>
+<text x="801.0" y="23.0" class="pt" fill="#23241F">4.00</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="297.8" height="21" fill="#7A9A3C"/>
+<text x="486.8" y="57.0" class="pt" fill="#23241F">1.95</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="121.7" height="21" fill="#7A9A3C"/>
+<text x="310.7" y="91.0" class="pt" fill="#23241F">0.80</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="27.9" height="21" fill="#7A9A3C"/>
+<text x="216.9" y="125.0" class="pt" fill="#23241F">0.18</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="18.8" height="21" fill="#7A9A3C"/>
+<text x="207.8" y="159.0" class="pt" fill="#23241F">0.12</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="1.5" height="21" fill="#7A9A3C"/>
+<text x="190.5" y="193.0" class="pt" fill="#23241F">0.01</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="107.2" height="21" fill="#7A9A3C"/>
+<rect x="287.2" y="8" width="110.3" height="21" fill="#A8482F"/>
+<text x="406.5" y="23.0" class="pt" fill="#23241F">1.42</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="309.5" height="21" fill="#7A9A3C"/>
+<text x="498.5" y="57.0" class="pt" fill="#23241F">2.03</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="44.2" height="21" fill="#7A9A3C"/>
+<text x="233.2" y="91.0" class="pt" fill="#23241F">0.29</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="31.4" height="21" fill="#7A9A3C"/>
+<text x="220.4" y="125.0" class="pt" fill="#23241F">0.21</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="22.5" height="21" fill="#7A9A3C"/>
+<text x="211.5" y="159.0" class="pt" fill="#23241F">0.15</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="1.3" height="21" fill="#7A9A3C"/>
+<text x="190.3" y="193.0" class="pt" fill="#23241F">0.01</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 900 262" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="170" y="23" text-anchor="end" class="ax">林道</text>
+<rect x="180.0" y="8" width="101.1" height="21" fill="#7A9A3C"/>
+<rect x="281.1" y="8" width="76.4" height="21" fill="#A8482F"/>
+<text x="366.5" y="23.0" class="pt" fill="#23241F">1.16</text>
+<text x="170" y="57" text-anchor="end" class="ax">村道</text>
+<rect x="180.0" y="42" width="152.0" height="21" fill="#7A9A3C"/>
+<text x="341.0" y="57.0" class="pt" fill="#23241F">0.99</text>
+<text x="170" y="91" text-anchor="end" class="ax">橋りょう</text>
+<rect x="180.0" y="76" width="334.9" height="21" fill="#7A9A3C"/>
+<text x="523.9" y="91.0" class="pt" fill="#23241F">2.19</text>
+<text x="170" y="125" text-anchor="end" class="ax">河川</text>
+<rect x="180.0" y="110" width="20.8" height="21" fill="#7A9A3C"/>
+<text x="209.8" y="125.0" class="pt" fill="#23241F">0.14</text>
+<text x="170" y="159" text-anchor="end" class="ax">除雪・交通安全</text>
+<rect x="180.0" y="144" width="17.5" height="21" fill="#7A9A3C"/>
+<text x="206.5" y="159.0" class="pt" fill="#23241F">0.11</text>
+<text x="170" y="193" text-anchor="end" class="ax">その他（国県道の負担金ほか）</text>
+<rect x="180.0" y="178" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="192.3" y="193.0" class="pt" fill="#23241F">0.02</text>
+<rect x="180" y="240" width="11" height="11" fill="#7A9A3C"/><text x="196" y="250" class="ax">ふだんの整備・管理</text>
+<rect x="330" y="240" width="11" height="11" fill="#A8482F"/><text x="346" y="250" class="ax">災害復旧</text>
+</svg></div><figcaption>第5次総合振興計画「5-2 道路環境の整備」に当たる支出。単位は億円。8年で目盛りをそろえてあります。</figcaption></figure>
+  <details><summary>8年分の表を開く（単位は円）</summary><div class="scroll"><table><thead><tr><th>　</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th><th>8年計</th></tr></thead><tbody><tr><td>林道</td><td>92,435,461</td><td>97,230,246</td><td>117,834,225</td><td>224,060,415</td><td>154,906,140</td><td>400,499,847</td><td>142,331,331</td><td>116,171,251</td><td>1,345,468,916</td></tr>
+<tr><td>村道</td><td>173,854,194</td><td>324,647,637</td><td>117,672,649</td><td>118,890,058</td><td>162,251,623</td><td>194,914,135</td><td>202,572,606</td><td>99,449,842</td><td>1,394,252,744</td></tr>
+<tr><td>橋りょう</td><td>5,120,400</td><td>15,899,000</td><td>69,575,000</td><td>110,467,000</td><td>59,236,400</td><td>79,640,000</td><td>28,893,000</td><td>219,175,330</td><td>588,006,130</td></tr>
+<tr><td>河川</td><td>18,193,396</td><td>49,355,096</td><td>24,730,257</td><td>25,548,940</td><td>15,196,500</td><td>18,266,600</td><td>20,559,220</td><td>13,608,100</td><td>185,458,109</td></tr>
+<tr><td>除雪・交通安全</td><td>7,313,319</td><td>9,597,488</td><td>10,063,126</td><td>26,941,657</td><td>20,732,328</td><td>12,322,610</td><td>14,732,661</td><td>11,476,503</td><td>113,179,692</td></tr>
+<tr><td>その他（国県道の負担金ほか）</td><td>1,936,392</td><td>598,400</td><td>657,300</td><td>803,092</td><td>3,455,800</td><td>1,002,100</td><td>855,100</td><td>2,142,246</td><td>11,450,430</td></tr></tbody><tfoot><tr class="tot"><td>合計</td><td>298,853,162</td><td>497,327,867</td><td>340,532,557</td><td>506,711,162</td><td>415,778,791</td><td>706,645,292</td><td>409,943,918</td><td>462,023,272</td><td>3,637,816,021</td></tr></tfoot></table></div></details>
+</div>
+  <p>上の「毎年かかっている費用」は広報の主要事業一覧によるもので、事業の単位です。
+  こちらは決算書の事項別明細書から、第5次総合振興計画の「5-2 道路環境の整備」に当たる支出を取り出したものです。
+  <b>広報に出ない小さな支出や、災害復旧の分も入っています。</b></p>
+  <div class="box">
+  <p>8年の合計は<b>36億3,782万円</b>。そのうち<b>災害復旧が11億2,461万円で31％</b>を占めます。</p>
+  <p>決算書のうえでは、この支出は<b>土木費・災害復旧費・農林水産業費・総務費の4つの款</b>に分かれています。
+  款だけを見ていると、道にいくら使っているかは分かりません。</p>
+  <p>林道は、第5次総合振興計画では「5-2 道路環境の整備」、過疎地域持続的発展計画では「2 産業の振興→エ.林道」です。
+  <b>計画によって分野が分かれます。</b>このページでは道路として扱い、<a href="agriforest.html#rindo">農林業のお金</a>のページでは参考として置いています。</p>
+  </div>
 
   <h2 id="tosho"><a class="alink" href="#tosho" aria-label="この見出しへのリンク">#</a>当初予算での計上額</h2>
   <p class="sub">令和元年度以降</p>
@@ -491,6 +788,39 @@
     box.addEventListener('pointerdown', function(e){ show(e.clientX); });
     box.addEventListener('pointerleave', hide);
     box.addEventListener('pointercancel', hide);
+  });
+})();
+</script>
+<script>
+(function(){
+  var base = {"2003": "平成15年度（2003年度）", "2004": "平成16年度（2004年度）", "2005": "平成17年度（2005年度）", "2006": "平成18年度（2006年度）", "2007": "平成19年度（2007年度）", "2008": "平成20年度（2008年度）", "2009": "平成21年度（2009年度）", "2010": "平成22年度（2010年度）", "2011": "平成23年度（2011年度）", "2012": "平成24年度（2012年度）", "2013": "平成25年度（2013年度）", "2014": "平成26年度（2014年度）", "2015": "平成27年度（2015年度）", "2016": "平成28年度（2016年度）", "2017": "平成29年度（2017年度）", "2018": "平成30年度（2018年度）", "2019": "令和元年度（2019年度）", "2020": "令和2年度（2020年度）", "2021": "令和3年度（2021年度）", "2022": "令和4年度（2022年度）", "2023": "令和5年度（2023年度）", "2024": "令和6年度（2024年度）", "2025": "令和7年度（2025年度）", "2026": "令和8年度（2026年度）", "2027": "令和9年度（2027年度）", "2028": "令和10年度（2028年度）", "2029": "令和11年度（2029年度）", "2030": "令和12年度（2030年度）", "2031": "令和13年度（2031年度）", "2032": "令和14年度（2032年度）", "2033": "令和15年度（2033年度）", "2034": "令和16年度（2034年度）", "2035": "令和17年度（2035年度）", "2036": "令和18年度（2036年度）", "2037": "令和19年度（2037年度）", "2038": "令和20年度（2038年度）", "2039": "令和21年度（2039年度）", "2040": "令和22年度（2040年度）"};
+  [].slice.call(document.querySelectorAll('.ysw-unit')).forEach(function(u){
+    var names = base;
+    var ps = [].slice.call(u.querySelectorAll('.yp')),
+        lab = u.querySelector('.yl'),
+        bs  = [].slice.call(u.querySelectorAll('.yb')),
+        ds  = [].slice.call(u.querySelectorAll('.ydot')),
+        i   = ps.length - 1,
+        own = u.getAttribute('data-labels');
+    if (!ps.length) return;
+    if (own) { try { names = JSON.parse(own); } catch(e) {} }
+    function show(k){
+      i = Math.max(0, Math.min(ps.length - 1, k));
+      ps.forEach(function(p, j){
+        if (j === i) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+      });
+      ds.forEach(function(d, j){ d.className = 'ydot' + (j === i ? ' on' : ''); });
+      lab.textContent = names[ps[i].getAttribute('data-y')] || ps[i].getAttribute('data-y');
+      bs[0].disabled = (i === 0); bs[1].disabled = (i === ps.length - 1);
+    }
+    bs.forEach(function(b){
+      b.addEventListener('click', function(){ show(i + (+b.getAttribute('data-d'))); });
+    });
+    u.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft') { show(i - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { show(i + 1); e.preventDefault(); }
+    });
+    show(ps.length - 1);
   });
 })();
 </script>
