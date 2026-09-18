@@ -37,6 +37,22 @@
   .nav span{color:var(--ink);font-weight:700}
   @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
 
+  .ysw{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 0 12px}
+  .yb{appearance:none;background:none;border:1px solid var(--rule);border-radius:50%;
+    width:40px;height:40px;font-size:22px;line-height:1;color:var(--ink);cursor:pointer;
+    font-family:var(--gothic);padding:0;flex:0 0 auto}
+  .yb:hover:not(:disabled){border-color:var(--moegi);color:var(--moegi)}
+  .yb:focus-visible{outline:2px solid var(--moegi);outline-offset:2px}
+  .yb:disabled{opacity:.26;cursor:default}
+  .yl{font-family:var(--mincho);font-size:19px;letter-spacing:.04em;
+    min-width:7.5em;text-align:center}
+  .ydots{display:flex;gap:5px;justify-content:center;margin:2px 0 14px}
+  .ydot{width:6px;height:6px;border-radius:50%;background:var(--rule)}
+  .ydot.on{background:var(--moegi)}
+  .yp[hidden]{display:none}
+  @media(max-width:560px){.yl{font-size:17px;min-width:6.5em}
+    .yb{width:36px;height:36px;font-size:20px}}
+
   :root{--paper:#FBFBF8;--panel:#F2F2EC;--ink:#23241F;--muted:#6B6E64;--rule:#D8DAD0;--moegi:#7A9A3C;
     --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
     --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;}
@@ -72,6 +88,8 @@
   thead th{font-weight:500;color:var(--muted);font-size:13px}
   tfoot .tot td,tr.tot td{font-weight:700;border-top:1.5px solid var(--ink);border-bottom:none}
   details{margin:0 0 26px}
+  .dcap{color:var(--muted);font-size:13.5px;margin:22px 0 6px;font-family:var(--mincho)}
+  details .ysw-unit{margin:14px 0 0}
   summary{cursor:pointer;color:var(--muted);font-size:14.5px;padding:6px 0}
   .d2 td:first-child{white-space:normal}
   .box{background:var(--panel);padding:20px 24px;margin:26px 0;font-size:15.5px;line-height:1.85}
@@ -137,7 +155,7 @@
 </header>
 
 <h1>農林業のお金</h1>
-<p class="stamp"><b>データの時点</b>　大鹿村一般会計決算書（平成30年度〜令和7年度）。令和7年度決算は令和8年9月議会で認定<br><b>このページの更新</b>　2026年9月18日</p>
+<p class="stamp"><b>データの時点</b>　大鹿村一般会計決算書（平成30年度〜令和7年度）。令和7年度決算は令和8年9月議会で認定<br><b>このページの更新</b>　2026年9月19日</p>
 <p class="lede">大鹿村が農業と林業にいくら使ってきたかを、決算書8年分（平成30年度〜令和7年度）から並べたものです。
 決算書は「款（かん）」という行政の分け方で並んでいますが、ここでは村の計画の分け方に合わせて束ね直しています。</p>
 
@@ -221,13 +239,163 @@
   <figcaption>けもの対策と、災害で壊れた農地を直す費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3 id="h8004"><a class="alink" href="#h8004" aria-label="この見出しへのリンク">#</a>けものから森林や田畑を守る</h3>
+<h3 id="h2814"><a class="alink" href="#h2814" aria-label="この見出しへのリンク">#</a>けものから森林や田畑を守る</h3>
 <p>8年で1億3,789万円。とったけものへの報償（駆除報償・駆除謝金）が6,753万円、
 柵などをつくる人への補助（獣害防止施設設置補助金）が6,380万円で、ほぼ半分ずつです。</p>
 <p>決算書のうえでは、この費用は<b>農業振興費と林業振興費の2か所に分かれて</b>います。
 8年の合計では農業振興費が1,780万円、林業振興費が5,456万円です。
 計画では「3-1 農業の振興」の中に置かれているため、このページではひとつにまとめています。</p>
-<details><summary>内訳を開く（16種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>獣害防止施設設置補助金</td><td>63,803,000</td></tr>
+<details><summary>内訳を開く（16種類）</summary><div class="ysw-unit" id="kemono-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="213.7" height="21" fill="#7A9A3C"/>
+<text x="442.7" y="23.0" class="pt" fill="#23241F">518</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="299.4" height="21" fill="#7A9A3C"/>
+<text x="528.4" y="57.0" class="pt" fill="#23241F">725</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="22.0" height="21" fill="#7A9A3C"/>
+<text x="251.0" y="91.0" class="pt" fill="#23241F">53</text>
+<text x="210" y="125" text-anchor="end" class="ax">防護柵設置工事</text>
+<rect x="220.0" y="110" width="27.3" height="21" fill="#7A9A3C"/>
+<text x="256.3" y="125.0" class="pt" fill="#23241F">66</text>
+<text x="210" y="159" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="144" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="159.0" class="pt" fill="#23241F">8</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="319.1" height="21" fill="#7A9A3C"/>
+<text x="548.1" y="23.0" class="pt" fill="#23241F">773</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="316.8" height="21" fill="#7A9A3C"/>
+<text x="545.8" y="57.0" class="pt" fill="#23241F">768</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="37.8" height="21" fill="#7A9A3C"/>
+<text x="266.8" y="91.0" class="pt" fill="#23241F">91</text>
+<text x="210" y="125" text-anchor="end" class="ax">防護柵設置工事</text>
+<rect x="220.0" y="110" width="22.3" height="21" fill="#7A9A3C"/>
+<text x="251.3" y="125.0" class="pt" fill="#23241F">54</text>
+<text x="210" y="159" text-anchor="end" class="ax">事業用備品購入費</text>
+<rect x="220.0" y="144" width="18.5" height="21" fill="#7A9A3C"/>
+<text x="247.5" y="159.0" class="pt" fill="#23241F">45</text>
+<text x="210" y="193" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="178" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="193.0" class="pt" fill="#23241F">8</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 306" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="424.3" height="21" fill="#7A9A3C"/>
+<text x="653.3" y="23.0" class="pt" fill="#23241F">1,028</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="365.5" height="21" fill="#7A9A3C"/>
+<text x="594.5" y="57.0" class="pt" fill="#23241F">885</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="57.8" height="21" fill="#7A9A3C"/>
+<text x="286.8" y="91.0" class="pt" fill="#23241F">140</text>
+<text x="210" y="125" text-anchor="end" class="ax">防護柵設置工事</text>
+<rect x="220.0" y="110" width="4.8" height="21" fill="#7A9A3C"/>
+<text x="233.8" y="125.0" class="pt" fill="#23241F">12</text>
+<text x="210" y="159" text-anchor="end" class="ax">有害鳥獣駆除対策協議会交付金</text>
+<rect x="220.0" y="144" width="66.0" height="21" fill="#7A9A3C"/>
+<text x="295.0" y="159.0" class="pt" fill="#23241F">160</text>
+<text x="210" y="193" text-anchor="end" class="ax">事業用備品購入費</text>
+<rect x="220.0" y="178" width="18.6" height="21" fill="#7A9A3C"/>
+<text x="247.6" y="193.0" class="pt" fill="#23241F">45</text>
+<text x="210" y="227" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="212" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="227.0" class="pt" fill="#23241F">8</text>
+<text x="210" y="261" text-anchor="end" class="ax">残渣処理場設置工事</text>
+<rect x="220.0" y="246" width="3.2" height="21" fill="#7A9A3C"/>
+<text x="232.2" y="261.0" class="pt" fill="#23241F">8</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="136.3" height="21" fill="#7A9A3C"/>
+<text x="365.3" y="23.0" class="pt" fill="#23241F">330</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="433.2" height="21" fill="#7A9A3C"/>
+<text x="662.2" y="57.0" class="pt" fill="#23241F">1,050</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="29.6" height="21" fill="#7A9A3C"/>
+<text x="258.6" y="91.0" class="pt" fill="#23241F">72</text>
+<text x="210" y="125" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="110" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="125.0" class="pt" fill="#23241F">8</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="417.8" height="21" fill="#7A9A3C"/>
+<text x="646.8" y="23.0" class="pt" fill="#23241F">1,012</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="272.9" height="21" fill="#7A9A3C"/>
+<text x="501.9" y="57.0" class="pt" fill="#23241F">661</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="25.4" height="21" fill="#7A9A3C"/>
+<text x="254.4" y="91.0" class="pt" fill="#23241F">61</text>
+<text x="210" y="125" text-anchor="end" class="ax">防護柵設置工事</text>
+<rect x="220.0" y="110" width="1.2" height="21" fill="#7A9A3C"/>
+<text x="230.2" y="125.0" class="pt" fill="#23241F">3</text>
+<text x="210" y="159" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="144" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="159.0" class="pt" fill="#23241F">8</text>
+<text x="210" y="193" text-anchor="end" class="ax">残渣処理場設置工事</text>
+<rect x="220.0" y="178" width="14.3" height="21" fill="#7A9A3C"/>
+<text x="243.3" y="193.0" class="pt" fill="#23241F">35</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="168.1" height="21" fill="#7A9A3C"/>
+<text x="397.1" y="23.0" class="pt" fill="#23241F">407</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="247.9" height="21" fill="#7A9A3C"/>
+<text x="476.9" y="57.0" class="pt" fill="#23241F">600</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="41.1" height="21" fill="#7A9A3C"/>
+<text x="270.1" y="91.0" class="pt" fill="#23241F">99</text>
+<text x="210" y="125" text-anchor="end" class="ax">防護柵設置工事</text>
+<rect x="220.0" y="110" width="15.4" height="21" fill="#7A9A3C"/>
+<text x="244.4" y="125.0" class="pt" fill="#23241F">37</text>
+<text x="210" y="159" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="144" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="159.0" class="pt" fill="#23241F">8</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="402.4" height="21" fill="#7A9A3C"/>
+<text x="631.4" y="23.0" class="pt" fill="#23241F">975</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="279.8" height="21" fill="#7A9A3C"/>
+<text x="508.8" y="57.0" class="pt" fill="#23241F">678</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="32.4" height="21" fill="#7A9A3C"/>
+<text x="261.4" y="91.0" class="pt" fill="#23241F">78</text>
+<text x="210" y="125" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="110" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="125.0" class="pt" fill="#23241F">8</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">獣害防止施設設置補助金</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">1,337</text>
+<text x="210" y="57" text-anchor="end" class="ax">有害鳥獣駆除報償</text>
+<rect x="220.0" y="42" width="291.9" height="21" fill="#7A9A3C"/>
+<text x="520.9" y="57.0" class="pt" fill="#23241F">707</text>
+<text x="210" y="91" text-anchor="end" class="ax">有害鳥獣駆除謝金</text>
+<rect x="220.0" y="76" width="34.1" height="21" fill="#7A9A3C"/>
+<text x="263.1" y="91.0" class="pt" fill="#23241F">83</text>
+<text x="210" y="125" text-anchor="end" class="ax">有害鳥獣捕獲檻管理委託料</text>
+<rect x="220.0" y="110" width="3.3" height="21" fill="#7A9A3C"/>
+<text x="232.3" y="125.0" class="pt" fill="#23241F">8</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>獣害防止施設設置補助金</td><td>63,803,000</td></tr>
 <tr><td>有害鳥獣駆除報償</td><td>60,743,000</td></tr>
 <tr><td>有害鳥獣駆除謝金</td><td>6,784,150</td></tr>
 <tr><td>防護柵設置工事</td><td>1,719,830</td></tr>
@@ -242,10 +410,99 @@
 <tr><td>獣害防止施設修繕費</td><td>69,410</td></tr>
 <tr><td>有害鳥獣駆除協議会賃金</td><td>60,200</td></tr></tbody><tfoot><tr class="tot"><td>ほか2種類</td><td>50,095</td></tr></tfoot></table></div></details>
 
-<h3 id="h6074"><a class="alink" href="#h6074" aria-label="この見出しへのリンク">#</a>災害で壊れた農地を直す</h3>
+<h3 id="h4675"><a class="alink" href="#h4675" aria-label="この見出しへのリンク">#</a>災害で壊れた農地を直す</h3>
 <p>8年で6,892万円。決算書では「災害復旧費」という別の款にありますが、直す対象が農地と農業用の施設なので、ここに置いています。
 令和4年度の2,248万円がいちばん多く、令和7年度は0円でした。</p>
-<details><summary>内訳を開く（7種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>補助災害復旧工事</td><td>26,824,400</td></tr>
+<details><summary>内訳を開く（7種類）</summary><div class="ysw-unit" id="nochi-saigai-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">補助災害復旧工事</text>
+<rect x="220.0" y="8" width="192.8" height="21" fill="#7A9A3C"/>
+<text x="421.8" y="23.0" class="pt" fill="#23241F">619</text>
+<text x="210" y="57" text-anchor="end" class="ax">単独災害復旧工事</text>
+<rect x="220.0" y="42" width="129.9" height="21" fill="#7A9A3C"/>
+<text x="358.9" y="57.0" class="pt" fill="#23241F">417</text>
+<text x="210" y="91" text-anchor="end" class="ax">補助事業設計・監理委託料</text>
+<rect x="220.0" y="76" width="31.0" height="21" fill="#7A9A3C"/>
+<text x="260.0" y="91.0" class="pt" fill="#23241F">99</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地農業用施設災害復旧工事補助金</text>
+<rect x="220.0" y="110" width="9.2" height="21" fill="#7A9A3C"/>
+<text x="238.2" y="125.0" class="pt" fill="#23241F">30</text>
+<text x="210" y="159" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="144" width="1.4" height="21" fill="#7A9A3C"/>
+<text x="230.4" y="159.0" class="pt" fill="#23241F">5</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">補助災害復旧工事</text>
+<rect x="220.0" y="8" width="159.3" height="21" fill="#7A9A3C"/>
+<text x="388.3" y="23.0" class="pt" fill="#23241F">512</text>
+<text x="210" y="57" text-anchor="end" class="ax">単独災害復旧工事</text>
+<rect x="220.0" y="42" width="2.5" height="21" fill="#7A9A3C"/>
+<text x="231.5" y="57.0" class="pt" fill="#23241F">8</text>
+<text x="210" y="91" text-anchor="end" class="ax">補助事業設計・監理委託料</text>
+<rect x="220.0" y="76" width="9.9" height="21" fill="#7A9A3C"/>
+<text x="238.9" y="91.0" class="pt" fill="#23241F">32</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">補助災害復旧工事</text>
+<rect x="220.0" y="8" width="253.9" height="21" fill="#7A9A3C"/>
+<text x="482.9" y="23.0" class="pt" fill="#23241F">815</text>
+<text x="210" y="57" text-anchor="end" class="ax">単独災害復旧工事</text>
+<rect x="220.0" y="42" width="88.7" height="21" fill="#7A9A3C"/>
+<text x="317.7" y="57.0" class="pt" fill="#23241F">285</text>
+<text x="210" y="91" text-anchor="end" class="ax">補助事業設計・監理委託料</text>
+<rect x="220.0" y="76" width="33.9" height="21" fill="#7A9A3C"/>
+<text x="262.9" y="91.0" class="pt" fill="#23241F">109</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">補助災害復旧工事</text>
+<rect x="220.0" y="8" width="142.2" height="21" fill="#7A9A3C"/>
+<text x="371.2" y="23.0" class="pt" fill="#23241F">456</text>
+<text x="210" y="57" text-anchor="end" class="ax">単独災害復旧工事</text>
+<rect x="220.0" y="42" width="63.7" height="21" fill="#7A9A3C"/>
+<text x="292.7" y="57.0" class="pt" fill="#23241F">205</text>
+<text x="210" y="91" text-anchor="end" class="ax">補助事業設計・監理委託料</text>
+<rect x="220.0" y="76" width="128.1" height="21" fill="#7A9A3C"/>
+<text x="357.1" y="91.0" class="pt" fill="#23241F">411</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">補助災害復旧工事（繰越明許）</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">1,772</text>
+<text x="210" y="57" text-anchor="end" class="ax">単独災害復旧工事</text>
+<rect x="220.0" y="42" width="39.3" height="21" fill="#7A9A3C"/>
+<text x="268.3" y="57.0" class="pt" fill="#23241F">126</text>
+<text x="210" y="91" text-anchor="end" class="ax">補助事業設計・監理委託料</text>
+<rect x="220.0" y="76" width="10.3" height="21" fill="#7A9A3C"/>
+<text x="239.3" y="91.0" class="pt" fill="#23241F">33</text>
+<text x="210" y="125" text-anchor="end" class="ax">単独災害復旧工事（繰越明許）</text>
+<rect x="220.0" y="110" width="98.7" height="21" fill="#7A9A3C"/>
+<text x="327.7" y="125.0" class="pt" fill="#23241F">317</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">補助災害復旧工事</text>
+<rect x="220.0" y="8" width="87.4" height="21" fill="#7A9A3C"/>
+<text x="316.4" y="23.0" class="pt" fill="#23241F">280</text>
+<text x="210" y="57" text-anchor="end" class="ax">単独災害復旧工事</text>
+<rect x="220.0" y="42" width="69.2" height="21" fill="#7A9A3C"/>
+<text x="298.2" y="57.0" class="pt" fill="#23241F">222</text>
+<text x="210" y="91" text-anchor="end" class="ax">補助事業設計・監理委託料</text>
+<rect x="220.0" y="76" width="15.4" height="21" fill="#7A9A3C"/>
+<text x="244.4" y="91.0" class="pt" fill="#23241F">50</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 68" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">単独災害復旧工事（繰越明許）</text>
+<rect x="220.0" y="8" width="27.8" height="21" fill="#7A9A3C"/>
+<text x="256.8" y="23.0" class="pt" fill="#23241F">89</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 60" xmlns="http://www.w3.org/2000/svg"><text x="440" y="34" text-anchor="middle" class="ax">この年度に支出はありません</text></svg></div><figcaption>金額の大きい7種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>補助災害復旧工事</td><td>26,824,400</td></tr>
 <tr><td>補助災害復旧工事（繰越明許）</td><td>17,721,000</td></tr>
 <tr><td>単独災害復旧工事</td><td>12,628,000</td></tr>
 <tr><td>補助事業設計・監理委託料</td><td>7,340,600</td></tr>
@@ -291,9 +548,153 @@
   <figcaption>田畑と水路、森の手入れにかかった費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3 id="h6321"><a class="alink" href="#h6321" aria-label="この見出しへのリンク">#</a>田畑と水路</h3>
+<h3 id="h6378"><a class="alink" href="#h6378" aria-label="この見出しへのリンク">#</a>田畑と水路</h3>
 <p>8年で2億16万円。農地費、日本型直接支払事業（多面的機能支払・中山間地域等直接支払）、畜産の施設などが入ります。</p>
-<details><summary>内訳を開く（43種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業施設整備工事</td><td>51,430,640</td></tr>
+<details><summary>内訳を開く（43種類）</summary><div class="ysw-unit" id="tahata-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="8" width="60.4" height="21" fill="#7A9A3C"/>
+<text x="289.4" y="23.0" class="pt" fill="#23241F">400</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="42" width="46.0" height="21" fill="#7A9A3C"/>
+<text x="275.0" y="57.0" class="pt" fill="#23241F">305</text>
+<text x="210" y="91" text-anchor="end" class="ax">農道改良工事（明許繰越）</text>
+<rect x="220.0" y="76" width="143.1" height="21" fill="#7A9A3C"/>
+<text x="372.1" y="91.0" class="pt" fill="#23241F">949</text>
+<text x="210" y="125" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="110" width="17.3" height="21" fill="#7A9A3C"/>
+<text x="246.3" y="125.0" class="pt" fill="#23241F">115</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="8" width="60.4" height="21" fill="#7A9A3C"/>
+<text x="289.4" y="23.0" class="pt" fill="#23241F">400</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="42" width="21.5" height="21" fill="#7A9A3C"/>
+<text x="250.5" y="57.0" class="pt" fill="#23241F">143</text>
+<text x="210" y="91" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="76" width="14.9" height="21" fill="#7A9A3C"/>
+<text x="243.9" y="91.0" class="pt" fill="#23241F">99</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="8" width="53.0" height="21" fill="#7A9A3C"/>
+<text x="282.0" y="23.0" class="pt" fill="#23241F">351</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="42" width="74.8" height="21" fill="#7A9A3C"/>
+<text x="303.8" y="57.0" class="pt" fill="#23241F">496</text>
+<text x="210" y="91" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="76" width="14.1" height="21" fill="#7A9A3C"/>
+<text x="243.1" y="91.0" class="pt" fill="#23241F">94</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業施設整備工事</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">3,661</text>
+<text x="210" y="57" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="42" width="48.2" height="21" fill="#7A9A3C"/>
+<text x="277.2" y="57.0" class="pt" fill="#23241F">320</text>
+<text x="210" y="91" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="76" width="10.9" height="21" fill="#7A9A3C"/>
+<text x="239.9" y="91.0" class="pt" fill="#23241F">72</text>
+<text x="210" y="125" text-anchor="end" class="ax">電気料（農業施設）</text>
+<rect x="220.0" y="110" width="24.8" height="21" fill="#7A9A3C"/>
+<text x="253.8" y="125.0" class="pt" fill="#23241F">165</text>
+<text x="210" y="159" text-anchor="end" class="ax">水田農業支援補助金</text>
+<rect x="220.0" y="144" width="36.3" height="21" fill="#7A9A3C"/>
+<text x="265.3" y="159.0" class="pt" fill="#23241F">241</text>
+<text x="210" y="193" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="178" width="14.1" height="21" fill="#7A9A3C"/>
+<text x="243.1" y="193.0" class="pt" fill="#23241F">94</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業施設整備工事</text>
+<rect x="220.0" y="8" width="52.7" height="21" fill="#7A9A3C"/>
+<text x="281.7" y="23.0" class="pt" fill="#23241F">350</text>
+<text x="210" y="57" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="42" width="48.2" height="21" fill="#7A9A3C"/>
+<text x="277.2" y="57.0" class="pt" fill="#23241F">320</text>
+<text x="210" y="91" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="76" width="9.0" height="21" fill="#7A9A3C"/>
+<text x="238.0" y="91.0" class="pt" fill="#23241F">59</text>
+<text x="210" y="125" text-anchor="end" class="ax">電気料（農業施設）</text>
+<rect x="220.0" y="110" width="36.2" height="21" fill="#7A9A3C"/>
+<text x="265.2" y="125.0" class="pt" fill="#23241F">240</text>
+<text x="210" y="159" text-anchor="end" class="ax">水田農業支援補助金</text>
+<rect x="220.0" y="144" width="28.3" height="21" fill="#7A9A3C"/>
+<text x="257.3" y="159.0" class="pt" fill="#23241F">188</text>
+<text x="210" y="193" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="178" width="18.1" height="21" fill="#7A9A3C"/>
+<text x="247.1" y="193.0" class="pt" fill="#23241F">120</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業施設整備工事</text>
+<rect x="220.0" y="8" width="165.7" height="21" fill="#7A9A3C"/>
+<text x="394.7" y="23.0" class="pt" fill="#23241F">1,099</text>
+<text x="210" y="57" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="42" width="46.7" height="21" fill="#7A9A3C"/>
+<text x="275.7" y="57.0" class="pt" fill="#23241F">310</text>
+<text x="210" y="91" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="76" width="61.9" height="21" fill="#7A9A3C"/>
+<text x="290.9" y="91.0" class="pt" fill="#23241F">411</text>
+<text x="210" y="125" text-anchor="end" class="ax">電気料（農業施設）</text>
+<rect x="220.0" y="110" width="33.1" height="21" fill="#7A9A3C"/>
+<text x="262.1" y="125.0" class="pt" fill="#23241F">219</text>
+<text x="210" y="159" text-anchor="end" class="ax">水田農業支援補助金</text>
+<rect x="220.0" y="144" width="34.4" height="21" fill="#7A9A3C"/>
+<text x="263.4" y="159.0" class="pt" fill="#23241F">228</text>
+<text x="210" y="193" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="178" width="18.4" height="21" fill="#7A9A3C"/>
+<text x="247.4" y="193.0" class="pt" fill="#23241F">122</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業施設整備工事</text>
+<rect x="220.0" y="8" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="233.9" y="23.0" class="pt" fill="#23241F">32</text>
+<text x="210" y="57" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="42" width="46.7" height="21" fill="#7A9A3C"/>
+<text x="275.7" y="57.0" class="pt" fill="#23241F">310</text>
+<text x="210" y="91" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="76" width="1.9" height="21" fill="#7A9A3C"/>
+<text x="230.9" y="91.0" class="pt" fill="#23241F">12</text>
+<text x="210" y="125" text-anchor="end" class="ax">電気料（農業施設）</text>
+<rect x="220.0" y="110" width="38.9" height="21" fill="#7A9A3C"/>
+<text x="267.9" y="125.0" class="pt" fill="#23241F">258</text>
+<text x="210" y="159" text-anchor="end" class="ax">水田農業支援補助金</text>
+<rect x="220.0" y="144" width="32.1" height="21" fill="#7A9A3C"/>
+<text x="261.1" y="159.0" class="pt" fill="#23241F">213</text>
+<text x="210" y="193" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="178" width="18.7" height="21" fill="#7A9A3C"/>
+<text x="247.7" y="193.0" class="pt" fill="#23241F">124</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">中山間地域等直接支払交付金</text>
+<rect x="220.0" y="8" width="14.3" height="21" fill="#7A9A3C"/>
+<text x="243.3" y="23.0" class="pt" fill="#23241F">95</text>
+<text x="210" y="57" text-anchor="end" class="ax">農道改良工事</text>
+<rect x="220.0" y="42" width="268.8" height="21" fill="#7A9A3C"/>
+<text x="497.8" y="57.0" class="pt" fill="#23241F">1,783</text>
+<text x="210" y="91" text-anchor="end" class="ax">農地維持工事</text>
+<rect x="220.0" y="76" width="17.4" height="21" fill="#7A9A3C"/>
+<text x="246.4" y="91.0" class="pt" fill="#23241F">115</text>
+<text x="210" y="125" text-anchor="end" class="ax">電気料（農業施設）</text>
+<rect x="220.0" y="110" width="39.3" height="21" fill="#7A9A3C"/>
+<text x="268.3" y="125.0" class="pt" fill="#23241F">261</text>
+<text x="210" y="159" text-anchor="end" class="ax">水田農業支援補助金</text>
+<rect x="220.0" y="144" width="33.3" height="21" fill="#7A9A3C"/>
+<text x="262.3" y="159.0" class="pt" fill="#23241F">221</text>
+<text x="210" y="193" text-anchor="end" class="ax">多面的機能支払交付金</text>
+<rect x="220.0" y="178" width="19.5" height="21" fill="#7A9A3C"/>
+<text x="248.5" y="193.0" class="pt" fill="#23241F">129</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業施設整備工事</td><td>51,430,640</td></tr>
 <tr><td>中山間地域等直接支払交付金</td><td>25,052,962</td></tr>
 <tr><td>農道改良工事</td><td>17,831,000</td></tr>
 <tr><td>農地維持工事</td><td>16,139,914</td></tr>
@@ -308,10 +709,112 @@
 <tr><td>農地情報処理委託料</td><td>4,015,000</td></tr>
 <tr><td>土地改良用資材代</td><td>3,831,722</td></tr></tbody><tfoot><tr class="tot"><td>ほか29種類</td><td>19,411,096</td></tr></tfoot></table></div></details>
 
-<h3 id="h397"><a class="alink" href="#h397" aria-label="この見出しへのリンク">#</a>森を手入れする</h3>
+<h3 id="h390"><a class="alink" href="#h390" aria-label="この見出しへのリンク">#</a>森を手入れする</h3>
 <p>8年で1億6,931万円。森林環境譲与税を使った事業と、造林費（森林組合への負担金）が中心です。
 令和7年度の4,675万円が8年でいちばん多くなっています。</p>
-<details><summary>内訳を開く（24種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>森林境界図作成委託料（繰越明許分）</td><td>35,970,000</td></tr>
+<details><summary>内訳を開く（24種類）</summary><div class="ysw-unit" id="mori-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 68" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林造成事業</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">2,283</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林造成事業</text>
+<rect x="220.0" y="8" width="248.8" height="21" fill="#7A9A3C"/>
+<text x="477.8" y="23.0" class="pt" fill="#23241F">1,029</text>
+<text x="210" y="57" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="42" width="43.9" height="21" fill="#7A9A3C"/>
+<text x="272.9" y="57.0" class="pt" fill="#23241F">182</text>
+<text x="210" y="91" text-anchor="end" class="ax">水源林造成受託事業委託料</text>
+<rect x="220.0" y="76" width="0.8" height="21" fill="#7A9A3C"/>
+<text x="229.8" y="91.0" class="pt" fill="#23241F">3</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="8" width="53.8" height="21" fill="#7A9A3C"/>
+<text x="282.8" y="23.0" class="pt" fill="#23241F">222</text>
+<text x="210" y="57" text-anchor="end" class="ax">伐採委託料</text>
+<rect x="220.0" y="42" width="33.5" height="21" fill="#7A9A3C"/>
+<text x="262.5" y="57.0" class="pt" fill="#23241F">139</text>
+<text x="210" y="91" text-anchor="end" class="ax">水源林造成受託事業委託料</text>
+<rect x="220.0" y="76" width="110.1" height="21" fill="#7A9A3C"/>
+<text x="339.1" y="91.0" class="pt" fill="#23241F">456</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="8" width="137.0" height="21" fill="#7A9A3C"/>
+<text x="366.0" y="23.0" class="pt" fill="#23241F">567</text>
+<text x="210" y="57" text-anchor="end" class="ax">伐採委託料</text>
+<rect x="220.0" y="42" width="14.4" height="21" fill="#7A9A3C"/>
+<text x="243.4" y="57.0" class="pt" fill="#23241F">59</text>
+<text x="210" y="91" text-anchor="end" class="ax">維持修繕工事</text>
+<rect x="220.0" y="76" width="50.5" height="21" fill="#7A9A3C"/>
+<text x="279.5" y="91.0" class="pt" fill="#23241F">209</text>
+<text x="210" y="125" text-anchor="end" class="ax">水源林造成受託事業委託料</text>
+<rect x="220.0" y="110" width="11.5" height="21" fill="#7A9A3C"/>
+<text x="240.5" y="125.0" class="pt" fill="#23241F">48</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林境界図作成委託料（繰越明許分）</text>
+<rect x="220.0" y="8" width="82.5" height="21" fill="#7A9A3C"/>
+<text x="311.5" y="23.0" class="pt" fill="#23241F">341</text>
+<text x="210" y="57" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="42" width="66.1" height="21" fill="#7A9A3C"/>
+<text x="295.1" y="57.0" class="pt" fill="#23241F">273</text>
+<text x="210" y="91" text-anchor="end" class="ax">維持修繕工事</text>
+<rect x="220.0" y="76" width="162.3" height="21" fill="#7A9A3C"/>
+<text x="391.3" y="91.0" class="pt" fill="#23241F">671</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林境界図作成委託料（繰越明許分）</text>
+<rect x="220.0" y="8" width="210.1" height="21" fill="#7A9A3C"/>
+<text x="439.1" y="23.0" class="pt" fill="#23241F">869</text>
+<text x="210" y="57" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="42" width="118.4" height="21" fill="#7A9A3C"/>
+<text x="347.4" y="57.0" class="pt" fill="#23241F">489</text>
+<text x="210" y="91" text-anchor="end" class="ax">水源林造成受託事業委託料</text>
+<rect x="220.0" y="76" width="18.6" height="21" fill="#7A9A3C"/>
+<text x="247.6" y="91.0" class="pt" fill="#23241F">77</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林境界図作成委託料（繰越明許分）</text>
+<rect x="220.0" y="8" width="316.5" height="21" fill="#7A9A3C"/>
+<text x="545.5" y="23.0" class="pt" fill="#23241F">1,309</text>
+<text x="210" y="57" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="42" width="111.5" height="21" fill="#7A9A3C"/>
+<text x="340.5" y="57.0" class="pt" fill="#23241F">461</text>
+<text x="210" y="91" text-anchor="end" class="ax">森林環境整備事業</text>
+<rect x="220.0" y="76" width="42.6" height="21" fill="#7A9A3C"/>
+<text x="271.6" y="91.0" class="pt" fill="#23241F">176</text>
+<text x="210" y="125" text-anchor="end" class="ax">水源林造成受託事業委託料</text>
+<rect x="220.0" y="110" width="12.5" height="21" fill="#7A9A3C"/>
+<text x="241.5" y="125.0" class="pt" fill="#23241F">52</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">森林境界図作成委託料（繰越明許分）</text>
+<rect x="220.0" y="8" width="260.7" height="21" fill="#7A9A3C"/>
+<text x="489.7" y="23.0" class="pt" fill="#23241F">1,078</text>
+<text x="210" y="57" text-anchor="end" class="ax">森林組合事業負担金</text>
+<rect x="220.0" y="42" width="58.5" height="21" fill="#7A9A3C"/>
+<text x="287.5" y="57.0" class="pt" fill="#23241F">242</text>
+<text x="210" y="91" text-anchor="end" class="ax">森林境界図作成委託料</text>
+<rect x="220.0" y="76" width="340.5" height="21" fill="#7A9A3C"/>
+<text x="569.5" y="91.0" class="pt" fill="#23241F">1,408</text>
+<text x="210" y="125" text-anchor="end" class="ax">伐採委託料</text>
+<rect x="220.0" y="110" width="242.4" height="21" fill="#7A9A3C"/>
+<text x="471.4" y="125.0" class="pt" fill="#23241F">1,002</text>
+<text x="210" y="159" text-anchor="end" class="ax">森林環境整備事業</text>
+<rect x="220.0" y="144" width="117.0" height="21" fill="#7A9A3C"/>
+<text x="346.0" y="159.0" class="pt" fill="#23241F">484</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>森林境界図作成委託料（繰越明許分）</td><td>35,970,000</td></tr>
 <tr><td>森林造成事業</td><td>33,115,674</td></tr>
 <tr><td>森林組合事業負担金</td><td>24,362,274</td></tr>
 <tr><td>森林境界図作成委託料</td><td>14,080,000</td></tr>
@@ -367,10 +870,118 @@
   <figcaption>農林業の人に関わる費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3 id="h4702"><a class="alink" href="#h4702" aria-label="この見出しへのリンク">#</a>農家をふやす</h3>
+<h3 id="h9956"><a class="alink" href="#h9956" aria-label="この見出しへのリンク">#</a>農家をふやす</h3>
 <p>8年で2,496万円。令和7年度が1,213万円で、前の年の419万円から3倍近くになっています。
 農業経営安定・効率化支援事業（492万円）と農業人材確保対策補助金が、この年に計上されています。</p>
-<details><summary>内訳を開く（12種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業人材確保対策補助金</td><td>9,205,000</td></tr>
+<details><summary>内訳を開く（12種類）</summary><div class="ysw-unit" id="noka-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">青年就農給付金</text>
+<rect x="220.0" y="8" width="205.1" height="21" fill="#7A9A3C"/>
+<text x="434.1" y="23.0" class="pt" fill="#23241F">225</text>
+<text x="210" y="57" text-anchor="end" class="ax">地域連携推進員賃金</text>
+<rect x="220.0" y="42" width="85.7" height="21" fill="#7A9A3C"/>
+<text x="314.7" y="57.0" class="pt" fill="#23241F">94</text>
+<text x="210" y="91" text-anchor="end" class="ax">経営体育成支援事業補助金</text>
+<rect x="220.0" y="76" width="50.0" height="21" fill="#7A9A3C"/>
+<text x="279.0" y="91.0" class="pt" fill="#23241F">55</text>
+<text x="210" y="125" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="110" width="1.2" height="21" fill="#7A9A3C"/>
+<text x="230.2" y="125.0" class="pt" fill="#23241F">1</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">青年就農給付金</text>
+<rect x="220.0" y="8" width="47.5" height="21" fill="#7A9A3C"/>
+<text x="276.5" y="23.0" class="pt" fill="#23241F">52</text>
+<text x="210" y="57" text-anchor="end" class="ax">地域連携推進員賃金</text>
+<rect x="220.0" y="42" width="66.0" height="21" fill="#7A9A3C"/>
+<text x="295.0" y="57.0" class="pt" fill="#23241F">72</text>
+<text x="210" y="91" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="76" width="1.4" height="21" fill="#7A9A3C"/>
+<text x="230.4" y="91.0" class="pt" fill="#23241F">2</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">地域連携推進員報酬</text>
+<rect x="220.0" y="8" width="65.7" height="21" fill="#7A9A3C"/>
+<text x="294.7" y="23.0" class="pt" fill="#23241F">72</text>
+<text x="210" y="57" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="42" width="1.4" height="21" fill="#7A9A3C"/>
+<text x="230.4" y="57.0" class="pt" fill="#23241F">2</text>
+<text x="210" y="91" text-anchor="end" class="ax">南信州・担い手就農プロデュース負担金</text>
+<rect x="220.0" y="76" width="1.7" height="21" fill="#7A9A3C"/>
+<text x="230.7" y="91.0" class="pt" fill="#23241F">2</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">地域連携推進員報酬</text>
+<rect x="220.0" y="8" width="67.2" height="21" fill="#7A9A3C"/>
+<text x="296.2" y="23.0" class="pt" fill="#23241F">74</text>
+<text x="210" y="57" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="42" width="1.4" height="21" fill="#7A9A3C"/>
+<text x="230.4" y="57.0" class="pt" fill="#23241F">2</text>
+<text x="210" y="91" text-anchor="end" class="ax">南信州・担い手就農プロデュース負担金</text>
+<rect x="220.0" y="76" width="1.7" height="21" fill="#7A9A3C"/>
+<text x="230.7" y="91.0" class="pt" fill="#23241F">2</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">地域連携推進員報酬</text>
+<rect x="220.0" y="8" width="78.5" height="21" fill="#7A9A3C"/>
+<text x="307.5" y="23.0" class="pt" fill="#23241F">86</text>
+<text x="210" y="57" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="42" width="1.4" height="21" fill="#7A9A3C"/>
+<text x="230.4" y="57.0" class="pt" fill="#23241F">2</text>
+<text x="210" y="91" text-anchor="end" class="ax">南信州・担い手就農プロデュース負担金</text>
+<rect x="220.0" y="76" width="1.6" height="21" fill="#7A9A3C"/>
+<text x="230.6" y="91.0" class="pt" fill="#23241F">2</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">地域連携推進員報酬</text>
+<rect x="220.0" y="8" width="79.0" height="21" fill="#7A9A3C"/>
+<text x="308.0" y="23.0" class="pt" fill="#23241F">87</text>
+<text x="210" y="57" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="42" width="1.4" height="21" fill="#7A9A3C"/>
+<text x="230.4" y="57.0" class="pt" fill="#23241F">2</text>
+<text x="210" y="91" text-anchor="end" class="ax">南信州・担い手就農プロデュース負担金</text>
+<rect x="220.0" y="76" width="1.6" height="21" fill="#7A9A3C"/>
+<text x="230.6" y="91.0" class="pt" fill="#23241F">2</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業人材確保対策補助金</text>
+<rect x="220.0" y="8" width="287.2" height="21" fill="#7A9A3C"/>
+<text x="516.2" y="23.0" class="pt" fill="#23241F">315</text>
+<text x="210" y="57" text-anchor="end" class="ax">地域連携推進員報酬</text>
+<rect x="220.0" y="42" width="90.3" height="21" fill="#7A9A3C"/>
+<text x="319.3" y="57.0" class="pt" fill="#23241F">99</text>
+<text x="210" y="91" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="76" width="2.7" height="21" fill="#7A9A3C"/>
+<text x="231.7" y="91.0" class="pt" fill="#23241F">3</text>
+<text x="210" y="125" text-anchor="end" class="ax">南信州・担い手就農プロデュース負担金</text>
+<rect x="220.0" y="110" width="1.7" height="21" fill="#7A9A3C"/>
+<text x="230.7" y="125.0" class="pt" fill="#23241F">2</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業人材確保対策補助金</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">606</text>
+<text x="210" y="57" text-anchor="end" class="ax">地域連携推進員報酬</text>
+<rect x="220.0" y="42" width="98.8" height="21" fill="#7A9A3C"/>
+<text x="327.8" y="57.0" class="pt" fill="#23241F">108</text>
+<text x="210" y="91" text-anchor="end" class="ax">農業経営安定・効率化支援事業</text>
+<rect x="220.0" y="76" width="448.8" height="21" fill="#7A9A3C"/>
+<text x="677.8" y="91.0" class="pt" fill="#23241F">492</text>
+<text x="210" y="125" text-anchor="end" class="ax">郵便料</text>
+<rect x="220.0" y="110" width="3.9" height="21" fill="#7A9A3C"/>
+<text x="232.9" y="125.0" class="pt" fill="#23241F">4</text>
+<text x="210" y="159" text-anchor="end" class="ax">南信州・担い手就農プロデュース負担金</text>
+<rect x="220.0" y="144" width="1.7" height="21" fill="#7A9A3C"/>
+<text x="230.7" y="159.0" class="pt" fill="#23241F">2</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業人材確保対策補助金</td><td>9,205,000</td></tr>
 <tr><td>地域連携推進員報酬</td><td>5,258,682</td></tr>
 <tr><td>農業経営安定・効率化支援事業</td><td>4,923,000</td></tr>
 <tr><td>青年就農給付金</td><td>2,771,500</td></tr>
@@ -383,7 +994,7 @@
 <tr><td>現地確認調査員賃金</td><td>77,400</td></tr>
 <tr><td>人・農地プラン策定委員報酬</td><td>43,000</td></tr></tbody><tfoot></tfoot></table></div></details>
 
-<h3 id="h1559"><a class="alink" href="#h1559" aria-label="この見出しへのリンク">#</a>林業で働く人を育てる</h3>
+<h3 id="h8547"><a class="alink" href="#h8547" aria-label="この見出しへのリンク">#</a>林業で働く人を育てる</h3>
 <p>8年で1億2,953万円。ただし、その中身は村の林業担当の職員の給料と、林業振興の一般経費（森林税を使った事業、松くい虫の対策など）です。</p>
 <div class="box">
 <p><b>計画の「林業経営体の育成」に当たる支出。</b>第5次総合振興計画は「3-2 林業の振興」の中に
@@ -392,7 +1003,187 @@
 令和4年度880,000円、令和5年度600,000円、令和7年度715,000円の3年度、合わせて2,195,000円です。</p>
 <p>この節の1億2,953万円のうち、残りは村の林業担当の職員の給料と、林業振興の一般経費です。</p>
 </div>
-<details><summary>内訳を開く（54種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>一般職員給料</td><td>32,641,600</td></tr>
+<details><summary>内訳を開く（54種類）</summary><div class="ysw-unit" id="ringyo-jin-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="450.6" height="21" fill="#7A9A3C"/>
+<text x="679.6" y="23.0" class="pt" fill="#23241F">369</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="219.0" height="21" fill="#7A9A3C"/>
+<text x="448.0" y="57.0" class="pt" fill="#23241F">180</text>
+<text x="210" y="91" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="76" width="277.9" height="21" fill="#7A9A3C"/>
+<text x="506.9" y="91.0" class="pt" fill="#23241F">228</text>
+<text x="210" y="125" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="110" width="155.3" height="21" fill="#7A9A3C"/>
+<text x="384.3" y="125.0" class="pt" fill="#23241F">127</text>
+<text x="210" y="159" text-anchor="end" class="ax">製材委託料</text>
+<rect x="220.0" y="144" width="195.1" height="21" fill="#7A9A3C"/>
+<text x="424.1" y="159.0" class="pt" fill="#23241F">160</text>
+<text x="210" y="193" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="178" width="51.4" height="21" fill="#7A9A3C"/>
+<text x="280.4" y="193.0" class="pt" fill="#23241F">42</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="405.3" height="21" fill="#7A9A3C"/>
+<text x="634.3" y="23.0" class="pt" fill="#23241F">332</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="219.0" height="21" fill="#7A9A3C"/>
+<text x="448.0" y="57.0" class="pt" fill="#23241F">180</text>
+<text x="210" y="91" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="76" width="242.5" height="21" fill="#7A9A3C"/>
+<text x="471.5" y="91.0" class="pt" fill="#23241F">199</text>
+<text x="210" y="125" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="110" width="131.4" height="21" fill="#7A9A3C"/>
+<text x="360.4" y="125.0" class="pt" fill="#23241F">108</text>
+<text x="210" y="159" text-anchor="end" class="ax">製材委託料</text>
+<rect x="220.0" y="144" width="173.9" height="21" fill="#7A9A3C"/>
+<text x="402.9" y="159.0" class="pt" fill="#23241F">143</text>
+<text x="210" y="193" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="178" width="64.8" height="21" fill="#7A9A3C"/>
+<text x="293.8" y="193.0" class="pt" fill="#23241F">53</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="448.0" height="21" fill="#7A9A3C"/>
+<text x="677.0" y="23.0" class="pt" fill="#23241F">367</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="219.0" height="21" fill="#7A9A3C"/>
+<text x="448.0" y="57.0" class="pt" fill="#23241F">180</text>
+<text x="210" y="91" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="76" width="275.6" height="21" fill="#7A9A3C"/>
+<text x="504.6" y="91.0" class="pt" fill="#23241F">226</text>
+<text x="210" y="125" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="110" width="154.2" height="21" fill="#7A9A3C"/>
+<text x="383.2" y="125.0" class="pt" fill="#23241F">126</text>
+<text x="210" y="159" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="144" width="84.9" height="21" fill="#7A9A3C"/>
+<text x="313.9" y="159.0" class="pt" fill="#23241F">70</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 272" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="540.9" height="21" fill="#7A9A3C"/>
+<text x="769.9" y="23.0" class="pt" fill="#23241F">443</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="219.0" height="21" fill="#7A9A3C"/>
+<text x="448.0" y="57.0" class="pt" fill="#23241F">180</text>
+<text x="210" y="91" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="76" width="284.0" height="21" fill="#7A9A3C"/>
+<text x="513.0" y="91.0" class="pt" fill="#23241F">233</text>
+<text x="210" y="125" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="110" width="174.5" height="21" fill="#7A9A3C"/>
+<text x="403.5" y="125.0" class="pt" fill="#23241F">143</text>
+<text x="210" y="159" text-anchor="end" class="ax">森林税活用事業</text>
+<rect x="220.0" y="144" width="210.7" height="21" fill="#7A9A3C"/>
+<text x="439.7" y="159.0" class="pt" fill="#23241F">173</text>
+<text x="210" y="193" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="178" width="111.5" height="21" fill="#7A9A3C"/>
+<text x="340.5" y="193.0" class="pt" fill="#23241F">91</text>
+<text x="210" y="227" text-anchor="end" class="ax">松くい虫対策事業</text>
+<rect x="220.0" y="212" width="97.1" height="21" fill="#7A9A3C"/>
+<text x="326.1" y="227.0" class="pt" fill="#23241F">80</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 306" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="543.7" height="21" fill="#7A9A3C"/>
+<text x="772.7" y="23.0" class="pt" fill="#23241F">446</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="230.6" height="21" fill="#7A9A3C"/>
+<text x="459.6" y="57.0" class="pt" fill="#23241F">189</text>
+<text x="210" y="91" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="76" width="308.5" height="21" fill="#7A9A3C"/>
+<text x="537.5" y="91.0" class="pt" fill="#23241F">253</text>
+<text x="210" y="125" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="110" width="173.6" height="21" fill="#7A9A3C"/>
+<text x="402.6" y="125.0" class="pt" fill="#23241F">142</text>
+<text x="210" y="159" text-anchor="end" class="ax">森林税活用事業</text>
+<rect x="220.0" y="144" width="221.4" height="21" fill="#7A9A3C"/>
+<text x="450.4" y="159.0" class="pt" fill="#23241F">182</text>
+<text x="210" y="193" text-anchor="end" class="ax">製材委託料</text>
+<rect x="220.0" y="178" width="283.1" height="21" fill="#7A9A3C"/>
+<text x="512.1" y="193.0" class="pt" fill="#23241F">232</text>
+<text x="210" y="227" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="212" width="239.3" height="21" fill="#7A9A3C"/>
+<text x="468.3" y="227.0" class="pt" fill="#23241F">196</text>
+<text x="210" y="261" text-anchor="end" class="ax">松くい虫対策事業</text>
+<rect x="220.0" y="246" width="78.1" height="21" fill="#7A9A3C"/>
+<text x="307.1" y="261.0" class="pt" fill="#23241F">64</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="536.1" height="21" fill="#7A9A3C"/>
+<text x="765.1" y="23.0" class="pt" fill="#23241F">440</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="221.3" height="21" fill="#7A9A3C"/>
+<text x="450.3" y="57.0" class="pt" fill="#23241F">181</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="171.4" height="21" fill="#7A9A3C"/>
+<text x="400.4" y="91.0" class="pt" fill="#23241F">141</text>
+<text x="210" y="125" text-anchor="end" class="ax">森林税活用事業</text>
+<rect x="220.0" y="110" width="190.9" height="21" fill="#7A9A3C"/>
+<text x="419.9" y="125.0" class="pt" fill="#23241F">157</text>
+<text x="210" y="159" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="144" width="83.3" height="21" fill="#7A9A3C"/>
+<text x="312.3" y="159.0" class="pt" fill="#23241F">68</text>
+<text x="210" y="193" text-anchor="end" class="ax">松くい虫対策事業</text>
+<rect x="220.0" y="178" width="79.0" height="21" fill="#7A9A3C"/>
+<text x="308.0" y="193.0" class="pt" fill="#23241F">65</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 272" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="504.8" height="21" fill="#7A9A3C"/>
+<text x="733.8" y="23.0" class="pt" fill="#23241F">414</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="230.7" height="21" fill="#7A9A3C"/>
+<text x="459.7" y="57.0" class="pt" fill="#23241F">189</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="173.7" height="21" fill="#7A9A3C"/>
+<text x="402.7" y="91.0" class="pt" fill="#23241F">142</text>
+<text x="210" y="125" text-anchor="end" class="ax">森林税活用事業</text>
+<rect x="220.0" y="110" width="326.0" height="21" fill="#7A9A3C"/>
+<text x="555.0" y="125.0" class="pt" fill="#23241F">267</text>
+<text x="210" y="159" text-anchor="end" class="ax">製材委託料</text>
+<rect x="220.0" y="144" width="165.0" height="21" fill="#7A9A3C"/>
+<text x="394.0" y="159.0" class="pt" fill="#23241F">135</text>
+<text x="210" y="193" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="178" width="117.7" height="21" fill="#7A9A3C"/>
+<text x="346.7" y="193.0" class="pt" fill="#23241F">96</text>
+<text x="210" y="227" text-anchor="end" class="ax">松くい虫対策事業</text>
+<rect x="220.0" y="212" width="112.7" height="21" fill="#7A9A3C"/>
+<text x="341.7" y="227.0" class="pt" fill="#23241F">92</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 272" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">453</text>
+<text x="210" y="57" text-anchor="end" class="ax">木工館管理運営委託料</text>
+<rect x="220.0" y="42" width="247.0" height="21" fill="#7A9A3C"/>
+<text x="476.0" y="57.0" class="pt" fill="#23241F">203</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="205.4" height="21" fill="#7A9A3C"/>
+<text x="434.4" y="91.0" class="pt" fill="#23241F">168</text>
+<text x="210" y="125" text-anchor="end" class="ax">森林税活用事業</text>
+<rect x="220.0" y="110" width="228.1" height="21" fill="#7A9A3C"/>
+<text x="457.1" y="125.0" class="pt" fill="#23241F">187</text>
+<text x="210" y="159" text-anchor="end" class="ax">製材委託料</text>
+<rect x="220.0" y="144" width="75.1" height="21" fill="#7A9A3C"/>
+<text x="304.1" y="159.0" class="pt" fill="#23241F">62</text>
+<text x="210" y="193" text-anchor="end" class="ax">下伊那山林協会負担金</text>
+<rect x="220.0" y="178" width="124.7" height="21" fill="#7A9A3C"/>
+<text x="353.7" y="193.0" class="pt" fill="#23241F">102</text>
+<text x="210" y="227" text-anchor="end" class="ax">松くい虫対策事業</text>
+<rect x="220.0" y="212" width="94.9" height="21" fill="#7A9A3C"/>
+<text x="323.9" y="227.0" class="pt" fill="#23241F">78</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>一般職員給料</td><td>32,641,600</td></tr>
 <tr><td>木工館管理運営委託料</td><td>14,801,270</td></tr>
 <tr><td>職員手当等</td><td>11,383,407</td></tr>
 <tr><td>地方公務員共済組合等負担金</td><td>10,981,592</td></tr>
@@ -407,10 +1198,157 @@
 <tr><td>林業技術者育成補助金</td><td>2,195,000</td></tr>
 <tr><td>林業施設工事（明許繰越）</td><td>1,980,000</td></tr></tbody><tfoot><tr class="tot"><td>ほか40種類</td><td>16,415,737</td></tr></tfoot></table></div></details>
 
-<h3 id="h493"><a class="alink" href="#h493" aria-label="この見出しへのリンク">#</a>農業委員会</h3>
+<h3 id="h1496"><a class="alink" href="#h1496" aria-label="この見出しへのリンク">#</a>農業委員会</h3>
 <p>8年で2,547万円。令和7年度が453万円で、前の年の320万円から増えています。
 この年に「機構集積支援事業報酬」と「農業委員会等補助事業資料作成業務委託料」が計上されています。</p>
-<details><summary>内訳を開く（21種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業委員報酬</td><td>13,554,210</td></tr>
+<details><summary>内訳を開く（21種類）</summary><div class="ysw-unit" id="nogyo-iinkai-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">171</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業賃金</text>
+<rect x="220.0" y="76" width="80.7" height="21" fill="#7A9A3C"/>
+<text x="309.7" y="91.0" class="pt" fill="#23241F">25</text>
+<text x="210" y="125" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="110" width="18.1" height="21" fill="#7A9A3C"/>
+<text x="247.1" y="125.0" class="pt" fill="#23241F">6</text>
+<text x="210" y="159" text-anchor="end" class="ax">農地利用状況調査員賃金</text>
+<rect x="220.0" y="144" width="51.6" height="21" fill="#7A9A3C"/>
+<text x="280.6" y="159.0" class="pt" fill="#23241F">16</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">171</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業賃金</text>
+<rect x="220.0" y="76" width="116.9" height="21" fill="#7A9A3C"/>
+<text x="345.9" y="91.0" class="pt" fill="#23241F">36</text>
+<text x="210" y="125" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="110" width="6.1" height="21" fill="#7A9A3C"/>
+<text x="235.1" y="125.0" class="pt" fill="#23241F">2</text>
+<text x="210" y="159" text-anchor="end" class="ax">農地利用状況調査員賃金</text>
+<rect x="220.0" y="144" width="66.0" height="21" fill="#7A9A3C"/>
+<text x="295.0" y="159.0" class="pt" fill="#23241F">20</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">171</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業報酬</text>
+<rect x="220.0" y="76" width="116.7" height="21" fill="#7A9A3C"/>
+<text x="345.7" y="91.0" class="pt" fill="#23241F">36</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地利用状況調査員報酬</text>
+<rect x="220.0" y="110" width="77.7" height="21" fill="#7A9A3C"/>
+<text x="306.7" y="125.0" class="pt" fill="#23241F">24</text>
+<text x="210" y="159" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="144" width="13.3" height="21" fill="#7A9A3C"/>
+<text x="242.3" y="159.0" class="pt" fill="#23241F">4</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">171</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業報酬</text>
+<rect x="220.0" y="76" width="118.3" height="21" fill="#7A9A3C"/>
+<text x="347.3" y="91.0" class="pt" fill="#23241F">37</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地利用状況調査員報酬</text>
+<rect x="220.0" y="110" width="77.8" height="21" fill="#7A9A3C"/>
+<text x="306.8" y="125.0" class="pt" fill="#23241F">24</text>
+<text x="210" y="159" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="144" width="0.5" height="21" fill="#7A9A3C"/>
+<text x="229.5" y="159.0" class="pt" fill="#23241F">0</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="537.8" height="21" fill="#7A9A3C"/>
+<text x="766.8" y="23.0" class="pt" fill="#23241F">166</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業報酬</text>
+<rect x="220.0" y="76" width="122.3" height="21" fill="#7A9A3C"/>
+<text x="351.3" y="91.0" class="pt" fill="#23241F">38</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地利用状況調査員報酬</text>
+<rect x="220.0" y="110" width="97.8" height="21" fill="#7A9A3C"/>
+<text x="326.8" y="125.0" class="pt" fill="#23241F">30</text>
+<text x="210" y="159" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="144" width="20.3" height="21" fill="#7A9A3C"/>
+<text x="249.3" y="159.0" class="pt" fill="#23241F">6</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="530.7" height="21" fill="#7A9A3C"/>
+<text x="759.7" y="23.0" class="pt" fill="#23241F">164</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業報酬</text>
+<rect x="220.0" y="76" width="114.0" height="21" fill="#7A9A3C"/>
+<text x="343.0" y="91.0" class="pt" fill="#23241F">35</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地利用状況調査員報酬</text>
+<rect x="220.0" y="110" width="101.3" height="21" fill="#7A9A3C"/>
+<text x="330.3" y="125.0" class="pt" fill="#23241F">31</text>
+<text x="210" y="159" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="144" width="60.8" height="21" fill="#7A9A3C"/>
+<text x="289.8" y="159.0" class="pt" fill="#23241F">19</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">171</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業報酬</text>
+<rect x="220.0" y="76" width="140.1" height="21" fill="#7A9A3C"/>
+<text x="369.1" y="91.0" class="pt" fill="#23241F">43</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地利用状況調査員報酬</text>
+<rect x="220.0" y="110" width="116.6" height="21" fill="#7A9A3C"/>
+<text x="345.6" y="125.0" class="pt" fill="#23241F">36</text>
+<text x="210" y="159" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="144" width="16.9" height="21" fill="#7A9A3C"/>
+<text x="245.9" y="159.0" class="pt" fill="#23241F">5</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農業委員報酬</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">171</text>
+<text x="210" y="57" text-anchor="end" class="ax">農地利用最適化推進委員報酬</text>
+<rect x="220.0" y="42" width="141.6" height="21" fill="#7A9A3C"/>
+<text x="370.6" y="57.0" class="pt" fill="#23241F">44</text>
+<text x="210" y="91" text-anchor="end" class="ax">機構集積支援事業報酬</text>
+<rect x="220.0" y="76" width="183.7" height="21" fill="#7A9A3C"/>
+<text x="412.7" y="91.0" class="pt" fill="#23241F">57</text>
+<text x="210" y="125" text-anchor="end" class="ax">農地利用状況調査員報酬</text>
+<rect x="220.0" y="110" width="120.3" height="21" fill="#7A9A3C"/>
+<text x="349.3" y="125.0" class="pt" fill="#23241F">37</text>
+<text x="210" y="159" text-anchor="end" class="ax">農業委員会等補助事業資料作成業務委託料</text>
+<rect x="220.0" y="144" width="355.4" height="21" fill="#7A9A3C"/>
+<text x="584.4" y="159.0" class="pt" fill="#23241F">110</text>
+<text x="210" y="193" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="178" width="18.6" height="21" fill="#7A9A3C"/>
+<text x="247.6" y="193.0" class="pt" fill="#23241F">6</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業委員報酬</td><td>13,554,210</td></tr>
 <tr><td>農地利用最適化推進委員報酬</td><td>3,504,000</td></tr>
 <tr><td>機構集積支援事業報酬</td><td>2,460,069</td></tr>
 <tr><td>農地利用状況調査員報酬</td><td>1,830,132</td></tr>
@@ -457,11 +1395,112 @@
   <figcaption>つくったものを活かすための費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3 id="h7566"><a class="alink" href="#h7566" aria-label="この見出しへのリンク">#</a>塩の里</h3>
+<h3 id="h1809"><a class="alink" href="#h1809" aria-label="この見出しへのリンク">#</a>塩の里</h3>
 <p>8年で1億6,547万円。そのうち1億3,878万円が令和元年度で、農産物加工直売施設の改修工事（1億1,500万円、繰越明許）と、その設計監理の委託料です。</p>
 <p>改修のあとは、施設の管理を委託する費用が令和3年度から計上されています。
 令和3年度の101万円、令和7年度の312万円です。修繕費は令和6年度から増え、令和7年度は142万円でした。</p>
-<details><summary>内訳を開く（12種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農産物加工直売施設改修工事（繰越明許）</td><td>115,000,000</td></tr>
+<details><summary>内訳を開く（12種類）</summary><div class="ysw-unit" id="shionosato-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 60" xmlns="http://www.w3.org/2000/svg"><text x="440" y="34" text-anchor="middle" class="ax">この年度に支出はありません</text></svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農産物加工直売施設改修工事（繰越明許）</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">11,500</text>
+<text x="210" y="57" text-anchor="end" class="ax">農産物加工直売施設改修設計監理委託料（繰越明許）</text>
+<rect x="220.0" y="42" width="75.1" height="21" fill="#7A9A3C"/>
+<text x="304.1" y="57.0" class="pt" fill="#23241F">1,564</text>
+<text x="210" y="91" text-anchor="end" class="ax">農産物加工直売施設改修工事</text>
+<rect x="220.0" y="76" width="34.5" height="21" fill="#7A9A3C"/>
+<text x="263.5" y="91.0" class="pt" fill="#23241F">719</text>
+<text x="210" y="125" text-anchor="end" class="ax">農産物加工直売施設備品購入費</text>
+<rect x="220.0" y="110" width="4.6" height="21" fill="#7A9A3C"/>
+<text x="233.6" y="125.0" class="pt" fill="#23241F">96</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 68" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">農産物加工直売施設備品購入費</text>
+<text x="229.4" y="23.0" class="pt" fill="#23241F">7</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">塩の里施設管理（村委託分）委託料</text>
+<rect x="220.0" y="8" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="233.9" y="23.0" class="pt" fill="#23241F">102</text>
+<text x="210" y="57" text-anchor="end" class="ax">農産物加工直売施設備品購入費</text>
+<rect x="220.0" y="42" width="5.7" height="21" fill="#7A9A3C"/>
+<text x="234.7" y="57.0" class="pt" fill="#23241F">119</text>
+<text x="210" y="91" text-anchor="end" class="ax">塩の里施設修繕費</text>
+<rect x="220.0" y="76" width="1.3" height="21" fill="#7A9A3C"/>
+<text x="230.3" y="91.0" class="pt" fill="#23241F">26</text>
+<text x="210" y="125" text-anchor="end" class="ax">農産物加工直売施設機器保守管理委託料</text>
+<rect x="220.0" y="110" width="2.4" height="21" fill="#7A9A3C"/>
+<text x="231.4" y="125.0" class="pt" fill="#23241F">49</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">塩の里施設管理（村委託分）委託料</text>
+<rect x="220.0" y="8" width="13.0" height="21" fill="#7A9A3C"/>
+<text x="242.0" y="23.0" class="pt" fill="#23241F">271</text>
+<text x="210" y="57" text-anchor="end" class="ax">農産物加工直売施設改修工事</text>
+<rect x="220.0" y="42" width="10.5" height="21" fill="#7A9A3C"/>
+<text x="239.5" y="57.0" class="pt" fill="#23241F">218</text>
+<text x="210" y="91" text-anchor="end" class="ax">農産物加工直売施設備品購入費</text>
+<rect x="220.0" y="76" width="3.7" height="21" fill="#7A9A3C"/>
+<text x="232.7" y="91.0" class="pt" fill="#23241F">76</text>
+<text x="210" y="125" text-anchor="end" class="ax">塩の里施設修繕費</text>
+<rect x="220.0" y="110" width="1.3" height="21" fill="#7A9A3C"/>
+<text x="230.3" y="125.0" class="pt" fill="#23241F">28</text>
+<text x="210" y="159" text-anchor="end" class="ax">農産物加工直売施設機器保守管理委託料</text>
+<rect x="220.0" y="144" width="1.8" height="21" fill="#7A9A3C"/>
+<text x="230.8" y="159.0" class="pt" fill="#23241F">37</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">塩の里施設管理（村委託分）委託料</text>
+<rect x="220.0" y="8" width="13.7" height="21" fill="#7A9A3C"/>
+<text x="242.7" y="23.0" class="pt" fill="#23241F">285</text>
+<text x="210" y="57" text-anchor="end" class="ax">農産物加工直売施設改修工事</text>
+<rect x="220.0" y="42" width="1.6" height="21" fill="#7A9A3C"/>
+<text x="230.6" y="57.0" class="pt" fill="#23241F">33</text>
+<text x="210" y="91" text-anchor="end" class="ax">農産物加工直売施設備品購入費</text>
+<rect x="220.0" y="76" width="0.7" height="21" fill="#7A9A3C"/>
+<text x="229.7" y="91.0" class="pt" fill="#23241F">14</text>
+<text x="210" y="125" text-anchor="end" class="ax">塩の里施設修繕費</text>
+<text x="229.2" y="125.0" class="pt" fill="#23241F">4</text>
+<text x="210" y="159" text-anchor="end" class="ax">農産物加工直売施設機器保守管理委託料</text>
+<rect x="220.0" y="144" width="2.7" height="21" fill="#7A9A3C"/>
+<text x="231.7" y="159.0" class="pt" fill="#23241F">56</text>
+<text x="210" y="193" text-anchor="end" class="ax">塩の里施設改修工事</text>
+<rect x="220.0" y="178" width="8.7" height="21" fill="#7A9A3C"/>
+<text x="237.7" y="193.0" class="pt" fill="#23241F">182</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">塩の里施設管理（村委託分）委託料</text>
+<rect x="220.0" y="8" width="14.2" height="21" fill="#7A9A3C"/>
+<text x="243.2" y="23.0" class="pt" fill="#23241F">295</text>
+<text x="210" y="57" text-anchor="end" class="ax">農産物加工直売施設備品購入費</text>
+<text x="229.3" y="57.0" class="pt" fill="#23241F">6</text>
+<text x="210" y="91" text-anchor="end" class="ax">塩の里施設修繕費</text>
+<rect x="220.0" y="76" width="4.0" height="21" fill="#7A9A3C"/>
+<text x="233.0" y="91.0" class="pt" fill="#23241F">84</text>
+<text x="210" y="125" text-anchor="end" class="ax">農産物加工直売施設機器保守管理委託料</text>
+<rect x="220.0" y="110" width="2.7" height="21" fill="#7A9A3C"/>
+<text x="231.7" y="125.0" class="pt" fill="#23241F">56</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">塩の里施設管理（村委託分）委託料</text>
+<rect x="220.0" y="8" width="15.0" height="21" fill="#7A9A3C"/>
+<text x="244.0" y="23.0" class="pt" fill="#23241F">313</text>
+<text x="210" y="57" text-anchor="end" class="ax">塩の里施設修繕費</text>
+<rect x="220.0" y="42" width="6.9" height="21" fill="#7A9A3C"/>
+<text x="235.9" y="57.0" class="pt" fill="#23241F">143</text>
+<text x="210" y="91" text-anchor="end" class="ax">農産物加工直売施設機器保守管理委託料</text>
+<rect x="220.0" y="76" width="2.1" height="21" fill="#7A9A3C"/>
+<text x="231.1" y="91.0" class="pt" fill="#23241F">43</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農産物加工直売施設改修工事（繰越明許）</td><td>115,000,000</td></tr>
 <tr><td>農産物加工直売施設改修設計監理委託料（繰越明許）</td><td>15,640,000</td></tr>
 <tr><td>塩の里施設管理（村委託分）委託料</td><td>12,656,362</td></tr>
 <tr><td>農産物加工直売施設改修工事</td><td>9,696,000</td></tr>
@@ -474,9 +1513,174 @@
 <tr><td>農の拠点敷地料</td><td>527,810</td></tr>
 <tr><td>塩の里周辺整備設計・監理委託料</td><td>220,000</td></tr></tbody><tfoot></tfoot></table></div></details>
 
-<h3 id="h8360"><a class="alink" href="#h8360" aria-label="この見出しへのリンク">#</a>大鹿ブランド</h3>
+<h3 id="h7837"><a class="alink" href="#h7837" aria-label="この見出しへのリンク">#</a>大鹿ブランド</h3>
 <p>8年で1,635万円。地域ブランド推進事業と、特産農産物に関わる費用です。年に113万円から290万円のあいだで動いています。</p>
-<details><summary>内訳を開く（16種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>ロゴマーク印刷費</td><td>4,917,400</td></tr>
+<details><summary>内訳を開く（16種類）</summary><div class="ysw-unit" id="brand-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="344.1" height="21" fill="#7A9A3C"/>
+<text x="573.1" y="23.0" class="pt" fill="#23241F">69</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="42.7" height="21" fill="#7A9A3C"/>
+<text x="271.7" y="57.0" class="pt" fill="#23241F">8</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="257.9" height="21" fill="#7A9A3C"/>
+<text x="486.9" y="91.0" class="pt" fill="#23241F">51</text>
+<text x="210" y="125" text-anchor="end" class="ax">物産展会場使用料</text>
+<rect x="220.0" y="110" width="138.7" height="21" fill="#7A9A3C"/>
+<text x="367.7" y="125.0" class="pt" fill="#23241F">28</text>
+<text x="210" y="159" text-anchor="end" class="ax">物産展機材借上料</text>
+<rect x="220.0" y="144" width="82.9" height="21" fill="#7A9A3C"/>
+<text x="311.9" y="159.0" class="pt" fill="#23241F">17</text>
+<text x="210" y="193" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="178" width="75.3" height="21" fill="#7A9A3C"/>
+<text x="304.3" y="193.0" class="pt" fill="#23241F">15</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 272" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="283.7" height="21" fill="#7A9A3C"/>
+<text x="512.7" y="23.0" class="pt" fill="#23241F">57</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="185.9" height="21" fill="#7A9A3C"/>
+<text x="414.9" y="57.0" class="pt" fill="#23241F">37</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="238.1" height="21" fill="#7A9A3C"/>
+<text x="467.1" y="91.0" class="pt" fill="#23241F">47</text>
+<text x="210" y="125" text-anchor="end" class="ax">物産展会場使用料</text>
+<rect x="220.0" y="110" width="166.5" height="21" fill="#7A9A3C"/>
+<text x="395.5" y="125.0" class="pt" fill="#23241F">33</text>
+<text x="210" y="159" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="144" width="17.6" height="21" fill="#7A9A3C"/>
+<text x="246.6" y="159.0" class="pt" fill="#23241F">4</text>
+<text x="210" y="193" text-anchor="end" class="ax">物産展機材借上料</text>
+<rect x="220.0" y="178" width="94.3" height="21" fill="#7A9A3C"/>
+<text x="323.3" y="193.0" class="pt" fill="#23241F">19</text>
+<text x="210" y="227" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="212" width="20.6" height="21" fill="#7A9A3C"/>
+<text x="249.6" y="227.0" class="pt" fill="#23241F">4</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="140.8" height="21" fill="#7A9A3C"/>
+<text x="369.8" y="23.0" class="pt" fill="#23241F">28</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="204.7" height="21" fill="#7A9A3C"/>
+<text x="433.7" y="57.0" class="pt" fill="#23241F">41</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="177.9" height="21" fill="#7A9A3C"/>
+<text x="406.9" y="91.0" class="pt" fill="#23241F">35</text>
+<text x="210" y="125" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="110" width="217.3" height="21" fill="#7A9A3C"/>
+<text x="446.3" y="125.0" class="pt" fill="#23241F">43</text>
+<text x="210" y="159" text-anchor="end" class="ax">地域の一店一商品づくりサポート事業補助金</text>
+<rect x="220.0" y="144" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="159.0" class="pt" fill="#23241F">110</text>
+<text x="210" y="193" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="178" width="98.4" height="21" fill="#7A9A3C"/>
+<text x="327.4" y="193.0" class="pt" fill="#23241F">20</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="175.5" height="21" fill="#7A9A3C"/>
+<text x="404.5" y="23.0" class="pt" fill="#23241F">35</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="156.8" height="21" fill="#7A9A3C"/>
+<text x="385.8" y="57.0" class="pt" fill="#23241F">31</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="151.8" height="21" fill="#7A9A3C"/>
+<text x="380.8" y="91.0" class="pt" fill="#23241F">30</text>
+<text x="210" y="125" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="110" width="44.2" height="21" fill="#7A9A3C"/>
+<text x="273.2" y="125.0" class="pt" fill="#23241F">9</text>
+<text x="210" y="159" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="144" width="20.1" height="21" fill="#7A9A3C"/>
+<text x="249.1" y="159.0" class="pt" fill="#23241F">4</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="342.8" height="21" fill="#7A9A3C"/>
+<text x="571.8" y="23.0" class="pt" fill="#23241F">68</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="184.2" height="21" fill="#7A9A3C"/>
+<text x="413.2" y="57.0" class="pt" fill="#23241F">37</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="144.7" height="21" fill="#7A9A3C"/>
+<text x="373.7" y="91.0" class="pt" fill="#23241F">29</text>
+<text x="210" y="125" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="110" width="79.8" height="21" fill="#7A9A3C"/>
+<text x="308.8" y="125.0" class="pt" fill="#23241F">16</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 272" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="337.3" height="21" fill="#7A9A3C"/>
+<text x="566.3" y="23.0" class="pt" fill="#23241F">67</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="264.3" height="21" fill="#7A9A3C"/>
+<text x="493.3" y="57.0" class="pt" fill="#23241F">53</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="41.3" height="21" fill="#7A9A3C"/>
+<text x="270.3" y="91.0" class="pt" fill="#23241F">8</text>
+<text x="210" y="125" text-anchor="end" class="ax">物産展会場使用料</text>
+<rect x="220.0" y="110" width="77.8" height="21" fill="#7A9A3C"/>
+<text x="306.8" y="125.0" class="pt" fill="#23241F">15</text>
+<text x="210" y="159" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="144" width="50.2" height="21" fill="#7A9A3C"/>
+<text x="279.2" y="159.0" class="pt" fill="#23241F">10</text>
+<text x="210" y="193" text-anchor="end" class="ax">物産展機材借上料</text>
+<rect x="220.0" y="178" width="47.7" height="21" fill="#7A9A3C"/>
+<text x="276.7" y="193.0" class="pt" fill="#23241F">10</text>
+<text x="210" y="227" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="212" width="14.1" height="21" fill="#7A9A3C"/>
+<text x="243.1" y="227.0" class="pt" fill="#23241F">3</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 272" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="534.3" height="21" fill="#7A9A3C"/>
+<text x="763.3" y="23.0" class="pt" fill="#23241F">106</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="262.3" height="21" fill="#7A9A3C"/>
+<text x="491.3" y="57.0" class="pt" fill="#23241F">52</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="212.0" height="21" fill="#7A9A3C"/>
+<text x="441.0" y="91.0" class="pt" fill="#23241F">42</text>
+<text x="210" y="125" text-anchor="end" class="ax">物産展会場使用料</text>
+<rect x="220.0" y="110" width="238.7" height="21" fill="#7A9A3C"/>
+<text x="467.7" y="125.0" class="pt" fill="#23241F">48</text>
+<text x="210" y="159" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="144" width="111.9" height="21" fill="#7A9A3C"/>
+<text x="340.9" y="159.0" class="pt" fill="#23241F">22</text>
+<text x="210" y="193" text-anchor="end" class="ax">物産展機材借上料</text>
+<rect x="220.0" y="178" width="47.7" height="21" fill="#7A9A3C"/>
+<text x="276.7" y="193.0" class="pt" fill="#23241F">10</text>
+<text x="210" y="227" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="212" width="18.6" height="21" fill="#7A9A3C"/>
+<text x="247.6" y="227.0" class="pt" fill="#23241F">4</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">ロゴマーク印刷費</text>
+<rect x="220.0" y="8" width="309.1" height="21" fill="#7A9A3C"/>
+<text x="538.1" y="23.0" class="pt" fill="#23241F">62</text>
+<text x="210" y="57" text-anchor="end" class="ax">特産農産物生産振興補助金</text>
+<rect x="220.0" y="42" width="265.2" height="21" fill="#7A9A3C"/>
+<text x="494.2" y="57.0" class="pt" fill="#23241F">53</text>
+<text x="210" y="91" text-anchor="end" class="ax">消耗品</text>
+<rect x="220.0" y="76" width="236.2" height="21" fill="#7A9A3C"/>
+<text x="465.2" y="91.0" class="pt" fill="#23241F">47</text>
+<text x="210" y="125" text-anchor="end" class="ax">六次産業化等支援補助金</text>
+<rect x="220.0" y="110" width="43.7" height="21" fill="#7A9A3C"/>
+<text x="272.7" y="125.0" class="pt" fill="#23241F">9</text>
+<text x="210" y="159" text-anchor="end" class="ax">お墨付き商品支援補助金</text>
+<rect x="220.0" y="144" width="19.1" height="21" fill="#7A9A3C"/>
+<text x="248.1" y="159.0" class="pt" fill="#23241F">4</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>ロゴマーク印刷費</td><td>4,917,400</td></tr>
 <tr><td>特産農産物生産振興補助金</td><td>3,120,920</td></tr>
 <tr><td>消耗品</td><td>2,909,428</td></tr>
 <tr><td>物産展会場使用料</td><td>1,238,958</td></tr>
@@ -495,7 +1699,139 @@
 <p class="sub">8年で2億25万円</p>
 <p>上のどれにも入らない費用です。8割が村の農業担当の職員の給料と手当で、
 ほかに事務の経費、公用車、機械の購入などが入っています。</p>
-<details><summary>内訳を開く（63種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>一般職員給料</td><td>86,049,200</td></tr>
+<details><summary>内訳を開く（63種類）</summary><div class="ysw-unit" id="shigoto-uchiwake-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="552.0" height="21" fill="#7A9A3C"/>
+<text x="781.0" y="23.0" class="pt" fill="#23241F">1,446</text>
+<text x="210" y="57" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="42" width="268.9" height="21" fill="#7A9A3C"/>
+<text x="497.9" y="57.0" class="pt" fill="#23241F">704</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="172.9" height="21" fill="#7A9A3C"/>
+<text x="401.9" y="91.0" class="pt" fill="#23241F">453</text>
+<text x="210" y="125" text-anchor="end" class="ax">そば用収穫機械購入費</text>
+<rect x="220.0" y="110" width="116.1" height="21" fill="#7A9A3C"/>
+<text x="345.1" y="125.0" class="pt" fill="#23241F">304</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="443.0" height="21" fill="#7A9A3C"/>
+<text x="672.0" y="23.0" class="pt" fill="#23241F">1,160</text>
+<text x="210" y="57" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="42" width="209.1" height="21" fill="#7A9A3C"/>
+<text x="438.1" y="57.0" class="pt" fill="#23241F">548</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="137.8" height="21" fill="#7A9A3C"/>
+<text x="366.8" y="91.0" class="pt" fill="#23241F">361</text>
+<text x="210" y="125" text-anchor="end" class="ax">そば用収穫機械購入費</text>
+<rect x="220.0" y="110" width="16.5" height="21" fill="#7A9A3C"/>
+<text x="245.5" y="125.0" class="pt" fill="#23241F">43</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 880 170" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="474.2" height="21" fill="#7A9A3C"/>
+<text x="703.2" y="23.0" class="pt" fill="#23241F">1,242</text>
+<text x="210" y="57" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="42" width="211.9" height="21" fill="#7A9A3C"/>
+<text x="440.9" y="57.0" class="pt" fill="#23241F">555</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="137.9" height="21" fill="#7A9A3C"/>
+<text x="366.9" y="91.0" class="pt" fill="#23241F">361</text>
+<text x="210" y="125" text-anchor="end" class="ax">そば用収穫機械購入費</text>
+<rect x="220.0" y="110" width="143.5" height="21" fill="#7A9A3C"/>
+<text x="372.5" y="125.0" class="pt" fill="#23241F">376</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 880 136" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="366.9" height="21" fill="#7A9A3C"/>
+<text x="595.9" y="23.0" class="pt" fill="#23241F">961</text>
+<text x="210" y="57" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="42" width="163.1" height="21" fill="#7A9A3C"/>
+<text x="392.1" y="57.0" class="pt" fill="#23241F">427</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="112.9" height="21" fill="#7A9A3C"/>
+<text x="341.9" y="91.0" class="pt" fill="#23241F">296</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="375.2" height="21" fill="#7A9A3C"/>
+<text x="604.2" y="23.0" class="pt" fill="#23241F">983</text>
+<text x="210" y="57" text-anchor="end" class="ax">職員手当等</text>
+<rect x="220.0" y="42" width="219.7" height="21" fill="#7A9A3C"/>
+<text x="448.7" y="57.0" class="pt" fill="#23241F">575</text>
+<text x="210" y="91" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="76" width="124.2" height="21" fill="#7A9A3C"/>
+<text x="353.2" y="91.0" class="pt" fill="#23241F">325</text>
+<text x="210" y="125" text-anchor="end" class="ax">そば用収穫機械購入費</text>
+<rect x="220.0" y="110" width="86.8" height="21" fill="#7A9A3C"/>
+<text x="315.8" y="125.0" class="pt" fill="#23241F">227</text>
+<text x="210" y="159" text-anchor="end" class="ax">燃料価格高騰緊急支援事業補助金</text>
+<rect x="220.0" y="144" width="50.5" height="21" fill="#7A9A3C"/>
+<text x="279.5" y="159.0" class="pt" fill="#23241F">132</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="403.9" height="21" fill="#7A9A3C"/>
+<text x="632.9" y="23.0" class="pt" fill="#23241F">1,058</text>
+<text x="210" y="57" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="42" width="127.2" height="21" fill="#7A9A3C"/>
+<text x="356.2" y="57.0" class="pt" fill="#23241F">333</text>
+<text x="210" y="91" text-anchor="end" class="ax">期末手当</text>
+<rect x="220.0" y="76" width="85.8" height="21" fill="#7A9A3C"/>
+<text x="314.8" y="91.0" class="pt" fill="#23241F">225</text>
+<text x="210" y="125" text-anchor="end" class="ax">燃料価格高騰緊急支援事業補助金</text>
+<rect x="220.0" y="110" width="45.2" height="21" fill="#7A9A3C"/>
+<text x="274.2" y="125.0" class="pt" fill="#23241F">118</text>
+<text x="210" y="159" text-anchor="end" class="ax">勤勉手当</text>
+<rect x="220.0" y="144" width="82.1" height="21" fill="#7A9A3C"/>
+<text x="311.1" y="159.0" class="pt" fill="#23241F">215</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 880 204" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="411.9" height="21" fill="#7A9A3C"/>
+<text x="640.9" y="23.0" class="pt" fill="#23241F">1,079</text>
+<text x="210" y="57" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="42" width="128.0" height="21" fill="#7A9A3C"/>
+<text x="357.0" y="57.0" class="pt" fill="#23241F">335</text>
+<text x="210" y="91" text-anchor="end" class="ax">期末手当</text>
+<rect x="220.0" y="76" width="98.0" height="21" fill="#7A9A3C"/>
+<text x="327.0" y="91.0" class="pt" fill="#23241F">257</text>
+<text x="210" y="125" text-anchor="end" class="ax">燃料価格高騰緊急支援事業補助金</text>
+<rect x="220.0" y="110" width="62.4" height="21" fill="#7A9A3C"/>
+<text x="291.4" y="125.0" class="pt" fill="#23241F">164</text>
+<text x="210" y="159" text-anchor="end" class="ax">勤勉手当</text>
+<rect x="220.0" y="144" width="78.6" height="21" fill="#7A9A3C"/>
+<text x="307.6" y="159.0" class="pt" fill="#23241F">206</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 880 238" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="210" y="23" text-anchor="end" class="ax">一般職員給料</text>
+<rect x="220.0" y="8" width="258.0" height="21" fill="#7A9A3C"/>
+<text x="487.0" y="23.0" class="pt" fill="#23241F">676</text>
+<text x="210" y="57" text-anchor="end" class="ax">地方公務員共済組合等負担金</text>
+<rect x="220.0" y="42" width="84.3" height="21" fill="#7A9A3C"/>
+<text x="313.3" y="57.0" class="pt" fill="#23241F">221</text>
+<text x="210" y="91" text-anchor="end" class="ax">期末手当</text>
+<rect x="220.0" y="76" width="60.6" height="21" fill="#7A9A3C"/>
+<text x="289.6" y="91.0" class="pt" fill="#23241F">159</text>
+<text x="210" y="125" text-anchor="end" class="ax">燃料価格高騰緊急支援事業補助金</text>
+<rect x="220.0" y="110" width="63.6" height="21" fill="#7A9A3C"/>
+<text x="292.6" y="125.0" class="pt" fill="#23241F">166</text>
+<text x="210" y="159" text-anchor="end" class="ax">事業用備品購入費</text>
+<rect x="220.0" y="144" width="218.1" height="21" fill="#7A9A3C"/>
+<text x="447.1" y="159.0" class="pt" fill="#23241F">571</text>
+<text x="210" y="193" text-anchor="end" class="ax">勤勉手当</text>
+<rect x="220.0" y="178" width="48.6" height="21" fill="#7A9A3C"/>
+<text x="277.6" y="193.0" class="pt" fill="#23241F">127</text>
+</svg></div><figcaption>金額の大きい8種類のうち、その年度に支出のあったもの。単位は万円。8年で目盛りをそろえてあります。</figcaption></figure>
+  
+</div><p class="dcap">8年の合計</p><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>一般職員給料</td><td>86,049,200</td></tr>
 <tr><td>職員手当等</td><td>28,096,347</td></tr>
 <tr><td>地方公務員共済組合等負担金</td><td>26,853,072</td></tr>
 <tr><td>そば用収穫機械購入費</td><td>9,504,060</td></tr>
@@ -663,6 +1999,36 @@
     box.addEventListener('pointerdown', function(e){ show(e.clientX); });
     box.addEventListener('pointerleave', hide);
     box.addEventListener('pointercancel', hide);
+  });
+})();
+</script>
+<script>
+(function(){
+  var names = {"2018": "平成30年度", "2019": "令和元年度", "2020": "令和2年度", "2021": "令和3年度", "2022": "令和4年度", "2023": "令和5年度", "2024": "令和6年度", "2025": "令和7年度"};
+  [].slice.call(document.querySelectorAll('.ysw-unit')).forEach(function(u){
+    var ps = [].slice.call(u.querySelectorAll('.yp')),
+        lab = u.querySelector('.yl'),
+        bs  = [].slice.call(u.querySelectorAll('.yb')),
+        ds  = [].slice.call(u.querySelectorAll('.ydot')),
+        i   = ps.length - 1;
+    if (!ps.length) return;
+    function show(k){
+      i = Math.max(0, Math.min(ps.length - 1, k));
+      ps.forEach(function(p, j){
+        if (j === i) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+      });
+      ds.forEach(function(d, j){ d.className = 'ydot' + (j === i ? ' on' : ''); });
+      lab.textContent = names[ps[i].getAttribute('data-y')] || ps[i].getAttribute('data-y');
+      bs[0].disabled = (i === 0); bs[1].disabled = (i === ps.length - 1);
+    }
+    bs.forEach(function(b){
+      b.addEventListener('click', function(){ show(i + (+b.getAttribute('data-d'))); });
+    });
+    u.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft') { show(i - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { show(i + 1); e.preventDefault(); }
+    });
+    show(ps.length - 1);
   });
 })();
 </script>
