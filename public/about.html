@@ -55,6 +55,40 @@
   @media (max-width:600px){
     body{font-size:16px} h1{font-size:27px} h2{font-size:20px;margin-top:50px}
   }
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -76,13 +110,14 @@
   </div>
 
   <h1>このサイトについて</h1>
+<p class="stamp"><b>データの時点</b>　このページに数値データはありません<br><b>このページの更新</b>　2026年9月18日</p>
   <p class="lede">長野県下伊那郡大鹿村について、公表された資料から数字を拾い、経年で並べています。運営の方針をここに書いておきます。</p>
 
-  <h2>誰が運営しているか</h2>
+  <h2 id="unei"><a class="alink" href="#unei" aria-label="この見出しへのリンク">#</a>誰が運営しているか</h2>
   <p>大鹿村に住む一住民が、個人で運営しています。村の公式サイトではなく、村やその他の団体の見解を示すものでもありません。</p>
   <p>費用は運営者が負担しています。広告は掲載していません。</p>
 
-  <h2>何を載せているか</h2>
+  <h2 id="naiyo"><a class="alink" href="#naiyo" aria-label="この見出しへのリンク">#</a>何を載せているか</h2>
   <p>出どころは次の3つです。</p>
   <ul>
     <li>村が公表した資料（広報おおしか、村のウェブサイト、住民懇談会の配布資料など）</li>
@@ -91,23 +126,23 @@
   </ul>
   <p>どのページにも出典を書いています。数値がどの資料の何ページから来たものかを、読んだ人が自分で確かめられる状態にすることを基本にしています。</p>
 
-  <h2>数値の扱い</h2>
+  <h2 id="suchi"><a class="alink" href="#suchi" aria-label="この見出しへのリンク">#</a>数値の扱い</h2>
 
-  <h3>出典のまま載せます</h3>
+  <h3 id="h4178"><a class="alink" href="#h4178" aria-label="この見出しへのリンク">#</a>出典のまま載せます</h3>
   <p>数値は、出典に記載されたとおりに転記します。読みやすさのために丸めたり、単位を揃えるために計算し直したりはしません。</p>
 
-  <h3>誤っていると思われる数値も直しません</h3>
+  <h3 id="h8209"><a class="alink" href="#h8209" aria-label="この見出しへのリンク">#</a>誤っていると思われる数値も直しません</h3>
   <p>資料の数値が明らかに他と整合しない場合でも、値は直さず、そのまま載せます。そのうえで、どこがどう整合しないかを注記に書きます。</p>
   <p>実際に、広報おおしかに掲載された決算額のうち、同じ紙面の費目総額を上回っているものが見つかっています。桁が1つ多い可能性がありますが、正しい額は確認できていないため、掲載値をそのまま載せて注記しています。</p>
 
-  <h3>判断が入った箇所は書き出します</h3>
+  <h3 id="h33"><a class="alink" href="#h33" aria-label="この見出しへのリンク">#</a>判断が入った箇所は書き出します</h3>
   <p>資料に載っていない数字を計算で出した場合、区分を組み直した場合、複数の資料をつなげた場合には、その旨を注記に書きます。</p>
   <p>たとえば固定資産台帳の「更新到来年度」は、台帳の供用開始日に耐用年数を加えて計算したものです。台帳にその項目はありません。こうした箇所をすべて書き出すようにしています。</p>
 
-  <h3>検算を通します</h3>
+  <h3 id="h5163"><a class="alink" href="#h5163" aria-label="この見出しへのリンク">#</a>検算を通します</h3>
   <p>内訳の合計が総額と一致するか、男女の人数の合計が総人口と一致するかを確認しています。合わなかったものは、いったん値を捨てて、紙面を目で見て採録し直しています。</p>
 
-  <h2>何を書かないか</h2>
+  <h2 id="kakanai"><a class="alink" href="#kakanai" aria-label="この見出しへのリンク">#</a>何を書かないか</h2>
   <p>このサイトは、数字を並べて「こう見える」と置くところまでを役目にしています。次のことは書きません。</p>
   <ul>
     <li><b>評価をしません。</b>「不適切」「未達」「問題がある」といった言葉は使いません</li>
@@ -117,7 +152,7 @@
   </ul>
   <p>数字を見てどう考えるかは、読んだ人が決めることだと思っています。</p>
 
-  <h2>このサイトの目的</h2>
+  <h2 id="mokuteki"><a class="alink" href="#mokuteki" aria-label="この見出しへのリンク">#</a>このサイトの目的</h2>
   <p>村が公表することになっている情報のうち、実際には公表されていないものがあります。それを代わりに整理して出しています。</p>
   <p>大鹿村公文書公開条例は、その目的をこう定めています。</p>
   <blockquote>村民の村政に対する理解と信頼を深め、村民の村政への参加を増進し、いっそう公正で開かれた村政の推進に寄与すること（第1条）</blockquote>
@@ -125,11 +160,11 @@
   <blockquote>実施機関は、公文書の公開にあわせ、村政に関する正確で分かりやすい情報を積極的に提供するよう努めなければならない</blockquote>
   <p><b>村が自分で公表するようになれば、このサイトの当該ページは役目を終えます。</b>代わりに出し続けることが目的ではありません。</p>
 
-  <h2>個人に関する情報</h2>
+  <h2 id="kojin"><a class="alink" href="#kojin" aria-label="この見出しへのリンク">#</a>個人に関する情報</h2>
   <p>個人が特定される情報は掲載しません。公文書公開条例第6条第2号が不開示情報として定めているものにあたります。</p>
   <p>公務員や議員の職務上の行動については、同号ただし書エにより公開の対象とされているため、必要な範囲で扱うことがあります。ただし個人を非難する目的では扱いません。</p>
 
-  <h2>掲載データの利用について</h2>
+  <h2 id="riyo"><a class="alink" href="#riyo" aria-label="この見出しへのリンク">#</a>掲載データの利用について</h2>
   <div class="box">
     <p><b>出典を明記していただければ、自由にお使いください。</b>引用、転載、加工、再配布のいずれも構いません。事前の連絡も不要です。営利・非営利を問いません。</p>
     <p>出典の書き方に決まりはありませんが、「大鹿村データ室（ooshika.org）」のように、たどれる形にしていただけると助かります。</p>
@@ -137,12 +172,12 @@
   </div>
   <p>掲載している数値そのものは、村や国が公表した公的な情報です。それらを整理して表やグラフにしたものが本サイトの内容にあたります。</p>
 
-  <h2>誤りのご指摘</h2>
+  <h2 id="shiteki"><a class="alink" href="#shiteki" aria-label="この見出しへのリンク">#</a>誤りのご指摘</h2>
   <p>数値の誤り、出典の記載漏れ、事実と異なる記述などがありましたら、お知らせください。確認のうえ訂正し、訂正した旨をページに残します。</p>
   <p>掲載してほしい資料、扱ってほしいテーマについてのご意見も歓迎します。</p>
   <p><b>data@ooshika.org</b></p>
 
-  <h2>更新について</h2>
+  <h2 id="koshin"><a class="alink" href="#koshin" aria-label="この見出しへのリンク">#</a>更新について</h2>
   <p>広報おおしかが発行されたときに人口の数値を追加しています。そのほかのページは、資料が手に入りしだい不定期に更新します。</p>
   <p>ページの元になっているデータは、各ページの下部からCSV形式でダウンロードできます。</p>
 

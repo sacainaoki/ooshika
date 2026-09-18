@@ -92,6 +92,40 @@
     h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
     .pt{font-size:17px} .ax{font-size:15px}
   }
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -112,6 +146,7 @@
   </div>
 
   <h1>大鹿村の予算と決算</h1>
+<p class="stamp"><b>データの時点</b>　広報おおしか掲載の予算・決算記事（令和8年度当初予算まで）<br><b>このページの更新</b>　2026年9月18日</p>
   <p class="lede">広報おおしかは毎年、当初予算の内容と、議会で認定された決算の額を載せています。2003年度から2026年度までの一般会計について、当初予算23年度分と決算22年度分を拾い、並べたものです。</p>
 
   <figure>
@@ -154,7 +189,7 @@
     <li class="fact"><b>決算はいつも当初予算より大きい</b><span>22年度のうち19年度で決算が当初予算を上回り、平均で1.13倍。年度の途中に補正予算で積み増されています。</span></li>
   </ul>
 
-  <h2>1人当たりで見ると</h2>
+  <h2 id="hitori"><a class="alink" href="#hitori" aria-label="この見出しへのリンク">#</a>1人当たりで見ると</h2>
   <p class="sub">村に住むためにかかっている額</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 340, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 120, &quot;ymax&quot;: 340, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 156.164859], [2004, 138.932403], [2005, 140.155185], [2006, 139.234206], [2007, 162.0556], [2008, 165.595451], [2009, 205.947064], [2010, 186.098985], [2011, 165.259356], [2012, 197.357581], [2013, 186.311372], [2014, 181.846797], [2015, 221.041746], [2016, 229.032289], [2017, 194.0], [2018, 220.282565], [2019, 220.736895], [2020, 289.805815], [2021, 272.621131], [2022, 254.393605], [2023, 293.114773], [2024, 276.889801]]}, {&quot;n&quot;: &quot;当初予算&quot;, &quot;c&quot;: &quot;#6B6E64&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2004, 141.807494], [2005, 149.129447], [2006, 129.583975], [2007, 140.190627], [2008, 153.533712], [2009, 162.944582], [2010, 159.052453], [2011, 156.657963], [2012, 142.857143], [2013, 162.454874], [2014, 174.55896], [2015, 225.806452], [2016, 181.386515], [2017, 174.373796], [2018, 184.368737], [2019, 210.685484], [2020, 208.515057], [2021, 255.923159], [2022, 218.302095], [2023, 244.431818], [2024, 264.712778], [2025, 314.353499]]}]}"><svg viewBox="0 0 900 340" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -192,7 +227,7 @@
   <p>2003年度の156万円が、2024年度に277万円。2025年度の当初予算では314万円になっています。</p>
   <p>これは村が使いすぎているという話とは別です。面積248平方キロメートルの道路も、水道も、消防も、人口が減っても同じだけ維持する必要があります。人数で割れば1人当たりが上がるのは避けられません。ただ、いま年25人ずつ人口が減っているので、総額が今のままなら1人当たりは今後も上がり続けます。</p>
 
-  <h2>村債と基金</h2>
+  <h2 id="saimu"><a class="alink" href="#saimu" aria-label="この見出しへのリンク">#</a>村債と基金</h2>
   <p class="sub">令和4年度から令和8年度まで</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 300, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2022, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 15, &quot;ymax&quot;: 32, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;基金積立見込額&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2022, 28.1249], [2023, 28.1221], [2024, 28.5897], [2025, 29.0447], [2026, 27.7934]]}, {&quot;n&quot;: &quot;村債残額&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2022, 18.257], [2023, 17.7509], [2024, 18.5894], [2025, 18.2199], [2026, 19.5755]]}]}"><svg viewBox="0 0 900 300" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -245,7 +280,7 @@
     </div>
   </details>
 
-  <h2>何に使われているか</h2>
+  <h2 id="nanini"><a class="alink" href="#nanini" aria-label="この見出しへのリンク">#</a>何に使われているか</h2>
   <p class="sub">決算の歳出に占める割合</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 0, &quot;ymax&quot;: 30, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;公債費&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 18.974793], [2004, 22.898454], [2005, 24.091388], [2006, 25.898321], [2007, 21.649095], [2008, 22.188101], [2009, 22.392064], [2010, 18.561706], [2011, 16.306357], [2012, 12.227778], [2013, 12.667548], [2014, 12.865013], [2015, 8.333834], [2016, 7.129381], [2017, 8.918817], [2018, 7.839721], [2019, 7.023761], [2020, 7.969672], [2021, 7.620006], [2022, 8.513663], [2023, 8.622936], [2024, 9.969643]]}, {&quot;n&quot;: &quot;農林水産業費&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 18.805793], [2004, 12.966518], [2005, 9.695644], [2006, 12.076292], [2007, 9.775177], [2008, 10.227719], [2009, 17.832443], [2010, 18.270756], [2011, 16.804032], [2012, 13.720779], [2013, 12.906851], [2014, 11.731998], [2015, 10.300543], [2016, 10.849149], [2017, 10.484576], [2018, 8.835891], [2019, 13.572574], [2020, 6.261578], [2021, 7.524878], [2022, 9.025505], [2023, 7.204001], [2024, 8.058445]]}, {&quot;n&quot;: &quot;総務費&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 11.690651], [2004, 11.693559], [2005, 20.148532], [2006, 10.164559], [2007, 11.128429], [2008, 12.92826], [2009, 13.242701], [2010, 14.750715], [2011, 13.812716], [2012, 13.230514], [2013, 17.414851], [2014, 18.531624], [2015, 15.290714], [2016, 14.472304], [2017, 15.827424], [2018, 20.039392], [2019, 17.984117], [2020, 20.49247], [2021, 18.439122], [2022, 18.624396], [2023, 14.249438], [2024, 20.551512]]}, {&quot;n&quot;: &quot;災害復旧費&quot;, &quot;c&quot;: &quot;#9A8C5C&quot;, &quot;u&quot;: &quot;%&quot;, &quot;d&quot;: 1, &quot;p&quot;: [[2003, 4.172686], [2004, 1.641572], [2005, 0.404008], [2006, 3.048261], [2007, 9.584026], [2008, 1.405459], [2009, 0.0], [2010, 0.510981], [2011, 0.238041], [2012, 2.562793], [2013, 0.0], [2014, 0.0], [2015, 0.0], [2016, 0.038147], [2017, 0.0], [2018, 4.448195], [2019, 11.156729], [2020, 4.080507], [2021, 7.110309], [2022, 4.342644], [2023, 12.896022], [2024, 3.093312]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -292,7 +327,7 @@
   </figure>
   <p>2000年代前半は、歳出の4分の1が公債費、つまり借金の返済でした。それが2010年代に大きく下がり、近年また上がりはじめています。農林水産業費は割合として大きく下がりました。災害復旧費は、計上のない年が続いた時期と、毎年計上される時期があります。</p>
 
-  <h2>もとの数字</h2>
+  <h2 id="data"><a class="alink" href="#data" aria-label="この見出しへのリンク">#</a>もとの数字</h2>
   <p class="sub">当初予算23年度分・決算22年度分</p>
   <details>
     <summary>総額の表を開く</summary>

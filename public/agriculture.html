@@ -118,6 +118,40 @@
     h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
     .pt{font-size:16px} .ax{font-size:14px}
   }
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -139,6 +173,7 @@
   </div>
 
   <h1>大鹿村の農業</h1>
+<p class="stamp"><b>データの時点</b>　2020年農林業センサス、生産農業所得統計ほか<br><b>このページの更新</b>　2026年9月18日</p>
   <p class="lede">農林水産省の農林業センサス（5年ごと）と作物統計（毎年）から、大鹿村の数字を拾って並べたものです。あわせて、村の決算から農林水産業費の推移を載せています。</p>
 
   <figure>
@@ -195,7 +230,7 @@
     <li class="fact"><b>2020年時点で60歳未満は10人</b><span>基幹的農業従事者86人のうち、70歳以上が65人。20代と45〜49歳はいません。</span></li>
   </ul>
 
-  <h2>担い手の年齢</h2>
+  <h2 id="nenrei"><a class="alink" href="#nenrei" aria-label="この見出しへのリンク">#</a>担い手の年齢</h2>
   <p class="sub">2020年農林業センサス</p>
   <figure>
     <svg viewBox="0 0 900 490" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -260,7 +295,7 @@
   <p>70歳以上が65人で全体の76％、80歳以上が30人で35％。60歳未満は10人です。20〜29歳と45〜49歳は0人でした。</p>
   <p>基幹的農業従事者の総数は2005年136人、2010年122人、2015年125人、2020年86人と推移しています。2015年までは横ばいでしたが、直近の5年で39人減りました。</p>
 
-  <h2>耕地面積</h2>
+  <h2 id="kochi"><a class="alink" href="#kochi" aria-label="この見出しへのリンク">#</a>耕地面積</h2>
   <p class="sub">田は4割減り、畑は横ばい</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2004, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 20, &quot;ymax&quot;: 240, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;耕地計&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 222.0], [2005, 221.0], [2006, 220.0], [2007, 214.0], [2008, 212.0], [2009, 211.0], [2010, 209.0], [2011, 208.0], [2012, 207.0], [2013, 205.0], [2014, 206.0], [2015, 206.0], [2016, 203.0], [2017, 201.0], [2018, 197.0], [2019, 193.0], [2020, 189.0], [2021, 188.0], [2022, 188.0], [2023, 188.0], [2024, 188.0], [2025, 188.0]]}, {&quot;n&quot;: &quot;畑&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 142.0], [2005, 141.0], [2006, 140.0], [2007, 138.0], [2008, 139.0], [2009, 141.0], [2010, 148.0], [2011, 147.0], [2012, 146.0], [2013, 145.0], [2014, 146.0], [2015, 146.0], [2016, 144.0], [2017, 143.0], [2018, 140.0], [2019, 137.0], [2020, 132.0], [2021, 132.0], [2022, 135.0], [2023, 136.0], [2024, 139.0], [2025, 141.0]]}, {&quot;n&quot;: &quot;田&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 80.0], [2005, 80.0], [2006, 80.0], [2007, 76.0], [2008, 73.0], [2009, 70.0], [2010, 61.0], [2011, 61.0], [2012, 61.0], [2013, 60.0], [2014, 60.0], [2015, 60.0], [2016, 59.0], [2017, 58.0], [2018, 57.0], [2019, 56.0], [2020, 57.0], [2021, 56.0], [2022, 53.0], [2023, 52.0], [2024, 49.0], [2025, 47.0]]}, {&quot;n&quot;: &quot;水稲作付&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;ha&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2004, 43.0], [2005, 42.0], [2006, 40.0], [2007, 40.0], [2008, 38.0], [2009, 39.0], [2010, 39.0], [2011, 39.0], [2012, 39.0], [2013, 38.0], [2014, 37.0], [2015, 33.0], [2016, 32.0], [2017, 32.0], [2018, 31.0], [2019, 30.0], [2020, 30.0], [2021, 30.0], [2022, 29.0], [2023, 29.0], [2024, 29.0], [2025, 28.0]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -308,7 +343,7 @@
   <p>2004年から2025年にかけて、田は80haから47haへ41.2％減った一方、畑は142haから141haとほとんど変わっていません。水稲の作付面積は43haから28haへ34.9％減っています。</p>
   <p>2009年から2010年にかけて田が9ha減り、同時に畑が7ha増えています。この統計だけでは、実際の転換によるものか、区分の取り方の変更によるものかは分かりません。</p>
 
-  <h2>農業産出額</h2>
+  <h2 id="sanshutsu"><a class="alink" href="#sanshutsu" aria-label="この見出しへのリンク">#</a>農業産出額</h2>
   <p class="sub">推計値</p>
   <div class="scroll" style="max-height:none;margin-top:22px">
     <table>
@@ -329,7 +364,7 @@
   <p style="margin-top:18px">農林水産省が農林業センサスなどをもとに推計した市町村別の産出額です。単位は千万円。実際の販売額を集計したものではありません。</p>
   <p>2017年から2023年にかけて、花きが7から12へ、畜産計が8から3へ動いています。この推移について、この統計だけでは背景は分かりません。産出額の推計方法は農林水産省が公表しています。</p>
 
-  <h2>農業集落別の経営体数</h2>
+  <h2 id="shuraku"><a class="alink" href="#shuraku" aria-label="この見出しへのリンク">#</a>農業集落別の経営体数</h2>
   <p class="sub">24集落</p>
   <figure>
     <div class="mapbox"><svg viewBox="0 0 900 760" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -403,7 +438,7 @@
   </figure>
   <p>集落名は下の表で番号と対応しています。北部の北入と、中央部から南にかけての集落に経営体が多く、東側の入沢井と南端の釜沢では0または秘匿となっています。経営体数が1〜2の集落は統計の秘密保護のため数値が公表されていません。</p>
 
-  <h2>15年間の変化</h2>
+  <h2 id="henka"><a class="alink" href="#henka" aria-label="この見出しへのリンク">#</a>15年間の変化</h2>
   <p class="sub">2005年と2020年</p>
   <div class="maps">
     <figure>
@@ -545,7 +580,7 @@
   </div>
   <p>2005年に経営体があった釜沢、南山、落合は、2020年には0になっています。沢井は2015年に5でしたが2020年は0です。ただし秘匿となっている集落があるため、2つの地図を直接比べることはできません。2005年の秘匿は5集落、2020年は9集落です。</p>
 
-  <h3 style="font-family:var(--mincho);font-weight:600;font-size:18px;margin:32px 0 8px">数値の表</h3>
+  <h3 id="h2637"><a class="alink" href="#h2637" aria-label="この見出しへのリンク">#</a>数値の表</h3>
   <details open>
     <summary>表を開く</summary>
     <div class="scroll">
@@ -582,7 +617,7 @@
   </details>
   <p style="margin-top:18px">経営体数が1〜2の集落は、統計の秘密保護のため数値が公表されていません。表では「秘匿」と表示しています。0との区別が必要です。2020年は9集落が秘匿となっており、表示されている数字の合計は村全体の67に届きません。</p>
 
-  <h2>村の農林水産業費</h2>
+  <h2 id="nogyohi"><a class="alink" href="#nogyohi" aria-label="この見出しへのリンク">#</a>村の農林水産業費</h2>
   <p class="sub">一般会計の決算</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 280, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2003, &quot;xmax&quot;: 2024, &quot;ymin&quot;: 1.5, &quot;ymax&quot;: 4.5, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;農林水産業費&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2003, 4.0616], [2004, 2.4518], [2005, 1.7951], [2006, 2.1825], [2007, 1.9944], [2008, 2.0849], [2009, 4.4401], [2010, 4.019], [2011, 3.1908], [2012, 3.0897], [2013, 2.6644], [2014, 2.2977], [2015, 2.3998], [2016, 2.6165], [2017, 2.1113], [2018, 1.9425], [2019, 2.972], [2020, 1.7475], [2021, 1.9222], [2022, 2.0825], [2023, 1.8582], [2024, 1.9033]]}]}"><svg viewBox="0 0 900 280" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -639,7 +674,7 @@
   <p>2003年度の4.06億円が2024年度に1.90億円へ。歳出全体に占める割合は18.8％から8.1％になりました。この間、村の歳出総額は21.6億円から23.6億円とほぼ横ばいです。</p>
   <p>農林水産業費には林道の整備・維持も含まれます。村の固定資産台帳（令和2年度末）では、林道の取得価額は140.4億円で、償却対象資産349.0億円の40.2％を占めています。</p>
 
-  <h2>もとの数字</h2>
+  <h2 id="data"><a class="alink" href="#data" aria-label="この見出しへのリンク">#</a>もとの数字</h2>
   <details>
     <summary>耕地面積の表を開く（2004〜2025年）</summary>
     <div class="scroll">

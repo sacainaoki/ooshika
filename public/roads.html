@@ -94,6 +94,40 @@
     h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
     .pt{font-size:16px} .ax{font-size:14px}
   }
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -115,9 +149,10 @@
   </div>
 
   <h1>村の道と橋</h1>
+<p class="stamp"><b>データの時点</b>　固定資産台帳（令和6年度末）、広報おおしか掲載の予算・決算記事<br><b>このページの更新</b>　2026年9月18日</p>
   <p class="lede">大鹿村の固定資産台帳（令和2年度末）と、広報おおしかに掲載された主要事業の決算額・当初予算額から、林道・村道・橋りょうに関する数字を並べたものです。村の面積は248平方キロメートル、村道の延長は約125キロメートル、林道は約87キロメートルあります。</p>
 
-  <h2>資産としての規模</h2>
+  <h2 id="shisan"><a class="alink" href="#shisan" aria-label="この見出しへのリンク">#</a>資産としての規模</h2>
   <p class="sub">固定資産台帳（令和2年度末）</p>
   <figure>
     <svg viewBox="0 0 900 308" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -185,7 +220,7 @@
 
   <p style="margin-top:30px">「更新到来年度」は、台帳の供用開始日に耐用年数を加えて計算したものです。台帳にこの項目はありません。また取得価額は更新に必要な費用ではなく、会計上の耐用年数の到達は物理的に更新が必要な時期とも異なります。</p>
 
-  <h2>林道の路線別</h2>
+  <h2 id="rosen"><a class="alink" href="#rosen" aria-label="この見出しへのリンク">#</a>林道の路線別</h2>
   <p class="sub">12路線・652件</p>
   <div class="scroll" style="max-height:none;margin-top:22px">
     <table>
@@ -208,7 +243,7 @@
   </div>
   <p style="margin-top:18px">上位3路線のうち、中峰黒川線と鳥倉線の残存率が25％前後であるのに対し、高森山線は57.7％です。残存率は取得価額に対する期末簿価の割合で、会計上の値です。</p>
 
-  <h2>毎年かかっている費用</h2>
+  <h2 id="maitoshi"><a class="alink" href="#maitoshi" aria-label="この見出しへのリンク">#</a>毎年かかっている費用</h2>
   <p class="sub">決算額</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2010, &quot;xmax&quot;: 2024, &quot;ymin&quot;: 0, &quot;ymax&quot;: 2.2, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;林道整備事業&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2010, 1.1682], [2011, 1.2363], [2012, 1.5003], [2013, 1.3713], [2014, 0.8289], [2015, 0.7402], [2016, 1.25], [2017, 0.7419], [2018, 0.808], [2019, 0.6897], [2021, 0.6652], [2022, 0.9421]]}, {&quot;n&quot;: &quot;村道改良事業&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2010, 1.0258], [2011, 0.7508], [2012, 1.3826], [2013, 1.7098], [2014, 1.0438], [2016, 0.6043], [2017, 0.7866], [2018, 0.7583], [2019, 1.2565], [2021, 2.0394], [2022, 1.1597]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +284,7 @@
   <p>林道整備事業は、農林水産業費に占める割合で見ると23％から52％の間で推移しています。村道改良事業は土木費に計上されます。</p>
   <p>令和2年度は「道路改良整備事業（鳥倉線、中峰線、小渋橋、他）」として林道と村道が合算で掲載されており、林道分を分けることができません。</p>
 
-  <h2>当初予算での計上額</h2>
+  <h2 id="tosho"><a class="alink" href="#tosho" aria-label="この見出しへのリンク">#</a>当初予算での計上額</h2>
   <p class="sub">令和元年度以降</p>
   <figure>
     <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 310, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2019, &quot;xmax&quot;: 2026, &quot;ymin&quot;: 0, &quot;ymax&quot;: 4.5, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;林道&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2020, 0.8306], [2021, 0.686], [2022, 0.6444], [2023, 0.5211], [2024, 0.4536], [2025, 0.2656], [2026, 0.1415]]}, {&quot;n&quot;: &quot;村道&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2019, 1.096], [2020, 0.9234], [2021, 0.9695], [2022, 0.5758], [2023, 1.7341], [2024, 1.545], [2025, 0.5266], [2026, 0.5]]}, {&quot;n&quot;: &quot;橋梁&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2019, 0.1169], [2020, 1.3801], [2021, 0.8519], [2022, 0.5167], [2025, 4.163], [2026, 0.238]]}]}"><svg viewBox="0 0 900 310" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -293,7 +328,7 @@
   <p>林道の当初予算額は令和2年度の8,306万円から令和8年度の1,415万円へ推移しています。この間、事業名は「林道維持・改良事業」「林道改良事業」「林道維持事業」と変わっています。名称の変更が事業の統合や分割を伴うものかどうかは、広報の記載からは分かりません。</p>
   <p>橋りょうは令和7年度に4億1,630万円が計上されています。前年度は5,266万円、翌年度は2,380万円です。</p>
 
-  <h2>もとの数字</h2>
+  <h2 id="data"><a class="alink" href="#data" aria-label="この見出しへのリンク">#</a>もとの数字</h2>
   <details>
     <summary>林道関係の事業費を開く</summary>
     <div class="scroll">

@@ -37,6 +37,22 @@
   .nav span{color:var(--ink);font-weight:700}
   @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
 
+  .ysw{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 0 12px}
+  .yb{appearance:none;background:none;border:1px solid var(--rule);border-radius:50%;
+    width:40px;height:40px;font-size:22px;line-height:1;color:var(--ink);cursor:pointer;
+    font-family:var(--gothic);padding:0;flex:0 0 auto}
+  .yb:hover:not(:disabled){border-color:var(--moegi);color:var(--moegi)}
+  .yb:focus-visible{outline:2px solid var(--moegi);outline-offset:2px}
+  .yb:disabled{opacity:.26;cursor:default}
+  .yl{font-family:var(--mincho);font-size:19px;letter-spacing:.04em;
+    min-width:7.5em;text-align:center}
+  .ydots{display:flex;gap:5px;justify-content:center;margin:2px 0 14px}
+  .ydot{width:6px;height:6px;border-radius:50%;background:var(--rule)}
+  .ydot.on{background:var(--moegi)}
+  .yp[hidden]{display:none}
+  @media(max-width:560px){.yl{font-size:17px;min-width:6.5em}
+    .yb{width:36px;height:36px;font-size:20px}}
+
   :root{--paper:#FBFBF8;--panel:#F2F3EE;--ink:#23241F;--muted:#6B6E64;--rule:#D8DAD0;--moegi:#7A9A3C;
     --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
     --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;}
@@ -78,15 +94,6 @@
   td.kn{color:var(--muted)}
   tfoot .tot td{border-top:1px solid var(--ink);border-bottom:none;font-weight:700;background:var(--panel)}
   .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
-  .ysw{display:flex;align-items:center;justify-content:center;gap:18px;margin:0 0 10px}
-  .yb{appearance:none;background:none;border:1px solid var(--rule);border-radius:50%;
-    width:38px;height:38px;font-size:22px;line-height:1;color:var(--ink);cursor:pointer;
-    font-family:var(--gothic);padding:0}
-  .yb:hover:not(:disabled){border-color:var(--moegi);color:var(--moegi)}
-  .yb:disabled{opacity:.28;cursor:default}
-  .yl{font-family:var(--mincho);font-size:19px;letter-spacing:.04em;min-width:7.5em;
-    text-align:center}
-  .yp[hidden]{display:none}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;
     background:var(--panel);padding:1px 5px}
   .box{background:var(--panel);padding:20px 24px;margin:26px 0;font-size:15.5px;line-height:1.85}
@@ -100,6 +107,40 @@
   @media (max-width:600px){body{font-size:16px} h1{font-size:27px}
     h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
     .pt{font-size:17px} .ax{font-size:15px}}
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
 </style></head><body><div class="wrap">
 
 <div class="top">
@@ -118,12 +159,13 @@
 </div>
 
 <h1>決算を読む</h1>
+<p class="stamp"><b>データの時点</b>　大鹿村一般会計決算書（平成30年度〜令和7年度）。令和7年度決算は令和8年9月議会で認定<br><b>このページの更新</b>　2026年9月18日</p>
 <p class="lede">村の予算は、年度のはじめに議会で決まったあと、補正で増減し、前の年度から繰り越された分が加わって、
 最終的な予算現額になります。そこから実際に支出された額が決算です。
 広報おおしかに載るのは当初予算額と決算額だけなので、その間の動きは決算書を見ないと分かりません。
 平成30年度から令和7年度までの8年分を並べています。</p>
 
-<h2>予算はどう変わって決算になるか</h2>
+<h2 id="yosan"><a class="alink" href="#yosan" aria-label="この見出しへのリンク">#</a>予算はどう変わって決算になるか</h2>
 <p class="sub">3つの額の8年間</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 360, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 16, &quot;ymax&quot;: 33, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 18.4], [2019, 20.9], [2020, 20.08], [2021, 23.98], [2022, 19.8], [2023, 21.51], [2024, 22.58], [2025, 26.5]]}, {&quot;n&quot;: &quot;予算現額&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 27.70808], [2019, 28.93223], [2020, 31.60349], [2021, 30.64043], [2022, 28.37786], [2023, 29.455445], [2024, 27.617099], [2025, 27.04603]]}, {&quot;n&quot;: &quot;支出済額&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 21.984245], [2019, 21.897054], [2020, 27.908303], [2021, 25.544557], [2022, 23.073392], [2023, 25.794137], [2024, 23.61869], [2025, 25.265666]]}]}"><svg viewBox="0 0 900 360" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -170,7 +212,7 @@
   <li class="fact"><b>令和7年度は補正が減額</b><span>補正予算額の合計が8年間で唯一のマイナス（-1.7億円）になっています。</span></li>
 </ul>
 
-<h2>予算現額はどう使われたか</h2>
+<h2 id="shikko"><a class="alink" href="#shikko" aria-label="この見出しへのリンク">#</a>予算現額はどう使われたか</h2>
 <p class="sub">支出済額・翌年度繰越額・不用額の別</p>
 <figure>
   <svg viewBox="0 0 900 368" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -239,7 +281,7 @@
 支出済額が予算現額に占める割合は、平成30年度の79.3％から令和7年度の93.4％まで動いています。</p>
 
 
-<h2>地方交付税</h2>
+<h2 id="kofuzei"><a class="alink" href="#kofuzei" aria-label="この見出しへのリンク">#</a>地方交付税</h2>
 <p class="sub">当初予算額と収入済額</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 360, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 15, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算（収入済額）&quot;, &quot;c&quot;: &quot;#23241F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 11.37536], [2019, 11.15968], [2020, 13.01671], [2021, 13.70096], [2022, 13.46473], [2023, 13.53823], [2024, 13.33856], [2025, 13.90351]]}, {&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 9.5], [2019, 9.2], [2020, 9.5], [2021, 10.0], [2022, 10.2], [2023, 10.2], [2024, 10.4], [2025, 10.5]]}, {&quot;n&quot;: &quot;村税（収入済額）&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 1.926803], [2019, 1.919964], [2020, 1.883161], [2021, 1.815636], [2022, 1.848335], [2023, 1.837787], [2024, 1.903559], [2025, 1.90591]]}]}"><svg viewBox="0 0 900 360" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -289,7 +331,7 @@
 
 <p>地方交付税は、この8年のあいだ、歳入の43.8％から55.2％を占めています。村税（1.8〜1.9億円）のおよそ7倍です。</p>
 
-<h2>もとの数字（地方交付税）</h2>
+<h2 id="data-kofuzei"><a class="alink" href="#data-kofuzei" aria-label="この見出しへのリンク">#</a>もとの数字（地方交付税）</h2>
 <p class="sub">単位は円</p>
 <details><summary>表を開く</summary>
 <div class="scroll"><table>
@@ -307,13 +349,18 @@
 </tbody></table></div></details>
 
 
-<h2>款別の執行状況</h2>
-<p class="sub">年度を切りかえて見られます</p>
-<figure>
-  <div class="ysw"><button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button><span class="yl" id="ylab">令和7年度</span><button type="button" class="yb" data-d="1" aria-label="次の年度">›</button></div><div id="ybox"><div class="yp" data-y="2018" hidden><svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
+<h2 id="kanbetsu"><a class="alink" href="#kanbetsu" aria-label="この見出しへのリンク">#</a>款別の執行状況</h2>
+<p class="sub">‹ › で年度を切りかえられます</p>
+<div class="ysw-unit" id="kanbetsu-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
 <text x="118" y="23" text-anchor="end" class="ax">議会費</text>
 <rect x="128.0" y="8" width="27.1" height="21" fill="#7A9A3C"/>
-<rect x="155.1" y="8" width="0.1" height="21" fill="#A8482F"/>
 <text x="164.2" y="23.0" class="pt" fill="#23241F">0.27</text>
 <text x="118" y="57" text-anchor="end" class="ax">総務費</text>
 <rect x="128.0" y="42" width="447.5" height="21" fill="#7A9A3C"/>
@@ -345,7 +392,6 @@
 <text x="371.8" y="227.0" class="pt" fill="#23241F">2.31</text>
 <text x="118" y="261" text-anchor="end" class="ax">消防費</text>
 <rect x="128.0" y="246" width="60.7" height="21" fill="#7A9A3C"/>
-<rect x="188.7" y="246" width="0.4" height="21" fill="#A8482F"/>
 <text x="198.1" y="261.0" class="pt" fill="#23241F">0.60</text>
 <text x="118" y="295" text-anchor="end" class="ax">教育費</text>
 <rect x="128.0" y="280" width="145.9" height="21" fill="#7A9A3C"/>
@@ -425,7 +471,6 @@
 <text x="295.3" y="363.0" class="pt" fill="#23241F">1.56</text>
 <text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
 <rect x="128.0" y="382" width="52.0" height="21" fill="#7A9A3C"/>
-<rect x="180.0" y="382" width="0.4" height="21" fill="#A8482F"/>
 <text x="189.3" y="397.0" class="pt" fill="#23241F">0.52</text>
 <text x="118" y="431" text-anchor="end" class="ax">予備費</text>
 <rect x="128.0" y="416" width="10.2" height="21" fill="#A8482F"/>
@@ -437,7 +482,6 @@
 <div class="yp" data-y="2020" hidden><svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
 <text x="118" y="23" text-anchor="end" class="ax">議会費</text>
 <rect x="128.0" y="8" width="26.2" height="21" fill="#7A9A3C"/>
-<rect x="154.2" y="8" width="0.0" height="21" fill="#A8482F"/>
 <text x="163.2" y="23.0" class="pt" fill="#23241F">0.26</text>
 <text x="118" y="57" text-anchor="end" class="ax">総務費</text>
 <rect x="128.0" y="42" width="580.9" height="21" fill="#7A9A3C"/>
@@ -470,7 +514,6 @@
 <text x="451.0" y="227.0" class="pt" fill="#23241F">3.09</text>
 <text x="118" y="261" text-anchor="end" class="ax">消防費</text>
 <rect x="128.0" y="246" width="66.3" height="21" fill="#7A9A3C"/>
-<rect x="194.3" y="246" width="0.3" height="21" fill="#A8482F"/>
 <text x="203.6" y="261.0" class="pt" fill="#23241F">0.66</text>
 <text x="118" y="295" text-anchor="end" class="ax">教育費</text>
 <rect x="128.0" y="280" width="407.8" height="21" fill="#7A9A3C"/>
@@ -500,7 +543,6 @@
 <div class="yp" data-y="2021" hidden><svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
 <text x="118" y="23" text-anchor="end" class="ax">議会費</text>
 <rect x="128.0" y="8" width="26.1" height="21" fill="#7A9A3C"/>
-<rect x="154.1" y="8" width="0.2" height="21" fill="#A8482F"/>
 <text x="163.3" y="23.0" class="pt" fill="#23241F">0.26</text>
 <text x="118" y="57" text-anchor="end" class="ax">総務費</text>
 <rect x="128.0" y="42" width="478.4" height="21" fill="#7A9A3C"/>
@@ -552,7 +594,6 @@
 <text x="337.4" y="363.0" class="pt" fill="#23241F">1.97</text>
 <text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
 <rect x="128.0" y="382" width="208.0" height="21" fill="#7A9A3C"/>
-<rect x="336.0" y="382" width="0.0" height="21" fill="#A8482F"/>
 <text x="345.0" y="397.0" class="pt" fill="#23241F">2.05</text>
 <text x="118" y="431" text-anchor="end" class="ax">予備費</text>
 <rect x="128.0" y="416" width="10.2" height="21" fill="#A8482F"/>
@@ -625,7 +666,6 @@
 <div class="yp" data-y="2023" hidden><svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
 <text x="118" y="23" text-anchor="end" class="ax">議会費</text>
 <rect x="128.0" y="8" width="27.1" height="21" fill="#7A9A3C"/>
-<rect x="155.1" y="8" width="0.3" height="21" fill="#A8482F"/>
 <text x="164.4" y="23.0" class="pt" fill="#23241F">0.27</text>
 <text x="118" y="57" text-anchor="end" class="ax">総務費</text>
 <rect x="128.0" y="42" width="373.3" height="21" fill="#7A9A3C"/>
@@ -669,11 +709,9 @@
 <text x="522.5" y="329.0" class="pt" fill="#23241F">3.79</text>
 <text x="118" y="363" text-anchor="end" class="ax">公債費</text>
 <rect x="128.0" y="348" width="225.9" height="21" fill="#7A9A3C"/>
-<rect x="353.9" y="348" width="0.1" height="21" fill="#A8482F"/>
 <text x="363.0" y="363.0" class="pt" fill="#23241F">2.23</text>
 <text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
 <rect x="128.0" y="382" width="153.7" height="21" fill="#7A9A3C"/>
-<rect x="281.7" y="382" width="0.0" height="21" fill="#A8482F"/>
 <text x="290.7" y="397.0" class="pt" fill="#23241F">1.51</text>
 <text x="118" y="431" text-anchor="end" class="ax">予備費</text>
 <rect x="128.0" y="416" width="3.3" height="21" fill="#A8482F"/>
@@ -737,7 +775,6 @@
 <text x="406.7" y="363.0" class="pt" fill="#23241F">2.66</text>
 <text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
 <rect x="128.0" y="382" width="52.2" height="21" fill="#7A9A3C"/>
-<rect x="180.2" y="382" width="0.0" height="21" fill="#A8482F"/>
 <text x="189.2" y="397.0" class="pt" fill="#23241F">0.51</text>
 <text x="118" y="431" text-anchor="end" class="ax">予備費</text>
 <rect x="128.0" y="416" width="9.8" height="21" fill="#A8482F"/>
@@ -749,7 +786,6 @@
 <div class="yp" data-y="2025"><svg viewBox="0 0 900 500" role="img" xmlns="http://www.w3.org/2000/svg">
 <text x="118" y="23" text-anchor="end" class="ax">議会費</text>
 <rect x="128.0" y="8" width="27.6" height="21" fill="#7A9A3C"/>
-<rect x="155.6" y="8" width="0.1" height="21" fill="#A8482F"/>
 <text x="164.7" y="23.0" class="pt" fill="#23241F">0.27</text>
 <text x="118" y="57" text-anchor="end" class="ax">総務費</text>
 <rect x="128.0" y="42" width="576.1" height="21" fill="#7A9A3C"/>
@@ -782,7 +818,6 @@
 <text x="529.5" y="227.0" class="pt" fill="#23241F">3.86</text>
 <text x="118" y="261" text-anchor="end" class="ax">消防費</text>
 <rect x="128.0" y="246" width="89.3" height="21" fill="#7A9A3C"/>
-<rect x="217.3" y="246" width="0.4" height="21" fill="#A8482F"/>
 <text x="226.6" y="261.0" class="pt" fill="#23241F">0.88</text>
 <text x="118" y="295" text-anchor="end" class="ax">教育費</text>
 <rect x="128.0" y="280" width="205.6" height="21" fill="#7A9A3C"/>
@@ -791,7 +826,6 @@
 <text x="357.9" y="295.0" class="pt" fill="#23241F">2.17</text>
 <text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
 <rect x="128.0" y="314" width="50.8" height="21" fill="#7A9A3C"/>
-<rect x="178.8" y="314" width="0.1" height="21" fill="#A8482F"/>
 <text x="187.9" y="329.0" class="pt" fill="#23241F">0.50</text>
 <text x="118" y="363" text-anchor="end" class="ax">公債費</text>
 <rect x="128.0" y="348" width="248.2" height="21" fill="#7A9A3C"/>
@@ -807,19 +841,357 @@
 <rect x="128" y="478" width="11" height="11" fill="#7A9A3C"/><text x="144" y="488" class="ax">支出済額</text>
 <rect x="278" y="478" width="11" height="11" fill="#B08A3E"/><text x="294" y="488" class="ax">翌年度繰越額</text>
 <rect x="428" y="478" width="11" height="11" fill="#A8482F"/><text x="444" y="488" class="ax">不用額</text>
-</svg></div></div>
-  <figcaption>一般会計歳出。款ごとの予算現額（右端の数字）が、支出済額・翌年度繰越額・不用額に分かれた内訳。単位は億円。
-  8年で目盛りをそろえてあるので、年をまたいで棒の長さを比べられます。</figcaption>
-</figure>
+</svg></div><figcaption>一般会計歳出。款ごとの予算現額（右端の数字）が、支出済額・翌年度繰越額・不用額に分かれた内訳。単位は億円。8年で目盛りをそろえてあるので、年をまたいで棒の長さを比べられます。</figcaption></figure>
+  <details><summary>8年分の表を開く（款別・予算現額と支出済額・単位は円）</summary><div class="scroll"><table><thead><tr><th>款</th><th>18<br>予算現額</th><th>18<br>支出済</th><th>19<br>予算現額</th><th>19<br>支出済</th><th>20<br>予算現額</th><th>20<br>支出済</th><th>21<br>予算現額</th><th>21<br>支出済</th><th>22<br>予算現額</th><th>22<br>支出済</th><th>23<br>予算現額</th><th>23<br>支出済</th><th>24<br>予算現額</th><th>24<br>支出済</th><th>25<br>予算現額</th><th>25<br>支出済</th></tr></thead><tbody><tr><td>議会費</td><td>26,791,000</td><td>26,725,677</td><td>26,678,000</td><td>25,935,255</td><td>25,780,000</td><td>25,775,413</td><td>25,934,000</td><td>25,689,505</td><td>26,658,000</td><td>26,130,156</td><td>26,968,000</td><td>26,660,825</td><td>28,235,000</td><td>27,692,883</td><td>27,297,000</td><td>27,163,440</td></tr>
+<tr><td>総務費</td><td>478,880,000</td><td>440,571,184</td><td>461,019,000</td><td>393,797,556</td><td>635,717,000</td><td>571,914,657</td><td>524,472,000</td><td>471,016,805</td><td>449,793,000</td><td>429,734,585</td><td>444,330,000</td><td>367,554,984</td><td>546,522,900</td><td>485,398,262</td><td>591,524,000</td><td>567,116,053</td></tr>
+<tr><td>民生費</td><td>313,967,000</td><td>301,151,417</td><td>653,700,000</td><td>378,624,239</td><td>586,039,000</td><td>565,993,799</td><td>393,477,000</td><td>373,025,340</td><td>329,312,000</td><td>317,078,058</td><td>356,864,000</td><td>335,238,142</td><td>359,210,000</td><td>342,360,610</td><td>392,518,000</td><td>385,527,371</td></tr>
+<tr><td>衛生費</td><td>142,472,000</td><td>138,013,051</td><td>148,648,000</td><td>144,599,322</td><td>186,287,000</td><td>176,595,348</td><td>174,778,000</td><td>162,526,335</td><td>197,529,000</td><td>194,461,392</td><td>229,411,000</td><td>227,283,516</td><td>209,323,000</td><td>205,689,264</td><td>198,118,000</td><td>194,589,575</td></tr>
+<tr><td>農林水産業費</td><td>335,306,000</td><td>194,252,600</td><td>309,258,000</td><td>297,203,650</td><td>199,542,000</td><td>174,749,058</td><td>226,630,000</td><td>192,217,781</td><td>229,300,000</td><td>208,245,063</td><td>233,979,000</td><td>185,818,118</td><td>277,774,000</td><td>190,332,582</td><td>289,951,000</td><td>245,604,196</td></tr>
+<tr><td>商工費</td><td>476,396,000</td><td>467,365,396</td><td>57,744,000</td><td>56,518,775</td><td>118,818,000</td><td>109,144,781</td><td>104,402,000</td><td>83,932,005</td><td>126,277,000</td><td>116,815,310</td><td>101,224,000</td><td>99,414,035</td><td>135,848,400</td><td>116,706,802</td><td>144,531,000</td><td>129,062,749</td></tr>
+<tr><td>土木費</td><td>231,129,000</td><td>146,075,513</td><td>225,942,000</td><td>202,369,821</td><td>309,162,000</td><td>178,509,650</td><td>412,832,000</td><td>254,553,218</td><td>314,366,000</td><td>240,631,709</td><td>304,806,860</td><td>302,627,372</td><td>350,745,000</td><td>266,279,294</td><td>386,411,000</td><td>347,459,754</td></tr>
+<tr><td>消防費</td><td>60,138,000</td><td>59,785,368</td><td>54,701,000</td><td>53,809,632</td><td>65,581,000</td><td>65,237,231</td><td>63,212,000</td><td>61,041,371</td><td>73,709,000</td><td>72,895,278</td><td>60,490,000</td><td>58,763,965</td><td>56,294,000</td><td>55,151,206</td><td>88,228,000</td><td>87,871,333</td></tr>
+<tr><td>教育費</td><td>190,398,000</td><td>143,660,598</td><td>482,711,000</td><td>187,587,919</td><td>411,131,000</td><td>401,470,300</td><td>372,360,000</td><td>349,365,430</td><td>228,360,000</td><td>211,632,707</td><td>430,893,000</td><td>269,650,030</td><td>341,476,000</td><td>312,363,272</td><td>217,494,000</td><td>202,410,316</td></tr>
+<tr><td>災害復旧費</td><td>318,983,000</td><td>97,787,277</td><td>255,432,000</td><td>244,301,463</td><td>196,527,000</td><td>113,880,660</td><td>353,809,000</td><td>181,631,840</td><td>455,653,000</td><td>100,195,000</td><td>379,471,600</td><td>332,643,435</td><td>129,708,000</td><td>73,057,000</td><td>50,149,000</td><td>50,025,000</td></tr>
+<tr><td>公債費</td><td>174,684,000</td><td>172,347,285</td><td>155,868,000</td><td>153,802,425</td><td>229,773,000</td><td>222,420,851</td><td>197,330,000</td><td>194,651,426</td><td>202,879,000</td><td>196,444,553</td><td>222,522,000</td><td>222,416,022</td><td>265,508,000</td><td>235,467,602</td><td>262,387,000</td><td>244,317,218</td></tr>
+<tr><td>諸支出金</td><td>11,664,000</td><td>10,689,164</td><td>51,522,000</td><td>51,155,334</td><td>185,992,000</td><td>185,138,518</td><td>204,807,000</td><td>204,804,694</td><td>194,275,000</td><td>193,075,422</td><td>151,346,000</td><td>151,343,219</td><td>51,378,000</td><td>51,370,210</td><td>45,995,000</td><td>45,419,611</td></tr>
+<tr><td>予備費</td><td>10,000,000</td><td>0</td><td>10,000,000</td><td>0</td><td>10,000,000</td><td>0</td><td>10,000,000</td><td>0</td><td>9,675,000</td><td>0</td><td>3,239,000</td><td>0</td><td>9,687,600</td><td>0</td><td>10,000,000</td><td>0</td></tr></tbody></table></div></details>
+</div>
 <p>予備費は、支出済額が0です。予備費から他の款へまわした分は、決算書ではその款の予算現額がふえ、予備費の予算現額がへる形で処理されます。令和7年度は、そのやりとりが決算書に印字されていません。</p>
 
-<h2>不用額の8年</h2>
-<p class="sub">款別・単位は円</p>
-<details><summary>表を開く（8年分・13款）</summary>
-<div class="scroll"><table>
-<thead><tr><th>款</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead>
-<tbody>
-<tr><td>議会費</td><td>65,323</td><td>742,745</td><td>4,587</td><td>244,495</td><td>527,844</td><td>307,175</td><td>542,117</td><td>133,560</td></tr>
+<h2 id="fuyo"><a class="alink" href="#fuyo" aria-label="この見出しへのリンク">#</a>不用額の8年</h2>
+<p class="sub">‹ › で年度を切りかえられます</p>
+<div class="ysw-unit" id="fuyo-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="0.9" height="21" fill="#7A9A3C"/>
+<text x="137.9" y="23.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="359.1" height="21" fill="#7A9A3C"/>
+<text x="496.1" y="57.0" class="pt" fill="#23241F">0.25</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="67.3" height="21" fill="#7A9A3C"/>
+<text x="204.3" y="91.0" class="pt" fill="#23241F">0.05</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="63.3" height="21" fill="#7A9A3C"/>
+<text x="200.3" y="125.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="57.5" height="21" fill="#7A9A3C"/>
+<text x="194.5" y="159.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="128.2" height="21" fill="#7A9A3C"/>
+<text x="265.2" y="193.0" class="pt" fill="#23241F">0.09</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="52.7" height="21" fill="#7A9A3C"/>
+<text x="189.7" y="227.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="5.0" height="21" fill="#7A9A3C"/>
+<text x="142.0" y="261.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="53.9" height="21" fill="#7A9A3C"/>
+<text x="190.9" y="295.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="32.3" height="21" fill="#7A9A3C"/>
+<text x="169.3" y="329.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="33.2" height="21" fill="#7A9A3C"/>
+<text x="170.2" y="363.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<rect x="128.0" y="382" width="13.8" height="21" fill="#7A9A3C"/>
+<text x="150.8" y="397.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="141.9" height="21" fill="#7A9A3C"/>
+<text x="278.9" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="10.5" height="21" fill="#7A9A3C"/>
+<text x="147.5" y="23.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="291.3" height="21" fill="#7A9A3C"/>
+<text x="428.3" y="57.0" class="pt" fill="#23241F">0.21</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="131.7" height="21" fill="#7A9A3C"/>
+<text x="268.7" y="91.0" class="pt" fill="#23241F">0.09</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="57.5" height="21" fill="#7A9A3C"/>
+<text x="194.5" y="125.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="64.1" height="21" fill="#7A9A3C"/>
+<text x="201.1" y="159.0" class="pt" fill="#23241F">0.05</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="17.4" height="21" fill="#7A9A3C"/>
+<text x="154.4" y="193.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="32.9" height="21" fill="#7A9A3C"/>
+<text x="169.9" y="227.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="12.7" height="21" fill="#7A9A3C"/>
+<text x="149.7" y="261.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="213.8" height="21" fill="#7A9A3C"/>
+<text x="350.8" y="295.0" class="pt" fill="#23241F">0.15</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="13.7" height="21" fill="#7A9A3C"/>
+<text x="150.7" y="329.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="29.3" height="21" fill="#7A9A3C"/>
+<text x="166.3" y="363.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<rect x="128.0" y="382" width="5.2" height="21" fill="#7A9A3C"/>
+<text x="142.2" y="397.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="141.9" height="21" fill="#7A9A3C"/>
+<text x="278.9" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<text x="137.1" y="23.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="473.8" height="21" fill="#7A9A3C"/>
+<text x="610.8" y="57.0" class="pt" fill="#23241F">0.33</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="276.7" height="21" fill="#7A9A3C"/>
+<text x="413.7" y="91.0" class="pt" fill="#23241F">0.19</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="137.5" height="21" fill="#7A9A3C"/>
+<text x="274.5" y="125.0" class="pt" fill="#23241F">0.10</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="117.9" height="21" fill="#7A9A3C"/>
+<text x="254.9" y="159.0" class="pt" fill="#23241F">0.08</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="55.3" height="21" fill="#7A9A3C"/>
+<text x="192.3" y="193.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="112.6" height="21" fill="#7A9A3C"/>
+<text x="249.6" y="227.0" class="pt" fill="#23241F">0.08</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="141.9" y="261.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="109.8" height="21" fill="#7A9A3C"/>
+<text x="246.8" y="295.0" class="pt" fill="#23241F">0.08</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="294.8" height="21" fill="#7A9A3C"/>
+<text x="431.8" y="329.0" class="pt" fill="#23241F">0.21</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="104.3" height="21" fill="#7A9A3C"/>
+<text x="241.3" y="363.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<rect x="128.0" y="382" width="12.1" height="21" fill="#7A9A3C"/>
+<text x="149.1" y="397.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="141.9" height="21" fill="#7A9A3C"/>
+<text x="278.9" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="3.5" height="21" fill="#7A9A3C"/>
+<text x="140.5" y="23.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="449.6" height="21" fill="#7A9A3C"/>
+<text x="586.6" y="57.0" class="pt" fill="#23241F">0.32</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="290.3" height="21" fill="#7A9A3C"/>
+<text x="427.3" y="91.0" class="pt" fill="#23241F">0.20</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="107.2" height="21" fill="#7A9A3C"/>
+<text x="244.2" y="125.0" class="pt" fill="#23241F">0.08</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="87.3" height="21" fill="#7A9A3C"/>
+<text x="224.3" y="159.0" class="pt" fill="#23241F">0.06</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="189.8" height="21" fill="#7A9A3C"/>
+<text x="326.8" y="193.0" class="pt" fill="#23241F">0.13</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="254.8" height="21" fill="#7A9A3C"/>
+<text x="391.8" y="227.0" class="pt" fill="#23241F">0.18</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="22.3" height="21" fill="#7A9A3C"/>
+<text x="159.3" y="261.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="100.1" height="21" fill="#7A9A3C"/>
+<text x="237.1" y="295.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="31.9" height="21" fill="#7A9A3C"/>
+<text x="168.9" y="329.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="38.0" height="21" fill="#7A9A3C"/>
+<text x="175.0" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<text x="137.0" y="397.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="141.9" height="21" fill="#7A9A3C"/>
+<text x="278.9" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="7.5" height="21" fill="#7A9A3C"/>
+<text x="144.5" y="23.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="284.7" height="21" fill="#7A9A3C"/>
+<text x="421.7" y="57.0" class="pt" fill="#23241F">0.20</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="173.6" height="21" fill="#7A9A3C"/>
+<text x="310.6" y="91.0" class="pt" fill="#23241F">0.12</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="43.5" height="21" fill="#7A9A3C"/>
+<text x="180.5" y="125.0" class="pt" fill="#23241F">0.03</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="100.1" height="21" fill="#7A9A3C"/>
+<text x="237.1" y="159.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="97.6" height="21" fill="#7A9A3C"/>
+<text x="234.6" y="193.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="407.0" height="21" fill="#7A9A3C"/>
+<text x="544.0" y="227.0" class="pt" fill="#23241F">0.29</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="11.5" height="21" fill="#7A9A3C"/>
+<text x="148.5" y="261.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="165.7" height="21" fill="#7A9A3C"/>
+<text x="302.7" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="103.9" height="21" fill="#7A9A3C"/>
+<text x="240.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="91.3" height="21" fill="#7A9A3C"/>
+<text x="228.3" y="363.0" class="pt" fill="#23241F">0.06</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<rect x="128.0" y="382" width="17.0" height="21" fill="#7A9A3C"/>
+<text x="154.0" y="397.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="137.3" height="21" fill="#7A9A3C"/>
+<text x="274.3" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="4.4" height="21" fill="#7A9A3C"/>
+<text x="141.4" y="23.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="54.3" height="21" fill="#7A9A3C"/>
+<text x="191.3" y="57.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="306.9" height="21" fill="#7A9A3C"/>
+<text x="443.9" y="91.0" class="pt" fill="#23241F">0.22</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="30.2" height="21" fill="#7A9A3C"/>
+<text x="167.2" y="125.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="29.5" height="21" fill="#7A9A3C"/>
+<text x="166.5" y="159.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="25.7" height="21" fill="#7A9A3C"/>
+<text x="162.7" y="193.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="30.9" height="21" fill="#7A9A3C"/>
+<text x="167.9" y="227.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="24.5" height="21" fill="#7A9A3C"/>
+<text x="161.5" y="261.0" class="pt" fill="#23241F">0.02</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="159.6" height="21" fill="#7A9A3C"/>
+<text x="296.6" y="295.0" class="pt" fill="#23241F">0.11</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="12.8" height="21" fill="#7A9A3C"/>
+<text x="149.8" y="329.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="1.5" height="21" fill="#7A9A3C"/>
+<text x="138.5" y="363.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<text x="137.0" y="397.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="46.0" height="21" fill="#7A9A3C"/>
+<text x="183.0" y="431.0" class="pt" fill="#23241F">0.03</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="7.7" height="21" fill="#7A9A3C"/>
+<text x="144.7" y="23.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="279.3" height="21" fill="#7A9A3C"/>
+<text x="416.3" y="57.0" class="pt" fill="#23241F">0.20</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="229.4" height="21" fill="#7A9A3C"/>
+<text x="366.4" y="91.0" class="pt" fill="#23241F">0.16</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="44.4" height="21" fill="#7A9A3C"/>
+<text x="181.4" y="125.0" class="pt" fill="#23241F">0.03</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="664.0" height="21" fill="#7A9A3C"/>
+<text x="801.0" y="159.0" class="pt" fill="#23241F">0.47</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="9.6" height="21" fill="#7A9A3C"/>
+<text x="146.6" y="193.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="99.3" height="21" fill="#7A9A3C"/>
+<text x="236.3" y="227.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="16.2" height="21" fill="#7A9A3C"/>
+<text x="153.2" y="261.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="315.6" height="21" fill="#7A9A3C"/>
+<text x="452.6" y="295.0" class="pt" fill="#23241F">0.22</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="202.9" height="21" fill="#7A9A3C"/>
+<text x="339.9" y="329.0" class="pt" fill="#23241F">0.14</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="426.3" height="21" fill="#7A9A3C"/>
+<text x="563.3" y="363.0" class="pt" fill="#23241F">0.30</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<text x="137.1" y="397.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="137.5" height="21" fill="#7A9A3C"/>
+<text x="274.5" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="23" text-anchor="end" class="ax">議会費</text>
+<rect x="128.0" y="8" width="1.9" height="21" fill="#7A9A3C"/>
+<text x="138.9" y="23.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="57" text-anchor="end" class="ax">総務費</text>
+<rect x="128.0" y="42" width="175.7" height="21" fill="#7A9A3C"/>
+<text x="312.7" y="57.0" class="pt" fill="#23241F">0.12</text>
+<text x="118" y="91" text-anchor="end" class="ax">民生費</text>
+<rect x="128.0" y="76" width="65.2" height="21" fill="#7A9A3C"/>
+<text x="202.2" y="91.0" class="pt" fill="#23241F">0.05</text>
+<text x="118" y="125" text-anchor="end" class="ax">衛生費</text>
+<rect x="128.0" y="110" width="50.1" height="21" fill="#7A9A3C"/>
+<text x="187.1" y="125.0" class="pt" fill="#23241F">0.04</text>
+<text x="118" y="159" text-anchor="end" class="ax">農林水産業費</text>
+<rect x="128.0" y="144" width="102.0" height="21" fill="#7A9A3C"/>
+<text x="239.0" y="159.0" class="pt" fill="#23241F">0.07</text>
+<text x="118" y="193" text-anchor="end" class="ax">商工費</text>
+<rect x="128.0" y="178" width="45.4" height="21" fill="#7A9A3C"/>
+<text x="182.4" y="193.0" class="pt" fill="#23241F">0.03</text>
+<text x="118" y="227" text-anchor="end" class="ax">土木費</text>
+<rect x="128.0" y="212" width="189.4" height="21" fill="#7A9A3C"/>
+<text x="326.4" y="227.0" class="pt" fill="#23241F">0.13</text>
+<text x="118" y="261" text-anchor="end" class="ax">消防費</text>
+<rect x="128.0" y="246" width="5.1" height="21" fill="#7A9A3C"/>
+<text x="142.1" y="261.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="295" text-anchor="end" class="ax">教育費</text>
+<rect x="128.0" y="280" width="136.8" height="21" fill="#7A9A3C"/>
+<text x="273.8" y="295.0" class="pt" fill="#23241F">0.10</text>
+<text x="118" y="329" text-anchor="end" class="ax">災害復旧費</text>
+<rect x="128.0" y="314" width="1.8" height="21" fill="#7A9A3C"/>
+<text x="138.8" y="329.0" class="pt" fill="#23241F">0.00</text>
+<text x="118" y="363" text-anchor="end" class="ax">公債費</text>
+<rect x="128.0" y="348" width="256.5" height="21" fill="#7A9A3C"/>
+<text x="393.5" y="363.0" class="pt" fill="#23241F">0.18</text>
+<text x="118" y="397" text-anchor="end" class="ax">諸支出金</text>
+<rect x="128.0" y="382" width="8.2" height="21" fill="#7A9A3C"/>
+<text x="145.2" y="397.0" class="pt" fill="#23241F">0.01</text>
+<text x="118" y="431" text-anchor="end" class="ax">予備費</text>
+<rect x="128.0" y="416" width="141.9" height="21" fill="#7A9A3C"/>
+<text x="278.9" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div><figcaption>款ごとの不用額。単位は億円。8年で目盛りをそろえてあります。</figcaption></figure>
+  <details><summary>8年分の表を開く（款別・単位は円）</summary><div class="scroll"><table><thead><tr><th>款</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead><tbody><tr><td>議会費</td><td>65,323</td><td>742,745</td><td>4,587</td><td>244,495</td><td>527,844</td><td>307,175</td><td>542,117</td><td>133,560</td></tr>
 <tr><td>総務費</td><td>25,304,816</td><td>20,527,444</td><td>33,387,343</td><td>31,682,195</td><td>20,058,415</td><td>3,823,116</td><td>19,679,638</td><td>12,378,947</td></tr>
 <tr><td>民生費</td><td>4,738,583</td><td>9,278,761</td><td>19,495,201</td><td>20,451,660</td><td>12,233,942</td><td>21,625,858</td><td>16,166,390</td><td>4,596,629</td></tr>
 <tr><td>衛生費</td><td>4,458,949</td><td>4,048,678</td><td>9,691,652</td><td>7,551,665</td><td>3,067,608</td><td>2,127,484</td><td>3,127,736</td><td>3,528,425</td></tr>
@@ -831,8 +1203,8 @@
 <tr><td>災害復旧費</td><td>2,278,723</td><td>962,537</td><td>20,768,340</td><td>2,247,160</td><td>7,321,400</td><td>904,165</td><td>14,293,000</td><td>124,000</td></tr>
 <tr><td>公債費</td><td>2,336,715</td><td>2,065,575</td><td>7,352,149</td><td>2,678,574</td><td>6,434,447</td><td>105,978</td><td>30,040,398</td><td>18,069,782</td></tr>
 <tr><td>諸支出金</td><td>974,836</td><td>366,666</td><td>853,482</td><td>2,306</td><td>1,199,578</td><td>2,781</td><td>7,790</td><td>575,389</td></tr>
-<tr><td>予備費</td><td>10,000,000</td><td>10,000,000</td><td>10,000,000</td><td>10,000,000</td><td>9,675,000</td><td>3,239,000</td><td>9,687,600</td><td>10,000,000</td></tr>
-</tbody><tfoot><tr class="tot"><td>合計</td><td>71,109,470</td><td>72,007,609</td><td>129,775,734</td><td>120,965,250</td><td>115,614,307</td><td>51,175,897</td><td>171,383,913</td><td>83,132,384</td></tr></tfoot></table></div></details>
+<tr><td>予備費</td><td>10,000,000</td><td>10,000,000</td><td>10,000,000</td><td>10,000,000</td><td>9,675,000</td><td>3,239,000</td><td>9,687,600</td><td>10,000,000</td></tr></tbody><tfoot><tr class="tot"><td>合計</td><td>71,109,470</td><td>72,007,609</td><td>129,775,734</td><td>120,965,250</td><td>115,614,307</td><td>51,175,897</td><td>171,383,913</td><td>83,132,384</td></tr></tfoot></table></div></details>
+</div>
 
 <ul class="facts">
   <li class="fact"><b>令和6年度の農林水産業費の不用額は4,679万円</b><span>予算現額の17％にあたります。同じ款の他の7年度は208万円から831万円で、1％から4％でした。</span></li>
@@ -847,12 +1219,12 @@
 <p>実質収支額の一部または全部は、基金に積み立てることができます（地方自治法第233条の2）。次の節で扱います。</p>
 
 
-<h2>基金への積立と取り崩し</h2>
+<h2 id="kikin-doko"><a class="alink" href="#kikin-doko" aria-label="この見出しへのリンク">#</a>基金への積立と取り崩し</h2>
 <p class="sub">諸支出金と繰入金</p>
 <p>村が基金に積み立てた額は、歳出の款13 諸支出金に計上されます。基金から取り崩した額は、歳入の款17 繰入金に入ります。
 どちらも8年分が決算書から取れます。</p>
 
-<h2>積み立て</h2>
+<h2 id="tsumitate"><a class="alink" href="#tsumitate" aria-label="この見出しへのリンク">#</a>積み立て</h2>
 <p class="sub">当初予算額と支出済額</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 320, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 2.2, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算（支出済額）&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.106892], [2019, 0.511553], [2020, 1.851385], [2021, 2.048047], [2022, 1.930754], [2023, 1.513432], [2024, 0.513702], [2025, 0.454196]]}, {&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.09178], [2019, 0.09643], [2020, 0.1945], [2021, 0.15698], [2022, 0.16977], [2023, 0.02586], [2024, 0.03122], [2025, 0.03016]]}]}"><svg viewBox="0 0 900 320" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -888,7 +1260,7 @@
   <figcaption>歳出の款13 諸支出金。全額が基金への積立です。<span class="chint"></span></figcaption>
 </figure>
 
-<h2>取り崩し</h2>
+<h2 id="torikuzushi"><a class="alink" href="#torikuzushi" aria-label="この見出しへのリンク">#</a>取り崩し</h2>
 <p class="sub">当初予算額と収入済額</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 320, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 4.2, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;決算（収入済額）&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.97851], [2019, 1.47011], [2020, 0.04], [2021, 0.1249], [2022, 0.0277], [2023, 0.0159], [2024, 0.0256], [2025, 0.214473]]}, {&quot;n&quot;: &quot;当初予算額&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.84], [2019, 2.57], [2020, 1.535], [2021, 1.3445], [2022, 1.3827], [2023, 1.3396], [2024, 2.32191], [2025, 3.81593]]}]}"><svg viewBox="0 0 900 320" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -930,7 +1302,7 @@
   <li class="fact"><b>令和2年度から令和5年度は、積立が2億円前後で取り崩しがほぼ止まった</b><span>この4年度の積立から取り崩しを引いた差は、1億4,975万円から1億9,231万円です。平成30年度と令和元年度は、逆に取り崩しのほうが多くなっていました。</span></li>
 </ul>
 
-<h2>基金の残高</h2>
+<h2 id="kikin"><a class="alink" href="#kikin" aria-label="この見出しへのリンク">#</a>基金の残高</h2>
 <p class="sub">各年度末の現在高</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 340, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 35, &quot;xfmt&quot;: &quot;fy&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;基金の合計&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 25.44183], [2019, 24.48445], [2020, 26.29583], [2021, 28.219], [2022, 30.12204], [2023, 31.61959], [2024, 32.09923], [2025, 32.33893]]}, {&quot;n&quot;: &quot;ふるさとづくり基金&quot;, &quot;c&quot;: &quot;#B08A3E&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 2.48503], [2019, 2.48596], [2020, 3.48685], [2021, 4.19964], [2022, 5.19023], [2023, 6.20057], [2024, 6.2003], [2025, 6.20399]]}, {&quot;n&quot;: &quot;公共施設等整備基金&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 8.12936], [2019, 7.14251], [2020, 7.16335], [2021, 8.04168], [2022, 8.64699], [2023, 8.8186], [2024, 8.82034], [2025, 8.82799]]}]}"><svg viewBox="0 0 900 340" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -975,13 +1347,365 @@
   <li class="fact"><b>6つの基金は8年間まったく動いていない</b><span>地域福祉基金、歌舞伎伝承基金、畜産経営振興基金、ふるさと保全基金、土地開発基金、補助事業等つなぎ資金貸付基金。合わせて2億7,342万円で、8年間1円も増減していません。</span></li>
 </ul>
 
-<h2>基金ごとの8年</h2>
-<p class="sub">各年度末の現在高・単位は千円</p>
-<details><summary>表を開く（15基金）</summary>
-<div class="scroll"><table>
-<thead><tr><th>基金</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead>
-<tbody>
-<tr><td>財政調整基金</td><td>481,712</td><td>482,917</td><td>483,385</td><td>503,692</td><td>504,034</td><td>504,128</td><td>504,221</td><td>504,414</td></tr>
+<h2 id="kikin-betsu"><a class="alink" href="#kikin-betsu" aria-label="この見出しへのリンク">#</a>基金ごとの8年</h2>
+<p class="sub">‹ › で年度を切りかえられます</p>
+<div class="ysw-unit" id="kikin-sw" tabindex="0">
+  <div class="ysw">
+    <button type="button" class="yb" data-d="-1" aria-label="前の年度">‹</button>
+    <span class="yl">令和7年度</span>
+    <button type="button" class="yb" data-d="1" aria-label="次の年度">›</button>
+  </div>
+  <div class="ydots" aria-hidden="true"><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot"></span><span class="ydot on"></span></div>
+  <figure><div class="yp" data-y="2018" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="339.4" height="21" fill="#7A9A3C"/>
+<text x="518.4" y="23.0" class="pt" fill="#23241F">4.82</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="419.8" height="21" fill="#7A9A3C"/>
+<text x="598.8" y="57.0" class="pt" fill="#23241F">5.96</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="572.8" height="21" fill="#7A9A3C"/>
+<text x="751.8" y="91.0" class="pt" fill="#23241F">8.13</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="39.4" height="21" fill="#7A9A3C"/>
+<text x="218.4" y="125.0" class="pt" fill="#23241F">0.56</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="175.1" height="21" fill="#7A9A3C"/>
+<text x="354.1" y="159.0" class="pt" fill="#23241F">2.49</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="51.1" height="21" fill="#7A9A3C"/>
+<text x="230.1" y="193.0" class="pt" fill="#23241F">0.73</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="2.3" height="21" fill="#7A9A3C"/>
+<text x="181.3" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2019" hidden><svg viewBox="0 0 900 476" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="340.3" height="21" fill="#7A9A3C"/>
+<text x="519.3" y="23.0" class="pt" fill="#23241F">4.83</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="420.9" height="21" fill="#7A9A3C"/>
+<text x="599.9" y="57.0" class="pt" fill="#23241F">5.97</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="503.2" height="21" fill="#7A9A3C"/>
+<text x="682.2" y="91.0" class="pt" fill="#23241F">7.14</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="39.4" height="21" fill="#7A9A3C"/>
+<text x="218.4" y="125.0" class="pt" fill="#23241F">0.56</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="175.2" height="21" fill="#7A9A3C"/>
+<text x="354.2" y="159.0" class="pt" fill="#23241F">2.49</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="51.2" height="21" fill="#7A9A3C"/>
+<text x="230.2" y="193.0" class="pt" fill="#23241F">0.73</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="2.4" height="21" fill="#7A9A3C"/>
+<text x="181.4" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+</svg></div>
+<div class="yp" data-y="2020" hidden><svg viewBox="0 0 900 510" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="340.6" height="21" fill="#7A9A3C"/>
+<text x="519.6" y="23.0" class="pt" fill="#23241F">4.83</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="446.6" height="21" fill="#7A9A3C"/>
+<text x="625.6" y="57.0" class="pt" fill="#23241F">6.34</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="504.7" height="21" fill="#7A9A3C"/>
+<text x="683.7" y="91.0" class="pt" fill="#23241F">7.16</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="63.4" height="21" fill="#7A9A3C"/>
+<text x="242.4" y="125.0" class="pt" fill="#23241F">0.90</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="245.7" height="21" fill="#7A9A3C"/>
+<text x="424.7" y="159.0" class="pt" fill="#23241F">3.49</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="51.2" height="21" fill="#7A9A3C"/>
+<text x="230.2" y="193.0" class="pt" fill="#23241F">0.73</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="2.4" height="21" fill="#7A9A3C"/>
+<text x="181.4" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+<text x="160" y="465" text-anchor="end" class="ax">森林環境譲与税基金</text>
+<rect x="170.0" y="450" width="5.6" height="21" fill="#7A9A3C"/>
+<text x="184.6" y="465.0" class="pt" fill="#23241F">0.08</text>
+</svg></div>
+<div class="yp" data-y="2021" hidden><svg viewBox="0 0 900 510" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="354.9" height="21" fill="#7A9A3C"/>
+<text x="533.9" y="23.0" class="pt" fill="#23241F">5.04</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="447.4" height="21" fill="#7A9A3C"/>
+<text x="626.4" y="57.0" class="pt" fill="#23241F">6.35</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="566.6" height="21" fill="#7A9A3C"/>
+<text x="745.6" y="91.0" class="pt" fill="#23241F">8.04</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="63.4" height="21" fill="#7A9A3C"/>
+<text x="242.4" y="125.0" class="pt" fill="#23241F">0.90</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="295.9" height="21" fill="#7A9A3C"/>
+<text x="474.9" y="159.0" class="pt" fill="#23241F">4.20</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="51.3" height="21" fill="#7A9A3C"/>
+<text x="230.3" y="193.0" class="pt" fill="#23241F">0.73</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="2.4" height="21" fill="#7A9A3C"/>
+<text x="181.4" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+<text x="160" y="465" text-anchor="end" class="ax">森林環境譲与税基金</text>
+<rect x="170.0" y="450" width="13.7" height="21" fill="#7A9A3C"/>
+<text x="192.7" y="465.0" class="pt" fill="#23241F">0.19</text>
+</svg></div>
+<div class="yp" data-y="2022" hidden><svg viewBox="0 0 900 510" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="355.1" height="21" fill="#7A9A3C"/>
+<text x="534.1" y="23.0" class="pt" fill="#23241F">5.04</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="447.8" height="21" fill="#7A9A3C"/>
+<text x="626.8" y="57.0" class="pt" fill="#23241F">6.36</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="609.2" height="21" fill="#7A9A3C"/>
+<text x="788.2" y="91.0" class="pt" fill="#23241F">8.65</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="81.0" height="21" fill="#7A9A3C"/>
+<text x="260.0" y="125.0" class="pt" fill="#23241F">1.15</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="365.7" height="21" fill="#7A9A3C"/>
+<text x="544.7" y="159.0" class="pt" fill="#23241F">5.19</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="51.3" height="21" fill="#7A9A3C"/>
+<text x="230.3" y="193.0" class="pt" fill="#23241F">0.73</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="2.4" height="21" fill="#7A9A3C"/>
+<text x="181.4" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+<text x="160" y="465" text-anchor="end" class="ax">森林環境譲与税基金</text>
+<rect x="170.0" y="450" width="17.2" height="21" fill="#7A9A3C"/>
+<text x="196.2" y="465.0" class="pt" fill="#23241F">0.24</text>
+</svg></div>
+<div class="yp" data-y="2023" hidden><svg viewBox="0 0 900 510" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="355.2" height="21" fill="#7A9A3C"/>
+<text x="534.2" y="23.0" class="pt" fill="#23241F">5.04</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="469.0" height="21" fill="#7A9A3C"/>
+<text x="648.0" y="57.0" class="pt" fill="#23241F">6.66</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="621.3" height="21" fill="#7A9A3C"/>
+<text x="800.3" y="91.0" class="pt" fill="#23241F">8.82</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="81.0" height="21" fill="#7A9A3C"/>
+<text x="260.0" y="125.0" class="pt" fill="#23241F">1.15</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="436.9" height="21" fill="#7A9A3C"/>
+<text x="615.9" y="159.0" class="pt" fill="#23241F">6.20</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="51.3" height="21" fill="#7A9A3C"/>
+<text x="230.3" y="193.0" class="pt" fill="#23241F">0.73</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="2.4" height="21" fill="#7A9A3C"/>
+<text x="181.4" y="363.0" class="pt" fill="#23241F">0.03</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+<text x="160" y="465" text-anchor="end" class="ax">森林環境譲与税基金</text>
+<rect x="170.0" y="450" width="18.1" height="21" fill="#7A9A3C"/>
+<text x="197.1" y="465.0" class="pt" fill="#23241F">0.26</text>
+</svg></div>
+<div class="yp" data-y="2024" hidden><svg viewBox="0 0 900 510" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="355.3" height="21" fill="#7A9A3C"/>
+<text x="534.3" y="23.0" class="pt" fill="#23241F">5.04</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="469.1" height="21" fill="#7A9A3C"/>
+<text x="648.1" y="57.0" class="pt" fill="#23241F">6.66</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="621.5" height="21" fill="#7A9A3C"/>
+<text x="800.5" y="91.0" class="pt" fill="#23241F">8.82</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="81.0" height="21" fill="#7A9A3C"/>
+<text x="260.0" y="125.0" class="pt" fill="#23241F">1.15</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="436.9" height="21" fill="#7A9A3C"/>
+<text x="615.9" y="159.0" class="pt" fill="#23241F">6.20</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="72.4" height="21" fill="#7A9A3C"/>
+<text x="251.4" y="193.0" class="pt" fill="#23241F">1.03</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="4.0" height="21" fill="#7A9A3C"/>
+<text x="183.0" y="363.0" class="pt" fill="#23241F">0.06</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+<text x="160" y="465" text-anchor="end" class="ax">森林環境譲与税基金</text>
+<rect x="170.0" y="450" width="28.9" height="21" fill="#7A9A3C"/>
+<text x="207.9" y="465.0" class="pt" fill="#23241F">0.41</text>
+</svg></div>
+<div class="yp" data-y="2025"><svg viewBox="0 0 900 544" role="img" xmlns="http://www.w3.org/2000/svg">
+<text x="160" y="23" text-anchor="end" class="ax">財政調整基金</text>
+<rect x="170.0" y="8" width="355.4" height="21" fill="#7A9A3C"/>
+<text x="534.4" y="23.0" class="pt" fill="#23241F">5.04</text>
+<text x="160" y="57" text-anchor="end" class="ax">減債基金</text>
+<rect x="170.0" y="42" width="469.2" height="21" fill="#7A9A3C"/>
+<text x="648.2" y="57.0" class="pt" fill="#23241F">6.66</text>
+<text x="160" y="91" text-anchor="end" class="ax">公共施設等整備基金</text>
+<rect x="170.0" y="76" width="622.0" height="21" fill="#7A9A3C"/>
+<text x="801.0" y="91.0" class="pt" fill="#23241F">8.83</text>
+<text x="160" y="125" text-anchor="end" class="ax">文教施設整備基金</text>
+<rect x="170.0" y="110" width="81.1" height="21" fill="#7A9A3C"/>
+<text x="260.1" y="125.0" class="pt" fill="#23241F">1.15</text>
+<text x="160" y="159" text-anchor="end" class="ax">ふるさとづくり基金</text>
+<rect x="170.0" y="144" width="437.1" height="21" fill="#7A9A3C"/>
+<text x="616.1" y="159.0" class="pt" fill="#23241F">6.20</text>
+<text x="160" y="193" text-anchor="end" class="ax">高齢者福祉基金</text>
+<rect x="170.0" y="178" width="100.6" height="21" fill="#7A9A3C"/>
+<text x="279.6" y="193.0" class="pt" fill="#23241F">1.43</text>
+<text x="160" y="227" text-anchor="end" class="ax">地域福祉基金</text>
+<rect x="170.0" y="212" width="74.6" height="21" fill="#7A9A3C"/>
+<text x="253.6" y="227.0" class="pt" fill="#23241F">1.06</text>
+<text x="160" y="261" text-anchor="end" class="ax">歌舞伎伝承基金</text>
+<rect x="170.0" y="246" width="70.5" height="21" fill="#7A9A3C"/>
+<text x="249.5" y="261.0" class="pt" fill="#23241F">1.00</text>
+<text x="160" y="295" text-anchor="end" class="ax">畜産経営振興基金</text>
+<rect x="170.0" y="280" width="8.5" height="21" fill="#7A9A3C"/>
+<text x="187.5" y="295.0" class="pt" fill="#23241F">0.12</text>
+<text x="160" y="329" text-anchor="end" class="ax">ふるさと保全基金</text>
+<rect x="170.0" y="314" width="4.9" height="21" fill="#7A9A3C"/>
+<text x="183.9" y="329.0" class="pt" fill="#23241F">0.07</text>
+<text x="160" y="363" text-anchor="end" class="ax">奨学資金貸付基金</text>
+<rect x="170.0" y="348" width="4.0" height="21" fill="#7A9A3C"/>
+<text x="183.0" y="363.0" class="pt" fill="#23241F">0.06</text>
+<text x="160" y="397" text-anchor="end" class="ax">土地開発基金</text>
+<rect x="170.0" y="382" width="27.0" height="21" fill="#7A9A3C"/>
+<text x="206.0" y="397.0" class="pt" fill="#23241F">0.38</text>
+<text x="160" y="431" text-anchor="end" class="ax">補助事業等つなぎ資金貸付基金</text>
+<rect x="170.0" y="416" width="7.0" height="21" fill="#7A9A3C"/>
+<text x="186.0" y="431.0" class="pt" fill="#23241F">0.10</text>
+<text x="160" y="465" text-anchor="end" class="ax">森林環境譲与税基金</text>
+<rect x="170.0" y="450" width="15.5" height="21" fill="#7A9A3C"/>
+<text x="194.5" y="465.0" class="pt" fill="#23241F">0.22</text>
+<text x="160" y="499" text-anchor="end" class="ax">大鹿さくら基金</text>
+<rect x="170.0" y="484" width="0.9" height="21" fill="#7A9A3C"/>
+<text x="179.9" y="499.0" class="pt" fill="#23241F">0.01</text>
+</svg></div><figcaption>各基金の年度末現在高。単位は億円。8年で目盛りをそろえてあります。「—」の基金は、その年度の財産に関する調書に行がありません。</figcaption></figure>
+  <details><summary>8年分の表を開く（15基金・単位は千円）</summary><div class="scroll"><table><thead><tr><th>基金</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr></thead><tbody><tr><td>財政調整基金</td><td>481,712</td><td>482,917</td><td>483,385</td><td>503,692</td><td>504,034</td><td>504,128</td><td>504,221</td><td>504,414</td></tr>
 <tr><td>減債基金</td><td>595,834</td><td>597,337</td><td>633,848</td><td>635,047</td><td>635,502</td><td>665,622</td><td>665,743</td><td>666,000</td></tr>
 <tr><td>公共施設等整備基金</td><td>812,936</td><td>714,251</td><td>716,335</td><td>804,168</td><td>864,699</td><td>881,860</td><td>882,034</td><td>882,799</td></tr>
 <tr><td>文教施設整備基金</td><td>55,865</td><td>55,907</td><td>89,949</td><td>89,989</td><td>115,008</td><td>115,013</td><td>115,030</td><td>115,070</td></tr>
@@ -995,11 +1719,11 @@
 <tr><td>土地開発基金</td><td>38,367</td><td>38,367</td><td>38,367</td><td>38,367</td><td>38,367</td><td>38,367</td><td>38,367</td><td>38,367</td></tr>
 <tr><td>補助事業等つなぎ資金貸付基金</td><td>10,000</td><td>10,000</td><td>10,000</td><td>10,000</td><td>10,000</td><td>10,000</td><td>10,000</td><td>10,000</td></tr>
 <tr><td>森林環境譲与税基金</td><td>—</td><td>—</td><td>7,889</td><td>19,497</td><td>24,379</td><td>25,716</td><td>41,070</td><td>22,060</td></tr>
-<tr><td>大鹿さくら基金</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1,338</td></tr>
-</tbody><tfoot><tr class="tot"><td>合計</td><td>2,544,183</td><td>2,448,445</td><td>2,629,583</td><td>2,821,900</td><td>3,012,204</td><td>3,161,959</td><td>3,209,923</td><td>3,233,893</td></tr></tfoot></table></div></details>
+<tr><td>大鹿さくら基金</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>1,338</td></tr></tbody><tfoot><tr class="tot"><td>合計</td><td>2,544,183</td><td>2,448,445</td><td>2,629,583</td><td>2,821,900</td><td>3,012,204</td><td>3,161,959</td><td>3,209,923</td><td>3,233,893</td></tr></tfoot></table></div></details>
+</div>
 <p>「—」は、その年度の財産に関する調書にその基金の行が無かったことを示します。森林環境譲与税基金は令和2年度から、大鹿さくら基金は令和7年度から載っています。</p>
 
-<h2>もとの数字（基金）</h2>
+<h2 id="data-kikin"><a class="alink" href="#data-kikin" aria-label="この見出しへのリンク">#</a>もとの数字（基金）</h2>
 <p class="sub">単位は円</p>
 <details><summary>表を開く</summary>
 <div class="scroll"><table>
@@ -1017,7 +1741,7 @@
 </tbody></table></div></details>
 
 
-<h2>項ごとの8年</h2>
+<h2 id="ko-8nen"><a class="alink" href="#ko-8nen" aria-label="この見出しへのリンク">#</a>項ごとの8年</h2>
 <p class="sub">歳出の支出済額・単位は円</p>
 <details><summary>表を開く（30項）</summary>
 <div class="scroll"><table>
@@ -1104,7 +1828,7 @@
 款の番号も年度で変わることがあるため、この表は款と項の名称で並べています。</p>
 
 
-<h2>もとの数字（歳出の全体）</h2>
+<h2 id="data-saishutsu"><a class="alink" href="#data-saishutsu" aria-label="この見出しへのリンク">#</a>もとの数字（歳出の全体）</h2>
 <p class="sub">単位は円</p>
 <details><summary>表を開く</summary>
 <div class="scroll"><table>
@@ -1121,7 +1845,7 @@
 <tr><td>2025年度</td><td>2,650,000,000</td><td>-173,854,000</td><td>228,457,000</td><td>2,704,603,000</td><td>2,526,566,616</td><td>94,904,000</td><td>83,132,384</td><td>93.4%</td></tr>
 </tbody></table></div></details>
 
-<h2>CSVの使い方</h2>
+<h2 id="csv"><a class="alink" href="#csv" aria-label="この見出しへのリンク">#</a>CSVの使い方</h2>
 <p class="sub">合計するときに気をつけること</p>
 <p>目より下の内訳は、決算書の備考欄から読み取っています。<b>8年間の歳出のすべて</b>、13の費目について取りました。予備費は8年度とも支出済額が0円で、備考欄に行がありません。</p>
 <p>事業別の内訳のCSV（<code>expenditure_jigyo</code>）は、決算書の備考欄をそのまま行にしたものです。同じ金額が上の段と下の段に重ねて印字されているため、全部を足すと二重三重に数えることになります。<code>level</code> の列で段を区別してください。</p>
@@ -1255,21 +1979,31 @@
 </script>
 <script>
 (function(){
-  var box=document.getElementById('ybox'); if(!box) return;
-  var ps=[].slice.call(box.querySelectorAll('.yp')),
-      lab=document.getElementById('ylab'),
-      bs=[].slice.call(document.querySelectorAll('.yb')),
-      names={"2018": "平成30年度", "2019": "令和元年度", "2020": "令和2年度", "2021": "令和3年度", "2022": "令和4年度", "2023": "令和5年度", "2024": "令和6年度", "2025": "令和7年度"}, i=ps.length-1;
-  function show(k){
-    i=Math.max(0,Math.min(ps.length-1,k));
-    ps.forEach(function(p,j){ if(j===i) p.removeAttribute('hidden'); else p.setAttribute('hidden',''); });
-    lab.textContent=names[ps[i].getAttribute('data-y')];
-    bs[0].disabled=(i===0); bs[1].disabled=(i===ps.length-1);
-  }
-  bs.forEach(function(b){ b.addEventListener('click',function(){ show(i+ (+b.getAttribute('data-d'))); }); });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='ArrowLeft') show(i-1); else if(e.key==='ArrowRight') show(i+1);
+  var names = {"2018": "平成30年度", "2019": "令和元年度", "2020": "令和2年度", "2021": "令和3年度", "2022": "令和4年度", "2023": "令和5年度", "2024": "令和6年度", "2025": "令和7年度"};
+  [].slice.call(document.querySelectorAll('.ysw-unit')).forEach(function(u){
+    var ps = [].slice.call(u.querySelectorAll('.yp')),
+        lab = u.querySelector('.yl'),
+        bs  = [].slice.call(u.querySelectorAll('.yb')),
+        ds  = [].slice.call(u.querySelectorAll('.ydot')),
+        i   = ps.length - 1;
+    if (!ps.length) return;
+    function show(k){
+      i = Math.max(0, Math.min(ps.length - 1, k));
+      ps.forEach(function(p, j){
+        if (j === i) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+      });
+      ds.forEach(function(d, j){ d.className = 'ydot' + (j === i ? ' on' : ''); });
+      lab.textContent = names[ps[i].getAttribute('data-y')] || ps[i].getAttribute('data-y');
+      bs[0].disabled = (i === 0); bs[1].disabled = (i === ps.length - 1);
+    }
+    bs.forEach(function(b){
+      b.addEventListener('click', function(){ show(i + (+b.getAttribute('data-d'))); });
+    });
+    u.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowLeft') { show(i - 1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { show(i + 1); e.preventDefault(); }
+    });
+    show(ps.length - 1);
   });
-  show(ps.length-1);
 })();
 </script></body></html>

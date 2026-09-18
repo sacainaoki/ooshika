@@ -84,6 +84,40 @@
   .foot a{color:var(--muted)}
   @media(max-width:560px){body{font-size:16px} h1{font-size:27px} h2{font-size:20px}
     .wrap{padding:0 16px} table{font-size:13px} th,td{padding:6px 7px}}
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
 </style></head>
 <body><div class="wrap">
 
@@ -103,10 +137,11 @@
 </header>
 
 <h1>農林業のお金</h1>
+<p class="stamp"><b>データの時点</b>　大鹿村一般会計決算書（平成30年度〜令和7年度）。令和7年度決算は令和8年9月議会で認定<br><b>このページの更新</b>　2026年9月18日</p>
 <p class="lede">大鹿村が農業と林業にいくら使ってきたかを、決算書8年分（平成30年度〜令和7年度）から並べたものです。
 決算書は「款（かん）」という行政の分け方で並んでいますが、ここでは村の計画の分け方に合わせて束ね直しています。</p>
 
-<h2>ぜんぶでいくら使ったか</h2>
+<h2 id="zenbu"><a class="alink" href="#zenbu" aria-label="この見出しへのリンク">#</a>ぜんぶでいくら使ったか</h2>
 <p class="sub">農業と林業に使った額（決算）</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 330, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 4.5, &quot;xfmt&quot;: &quot;ym&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;農業と林業&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 1.241126], [2019, 2.32884], [2020, 1.093052], [2021, 1.334382], [2022, 1.348262], [2023, 1.133179], [2024, 1.171258], [2025, 1.73301]]}, {&quot;n&quot;: &quot;参考：林道&quot;, &quot;c&quot;: &quot;#B08A3E&quot;, &quot;u&quot;: &quot;億円&quot;, &quot;d&quot;: 2, &quot;p&quot;: [[2018, 0.924355], [2019, 0.972302], [2020, 1.178342], [2021, 2.240604], [2022, 1.549061], [2023, 4.004998], [2024, 1.423313], [2025, 1.161713]]}]}"><svg viewBox="0 0 900 330" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -148,7 +183,7 @@
   <li class="fact"><b>林道はこの倍以上ある</b><span>林道に使った額は8年で13億4,547万円。農業と林業を足した額より多くなります。計画の分け方では林道は道路に入るため、このページでは参考として置いています。</span></li>
 </ul>
 
-<h2>守る</h2>
+<h2 id="mamoru"><a class="alink" href="#mamoru" aria-label="この見出しへのリンク">#</a>守る</h2>
 <p class="src">第5次総合振興計画 3-1 農業の振興「野生鳥獣対策の支援」ほか</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 280, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 2600, &quot;xfmt&quot;: &quot;ym&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;けものから森林や田畑を守る&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 1377.6834], [2019, 1746.7164], [2020, 2293.8], [2021, 1491.65], [2022, 1787.769], [2023, 1165.716], [2024, 1779.24], [2025, 2146.1]]}, {&quot;n&quot;: &quot;災害で壊れた農地を直す&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 1169.2732], [2019, 551.32], [2020, 1208.9], [2021, 1072.5], [2022, 2248.4], [2023, 552.2], [2024, 89.1], [2025, 0.0]]}]}"><svg viewBox="0 0 900 280" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -186,7 +221,7 @@
   <figcaption>けもの対策と、災害で壊れた農地を直す費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3>けものから森林や田畑を守る</h3>
+<h3 id="h8004"><a class="alink" href="#h8004" aria-label="この見出しへのリンク">#</a>けものから森林や田畑を守る</h3>
 <p>8年で1億3,789万円。とったけものへの報償（駆除報償・駆除謝金）が6,753万円、
 柵などをつくる人への補助（獣害防止施設設置補助金）が6,380万円で、ほぼ半分ずつです。</p>
 <p>決算書のうえでは、この費用は<b>農業振興費と林業振興費の2か所に分かれて</b>います。
@@ -207,7 +242,7 @@
 <tr><td>獣害防止施設修繕費</td><td>69,410</td></tr>
 <tr><td>有害鳥獣駆除協議会賃金</td><td>60,200</td></tr></tbody><tfoot><tr class="tot"><td>ほか2種類</td><td>50,095</td></tr></tfoot></table></div></details>
 
-<h3>災害で壊れた農地を直す</h3>
+<h3 id="h6074"><a class="alink" href="#h6074" aria-label="この見出しへのリンク">#</a>災害で壊れた農地を直す</h3>
 <p>8年で6,892万円。決算書では「災害復旧費」という別の款にありますが、直す対象が農地と農業用の施設なので、ここに置いています。
 令和4年度の2,248万円がいちばん多く、令和7年度は0円でした。</p>
 <details><summary>内訳を開く（7種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>補助災害復旧工事</td><td>26,824,400</td></tr>
@@ -218,7 +253,7 @@
 <tr><td>農地農業用施設災害復旧工事補助金</td><td>296,000</td></tr>
 <tr><td>消耗品</td><td>45,932</td></tr></tbody><tfoot></tfoot></table></div></details>
 
-<h2>つくる・なおす</h2>
+<h2 id="tsukuru"><a class="alink" href="#tsukuru" aria-label="この見出しへのリンク">#</a>つくる・なおす</h2>
 <p class="src">第5次総合振興計画 3-1「農業生産基盤の整備」／3-2「森林の整備」</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 280, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 5400, &quot;xfmt&quot;: &quot;ym&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;田畑と水路&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 2050.8681], [2019, 1042.4626], [2020, 1688.1158], [2021, 5096.1685], [2022, 2162.5147], [2023, 2797.341], [2024, 1387.6631], [2025, 3791.0763]]}, {&quot;n&quot;: &quot;森を手入れする&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 2539.188], [2019, 2031.241], [2020, 1179.5006], [2021, 1256.127], [2022, 1403.3245], [2023, 1455.2859], [2024, 2391.1597], [2025, 4675.1086]]}]}"><svg viewBox="0 0 900 280" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -256,7 +291,7 @@
   <figcaption>田畑と水路、森の手入れにかかった費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3>田畑と水路</h3>
+<h3 id="h6321"><a class="alink" href="#h6321" aria-label="この見出しへのリンク">#</a>田畑と水路</h3>
 <p>8年で2億16万円。農地費、日本型直接支払事業（多面的機能支払・中山間地域等直接支払）、畜産の施設などが入ります。</p>
 <details><summary>内訳を開く（43種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業施設整備工事</td><td>51,430,640</td></tr>
 <tr><td>中山間地域等直接支払交付金</td><td>25,052,962</td></tr>
@@ -273,7 +308,7 @@
 <tr><td>農地情報処理委託料</td><td>4,015,000</td></tr>
 <tr><td>土地改良用資材代</td><td>3,831,722</td></tr></tbody><tfoot><tr class="tot"><td>ほか29種類</td><td>19,411,096</td></tr></tfoot></table></div></details>
 
-<h3>森を手入れする</h3>
+<h3 id="h397"><a class="alink" href="#h397" aria-label="この見出しへのリンク">#</a>森を手入れする</h3>
 <p>8年で1億6,931万円。森林環境譲与税を使った事業と、造林費（森林組合への負担金）が中心です。
 令和7年度の4,675万円が8年でいちばん多くなっています。</p>
 <details><summary>内訳を開く（24種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>森林境界図作成委託料（繰越明許分）</td><td>35,970,000</td></tr>
@@ -291,7 +326,7 @@
 <tr><td>私有林　造林事業補助金</td><td>2,552,062</td></tr>
 <tr><td>松くい虫対策事業</td><td>1,823,100</td></tr></tbody><tfoot><tr class="tot"><td>ほか10種類</td><td>8,737,243</td></tr></tfoot></table></div></details>
 
-<h2>人をふやす・支える</h2>
+<h2 id="hito"><a class="alink" href="#hito" aria-label="この見出しへのリンク">#</a>人をふやす・支える</h2>
 <p class="src">第5次総合振興計画 3-1「後継者・新規就農者の確保・育成」／3-2「林業経営体の育成」</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 280, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 2400, &quot;xfmt&quot;: &quot;ym&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;林業で働く人を育てる&quot;, &quot;c&quot;: &quot;#2E6B8A&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 1312.4101], [2019, 1218.1893], [2020, 1229.1359], [2021, 1562.5133], [2022, 2169.9481], [2023, 1729.7571], [2024, 1874.8343], [2025, 1856.6]]}, {&quot;n&quot;: &quot;農業委員会&quot;, &quot;c&quot;: &quot;#B08A3E&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 275.2642], [2019, 307.2013], [2020, 290.411], [2021, 290.6819], [2022, 298.2484], [2023, 312.6791], [2024, 320.4122], [2025, 452.5612]]}, {&quot;n&quot;: &quot;農家をふやす&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 387.5097], [2019, 136.2272], [2020, 80.6683], [2021, 77.8029], [2022, 90.2007], [2023, 90.911], [2024, 419.3927], [2025, 1213.208]]}]}"><svg viewBox="0 0 900 280" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -332,7 +367,7 @@
   <figcaption>農林業の人に関わる費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3>農家をふやす</h3>
+<h3 id="h4702"><a class="alink" href="#h4702" aria-label="この見出しへのリンク">#</a>農家をふやす</h3>
 <p>8年で2,496万円。令和7年度が1,213万円で、前の年の419万円から3倍近くになっています。
 農業経営安定・効率化支援事業（492万円）と農業人材確保対策補助金が、この年に計上されています。</p>
 <details><summary>内訳を開く（12種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業人材確保対策補助金</td><td>9,205,000</td></tr>
@@ -348,7 +383,7 @@
 <tr><td>現地確認調査員賃金</td><td>77,400</td></tr>
 <tr><td>人・農地プラン策定委員報酬</td><td>43,000</td></tr></tbody><tfoot></tfoot></table></div></details>
 
-<h3>林業で働く人を育てる</h3>
+<h3 id="h1559"><a class="alink" href="#h1559" aria-label="この見出しへのリンク">#</a>林業で働く人を育てる</h3>
 <p>8年で1億2,953万円。ただし、その中身は村の林業担当の職員の給料と、林業振興の一般経費（森林税を使った事業、松くい虫の対策など）です。</p>
 <div class="box">
 <p><b>計画の「林業経営体の育成」に当たる支出。</b>第5次総合振興計画は「3-2 林業の振興」の中に
@@ -372,7 +407,7 @@
 <tr><td>林業技術者育成補助金</td><td>2,195,000</td></tr>
 <tr><td>林業施設工事（明許繰越）</td><td>1,980,000</td></tr></tbody><tfoot><tr class="tot"><td>ほか40種類</td><td>16,415,737</td></tr></tfoot></table></div></details>
 
-<h3>農業委員会</h3>
+<h3 id="h493"><a class="alink" href="#h493" aria-label="この見出しへのリンク">#</a>農業委員会</h3>
 <p>8年で2,547万円。令和7年度が453万円で、前の年の320万円から増えています。
 この年に「機構集積支援事業報酬」と「農業委員会等補助事業資料作成業務委託料」が計上されています。</p>
 <details><summary>内訳を開く（21種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>農業委員報酬</td><td>13,554,210</td></tr>
@@ -390,7 +425,7 @@
 <tr><td>職員旅費</td><td>132,960</td></tr>
 <tr><td>自治会農業委員賃金</td><td>89,300</td></tr></tbody><tfoot><tr class="tot"><td>ほか7種類</td><td>353,624</td></tr></tfoot></table></div></details>
 
-<h2>活かす・売る・とどける</h2>
+<h2 id="ikasu"><a class="alink" href="#ikasu" aria-label="この見出しへのリンク">#</a>活かす・売る・とどける</h2>
 <p class="src">第5次総合振興計画 3-1「地産地消の推進」「6次産業化の支援・販路拡大」「伝統野菜等の農産物の振興・ブランド化」</p>
 <figure>
   <div class="chartbox" data-chart="{&quot;W&quot;: 900, &quot;H&quot;: 280, &quot;L&quot;: 62, &quot;R&quot;: 18, &quot;T&quot;: 26, &quot;B&quot;: 40, &quot;xmin&quot;: 2018, &quot;xmax&quot;: 2025, &quot;ymin&quot;: 0, &quot;ymax&quot;: 14500, &quot;xfmt&quot;: &quot;ym&quot;, &quot;series&quot;: [{&quot;n&quot;: &quot;塩の里&quot;, &quot;c&quot;: &quot;#A8482F&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 0.0], [2019, 13878.5], [2020, 100.903], [2021, 317.7711], [2022, 656.2787], [2023, 600.3575], [2024, 467.9645], [2025, 525.0145]]}, {&quot;n&quot;: &quot;大鹿ブランド&quot;, &quot;c&quot;: &quot;#7A9A3C&quot;, &quot;u&quot;: &quot;万円&quot;, &quot;d&quot;: 0, &quot;p&quot;: [[2018, 210.4791], [2019, 214.2685], [2020, 281.0417], [2021, 112.7599], [2022, 153.3019], [2023, 175.3405], [2024, 289.5403], [2025, 198.3987]]}]}"><svg viewBox="0 0 900 280" role="img" xmlns="http://www.w3.org/2000/svg">
@@ -422,7 +457,7 @@
   <figcaption>つくったものを活かすための費用。<span class="chint"></span></figcaption>
 </figure>
 
-<h3>塩の里</h3>
+<h3 id="h7566"><a class="alink" href="#h7566" aria-label="この見出しへのリンク">#</a>塩の里</h3>
 <p>8年で1億6,547万円。そのうち1億3,878万円が令和元年度で、農産物加工直売施設の改修工事（1億1,500万円、繰越明許）と、その設計監理の委託料です。</p>
 <p>改修のあとは、施設の管理を委託する費用が令和3年度から計上されています。
 令和3年度の101万円、令和7年度の312万円です。修繕費は令和6年度から増え、令和7年度は142万円でした。</p>
@@ -439,7 +474,7 @@
 <tr><td>農の拠点敷地料</td><td>527,810</td></tr>
 <tr><td>塩の里周辺整備設計・監理委託料</td><td>220,000</td></tr></tbody><tfoot></tfoot></table></div></details>
 
-<h3>大鹿ブランド</h3>
+<h3 id="h8360"><a class="alink" href="#h8360" aria-label="この見出しへのリンク">#</a>大鹿ブランド</h3>
 <p>8年で1,635万円。地域ブランド推進事業と、特産農産物に関わる費用です。年に113万円から290万円のあいだで動いています。</p>
 <details><summary>内訳を開く（16種類）</summary><div class="scroll"><table class="d2"><thead><tr><th>決算書の名称</th><th>8年の合計（円）</th></tr></thead><tbody><tr><td>ロゴマーク印刷費</td><td>4,917,400</td></tr>
 <tr><td>特産農産物生産振興補助金</td><td>3,120,920</td></tr>
@@ -456,7 +491,7 @@
 <tr><td>地域ブランド協議会報酬</td><td>77,400</td></tr>
 <tr><td>運転手賃金</td><td>67,200</td></tr></tbody><tfoot><tr class="tot"><td>ほか2種類</td><td>109,600</td></tr></tfoot></table></div></details>
 
-<h2>村の農林の仕事を動かす</h2>
+<h2 id="shigoto"><a class="alink" href="#shigoto" aria-label="この見出しへのリンク">#</a>村の農林の仕事を動かす</h2>
 <p class="sub">8年で2億25万円</p>
 <p>上のどれにも入らない費用です。8割が村の農業担当の職員の給料と手当で、
 ほかに事務の経費、公用車、機械の購入などが入っています。</p>
@@ -475,7 +510,7 @@
 <tr><td>データ整備委託料</td><td>1,430,000</td></tr>
 <tr><td>村有建物災害共済保険料</td><td>1,421,955</td></tr></tbody><tfoot><tr class="tot"><td>ほか49種類</td><td>13,383,233</td></tr></tfoot></table></div></details>
 
-<h2>【参考】林道</h2>
+<h2 id="rindo"><a class="alink" href="#rindo" aria-label="この見出しへのリンク">#</a>【参考】林道</h2>
 <p class="sub">8年で13億4,547万円</p>
 <p>林道は、第5次総合振興計画では「5-2 道路環境の整備」に入ります。
 過疎地域持続的発展計画では「2 産業の振興」の中の「エ.林道」です。
@@ -487,7 +522,7 @@
 <p>令和5年度が4億50万円でいちばん多く、この年は農業と林業を足した額（1億1,332万円）の3倍を超えています。</p>
 </div>
 
-<h2>年ごとの数字</h2>
+<h2 id="nenji"><a class="alink" href="#nenji" aria-label="この見出しへのリンク">#</a>年ごとの数字</h2>
 <p class="sub">節ごとの支出済額・単位は万円</p>
 <div class="scroll"><table>
 <thead><tr><th>　</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th><th>8年計</th></tr></thead>
@@ -504,7 +539,7 @@
 <tr><td>村の農林の仕事を動かす</td><td>3,089</td><td>2,162</td><td>2,578</td><td>2,066</td><td>2,513</td><td>2,452</td><td>2,693</td><td>2,472</td><td>20,025</td></tr>
 </tbody><tfoot><tr class="tot"><td>合計</td><td>12,411</td><td>23,288</td><td>10,931</td><td>13,344</td><td>13,483</td><td>11,332</td><td>11,713</td><td>17,330</td><td>113,831</td></tr></tfoot></table></div>
 
-<h2>この分類について</h2>
+<h2 id="bunrui"><a class="alink" href="#bunrui" aria-label="この見出しへのリンク">#</a>この分類について</h2>
 <p>決算書は「款・項・目・節」という行政の分け方で並んでいます。
 その分け方だと、たとえばけものの対策は農業振興費と林業振興費に分かれ、
 林道は林業費と災害復旧費に分かれてしまい、全体でいくら使っているのかが分かりません。</p>
