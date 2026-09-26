@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>くらしの場面から探す村の決まり｜大鹿村データ室</title>
+<meta name="description" content="大鹿村の条例・規則・要綱のうち、暮らしの場面ごとに関係するものを選び、要点を本文からまとめました。">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#7A9A3C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  .chartbox{position:relative;touch-action:pan-y}
+  .chartbox svg{width:100%;height:auto;display:block}
+  .cguide{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0;pointer-events:none}
+  .cdot{opacity:0;pointer-events:none}
+  .ctip{
+    position:absolute;z-index:3;pointer-events:none;opacity:0;
+    background:var(--paper);border:1px solid var(--ink);
+    padding:8px 12px;font-size:13px;line-height:1.75;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    box-shadow:0 2px 10px rgba(35,36,31,.10);transition:opacity .1s
+  }
+  .ctip b{display:block;font-weight:600;margin-bottom:2px;font-size:12px;color:var(--muted)}
+  .ctip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .chartbox.on .cguide,.chartbox.on .cdot,.chartbox.on .ctip{opacity:1}
+  .chint{color:var(--muted);font-size:12px;margin-top:6px}
+  @media (hover:none){.chint::after{content:"（グラフをタップまたは指でなぞると数字が出ます）"}}
+  @media (hover:hover){.chint::after{content:"（グラフの上にカーソルを置くと数字が出ます）"}}
+
+  .nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+       margin:14px 0 0;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.nav span{flex:0 0 auto;padding:7px 15px 7px 0;font-size:15px;
+       text-decoration:none;white-space:nowrap;color:var(--muted)}
+  .nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+  .nav span{color:var(--ink);font-weight:700}
+  @media (max-width:600px){.nav a,.nav span{font-size:14.5px;padding-right:13px}}
+
+  :root{
+    --paper:#FBFBF8; --panel:#F2F3EE; --ink:#23241F; --muted:#6B6E64;
+    --rule:#D8DAD0; --moegi:#7A9A3C;
+    --mincho:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+    --gothic:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+       font-size:17px;line-height:1.95;letter-spacing:.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .top{border-bottom:1px solid var(--rule);padding:20px 0 16px;margin-bottom:44px}
+  .site{font-family:var(--mincho);font-size:16px;letter-spacing:.08em}
+  .site a{color:inherit;text-decoration:none}
+  .disclaim{color:var(--muted);font-size:14px;margin:6px 0 0;line-height:1.7}
+  h1{font-family:var(--mincho);font-weight:600;font-size:34px;line-height:1.45;
+     letter-spacing:.02em;margin:0 0 18px}
+  .lede{font-size:16px;color:var(--muted);margin:0 0 40px;max-width:36em}
+  h2{font-family:var(--mincho);font-weight:600;font-size:23px;letter-spacing:.03em;
+     margin:64px 0 6px;padding-top:18px;border-top:2px solid var(--moegi)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+  p{margin:0 0 18px;max-width:38em}
+  figure{margin:0 0 10px}
+  svg{width:100%;height:auto;display:block}
+  .ax{font-family:var(--gothic);font-size:12px;fill:var(--muted)}
+  .pt{font-family:var(--gothic);font-size:14px;font-weight:700}
+  figcaption{color:var(--muted);font-size:13px;margin-top:8px}
+  .facts{margin:34px 0 0;padding:0;list-style:none}
+  .fact{border-top:1px solid var(--rule);padding:20px 0}
+  .fact:last-child{border-bottom:1px solid var(--rule)}
+  .fact b{display:block;font-family:var(--mincho);font-size:27px;font-weight:600;
+          letter-spacing:.02em;line-height:1.35;margin-bottom:4px}
+  .fact span{color:var(--muted);font-size:15px}
+  details{margin:26px 0 0}
+  summary{cursor:pointer;font-size:15px;color:var(--muted);padding:8px 0}
+  summary:hover{color:var(--ink)}
+  .scroll{overflow:auto;max-height:460px;border:1px solid var(--rule);background:#fff}
+  table{border-collapse:collapse;width:100%;font-size:14px}
+  th,td{padding:7px 12px;text-align:right;white-space:nowrap;
+        font-variant-numeric:tabular-nums;border-bottom:1px solid var(--rule)}
+  th{position:sticky;top:0;background:var(--panel);font-weight:600;
+     border-bottom:1px solid var(--ink);font-size:13px}
+  td:first-child,th:first-child{text-align:left}
+  .note{background:var(--panel);padding:20px 24px;margin:34px 0 0;font-size:15px;line-height:1.85}
+  .note p{margin:0 0 12px} .note p:last-child{margin:0}
+  footer{margin:80px 0 0;border-top:1px solid var(--rule);padding:26px 0 60px;
+         font-size:14px;color:var(--muted);line-height:1.9}
+  a{color:var(--ink);text-underline-offset:3px}
+  @media (max-width:600px){
+    body{font-size:16px} h1{font-size:27px}
+    h2{font-size:20px;margin-top:52px} .fact b{font-size:22px}
+    .pt{font-size:17px} .ax{font-size:15px}
+  }
+
+  .idx{list-style:none;margin:40px 0 0;padding:0}
+  .idx li{border-top:1px solid var(--rule);padding:0}
+  .idx li:last-child{border-bottom:1px solid var(--rule)}
+  .idx a{display:block;padding:24px 2px;text-decoration:none;color:inherit}
+  .idx a:hover b{text-decoration:underline;text-underline-offset:4px}
+  .idx b{display:block;font-family:var(--mincho);font-size:25px;font-weight:600;
+         letter-spacing:.02em;line-height:1.4;margin-bottom:5px}
+  .idx span{color:var(--muted);font-size:15px;display:block;max-width:36em}
+  .soon{padding:24px 2px;color:#A8ADA0}
+  .soon b{display:block;font-family:var(--mincho);font-size:25px;font-weight:600;
+          letter-spacing:.02em;line-height:1.4;margin-bottom:5px}
+  .soon span{font-size:15px;display:block}
+
+  h2,h3{position:relative}
+  .alink{position:absolute;left:-1.1em;top:0;opacity:0;text-decoration:none;
+    color:var(--rule);font-weight:400;font-size:.8em;padding:0 .2em}
+  h2:hover .alink,h3:hover .alink,.alink:focus{opacity:1;color:var(--moegi)}
+  @media(max-width:700px){.alink{display:none}}
+  .stamp{color:var(--muted);font-size:13.5px;line-height:1.9;margin:0 0 6px}
+  .stamp b{font-weight:500;color:var(--ink)}
+
+@media print{
+  :root{--paper:#fff}
+  body{font-size:10.5pt;line-height:1.7;background:#fff}
+  .wrap{max-width:none;padding:0}
+  .nav,.ysw,.ydots,.alink,.chint{display:none !important}
+  .disclaim{font-size:9pt}
+  h1{font-size:20pt;margin-bottom:10pt}
+  h2{font-size:13pt;margin:16pt 0 4pt;padding-top:6pt;
+     break-after:avoid;page-break-after:avoid}
+  h3{font-size:11.5pt;margin:12pt 0 3pt;break-after:avoid;page-break-after:avoid}
+  figure,table,.fact,.box{break-inside:avoid;page-break-inside:avoid}
+  figure{margin-bottom:8pt}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  .yp[hidden]{display:block !important}
+  .yp{break-inside:avoid;page-break-inside:avoid;margin-bottom:8pt}
+  .scroll{overflow:visible}
+  table{font-size:8.5pt;white-space:normal}
+  th,td{padding:2pt 4pt}
+  a{color:inherit;text-decoration:none}
+  .foot a[href^="http"]::after{content:" (" attr(href) ")";font-size:8pt}
+  .note,.box{background:#f4f4f0;border:1px solid #ddd}
+  .foot{margin-top:16pt;padding-bottom:0}
+}
+
+
+  .toc{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .toc a{display:block;border:1px solid var(--rule);border-radius:3px;padding:6px 12px;font-size:14.5px;text-decoration:none}
+  .toc a:hover{border-color:var(--ink)}
+  .it{border-top:1px solid var(--rule);padding:18px 0 16px}
+  .it:last-of-type{border-bottom:1px solid var(--rule)}
+  .it h3{font-family:var(--mincho);font-weight:600;font-size:18px;line-height:1.5;margin:0 0 2px}
+  .it h3 a{text-decoration:none} .it h3 a:hover{text-decoration:underline}
+  .it .meta{color:var(--muted);font-size:13px;margin:0 0 8px}
+  .it p{margin:0 0 6px;font-size:16px}
+  .it .src{color:var(--muted);font-size:13px;margin:0}
+  .tag{display:inline-block;font-size:12px;border:1px solid var(--rule);border-radius:3px;padding:0 6px;margin-right:6px;color:var(--muted)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="site"><a href="./">大鹿村データ室</a></div>
+    <p class="disclaim">本サイトは大鹿村の公式サイトではありません。一住民が、村が公表した資料をもとに数字を整理して掲載しています。</p>
+    <nav class="nav">
+    <a href="index.html">目次</a>
+    <a href="population.html">人口</a>
+    <a href="finance.html">予算と決算</a>
+    <a href="agriculture.html">農業</a>
+    <a href="roads.html">村の道と橋</a>
+    <a href="settlement.html">決算を読む</a>
+    <a href="agriforest.html">農林業のお金</a>
+    <a href="reiki.html">村の決まり</a>
+    <a href="about.html">このサイトについて</a>
+    </nav>
+  </div>
+
+  <h1>くらしの場面から探す村の決まり</h1>
+  <p class="stamp"><b>データの時点</b>　大鹿村例規集　内容現在 令和8年3月13日<br><b>このページの更新</b>　2026年9月26日</p>
+  <p class="lede">村の決まり（例規）のうち、暮らしの場面ごとに関係の深いもの51件を選び、要点を本文から書き出しました。金額や期限は本文の書き方のままです。</p>
+  <div class="note" style="margin-top:0">
+    <p><b>使うときの注意</b></p>
+    <p>ここにあるのは令和8年3月13日時点の例規集の内容です。その後に改正されている場合があります。実際に申請するときは、役場の担当の窓口で最新の内容と手続きを確かめてください。</p>
+    <p>国の法律や県の条例に大事な定めがあるものは、要点の終わりに書き添えています（国の法律はe-Gov法令検索のデータ、県の条例は長野県法規集で、いずれも2026年9月26日に確認）。</p>
+    <p>要点は抜き書きです。対象になる人の細かい条件や、例外の定めは省いていることがあります。名前を押すと、村の例規集の本文が開きます。</p>
+  </div>
+  <ul class="toc">
+    <li><a href="#kodomo">子どもが生まれる・育てる</a></li>
+    <li><a href="#sumu">結婚する・村に住む</a></li>
+    <li><a href="#ie">家を建てる・直す、暮らしの設備</a></li>
+    <li><a href="#nou">農業・林業をする</a></li>
+    <li><a href="#noyaki">野焼きをする・土地や自然にかかわる</a></li>
+    <li><a href="#kourei">年を重ねる・介護</a></li>
+    <li><a href="#saigai">災害にあう・備える</a></li>
+    <li><a href="#jouhou">役場の情報を見る・村政に参加する</a></li>
+  </ul>
+  <h2 id="kodomo">子どもが生まれる・育てる</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000210.html" target="_blank" rel="noopener">若者定住促進祝金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第2号　制定 平成10年4月1日　最終改正 令和7年3月14日</p>
+    <p>出産祝金は子ども1人につき20万円です。出産のときに村に住んでいて住所があり、親子で同居して子を育てる父母がもらえます（年齢の条件はありません）。結婚祝金は1組につき10万円で、結婚のときに村に住み、夫婦どちらかが45歳以下の場合です。どちらも、理由ができた日から1年以内に村長に申請します。もらってから3年未満で村に住まなくなると、全額を返します（やむを得ない理由があると村長が認めたときは別）。</p>
+    <p class="src">根拠：第2条、第3条、第6条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000591.html" target="_blank" rel="noopener">大鹿村妊婦のための支援給付金支給要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第19号　制定 令和7年9月16日　制定後の改正なし</p>
+    <p>妊娠の届出をした妊婦で、大鹿村に住み住民登録がある人がもらえます。1回目は妊娠1回につき5万円、2回目はおなかの赤ちゃん1人につき5万円です。申請は村長が別に定める日までに村長へ出します。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第6条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000481.html" target="_blank" rel="noopener">大鹿村入学祝い金支給要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第21号　制定 平成31年3月19日　制定後の改正なし</p>
+    <p>満6歳と満12歳の誕生日のあとの最初の4月1日に、村に住所がある子どもの保護者に、入学祝い金10,000円を支給します。申請は指定の期日までに村長へ出し、お金は口座に振り込まれます。転出などで対象でなくなったときは、返すよう命じられることがあります。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第6条、第7条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000236.html" target="_blank" rel="noopener">大鹿村福祉医療費支給に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第17号　制定 平成15年6月24日　最終改正 令和6年9月13日</p>
+    <p>生まれた日から18歳になった後の最初の3月31日までの子どもは「乳幼児等」として福祉医療費給付金の対象です。病院で保険証といっしょに受給者証を見せると、医療保険で自分が払う分から、入院中の食事代の決まった負担額などを引いた額を、村が給付金として出します。受給者証はあらかじめ村長に申請して受け取ります。</p>
+    <p class="src">根拠：第2条第1号、第3条、第4条、第6条、第7条、第8条第4項・第5項、大鹿村福祉医療費支給に関する規則第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000247.html" target="_blank" rel="noopener">大鹿村特定教育・保育施設及び特定地域型保育事業の利用者負担に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第16号　制定 令和元年9月18日　制定後の改正なし</p>
+    <p>保育所などの保育料（利用者負担額）は、条例では「別に定める額」とされ、規則の表で決まります。表では3歳以上の子どもは0円、3歳未満の子どもは世帯の村民税の額によって月0円〜48,200円です。同じ世帯の2人目は表の額×0.5（第2・第3階層の世帯は無料）、3人目からは0円で、給食費と副食費は村が負担します。特別な事情があると村長が認めたときは減額・免除できます。</p>
+    <p class="src">根拠：条例第2条、第3条、規則第2条、第3条第2項、規則別表第1、別表第3</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000251.html" target="_blank" rel="noopener">大鹿村一時保育事業実施要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第12号　制定 平成29年12月20日　最終改正 令和3年3月19日</p>
+    <p>ふだんの保育所の対象にならない1歳から小学校に入る前の子どもを、大鹿保育所で一時的にあずかります。平日の午前8時30分から午後4時30分までで、原則として週3日程度、1か月12日までです。料金は1日利用で3歳未満児3,200円・3歳以上児2,400円、それ以外は1時間あたり400円・300円、給食費は1日280円です。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条、第6条、第7条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000346.html" target="_blank" rel="noopener">大鹿村不妊症及び不育症治療費助成事業実施要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第5号　制定 平成28年3月16日　制定後の改正なし</p>
+    <p>村に住所をもって1年以上たつ、不妊症・不育症の夫婦で、妻の年齢が43歳までの人が対象です。保険がきかない検査費・診療費（県の助成があるときはその分を引いた額）を、1年で500,000円まで助成します。申請は医師の意見書をつけて村長に出し、診療月の翌月1日から1年のうちに1回です。</p>
+    <p class="src">根拠：第2条第3号、第3条、第5条、第7条、第8条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000189.html" target="_blank" rel="noopener">大鹿村チャイルドシート購入補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第1号　制定 平成12年1月18日　最終改正 平成12年12月28日</p>
+    <p>村に住所があり、6歳未満の子どもを育てている保護者が、チャイルドシートを新しく買ったときに補助します。子ども1人につき1台で、購入費の1/2以内、15,000円までです。国土交通省の型式認定などを受けたものが対象で、申請書を村長に出します。</p>
+    <p class="src">根拠：第3、第4</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000254.html" target="_blank" rel="noopener">大鹿村児童養育手当支給に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第10号　制定 昭和57年3月18日　制定後の改正なし</p>
+    <p>村に続けて1年以上住み、18歳未満の子どもを4人以上育てている父または母などに、4人目から1人あたり月額3,000円の養育手当を出します。支給日は6月15日・9月15日・12月15日・3月15日です。ほかの市町村に引っ越すと受け取れなくなります。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条、第6条</p>
+  </div>
+  <h2 id="sumu">結婚する・村に住む</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000205.html" target="_blank" rel="noopener">大鹿村若者定住促進条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第5号　制定 平成10年3月25日　最終改正 平成28年3月16日</p>
+    <p>村に住む人やI・U・Jターンで来た人の定住を進めるための条例で、「若者」は45歳以下の人をいいます。村はこの条例にもとづき、住宅の新築・改築・用地取得の補助金、結婚祝金・出産祝金、村外に通勤する人の通勤費助成を行います。申請までに村に住所がなくなったり、本人や同居の家族が村税などを滞納していると資格がなくなります。</p>
+    <p class="src">根拠：第2条、第4条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000537.html" target="_blank" rel="noopener">大鹿村結婚新生活支援事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第14号　制定 令和4年9月15日　最終改正 令和6年3月27日</p>
+    <p>結婚した日に夫婦とも39歳以下で、夫婦の所得が500万円未満、村内の家に住む新婚世帯に、住まいの費用（購入・建築・家賃・リフォーム）と引っ越し費用を補助します。上限は30万円、夫婦とも29歳以下なら60万円です。申請は結婚した年度の3月31日までに村長へ出します。</p>
+    <p class="src">根拠：第2条、第3条、第5条、第6条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000206.html" target="_blank" rel="noopener">大鹿村通勤就職者通勤費助成金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第3号　制定 平成10年4月1日　最終改正 令和7年3月14日</p>
+    <p>村に住み、村の外の職場に1年を通して通勤する45歳以下の人に、通勤費を助成します。40歳以下は月額7,500円以内、41歳以上45歳以下は月額5,000円以内で、消防団（消防協力員を含む）や赤十字奉仕団の入団などの条件にあたる人は2倍です。申請は6月30日までに村長に出します（年度の途中で条件にあてはまった人はいつでも）。</p>
+    <p class="src">根拠：第2条、第3条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000207.html" target="_blank" rel="noopener">大鹿村住宅新築事業等補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第1号　制定 平成10年4月1日　最終改正 令和7年12月15日</p>
+    <p>村に住み永住するつもりの、45歳になった後の最初の3月31日までの人（夫婦はどちらか一方で可）が、家を建てる・中古住宅を買う・改築する・住宅用の土地を買うときに補助します。新築等は費用の1/3で200万円まで（村内業者なら250万円、中古住宅の取得は100万円）、改築は1/2で50万円まで（村内業者なら60万円、工事費20万円以上）、用地取得は1/3で60万円までです。新築・改築は工事を始める前に、用地取得は理由ができた日から6か月以内に申請します。</p>
+    <p class="src">根拠：第2条、第3条、第11条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000209.html" target="_blank" rel="noopener">大鹿村空き家対策事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第6号　制定 平成24年3月28日　最終改正 令和7年12月15日</p>
+    <p>村の空き家情報に登録された空き家について、所有者が家財の片付けや清掃をするときは8/10で20万円まで、定住する人が借りたり買ったりした空き家を改修するときは5/10で50万円まで（工事費20万円以上）、所有者が古くて危ない空き家を取り壊すときは8/10で150万円まで補助します。申請は工事などを始める前に村長へ出します。改修の申請は、借りたり買ったりした契約日から5年が期限です。</p>
+    <p class="src">根拠：第2条、第3条、第4条、別表1</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000426.html" target="_blank" rel="noopener">大鹿村UIJターン就業・創業移住支援事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第19号　制定 令和元年9月18日　最終改正 令和7年6月16日</p>
+    <p>東京圏（埼玉・千葉・東京・神奈川）・愛知県・大阪府に長く住んで働いていた人が大鹿村に移住し、決められた条件で就業や創業をしたときに移住支援金を出します。単身の世帯は60万円、2人以上の世帯は100万円で、18歳未満の子どもを連れてくると1人につき100万円を加算します。申請は移住してから1年以内で、申請日から3年未満で転出や退職をすると全額、3年以上5年以内なら半額を返します。</p>
+    <p class="src">根拠：第3条、第4条、第9条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000447.html" target="_blank" rel="noopener">大鹿村営住宅管理条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第15号　制定 平成9年12月25日　最終改正 令和6年3月15日</p>
+    <p>村営住宅に入るには、同居する家族がいる（60歳以上の人などは一人でも可）、収入が決まった額（原則158,000円）を超えない、住宅に困っている、村税などを滞納していない、村内に住所か勤め先がある（または予定）、暴力団員でない、といった条件をすべて満たす必要があります。村長の定めるところにより申込みをし、申込みが戸数より多いときは選考し、とても多いときは公開抽選になります。入居が決まったら10日以内に連帯保証人が連署した誓約書などを出します。</p>
+    <p class="src">根拠：第5条、第7条、第8条、第10条、大鹿村営住宅の管理に関する規則第3条</p>
+  </div>
+  <h2 id="ie">家を建てる・直す、暮らしの設備</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000355.html" target="_blank" rel="noopener">大鹿村合併処理浄化槽設置事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第8号　制定 平成5年7月5日　最終改正 平成19年3月16日</p>
+    <p>村長の定める地域内で合併処理浄化槽を設置する人に、設置費用に相当する額を、5人槽529,000円、6～7人槽744,000円、8～10人槽824,000円、11～30人槽1,854,000円、31～50人槽2,058,000円、51人槽以上2,349,000円を限度に補助します。設置場所に住所があり生活の本拠とする人は、附帯施設の事業費の80％以内（限度額150,000円）も対象です。工事の前にあらかじめ申請書を村長に出し、事業完了後1か月以内又はその年度の3月31日のいずれか早い日までに実績報告書を出します。</p>
+    <p class="src">根拠：第3条、第4条、第5条、第8条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000356.html" target="_blank" rel="noopener">大鹿村合併処理浄化槽維持管理経費補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第1号　制定 平成29年3月17日　最終改正 令和8年3月13日</p>
+    <p>村の設置補助を受けた浄化槽の管理者に、年3回以上の保守点検と年1回の法定検査の費用として年額20,000円（設置初年度は使用開始の翌月以降、月額1,660円の月割）を補助します。年1回の清掃には1基当たり5,000円（清掃費が10,000円以下ならその1／2以内、1,000円未満切捨て）を補助します。保守管理・法定検査の補助金は指定口座に毎年度末までに振り込まれます。 保守点検・清掃（浄化槽法第10条）と水質の検査（同法第11条）は、補助の有無にかかわらず浄化槽管理者の義務です。</p>
+    <p class="src">根拠：第2条第1号、第3条、第4条、第5条<br>国の法律・県の条例：浄化槽法第10条・第11条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000354.html" target="_blank" rel="noopener">大鹿村住宅用太陽光発電システム・蓄電システム設置費補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第5号　制定 平成22年3月19日　最終改正 令和3年9月17日</p>
+    <p>村に住み、村内の住宅に最大出力10キロワット未満の太陽光発電を設置した人に、1キロワット当たり5万円（上限25万円）を補助します。蓄電システム（国のZEH支援事業の対象品として登録されたもの）は設置費用の3分の1（上限10万円）で、自分の太陽光発電の電気をためて系統連系しているものに限ります。設置を完了してから申請書を村長に出し、補助は1つの設置につき1回限りです。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000351.html" target="_blank" rel="noopener">大鹿村家庭用生ごみ処理機補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第9号　制定 平成25年12月19日　最終改正 令和3年7月30日</p>
+    <p>村内に住み、自分で使う生ごみ処理機（電動式処理機、コンポスター、ボカシ容器の新品）を買った人に、購入費の2分の1（限度3万円、千円未満切捨て）を補助します。村税を滞納していないことが条件で、購入後3か月以内に申請書を村長に出します。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000307.html" target="_blank" rel="noopener">人にやさしい住宅改良促進事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第4号　制定 平成20年6月19日　最終改正 平成21年9月25日</p>
+    <p>村に住む高齢者や障害者が、自分でできる限り生活できるように住まいを改良するときの補助金です。対象となる世帯と経費は長野県の地域福祉総合助成金の要綱に基づくとされ、補助の金額や割合はこの要綱には書かれていません。工事の前にあらかじめ申請書を村長に出します。</p>
+    <p class="src">根拠：第1条、第2条、第3条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000218.html" target="_blank" rel="noopener">大鹿村インターネット利用補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第14号　制定 平成31年3月19日　制定後の改正なし</p>
+    <p>村内に住所がある人や事業所が、飯田ケーブルテレビでテレビを見て、1Gbps以上（本文の表記は「1Gdps」）またはそれに準ずるインターネットを使う場合に、回線費用の月額3,900円を超える部分を、月額800円を上限に補助します。申請書は毎年度、村長に出します。飯田ケーブルテレビで契約した場合は月額利用料から差し引かれ、ほかの会社で契約した場合は口座に振り込まれます。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000437.html" target="_blank" rel="noopener">大鹿村無車道対策事業補助規程</a></h3>
+    <p class="meta"><span class="tag">規程</span>規程第19号　制定 平成12年3月17日　制定後の改正なし</p>
+    <p>自動車道から離れた1～2戸の、交通条件の悪い住居で、自分で道路の開設（改良）を計画する人に、総事業費（測量・設計・工事費）の2分の1以内を補助します。総事業費は20万円以上で、道路は最低軽自動車以上が通れる幅（2.0～4.0m）とし、舗装工事は対象外です。先に「実施計画承認申請書」を村長に出し、自分で工事できない場合は自己負担分（総事業費の2分の1）を村に納めて村が代わりに工事することもできます。</p>
+    <p class="src">根拠：第1、第3、第4、第5、第7</p>
+  </div>
+  <h2 id="nou">農業・林業をする</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000585.html" target="_blank" rel="noopener">大鹿村農業経営安定・効率化支援事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第10号　制定 令和7年3月14日　最終改正 令和8年3月13日</p>
+    <p>農業用の機械・施設、繁忙期の臨時雇用、農産物の配送料などに補助が出ます。認定農業者・基本構想水準到達者は1／2補助で上限100万円（推奨品目のキュウリ・夏秋いちご・アスパラガスは上限200万円）、販売農家（経営地30a以上又は販売金額50万円以上）は1／2補助で上限50万円（推奨品目は100万円）、農家（経営地10a以上又は販売金額15万円以上）は1／4補助で上限10万円です（各項目いずれか年度内1回限り）。ほかに、認定新規就農者への60万円（就農した年から3年経過時に支給）と機械・施設の1／2補助（上限80万円、就農後3年間のうち1回）、村内事業所との契約販売への補助（施設・農地整備は1／3・上限20万円、肥料費等は1／3・上限5万円）、地産地消活動への10万円、スマート農業技術の導入・活用への9／10補助（共同は上限50万円、個人は上限10万円、年度内1回限り）があり、申請書は村長に出します。</p>
+    <p class="src">根拠：第1条、第2条、第3条、別表1</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000571.html" target="_blank" rel="noopener">大鹿村新規就農者育成総合対策補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第6号　制定 令和6年6月14日　制定後の改正なし</p>
+    <p>村で新しく農業を始めるために、村と営農支援センターが認める研修先で1年以上・年間1,200時間以上研修する人（就農予定時の年齢が原則60歳未満）に、就農準備補助金として1人1月12万5千円を最長3年間交付します。研修生を受け入れる研修先にも、研修受託補助金として1人1月5万円を最長3年間交付します。研修先と研修生が3親等以内の親族でないこと、前年の世帯所得が600万円以下であることなどの条件があり、研修終了後1年以内に就農しない場合などは返還が必要です。</p>
+    <p class="src">根拠：第2条、第4条、第5条、第13条、第14条、第15条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000388.html" target="_blank" rel="noopener">大鹿村遊休農地等活用支援事業補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第3号　制定 令和2年3月19日　最終改正 令和4年9月15日</p>
+    <p>1年以上耕作されていない農地などを、5年以上の賃借権を設定して10アール以上活用する、村内の農地適格法人か村内に住む3人以上の組織が対象です。農作物（水稲を除く）又は花きの栽培に、田1アールにつき2,100円・畑1アールにつき1,150円以内、援農（農作業受託）に標準作業料の一部、農地の賃借料に支払実績の1／2を補助します。中山間地域等直接支払交付金・多面的機能支払交付金の対象農地は対象外です。 農地を借りるときは、農地法第3条の農業委員会の許可などの手続きが必要です（同条に例外の定めがあります）。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条<br>国の法律・県の条例：農地法第3条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000367.html" target="_blank" rel="noopener">大鹿村6次産業化支援補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第8号　制定 平成26年6月17日　最終改正 令和4年3月18日</p>
+    <p>村内に事務所・事業所・住居がある法人や個人が、農産物などを加工して売る取り組みに補助します。外部への加工委託は2／3以内で限度50,000円、加工設備の導入は1／2以内で限度100,000円（どちらも主な原材料の50％以上が村内産であること、1商品当たり1回限り）、食品衛生責任者養成講習会の受講は1／2以内で限度5,000円（1講習会当たり1回限り）です。</p>
+    <p class="src">根拠：第2条、第3条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000364.html" target="_blank" rel="noopener">大鹿村農業振興総合対策推進事業補助金交付規程</a></h3>
+    <p class="meta"><span class="tag">規程</span>規程第1号　制定 昭和61年6月18日　最終改正 令和7年3月14日</p>
+    <p>村民、村民の団体、農協が行う農道・水路・共同利用施設などの整備に、別表の補助率で補助します（例：受益農家3戸以上・面積30a以上の農道は村単で3／10）。電気牧柵など鳥獣被害防止施設の資材代又は請負工事費は村単で8／10以内（家庭菜園を含む、威嚇機器は限度額20,000円、過去5年間に助成を受けた施設の修繕は対象外）です。農業用井水の堆積土除去など事業費400,000円未満の維持修繕は9／10以内です。</p>
+    <p class="src">根拠：第1、第2、別表（第2関係）</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000527.html" target="_blank" rel="noopener">大鹿村水田農業経営支援助成金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第4号　制定 令和4年3月18日　制定後の改正なし</p>
+    <p>村内で主食用米を10アール以上作付けし、水稲共済に加入して次年度以降も主食用米を作付けする人などに、主食用米の村内作付面積10アール当たり7,500円を助成します（1アール未満切捨て、水稲生産実施計画書の合計面積が上限）。村税等の未納がないことも条件で、申請書（実績報告書兼請求書）を村長に出します。</p>
+    <p class="src">根拠：第2条、第3条、第4条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000528.html" target="_blank" rel="noopener">大鹿村農地流動化助成金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第5号　制定 令和4年3月18日　制定後の改正なし</p>
+    <p>農業経営基盤強化促進事業で水田を3年以上借りる（利用権を設定する）人で、年間50アール以上の稲作経営を行い、人・農地プランの中心経営体・認定農業者・認定新規就農者である人などに、借りた主食用水稲の作付面積10アール当たり10,000円を、利用権の設定期間中毎年交付します。期間満了前に契約を解除すると返還を求められることがあります。 農地を借りるときは、農地法第3条の農業委員会の許可などの手続きが必要です（同条に例外の定めがあります）。</p>
+    <p class="src">根拠：第1条、第2条、第3条、第7条<br>国の法律・県の条例：農地法第3条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000385.html" target="_blank" rel="noopener">大鹿村鳥獣被害対策実施隊の設置に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第7号　制定 平成24年3月19日　制定後の改正なし</p>
+    <p>鳥獣被害防止特措法に基づき、村に「大鹿村鳥獣被害対策実施隊」を置いています。隊員は、鳥獣被害防止計画に基づく被害防止策に積極的に取り組むことが見込まれる人の中から村長が任命します。細かいことは規則で定めます。 鳥獣を捕獲するには、鳥獣の保護及び管理並びに狩猟の適正化に関する法律による許可などが必要です（同法第9条ほか）。この許可は法律では環境大臣か都道府県知事が行いますが、長野県の規則で定める鳥獣による被害を防ぐための捕獲などの許可は、長野県の条例（知事の権限に属する事務の処理の特例に関する条例 第2条・別表32の項）で市町村が行うことになっています。</p>
+    <p class="src">根拠：第1条、第2条、第3条、第4条<br>国の法律・県の条例：鳥獣の保護及び管理並びに狩猟の適正化に関する法律第9条、知事の権限に属する事務の処理の特例に関する条例（平成11年長野県条例第46号）第2条・別表32の項</p>
+  </div>
+  <h2 id="noyaki">野焼きをする・土地や自然にかかわる</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000407.html" target="_blank" rel="noopener">大鹿村火入れに関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第4号　制定 昭和59年7月5日　制定後の改正なし</p>
+    <p>森林や、森林のまわり1キロメートル以内の土地で火入れ（野焼きなど）をするときは、森林法第21条の許可を受けるため、火入れをする期間が始まる日の7日前までに、申請書2通に見取図などをそえて村長に出します。許可は1件7日以内で、火入れの前日までに場所と日時を村長に知らせ、日の出のあとに始めて15時までに終えること、幅10メートル以上（傾斜地の上側や風下は5メートル以上）の防火帯をつくること、1ヘクタールまでは15人以上の人を置くこと、強風注意報・異常乾燥注意報・火災警報が出たらやらないことなどが決まっています。 国の法律にも定めがあります。ごみなど廃棄物を燃やすこと（いわゆる野焼き）は、廃棄物の処理及び清掃に関する法律で原則として禁止されていて（第16条の2）、農業・林業・漁業を営むためにやむを得ないものや、たき火など日常生活での軽微なものなどが例外です（同法施行令第14条）。違反すると5年以下の拘禁刑か1,000万円以下の罰金、またはその両方です（同法第25条第1項第15号）。森林とその周り1キロメートル以内で火入れをするときは森林法第21条の村長の許可が必要で（範囲は森林法施行令第3条の2）、許可なく火入れをすると20万円以下の罰金（保安林では30万円以下）です（森林法第205条）。</p>
+    <p class="src">根拠：第1条、第2条、第6条、第8条、第11条、第12条、第13条、第14条<br>国の法律・県の条例：森林法第21条・第205条、森林法施行令第3条の2、廃棄物の処理及び清掃に関する法律第16条の2・第25条、同法施行令第14条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000197.html" target="_blank" rel="noopener">大鹿村自然保護条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第18号　制定 昭和62年3月16日　制定後の改正なし</p>
+    <p>村長は、自然環境を守ることが特に必要な場所を、別に定める委員会の意見を聴いて自然保護地域に指定できます。その地域の中で建物などを新しく建てる、土地を開いたり形を変えたりする、動植物や土石をとるときは、行為の種類・場所・方法・始める予定日を村長に届け出て話し合わなければなりません（国・県の法令で届出が必要な区域は除きます）。</p>
+    <p class="src">根拠：第5条、第6条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000201.html" target="_blank" rel="noopener">大鹿村美しい村づくり条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第5号　制定 平成23年3月18日　最終改正 令和6年3月15日</p>
+    <p>決まった規模をこえる建物の新築・増築・外観の変更、土地の形の変更、土石の採取、屋外での物の積み上げ、屋外広告を出すときは、始める日の30日前までに村長に届け出ます（規模は規則で定めるとされています。ふだんの管理や災害のときの応急の行為などは除きます）。村民（村に住所か土地建物をもつ人）や事業者は、自分の土地を適切に管理し、いらなくなった物を長く放置しないよう努めることとされ、村長は景観をそこなっているときに勧告や指導ができます。</p>
+    <p class="src">根拠：第2条、第4条、第7条、第8条、第14条、第15条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000358.html" target="_blank" rel="noopener">大鹿村墓地等の経営の許可等に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第20号　制定 平成12年3月17日　制定後の改正なし</p>
+    <p>墓地・納骨堂・火葬場をつくる（経営する）、広げる・変える、やめるときは、村長の許可が必要で、申請書に図面や土地の登記簿謄本、となりの土地の持ち主の同意書などをそえて村長に出します。墓地は、国道・県道などの大事な道路や鉄道・川から50メートル以上、家が集まっている所から200メートル以上はなれていることなどが決まっています（地形によって村長が支障がないと認めたときは別です）。1区画の広さは原則6.6平方メートル以内です。 国の法律（墓地、埋葬等に関する法律第10条）では都道府県知事の許可ですが、長野県の条例（知事の権限に属する事務の処理の特例に関する条例 第2条・別表9の項）で町村が行うことになっているため、村長の許可になります。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条、第6条<br>国の法律・県の条例：墓地、埋葬等に関する法律第10条、知事の権限に属する事務の処理の特例に関する条例（平成11年長野県条例第46号）第2条・別表9の項</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000438.html" target="_blank" rel="noopener">大鹿村公共物管理条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第18号　制定 昭和63年3月23日　最終改正 令和6年9月13日</p>
+    <p>法律が適用されない小さな川・水路・ため池や、道路法の適用を受けない道路（公共物）で、水を使う、土地を使う、土石をとる、工作物をつくる、土地を掘ったり盛ったりする、竹木を植えたり切ったりする、物を積むときは、村長の許可が必要で、水・土地の使用や土石の採取には別表の料金がかかります（かんがい用・飲み水用は免除）。公共物をこわしたり、土石やごみを捨てたりすることは禁止されており（川での農業・林業・漁業のためにふつうに行うことは除きます）、許可なく工作物をつくるなどした場合は1年以下の拘禁刑または3万円以下の罰金、ごみを捨てるなどした場合は3万円以下の罰金などの罰則があります。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第6条、第17条、第18条、別表</p>
+  </div>
+  <h2 id="kourei">年を重ねる・介護</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000300.html" target="_blank" rel="noopener">敬老年金の支給に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第18号　制定 昭和43年3月28日　最終改正 平成17年3月16日</p>
+    <p>村に1か年以上住んでいて、その年度中に88歳になる人には5,000円、99歳以上の人には10,000円の敬老年金が、毎年9月15日に支給されます。お金のかわりに品物になることもあります。</p>
+    <p class="src">根拠：第3条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000303.html" target="_blank" rel="noopener">大鹿村交通弱者対策事業費補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第6号　制定 平成25年3月29日　最終改正 令和6年12月16日</p>
+    <p>村に住み、公共交通空白地有償運送の事業者に利用者として登録している人は、その運送を使うとき、村の中でも外でも、片道・往復とも料金の2分の1が補助されます。村の外に行く分は1人月2回までですが、通院などのときは除きます。補助分は乗るときに差し引かれ、村から事業者に払われるしくみです。</p>
+    <p class="src">根拠：第2条、第4条、第5条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000304.html" target="_blank" rel="noopener">家族介護用品支給事業実施要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第12号　制定 平成12年4月1日　最終改正 令和5年3月16日</p>
+    <p>要介護・要支援の認定を受けた人、介護予防・日常生活支援総合事業の対象者などに、紙おむつなどの介護用品が支給されます。上限は1人年60,000円（要介護3から要介護5の人は72,000円）で、年度の途中から、または途中までの人は、上限額を12で割って必要な月数をかけた額です。申請書に必要な書類をそえて申請します。</p>
+    <p class="src">根拠：第1条、第3条、第4条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000521.html" target="_blank" rel="noopener">大鹿村高齢者安全運転対策車普及促進補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第19号　制定 令和3年12月17日　制定後の改正なし</p>
+    <p>村に住む65歳以上で運転免許をもち、村税などの滞納がない人が、自分で使う車にペダル踏み間違い急発進抑制装置をつけたとき、国の安全運転サポート車普及促進事業補助金でもらった額の2分の1が補助されます。申請書（請求書をかねる）に、国の補助金額がわかる書類、車検証、免許証の写しをそえて村長に出します。</p>
+    <p class="src">根拠：第2条、第3条、第4条、第5条、第6条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000536.html" target="_blank" rel="noopener">大鹿村帯状疱疹予防接種費補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第13号　制定 令和4年9月15日　制定後の改正なし</p>
+    <p>接種の日に村の住民基本台帳にのっている50歳以上の人は、帯状疱疹の予防接種の費用の半額が補助されます（不活化ワクチンなら2回まで、生ワクチンなら1回まで、どちらか一方）。村立診療所で受けると補助分を引いた額を払うだけですみ、ほかの医療機関で受けたときは、領収書をそえて、接種した年度の末日までに村長に請求します。 なお、帯状疱疹は予防接種法のB類疾病で、65歳の人などは同法の定期接種の対象です（予防接種法施行令第2条・第3条）。</p>
+    <p class="src">根拠：第2条、第3条、第5条、第6条<br>国の法律・県の条例：予防接種法施行令第2条・第3条</p>
+  </div>
+  <h2 id="saigai">災害にあう・備える</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000239.html" target="_blank" rel="noopener">災害弔慰金の支給等に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第35号　制定 昭和51年12月24日　最終改正 令和7年12月15日</p>
+    <p>自然災害で村民が亡くなったとき、遺族に災害弔慰金が支給されます（家の生計を主にささえていた人の場合500万円、それ以外は250万円）。自然災害でけがや病気をして、法律の別表にある程度の障害が残った村民には災害障害見舞金（生計を主にささえていた人は250万円、それ以外は125万円）が支給されます。被害を受けた世帯の世帯主には、被害の程度に応じて最大350万円までの災害援護資金の貸付けがあり、返す期間は10年（うち据置き期間は3年、政令で定める場合は5年）、保証人を立てれば無利子、立てなければ据置き期間後は年1.5パーセントです。</p>
+    <p class="src">根拠：第3条、第5条、第9条、第10条、第12条、第13条、第14条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000241.html" target="_blank" rel="noopener">大鹿村被災者生活再建支援制度補助金交付要綱</a></h3>
+    <p class="meta"><span class="tag">要綱</span>要綱第18号　制定 令和元年9月18日　最終改正 令和3年9月17日</p>
+    <p>村内で住宅が半壊以上の被害が1世帯以上出て、村長がこの要綱を使うと決めた自然災害で、国の被災者生活再建支援法の対象にならない世帯に、村の支援金が支給されます。額は被害の程度（全壊・大規模半壊・中規模半壊・半壊など）、世帯の人数（複数か1人か）、再建の方法によって別表で決まっていて、たとえば複数世帯で全壊し住宅を建設・購入する場合は基礎支援金100万円と加算支援金200万円の計300万円です。申請は世帯主が行い、期限は災害が起きた日から基礎支援金は13月、加算支援金は37月を経過する日までです。</p>
+    <p class="src">根拠：第1条、第3条、第5条、第6条、第7条、第8条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000393.html" target="_blank" rel="noopener">大鹿村単独災害復旧事業補助金交付規程</a></h3>
+    <p class="meta"><span class="tag">規程</span>規程第6号　制定 平成18年12月14日　制定後の改正なし</p>
+    <p>村内に住所や事業所がある個人・企業などが、災害でこわれた農地・農業用施設・道路・宅地などを、国の補助の対象にならないため自分で直すとき、事業費の2分の1以内、限度額5万円の補助があります。申請書は別に定める期日までに村長に出し、工事が終わったら、終わった日から15日を経過した日か、交付決定のあった年度の3月31日の早いほうまでに実績報告書を出します。</p>
+    <p class="src">根拠：第1条、第3条、第5条、第7条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000226.html" target="_blank" rel="noopener">大鹿村消火器購入事業補助金交付規程</a></h3>
+    <p class="meta"><span class="tag">規程</span>規程第2号　制定 平成23年8月31日　制定後の改正なし</p>
+    <p>自治会ごとの自主防災訓練で使った消火器が、村の頼む専門業者に詰め替えできないと判断されてリサイクル処理され、新しく国家検定合格証のついた消火器を買ったときに補助があります。補助額は、村を通して粉末（ABC）消火器4型・6型・10型を買う場合は、その年度の詰め替え代にあたる額です（村を通さず自分で買った場合は別表の計算式による額）。申請書は別に定める期日までに村長に出し、実績報告書は完了した日から15日を経過した日か、その年度の12月25日の早いほうまでに出します。</p>
+    <p class="src">根拠：第3条、第4条、第5条、別表</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000541.html" target="_blank" rel="noopener">大鹿村避難行動要支援者名簿に関する条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第19号　制定 令和4年12月16日　制定後の改正なし</p>
+    <p>村長は、災害のときに自分で避難することがむずかしく、特に支援が必要な人（高齢者や障がい者など）の名簿をつくります（福祉施設などにいる人は除きます）。名簿の情報は、長野県警察・飯田広域消防本部・村の消防団・民生委員には本人の同意なしで提供され、災害が起きたときや起きるおそれがあるときに特に必要な場合は、ほかの支援者にも同意なしで提供できます。情報を受けた人は、避難支援以外に使ったり、秘密をもらしたりしてはいけません。</p>
+    <p class="src">根拠：第2条、第4条、第5条、第7条、第8条</p>
+  </div>
+  <h2 id="jouhou">役場の情報を見る・村政に参加する</h2>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000060.html" target="_blank" rel="noopener">大鹿村公文書公開条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第6号　制定 平成11年3月18日　最終改正 令和6年3月15日</p>
+    <p>村内に住所がある人、村内に事務所や事業所がある個人・団体、村の行政に利害関係がある人（その関係する文書に限る）は、村長・教育委員会・議会などに公文書の公開を請求できます。請求を受け付けた日の翌日から15日以内に公開するかどうかが決まり（やむを得ないときは請求の日から30日まで延長）、公開しないときは理由が書面で知らされます。手数料は無料ですが、写しをもらうときは作成や送付の費用を払います。</p>
+    <p class="src">根拠：第2条第3号、第5条、第10条、第12条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000061.html" target="_blank" rel="noopener">大鹿村公文書公開条例施行規則</a></h3>
+    <p class="meta"><span class="tag">規則</span>規則第3号　制定 平成11年3月18日　制定後の改正なし</p>
+    <p>公開の請求は公文書公開請求書（様式第1号）で行い、公開の方法・文書の内容・請求の目的を書きます。写しの作成・送付の費用は前払いで、公文書を探すための文書分類表と文書保存目録は総務課に置かれています。</p>
+    <p class="src">根拠：第3条、第7条、第8条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000551.html" target="_blank" rel="noopener">大鹿村個人情報保護法施行条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第7号　制定 令和5年3月16日　制定後の改正なし</p>
+    <p>自分の個人情報の開示請求は国の個人情報保護法によって行い、村がこの条例で定めているのは手数料で、開示請求の手数料は無料、写しをもらうときは作成や送付の費用を払います。この条例の実施機関は村長・教育委員会・選挙管理委員会・監査委員・農業委員会・固定資産評価審査委員会です。</p>
+    <p class="src">根拠：第2条第2項、第3条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000013.html" target="_blank" rel="noopener">大鹿村議会傍聴規則</a></h3>
+    <p class="meta"><span class="tag">議会規則</span>議会規則第11号　制定 昭和62年3月24日　最終改正 令和7年3月26日</p>
+    <p>議会を傍聴するときは、決められた場所で傍聴人受付簿に自分の住所と氏名を書きます。傍聴席の定員は21人で、議長が必要と認めたときは会議の当日に先着順で傍聴券が配られます。傍聴中は拍手などで賛成・反対を表さない、携帯電話の音を出さない、飲食・喫煙をしない、議長の許可なく写真・録音・録画をしないことなどが決まっています。</p>
+    <p class="src">根拠：第3条、第4条、第5条、第8条</p>
+  </div>
+  <div class="it">
+    <h3><a href="https://www1.g-reiki.net/vill.ooshika.nagano/reiki_honbun/e765RG00000599.html" target="_blank" rel="noopener">大鹿村議会基本条例</a></h3>
+    <p class="meta"><span class="tag">条例</span>条例第1号　制定 令和8年3月13日　制定後の改正なし</p>
+    <p>議会は、村民の意見が村政や議会活動に反映されるよう意見交換の場などを設けること、議会だよりを発行し議会報告会などを開くこと、請願・陳情を審議するときは村民などから意見を聴くなど的確に対応するよう努めることを定めています。議員が一般質問をするときは1問1答方式で行います。この条例は令和8年4月1日から施行されます。</p>
+    <p class="src">根拠：第6条、第7条第2項、附則</p>
+  </div>
+
+  <p style="margin-top:40px">ここにない決まりは、<a href="reiki.html">村の決まりの全体像</a>から名前で探せます。</p>
+
+  <footer><p>出典：大鹿村例規集（Reiki-Base インターネット版、内容現在 令和8年3月13日）。各項目の「根拠」は、その例規の条項です。<br>
+  <a href="./">目次へ</a> ／ <a href="reiki.html">村の決まり（全体像）</a> ／ ooshika.org ／ 最終更新 2026年9月26日<br>
+  ご指摘は data@ooshika.org までお願いします。</p></footer>
+</div>
+</body>
+</html>
